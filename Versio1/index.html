@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Damm Smart Truck V1</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--red:#C8102E;--gold:#F2A623;--green:#1D9E75;--dark:#0d0d0d;--dark2:#161616;--dark3:#1e1e1e;--border:#2a2a2a;--muted:#666;--text:#e8e8e8}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--dark);color:var(--text);min-height:100vh}
+
+/* NAV */
+nav{background:var(--dark2);border-bottom:1px solid var(--border);padding:0 24px;height:52px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:9000}
+nav::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--red),var(--gold))}
+.logo{font-size:16px;font-weight:700}.logo span{color:var(--gold)}
+.tabs{display:flex;gap:2px}
+.tab{background:none;border:none;color:var(--muted);padding:6px 14px;border-radius:5px;cursor:pointer;font-size:12px;font-weight:500;transition:all .15s}
+.tab.active{background:var(--gold);color:#000}
+.tab:hover:not(.active){background:#252525;color:var(--text)}
+
+/* PANELS */
+.panel{display:none;padding:20px;max-width:1400px;margin:0 auto}
+.panel.active{display:block}
+
+/* METRICS */
+.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px}
+.metric{background:var(--dark2);border:1px solid var(--border);border-radius:10px;padding:18px 20px}
+.mlabel{font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:4px}
+.mval{font-size:28px;font-weight:700;line-height:1;color:var(--gold)}
+.mval.green{color:var(--green)}
+.mval.white{color:var(--text)}
+.msub{font-size:11px;color:#444;margin-top:3px}
+.metrics2{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px}
+
+/* SECTIONS */
+.sec-title{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:10px;margin-top:20px}
+
+/* TABLE */
+.rtable{width:100%;border-collapse:collapse;font-size:12px}
+.rtable th{text-align:left;padding:8px 10px;color:#444;font-weight:600;border-bottom:1px solid var(--border);font-size:10px;text-transform:uppercase;letter-spacing:.05em}
+.rtable td{padding:8px 10px;border-bottom:1px solid #181818;vertical-align:middle}
+.rtable tr:hover td{background:#1a1a1a}
+.stopnum{width:26px;height:26px;border-radius:50%;background:var(--gold);color:#000;font-size:10px;font-weight:700;display:inline-flex;align-items:center;justify-content:center}
+.pbar{background:#222;border-radius:3px;height:5px;width:70px;display:inline-block;vertical-align:middle;overflow:hidden}
+.pfill{height:100%;background:linear-gradient(90deg,var(--gold),var(--red));border-radius:3px}
+.tag{display:inline-block;padding:2px 7px;border-radius:3px;font-size:10px;font-weight:600}
+.tH{background:rgba(200,16,46,.2);color:#ff6b7a}
+.tM{background:rgba(242,166,35,.15);color:var(--gold)}
+.tL{background:#1e1e1e;color:#444}
+
+/* MAP */
+.mapbox{background:var(--dark2);border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:12px}
+#map{height:520px}
+#map-r{height:340px}
+#map-o{height:340px}
+#hm{height:460px}
+.mapleg{padding:10px 14px;display:flex;gap:16px;font-size:11px;color:var(--muted);border-top:1px solid var(--border)}
+.dot{width:8px;height:8px;border-radius:50%;display:inline-block;margin-right:4px}
+
+/* COMPARE */
+.cmp{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px}
+.ccard{background:var(--dark2);border:1px solid var(--border);border-radius:10px;overflow:hidden}
+.ccard.opt{border-color:var(--gold)}
+.chead{padding:12px 16px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;font-size:13px;font-weight:600}
+.cstats{padding:12px 16px;display:flex;gap:20px}
+.cs{font-size:11px;color:var(--muted)}.cs b{color:var(--text);font-size:14px;display:block}
+
+/* TRUCK */
+.truck-wrap{background:var(--dark2);border:1px solid var(--border);border-radius:10px;padding:20px}
+.tv{display:flex;gap:3px;height:100px;margin:16px 0;align-items:stretch}
+.tcab{width:40px;background:#222;border-radius:7px 0 0 7px;border:1px solid #333;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:9px;color:#555;flex-shrink:0}
+.tpar{flex:1;border-radius:3px;border:1px solid #333;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:4px;font-size:9px;text-align:center;cursor:pointer;transition:transform .15s}
+.tpar:hover{transform:scaleY(1.04)}
+.tpar.ret{background:rgba(29,158,117,.1);border-color:#0F6E56;color:#1D9E75}
+.tpar.p6{background:rgba(242,166,35,.18);border-color:#BA7517;color:#F2A623}
+.tpar.p5{background:rgba(242,166,35,.12);border-color:#8a5512;color:#F2A623}
+.tpar.p4{background:rgba(242,166,35,.07);border-color:#5a3a0e;color:#aa7730}
+.tpar.p3,.tpar.p2{background:rgba(242,166,35,.04);border-color:#3a250a;color:#776040}
+.tdoor{width:28px;background:#1a1a1a;border-radius:0 7px 7px 0;border:1px solid #333;border-left:3px solid var(--gold);display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:9px;color:var(--gold);flex-shrink:0}
+.pnum{font-size:14px;font-weight:700;opacity:.4}
+.pcl{font-size:8px;color:#888;margin-top:2px;line-height:1.2}
+.timeline-row{display:grid;grid-template-columns:26px 150px 1fr 1fr;gap:10px;align-items:center;padding:6px 0;border-bottom:1px solid #151515;font-size:11px}
+.tls{width:22px;height:22px;border-radius:50%;background:#222;color:var(--gold);display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700}
+.sbar{height:6px;border-radius:3px;background:#1e1e1e;overflow:hidden}
+.sbar-d{height:100%;background:var(--gold);border-radius:3px}
+.sbar-r{height:100%;background:var(--green);border-radius:3px;margin-top:2px}
+
+/* UPLOAD */
+.upload-area{border:2px dashed var(--border);border-radius:12px;padding:40px;text-align:center;cursor:pointer;transition:border-color .2s;background:var(--dark2)}
+.upload-area:hover,.upload-area.drag{border-color:var(--gold)}
+.upload-area input{display:none}
+.up-icon{font-size:40px;margin-bottom:12px}
+.btn{background:var(--gold);color:#000;border:none;padding:9px 20px;border-radius:7px;cursor:pointer;font-weight:600;font-size:13px;transition:opacity .15s}
+.btn:hover{opacity:.85}
+.btn-sec{background:#222;color:var(--text);border:1px solid var(--border)}
+.hint{font-size:11px;color:var(--muted);margin-top:6px}
+.alert{background:rgba(29,158,117,.1);border:1px solid rgba(29,158,117,.3);border-radius:8px;padding:12px 16px;font-size:13px;color:#1D9E75;margin-bottom:16px}
+
+/* HEATMAP */
+.hm-grid{display:grid;grid-template-columns:2fr 1fr;gap:14px}
+.density-list{background:var(--dark2);border:1px solid var(--border);border-radius:10px;overflow:hidden}
+.dl-row{display:flex;align-items:center;gap:10px;padding:8px 12px;border-bottom:1px solid #181818;font-size:11px}
+.dl-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.dl-bar{flex:1;background:#1e1e1e;height:4px;border-radius:2px;overflow:hidden}
+.dl-fill{height:100%;border-radius:2px}
+
+/* DOWNLOAD BTNs */
+.dl-grid{display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap}
+.dlbtn{background:var(--dark2);border:1px solid var(--border);border-radius:8px;padding:10px 16px;font-size:12px;color:var(--text);cursor:pointer;display:flex;align-items:center;gap:8px;text-decoration:none;transition:border-color .15s}
+.dlbtn:hover{border-color:var(--gold)}
+.dlbtn span{color:var(--gold);font-size:16px}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">Damm <span>Smart</span> Truck <span style="font-size:10px;color:#444;font-weight:400;margin-left:8px;">V1</span></div>
+  <div class="tabs">
+    <button class="tab active" onclick="showTab('dash',this)">Dashboard</button>
+    <button class="tab" onclick="showTab('route',this)">Ruta</button>
+    <button class="tab" onclick="showTab('compare',this)">Antes/Después</button>
+    <button class="tab" onclick="showTab('truck',this)">Camión</button>
+    <button class="tab" onclick="showTab('heat',this)">Heatmap</button>
+    <button class="tab" onclick="showTab('upload',this)">📂 Nueva ruta</button>
+  </div>
+</nav>
+
+<!-- DASHBOARD -->
+<div id="tab-dash" class="panel active">
+  <div style="padding-top:6px;margin-bottom:16px">
+    <div style="font-size:20px;font-weight:700">Resultado de optimización</div>
+    <div style="color:#444;font-size:12px;margin-top:3px" id="route-meta"></div>
+  </div>
+  <div class="metrics" id="metrics-grid"></div>
+  <div class="metrics2" id="metrics2-grid"></div>
+
+  <div class="dl-grid">
+    <a class="dlbtn" href="Hoja_Ruta.pdf" download><span>📄</span> Hoja de Ruta</a>
+    <a class="dlbtn" href="Hoja_Carga.pdf" download><span>📦</span> Hoja de Carga</a>
+    <a class="dlbtn" href="Albaranes.pdf" download><span>🧾</span> Albaranes</a>
+  </div>
+
+  <div class="sec-title">Orden de visitas optimizado</div>
+  <table class="rtable">
+    <thead><tr>
+      <th>#</th><th>Cliente</th><th>Prioridad</th><th>Entrega</th><th>Retornos</th><th>Dirección</th>
+    </tr></thead>
+    <tbody id="route-tbody"></tbody>
+  </table>
+</div>
+
+<!-- ROUTE MAP -->
+<div id="tab-route" class="panel">
+  <div style="font-size:20px;font-weight:700;margin-bottom:14px">Mapa de ruta optimizada</div>
+  <div class="mapbox"><div id="map"></div>
+  <div class="mapleg">
+    <span><span class="dot" style="background:var(--gold)"></span>Paradas optimizadas</span>
+    <span><span class="dot" style="background:var(--red)"></span>Depósito</span>
+    <span><span class="dot" style="background:var(--green)"></span>Ruta</span>
+  </div></div>
+</div>
+
+<!-- COMPARE -->
+<div id="tab-compare" class="panel">
+  <div style="font-size:20px;font-weight:700;margin-bottom:14px">Antes vs Después</div>
+  <div class="cmp">
+    <div class="ccard">
+      <div class="chead">❌ Ruta aleatoria (estado actual)<span class="tag tH">SIN OPTIMIZAR</span></div>
+      <div id="map-r"></div>
+      <div class="cstats">
+        <div class="cs"><b id="cr-dist"></b>Distancia total</div>
+        <div class="cs"><b id="cr-time"></b>Tiempo est.</div>
+        <div class="cs"><b style="color:#ff6b7a">Baseline</b>Sin algoritmo</div>
+      </div>
+    </div>
+    <div class="ccard opt">
+      <div class="chead">✅ Smart Truck optimizado<span class="tag tM">OPTIMIZADO</span></div>
+      <div id="map-o"></div>
+      <div class="cstats">
+        <div class="cs"><b id="co-dist"></b>Distancia total</div>
+        <div class="cs"><b id="co-time"></b>Tiempo est.</div>
+        <div class="cs"><b id="co-imp" style="color:var(--green)"></b>Mejora</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TRUCK -->
+<div id="tab-truck" class="panel">
+  <div style="font-size:20px;font-weight:700;margin-bottom:14px">Plan de carga del camión</div>
+  <div class="truck-wrap">
+    <div style="font-size:13px;font-weight:600">Distribución de 6 parcelas · Cargado de atrás hacia delante</div>
+    <div style="font-size:11px;color:var(--muted);margin-top:3px">La ruta determina la carga. Últimos clientes = zona profunda. Primeros clientes = junto a la puerta.</div>
+    <div class="tv" id="truck-visual"></div>
+    <div style="display:flex;justify-content:space-between;padding:0 68px;font-size:9px;color:#333;margin-bottom:16px">
+      <span>← Cargado ÚLTIMO</span><span>Cargado PRIMERO →</span>
+    </div>
+
+    <div class="sec-title">Uso del espacio por parada</div>
+    <div style="display:grid;grid-template-columns:26px 150px 1fr 1fr;gap:8px;padding:6px 0;font-size:9px;color:#444;text-transform:uppercase;letter-spacing:.06em;border-bottom:1px solid var(--border)">
+      <span>#</span><span>Cliente</span><span>Espacio entrega</span><span>Espacio retornos</span>
+    </div>
+    <div id="timeline"></div>
+  </div>
+</div>
+
+<!-- HEATMAP -->
+<div id="tab-heat" class="panel">
+  <div style="font-size:20px;font-weight:700;margin-bottom:14px">Mapa de calor — densidad de clientes</div>
+  <div class="hm-grid">
+    <div class="mapbox"><div id="hm"></div></div>
+    <div>
+      <div class="sec-title">Ranking por densidad</div>
+      <div class="density-list" id="density-list"></div>
+      <div style="background:var(--dark2);border:1px solid var(--border);border-radius:10px;padding:14px;margin-top:10px;font-size:11px;color:var(--muted);line-height:1.7">
+        <b style="color:var(--text)">Cómo se calcula</b><br>
+        Score = 1 − (distancia media a los 4 vecinos más cercanos / máximo).<br><br>
+        <span style="color:var(--red)">● Rojo</span> = clúster denso → eficiente agrupar<br>
+        <span style="color:var(--gold)">● Ámbar</span> = moderadamente cerca<br>
+        <span style="color:#444">● Gris</span> = cliente aislado → alto coste por visita
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- UPLOAD -->
+<div id="tab-upload" class="panel">
+  <div style="font-size:20px;font-weight:700;margin-bottom:6px">Cargar nueva ruta</div>
+  <div style="font-size:12px;color:var(--muted);margin-bottom:20px">Sube el CSV de Damm (Detalle_entrega) y selecciona ruta + fecha para optimizar</div>
+  <div class="upload-area" id="drop-zone" onclick="document.getElementById('csv-input').click()">
+    <input type="file" id="csv-input" accept=".csv,.xlsx">
+    <div class="up-icon">📂</div>
+    <div style="font-size:15px;font-weight:600;margin-bottom:6px">Arrastra o haz clic para subir</div>
+    <div class="hint">Formato: Hackaton.xlsx o Detalle_entrega.csv</div>
+  </div>
+  <div style="display:flex;gap:12px;margin-top:16px;flex-wrap:wrap;align-items:flex-end">
+    <div>
+      <div style="font-size:11px;color:var(--muted);margin-bottom:4px">Ruta</div>
+      <select id="sel-ruta" style="background:var(--dark2);border:1px solid var(--border);color:var(--text);padding:8px 12px;border-radius:7px;font-size:13px">
+        <option>DR0027</option><option>DR0001</option><option>DR0006</option>
+        <option>DR0031</option><option>DR0052</option><option>DR0054</option>
+      </select>
+    </div>
+    <div>
+      <div style="font-size:11px;color:var(--muted);margin-bottom:4px">α (prioridad vs distancia)</div>
+      <input type="range" id="alpha-slider" min="0" max="100" value="65" style="width:160px">
+      <span id="alpha-val" style="font-size:11px;color:var(--gold);margin-left:6px">0.65</span>
+    </div>
+    <button class="btn" onclick="runDemo()">▶ Ejecutar con datos demo</button>
+  </div>
+  <div id="upload-result" style="margin-top:16px"></div>
+</div>
+
+<script>
+const stops=[{"id": "828089024", "name": "ENTREPA I PA", "address": "Carrer de la Provid\u00e8ncia 23, 08500 VIC", "city": "VIC", "cp": "08500", "lat": 41.9302, "lon": 2.254, "delivery_caj": 12.0, "delivery_brl": 2.0, "delivery_un": 0, "ret_caj": 10.0, "ret_brl": 2.0, "items": [{"mat": "ED13", "desc": "ESTRELLA DAMM 1/3 RET. PP", "qty": 8.0, "unit": "CAJ", "ubic": "AA09A1", "client": "ENTREPA I PA"}, {"mat": "ED15LN", "desc": "ESTRELLA DAMM 1/5 LN", "qty": 2.0, "unit": "CAJ", "ubic": "AA08A1", "client": "ENTREPA I PA"}, {"mat": "ED30", "desc": "ESTRELLA DAMM BARRIL 30", "qty": 1.0, "unit": "BRL", "ubic": "AA10A1", "client": "ENTREPA I PA"}, {"mat": "TU20", "desc": "TURIA BARRIL 20L.", "qty": 1.0, "unit": "BRL", "ubic": "AC03A2", "client": "ENTREPA I PA"}, {"mat": "0RF0022", "desc": "/-AQUARIUS LIMON 33CL LATA 24U", "qty": 1.0, "unit": "CAJ", "ubic": "CA06A2", "client": "ENTREPA I PA"}, {"mat": "0RF0021", "desc": "/-FANTA LIMON LATA 33 CL 24U", "qty": 1.0, "unit": "CAJ", "ubic": "CA05A2", "client": "ENTREPA I PA"}], "ret_items": [{"mat": "CJ13", "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13", "qty": 8.0, "unit": "CAJ", "ubic": "ENVASE", "client": "ENTREPA I PA"}, {"mat": "CJ15", "desc": "CAJA DAMM+BOT.1/5RET VACIO EN P.PLAS.A13", "qty": 2.0, "unit": "CAJ", "ubic": "ENVASE", "client": "ENTREPA I PA"}, {"mat": "BRL30V", "desc": "BARRIL INOX 30L. EURONORMA", "qty": 1.0, "unit": "BRL", "ubic": "ENVASE", "client": "ENTREPA I PA"}, {"mat": "BRL20V", "desc": "BARRIL INOX 20L. TANQUETA A16", "qty": 1.0, "unit": "BRL", "ubic": "ENVASE", "client": "ENTREPA I PA"}]}, {"id": "828089025", "name": "ENTREPA I PA", "address": "Carrer de la Provid\u00e8ncia 23, 08500 VIC", "city": "VIC", "cp": "08500", "lat": 41.9302, "lon": 2.254, "delivery_caj": 1.0, "delivery_brl": 0, "delivery_un": 0, "ret_caj": 0, "ret_brl": 0, "items": [{"mat": "0RF0019", "desc": "/-COCA COLA LATA 33CL 24U", "qty": 1.0, "unit": "CAJ", "ubic": "CA04A2", "client": "ENTREPA I PA"}], "ret_items": []}, {"id": "828089026", "name": "INDUSTRIA 52", "address": "Carrer de la Ind\u00fastria 52, 08500 VIC", "city": "VIC", "cp": "08500", "lat": 41.9302, "lon": 2.254, "delivery_caj": 9.0, "delivery_brl": 0, "delivery_un": 0, "ret_caj": 9.0, "ret_brl": 0, "items": [{"mat": "ED13", "desc": "ESTRELLA DAMM 1/3 RET. PP", "qty": 4.0, "unit": "CAJ", "ubic": "AA09A1", "client": "INDUSTRIA 52"}, {"mat": "FDT13", "desc": "FREE DAMM TOSTADA 1/3 RET. PP", "qty": 1.0, "unit": "CAJ", "ubic": "AA04A1", "client": "INDUSTRIA 52"}, {"mat": "VO13", "desc": "VOLL-DAMM 1/3 RET.", "qty": 1.0, "unit": "CAJ", "ubic": "AA07A1", "client": "INDUSTRIA 52"}, {"mat": "ED13", "desc": "ESTRELLA DAMM 1/3 RET. PP", "qty": 2.0, "unit": "CAJ", "ubic": "AA09A1", "client": "INDUSTRIA 52"}, {"mat": "FDT13", "desc": "FREE DAMM TOSTADA 1/3 RET. PP", "qty": 1.0, "unit": "CAJ", "ubic": "AA04A1", "client": "INDUSTRIA 52"}], "ret_items": [{"mat": "CJ13", "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13", "qty": 4.0, "unit": "CAJ", "ubic": "ENVASE", "client": "INDUSTRIA 52"}, {"mat": "CJ13", "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13", "qty": 1.0, "unit": "CAJ", "ubic": "ENVASE", "client": "INDUSTRIA 52"}, {"mat": "CJ13", "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13", "qty": 1.0, "unit": "CAJ", "ubic": "ENVASE", "client": "INDUSTRIA 52"}, {"mat": "CJ13", "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13", "qty": 2.0, "unit": "CAJ", "ubic": "ENVASE", "client": "INDUSTRIA 52"}, {"mat": "CJ13", "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13", "qty": 1.0, "unit": "CAJ", "ubic": "ENVASE", "client": "INDUSTRIA 52"}]}, {"id": "828089027", "name": "AURIAL PADEL", "address": "Carrer de Figueres 14, 08500 VIC", "city": "VIC", "cp": "08500", "lat": 41.9302, "lon": 2.254, "delivery_caj": 31.0, "delivery_brl": 10.0, "delivery_un": 0, "ret_caj": 9.0, "ret_brl": 10.0, "items": [{"mat": "TU13", "desc": "TURIA 1/3 RET.", "qty": 2.0, "unit": "CAJ", "ubic": "AA03A1", "client": "AURIAL PADEL"}, {"mat": "VO13", "desc": "VOLL-DAMM 1/3 RET.", "qty": 3.0, "unit": "CAJ", "ubic": "AA07A1", "client": "AURIAL PADEL"}, {"mat": "DL20", "desc": "DAMM LEMON BARRIL 20L.", "qty": 2.0, "unit": "BRL", "ubic": "AC03A3", "client": "AURIAL PADEL"}, {"mat": "ED30", "desc": "ESTRELLA DAMM BARRIL 30", "qty": 5.0, "unit": "BRL", "ubic": "AA10A1", "client": "AURIAL PADEL"}, {"mat": "TU20", "desc": "TURIA BARRIL 20L.", "qty": 3.0, "unit": "BRL", "ubic": "AC03A2", "client": "AURIAL PADEL"}, {"mat": "VE12SP", "desc": "AGUA VERI 1/2 PET CAJA 24U. T.TH", "qty": 6.0, "unit": "CAJ", "ubic": "EB03A1", "client": "AURIAL PADEL"}, {"mat": "VE32SP", "desc": "AGUA VERI 1,5L PET CAJA 12U.", "qty": 10.0, "unit": "CAJ", "ubic": "EB02A1", "client": "AURIAL PADEL"}, {"mat": "0AG0183", "desc": "VICHY CATALAN GAS 30CL RET 24U", "qty": 1.0, "unit": "CAJ", "ubic": "BA01A1", "client": "AURIAL PADEL"}, {"mat": "0LT0032", "desc": "CACAOLAT VIDRIO 20CL RET 30U", "qty": 1.0, "unit": "CAJ", "ubic": "AC04A3", "client": "AURIAL PADEL"}, {"mat": "0LT0235", "desc": "LA LEVANTINA AVENA ESP.HOST 1L 6U", "qty": 2.0, "unit": "CAJ", "ubic": "FA02A2", "client": "AURIAL PADEL"}, {"mat": "0LT0033", "desc": "LETONA GRAN CREME PET 1,5L PET 6U", "qty": 4.0, "unit": "CAJ", "ubic": "FA06A3", "client": "AURIAL PADEL"}, {"mat": "TU13", "desc": "TURIA 1/3 RET.", "qty": 2.0, "unit": "CAJ", "ubic": "AA03A1", "client": "AURIAL PADEL"}], "ret_items": [{"mat": "CJ13", "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13", "qty": 2.0, "unit": "CAJ", "ubic": "ENVASE", "client": "AURIAL PADEL"}, {"mat": "CJ13", "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13", "qty": 3.0, "unit": "CAJ", "ubic": "ENVASE", "client": "AURIAL PADEL"}, {"mat": "BRL20V", "desc": "BARRIL INOX 20L. TANQUETA A16", "qty": 2.0, "unit": "BRL", "ubic": "ENVASE", "client": "AURIAL PADEL"}, {"mat": "BRL30V", "desc": "BARRIL INOX 30L. EURONORMA", "qty": 5.0, "unit": "BRL", "ubic": "ENVASE", "client": "AURIAL PADEL"}, {"mat": "BRL20V", "desc": "BARRIL INOX 20L. TANQUETA A16", "qty": 3.0, "unit": "BRL", "ubic": "ENVASE", "client": "AURIAL PADEL"}, {"mat": "3ENV0236", "desc": "C.C. AGUA 1/3 VICHY-FONT D'OR", "qty": 1.0, "unit": "CAJ", "ubic": "AA", "client": "AURIAL PADEL"}, {"mat": "3ENV0029", "desc": "C.C. CACAOLAT 30 U.", "qty": 1.0, "unit": "CAJ", "ubic": "ENVASE", "client": "AURIAL PADEL"}, {"mat": "CJ13", "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13", "qty": 2.0, "unit": "CAJ", "ubic": "ENVASE", "client": "AURIAL PADEL"}]}, {"id": "828089028", "name": "ALASKA BAR", "address": "Carrer de Manuel Serra i Moret 4, 08500 VIC", "city": "VIC", "cp": "08500", "lat": 41.9302, "lon": 2.254, "delivery_caj": 14.0, "delivery_brl": 0, "delivery_un": 3.0, "ret_caj": 14.0, "ret_brl": 0, "items": [{"mat": "ED13", "desc": "ESTRELLA DAMM 1/3 RET. PP", "qty": 6.0, "unit": "CAJ", "ubic": "AA09A1", "client": "ALASKA BAR"}, {"mat": "FD13", "desc": "FREE DAMM 1/3 RET.", "qty": 1.0, "unit": "CAJ", "ubic": "AA06A1", "client": "ALASKA BAR"}, {"mat": "FDT13", "desc": "FREE DAMM TOSTADA 1/3 RET. PP", "qty": 1.0, "unit": "CAJ", "ubic": "AA04A1", "client": "ALASKA BAR"}, {"mat": "VO13", "desc": "VOLL-DAMM 1/3 RET.", "qty": 2.0, "unit": "CAJ", "ubic": "AA07A1", "client": "ALASKA BAR"}, {"mat": "0CF0080", "desc": "XPLICIT NATURAL CREMOSO 1KG", "qty": 1.0, "unit": "UN", "ubic": "FC02A2", "client": "ALASKA BAR"}, {"mat": "0AM1290", "desc": "XPLICIT AZUCAR 7GR  1000U", "qty": 1.0, "unit": "ZPR", "ubic": "FC02A2", "client": "ALASKA BAR"}, {"mat": "0AM1634", "desc": "XPLICIT EDULCORANTE 1G 150U", "qty": 1.0, "unit": "ZPR", "ubic": "FC01C4", "client": "ALASKA BAR"}, {"mat": "ED13", "desc": "ESTRELLA DAMM 1/3 RET. PP", "qty": 3.0, "unit": "CAJ", "ubic": "AA09A1", "client": "ALASKA BAR"}, {"mat": "VO13", "desc": "VOLL-DAMM 1/3 RET.", "qty": 1.0, "unit": "CAJ", "ubic": "AA07A1", "client": "ALASKA BAR"}], "ret_items": [{"mat": "CJ13", "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13", "qty": 6.0, "unit": "CAJ", "ubic": "ENVASE", "client": "ALASKA BAR"}, {"mat": "CJ13", "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13", "qty": 1.0, "unit": "CAJ", "ubic": "ENVASE", "client": "ALASKA BAR"}, {"mat": "CJ13", "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13", "qty": 1.0, "unit": "CAJ", "ubic": "ENVASE", "client": "ALASKA BAR"}, {"mat": "CJ13", "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13", "qty": 2.0, "unit": "CAJ", "ubic": "ENVASE", "client": "ALASKA BAR"}, {"mat": "CJ13", "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13", "qty": 3.0, "unit": "CAJ", "ubic": "ENVASE", "client": "ALASKA BAR"}, {"mat": "CJ13", "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13", "qty": 1.0, "unit": "CAJ", "ubic": "ENVASE", "client": "ALASKA BAR"}]}, {"id": "828089029", "name": "CASAL DE LA GENT GRAN", "address": "CALLE SOLEDAT 13, 08500 VIC", "city": "VIC", "cp": "08500", "lat": 41.9302, "lon": 2.254, "delivery_caj": 6.0, "delivery_brl": 0, "delivery_un": 0, "ret_caj": 6.0, "ret_brl": 0, "items": [{"mat": "ED13", "desc": "ESTRELLA DAMM 1/3 RET. PP", "qty": 2.0, "unit": "CAJ", "ubic": "AA09A1", "client": "CASAL DE LA GENT GRAN"}, {"mat": "ED15LN", "desc": "ESTRELLA DAMM 1/5 LN", "qty": 1.0, "unit": "CAJ", "ubic": "AA08A1", "client": "CASAL DE LA GENT GRAN"}, {"mat": "FD15", "desc": "FREE DAMM 1/5 LN RET.", "qty": 2.0, "unit": "CAJ", "ubic": "BA06A2", "client": "CASAL DE LA GENT GRAN"}, {"mat": "FD15", "desc": "FREE DAMM 1/5 LN RET.", "qty": 1.0, "unit": "CAJ", "ubic": "BA06A2", "client": "CASAL DE LA GENT GRAN"}], "ret_items": [{"mat": "CJ13", "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13", "qty": 2.0, "unit": "CAJ", "ubic": "ENVASE", "client": "CASAL DE LA GENT GRAN"}, {"mat": "CJ15", "desc": "CAJA DAMM+BOT.1/5RET VACIO EN P.PLAS.A13", "qty": 1.0, "unit": "CAJ", "ubic": "ENVASE", "client": "CASAL DE LA GENT GRAN"}, {"mat": "CJ15", "desc": "CAJA DAMM+BOT.1/5RET VACIO EN P.PLAS.A13", "qty": 2.0, "unit": "CAJ", "ubic": "ENVASE", "client": "CASAL DE LA GENT GRAN"}, {"mat": "CJ15", "desc": "CAJA DAMM+BOT.1/5RET VACIO EN P.PLAS.A13", "qty": 1.0, "unit": "CAJ", "ubic": "ENVASE", "client": "CASAL DE LA GENT GRAN"}]}, {"id": "828089030", "name": "BAR REST EL TAST", "address": "RAMON SALA I SA\u00c7ALA 15, 08500 VIC", "city": "VIC", "cp": "08500", "lat": 41.9302, "lon": 2.254, "delivery_caj": 25.0, "delivery_brl": 0, "delivery_un": 14.0, "ret_caj": 9.0, "ret_brl": 0, "items": [{"mat": "ED13", "desc": "ESTRELLA DAMM 1/3 RET. PP", "qty": 8.0, "unit": "CAJ", "ubic": "AA09A1", "client": "BAR REST EL TAST"}, {"mat": "0AG0183", "desc": "VICHY CATALAN GAS 30CL RET 24U", "qty": 1.0, "unit": "CAJ", "ubic": "BA01A1", "client": "BAR REST EL TAST"}, {"mat": "0AG0007", "desc": "FONT D.OR NATURAL 1,5L PET 12U", "qty": 3.0, "unit": "CAJ", "ubic": "EB09A1", "client": "BAR REST EL TAST"}, {"mat": "0AG0004", "desc": "FONT D.OR NATURAL 1/2 PET 24U", "qty": 3.0, "unit": "CAJ", "ubic": "EB10A1", "client": "BAR REST EL TAST"}, {"mat": "0LT0033", "desc": "LETONA GRAN CREME PET 1,5L PET 6U", "qty": 6.0, "unit": "CAJ", "ubic": "FA06A3", "client": "BAR REST EL TAST"}, {"mat": "0VE0531", "desc": "PRIOR  BLANCO VERDEJO 75CL 6U", "qty": 2.0, "unit": "CAJ", "ubic": "EA08B3", "client": "BAR REST EL TAST"}, {"mat": "0VE0532", "desc": "PRIOR BOBAL ROSADO 75CL 6U", "qty": 2.0, "unit": "CAJ", "ubic": "EC08A1", "client": "BAR REST EL TAST"}, {"mat": "0AM1276", "desc": "BARGALLO ACEITE OLIVA SUAVE 5L", "qty": 3.0, "unit": "UN", "ubic": "EC01B3", "client": "BAR REST EL TAST"}, {"mat": "0AM1278", "desc": "BARGALLO ACEITE VIRGEN EXTRA 5L", "qty": 3.0, "unit": "UN", "ubic": "EC01B1", "client": "BAR REST EL TAST"}, {"mat": "0AM3864", "desc": "FRIMASOL ACEITE GIRASOL 25L", "qty": 2.0, "unit": "UN", "ubic": "EA02A3", "client": "BAR REST EL TAST"}, {"mat": "0AM0702", "desc": "SALSA ROMESCO FERRER POT 660G", "qty": 6.0, "unit": "UN", "ubic": "ZCG", "client": "BAR REST EL TAST"}], "ret_items": [{"mat": "CJ13", "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13", "qty": 8.0, "unit": "CAJ", "ubic": "ENVASE", "client": "BAR REST EL TAST"}, {"mat": "3ENV0236", "desc": "C.C. AGUA 1/3 VICHY-FONT D'OR", "qty": 1.0, "unit": "CAJ", "ubic": "AA", "client": "BAR REST EL TAST"}]}, {"id": "828089031", "name": "ZONA DIESEL URBAN", "address": "CALLE MATARO S/N, 08500 VIC", "city": "VIC", "cp": "08500", "lat": 41.9302, "lon": 2.254, "delivery_caj": 18.0, "delivery_brl": 0, "delivery_un": 10.0, "ret_caj": 0, "ret_brl": 0, "items": [{"mat": "VO13LT", "desc": "VOLL DAMM 1/3 LATA LC", "qty": 4.0, "unit": "CAJ", "ubic": "CA01A2", "client": "ZONA DIESEL URBAN"}, {"mat": "0AG0182", "desc": "VICHY CATALAN SYSPACK GAS 30CL SR 24U", "qty": 1.0, "unit": "CAJ", "ubic": "DB06A2", "client": "ZONA DIESEL URBAN"}, {"mat": "0AG0046", "desc": "VICHY CATALAN GAS 1,2L PET 6U", "qty": 1.0, "unit": "CAJ", "ubic": "ZCG", "client": "ZONA DIESEL URBAN"}, {"mat": "0LT0020", "desc": "CACAOLAT ORIGINAL 1L PET 6U", "qty": 1.0, "unit": "CAJ", "ubic": "FA02B1", "client": "ZONA DIESEL URBAN"}, {"mat": "0LT0412", "desc": "CACAOLAT ORIGINAL 27,5CL PET 24U", "qty": 2.0, "unit": "CAJ", "ubic": "FA01B1", "client": "ZONA DIESEL URBAN"}, {"mat": "NTL13LT6", "desc": "NESTEA LIMON 1/3 LATA 4U-PACK 6U.", "qty": 1.0, "unit": "CAJ", "ubic": "CB06A2", "client": "ZONA DIESEL URBAN"}, {"mat": "0ZU0006", "desc": "GRANINI NARANJA 33CL PET 12U", "qty": 1.0, "unit": "CAJ", "ubic": "ZCG", "client": "ZONA DIESEL URBAN"}, {"mat": "0ZU0056", "desc": "GRANINI MELOCOTON 33CL PET 12U", "qty": 1.0, "unit": "CAJ", "ubic": "ZCG", "client": "ZONA DIESEL URBAN"}, {"mat": "0ZU0065", "desc": "GRANINI PI\u00d1A 33CL PET 12U", "qty": 1.0, "unit": "CAJ", "ubic": "ZCG", "client": "ZONA DIESEL URBAN"}, {"mat": "0ZU0287", "desc": "GRANINI ZANAHORIA-NARANJA 33CL 12U", "qty": 1.0, "unit": "CAJ", "ubic": "ZCG", "client": "ZONA DIESEL URBAN"}, {"mat": "0ZU0020", "desc": "GRANINI MELOCOTON  20CL 24U", "qty": 1.0, "unit": "CAJ", "ubic": "DA09A1", "client": "ZONA DIESEL URBAN"}, {"mat": "0LI0153", "desc": "RUAVIEJA ORUJO HIERBAS 70CL", "qty": 6.0, "unit": "BOT", "ubic": "ZCG", "client": "ZONA DIESEL URBAN"}, {"mat": "0RF0091", "desc": "/-SCHWEPPES LIMON LATA SLEEK 24U", "qty": 1.0, "unit": "CAJ", "ubic": "ZCG", "client": "ZONA DIESEL URBAN"}, {"mat": "0LI0068", "desc": "NEGRITA RON 70CL", "qty": 4.0, "unit": "BOT", "ubic": "ZCG", "client": "ZONA DIESEL URBAN"}, {"mat": "NTL13LT6", "desc": "NESTEA LIMON 1/3 LATA 4U-PACK 6U.", "qty": 2.0, "unit": "CAJ", "ubic": "CB06A2", "client": "ZONA DIESEL URBAN"}], "ret_items": []}, {"id": "828089032", "name": "CAFETERIA PRADALS", "address": "CTRA. SANT HIP\u00d2LIT 61, 08500 VIC", "city": "VIC", "cp": "08500", "lat": 41.9302, "lon": 2.254, "delivery_caj": 10.0, "delivery_brl": 0, "delivery_un": 0, "ret_caj": 6.0, "ret_brl": 0, "items": [{"mat": "ED13", "desc": "ESTRELLA DAMM 1/3 RET. PP", "qty": 2.0, "unit": "CAJ", "ubic": "AA09A1", "client": "CAFETERIA PRADALS"}, {"mat": "FDL13", "desc": "FREE DAMM LIMON 1/3 RET. PP", "qty": 1.0, "unit": "CAJ", "ubic": "AA05A1", "client": "CAFETERIA PRADALS"}, {"mat": "ED13LT", "desc": "ESTRELLA DAMM 1/3 LATA", "qty": 1.0, "unit": "CAJ", "ubic": "CA01A1", "client": "CAFETERIA PRADALS"}, {"mat": "0LT0032", "desc": "CACAOLAT VIDRIO 20CL RET 30U", "qty": 2.0, "unit": "CAJ", "ubic": "AC04A3", "client": "CAFETERIA PRADALS"}, {"mat": "0ZU0048", "desc": "PAGO PI\u00d1A 20CL SR 24U", "qty": 2.0, "unit": "CAJ", "ubic": "ZCG", "client": "CAFETERIA PRADALS"}, {"mat": "0ZU0049", "desc": "PAGO MELOCOTON  20CL SR 24U", "qty": 1.0, "unit": "CAJ", "ubic": "ZCG", "client": "CAFETERIA PRADALS"}, {"mat": "ED13", "desc": "ESTRELLA DAMM 1/3 RET. PP", "qty": 1.0, "unit": "CAJ", "ubic": "AA09A1", "client": "CAFETERIA PRADALS"}], "ret_items": [{"mat": "CJ13", "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13", "qty": 2.0, "unit": "CAJ", "ubic": "ENVASE", "client": "CAFETERIA PRADALS"}, {"mat": "CJ13", "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13", "qty": 1.0, "unit": "CAJ", "ubic": "ENVASE", "client": "CAFETERIA PRADALS"}, {"mat": "3ENV0029", "desc": "C.C. CACAOLAT 30 U.", "qty": 2.0, "unit": "CAJ", "ubic": "ENVASE", "client": "CAFETERIA PRADALS"}, {"mat": "CJ13", "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13", "qty": 1.0, "unit": "CAJ", "ubic": "ENVASE", "client": "CAFETERIA PRADALS"}]}, {"id": "828089033", "name": "LLAR JUVENIL", "address": "CALLE PIUS XII 20, 08500 VIC", "city": "VIC", "cp": "08500", "lat": 41.9302, "lon": 2.254, "delivery_caj": 6.0, "delivery_brl": 0, "delivery_un": 0, "ret_caj": 0, "ret_brl": 0, "items": [{"mat": "0AG0004", "desc": "FONT D.OR NATURAL 1/2 PET 24U", "qty": 1.0, "unit": "CAJ", "ubic": "EB10A1", "client": "LLAR JUVENIL"}, {"mat": "0LT0033", "desc": "LETONA GRAN CREME PET 1,5L PET 6U", "qty": 4.0, "unit": "CAJ", "ubic": "FA06A3", "client": "LLAR JUVENIL"}, {"mat": "0ZU0755", "desc": "GRANINI MELOCOTON 3X20CL MINIBRICK 30U", "qty": 1.0, "unit": "CAJ", "ubic": "ZCG", "client": "LLAR JUVENIL"}], "ret_items": []}, {"id": "828089034", "name": "GURBI", "address": "CALLE JACINT VERDAGUER 20, 08503 GURB", "city": "GURB", "cp": "08503", "lat": 41.9501, "lon": 2.2673, "delivery_caj": 14.0, "delivery_brl": 0, "delivery_un": 0, "ret_caj": 7.0, "ret_brl": 0, "items": [{"mat": "DL13", "desc": "DAMM LEMON 1/3 RET", "qty": 1.0, "unit": "CAJ", "ubic": "AA02A1", "client": "GURBI"}, {"mat": "ED13", "desc": "ESTRELLA DAMM 1/3 RET. PP", "qty": 2.0, "unit": "CAJ", "ubic": "AA09A1", "client": "GURBI"}, {"mat": "0LT0032", "desc": "CACAOLAT VIDRIO 20CL RET 30U", "qty": 3.0, "unit": "CAJ", "ubic": "AC04A3", "client": "GURBI"}, {"mat": "0LT0412", "desc": "CACAOLAT ORIGINAL 27,5CL PET 24U", "qty": 2.0, "unit": "CAJ", "ubic": "FA01B1", "client": "GURBI"}, {"mat": "0ZU0754", "desc": "GRANINI PI\u00d1A 3X20CL MINIBRICK 30U", "qty": 1.0, "unit": "CAJ", "ubic": "ZCG", "client": "GURBI"}, {"mat": "0ZU0311", "desc": "PAGO NARANJA   1L PET 6U", "qty": 1.0, "unit": "CAJ", "ubic": "ZCG", "client": "GURBI"}, {"mat": "0ZU0048", "desc": "PAGO PI\u00d1A 20CL SR 24U", "qty": 2.0, "unit": "CAJ", "ubic": "ZCG", "client": "GURBI"}, {"mat": "0ZU0050", "desc": "PAGO NARANJA-ZANAH-LIM\u00d3N  20CL SR 24U", "qty": 1.0, "unit": "CAJ", "ubic": "ZCG", "client": "GURBI"}, {"mat": "ED13", "desc": "ESTRELLA DAMM 1/3 RET. PP", "qty": 1.0, "unit": "CAJ", "ubic": "AA09A1", "client": "GURBI"}], "ret_items": [{"mat": "CJ13", "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13", "qty": 1.0, "unit": "CAJ", "ubic": "ENVASE", "client": "GURBI"}, {"mat": "CJ13", "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13", "qty": 2.0, "unit": "CAJ", "ubic": "ENVASE", "client": "GURBI"}, {"mat": "3ENV0029", "desc": "C.C. CACAOLAT 30 U.", "qty": 3.0, "unit": "CAJ", "ubic": "ENVASE", "client": "GURBI"}, {"mat": "CJ13", "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13", "qty": 1.0, "unit": "CAJ", "ubic": "ENVASE", "client": "GURBI"}]}, {"id": "828089035", "name": "PADEL OSONA GURB", "address": "CALLE SANT ROC 29, 08503 GURB", "city": "GURB", "cp": "08503", "lat": 41.9501, "lon": 2.2673, "delivery_caj": 19.0, "delivery_brl": 2.0, "delivery_un": 0, "ret_caj": 3.0, "ret_brl": 2.0, "items": [{"mat": "ED13", "desc": "ESTRELLA DAMM 1/3 RET. PP", "qty": 2.0, "unit": "CAJ", "ubic": "AA09A1", "client": "PADEL OSONA GURB"}, {"mat": "ED30", "desc": "ESTRELLA DAMM BARRIL 30", "qty": 1.0, "unit": "BRL", "ubic": "AA10A1", "client": "PADEL OSONA GURB"}, {"mat": "TU20", "desc": "TURIA BARRIL 20L.", "qty": 1.0, "unit": "BRL", "ubic": "AC03A2", "client": "PADEL OSONA GURB"}, {"mat": "VE12SP", "desc": "AGUA VERI 1/2 PET CAJA 24U. T.TH", "qty": 5.0, "unit": "CAJ", "ubic": "EB03A1", "client": "PADEL OSONA GURB"}, {"mat": "VE32SP", "desc": "AGUA VERI 1,5L PET CAJA 12U.", "qty": 8.0, "unit": "CAJ", "ubic": "EB02A1", "client": "PADEL OSONA GURB"}, {"mat": "0LT0103", "desc": "YOSOY AVENA BARISTA 1L BRIK 6U", "qty": 1.0, "unit": "CAJ", "ubic": "FA03A1", "client": "PADEL OSONA GURB"}, {"mat": "0LT0034", "desc": "LETONA SEMI ESPEC HOSTELERIA PET 1,5L 6U", "qty": 2.0, "unit": "CAJ", "ubic": "FA05A2", "client": "PADEL OSONA GURB"}, {"mat": "ED13", "desc": "ESTRELLA DAMM 1/3 RET. PP", "qty": 1.0, "unit": "CAJ", "ubic": "AA09A1", "client": "PADEL OSONA GURB"}], "ret_items": [{"mat": "CJ13", "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13", "qty": 2.0, "unit": "CAJ", "ubic": "ENVASE", "client": "PADEL OSONA GURB"}, {"mat": "BRL30V", "desc": "BARRIL INOX 30L. EURONORMA", "qty": 1.0, "unit": "BRL", "ubic": "ENVASE", "client": "PADEL OSONA GURB"}, {"mat": "BRL20V", "desc": "BARRIL INOX 20L. TANQUETA A16", "qty": 1.0, "unit": "BRL", "ubic": "ENVASE", "client": "PADEL OSONA GURB"}, {"mat": "CJ13", "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13", "qty": 1.0, "unit": "CAJ", "ubic": "ENVASE", "client": "PADEL OSONA GURB"}]}, {"id": "828089036", "name": "ALOE", "address": "MENENDEZ I PELAYO 1, 08500 VIC", "city": "VIC", "cp": "08500", "lat": 41.9302, "lon": 2.254, "delivery_caj": 3.0, "delivery_brl": 0, "delivery_un": 0, "ret_caj": 3.0, "ret_brl": 0, "items": [{"mat": "ED13", "desc": "ESTRELLA DAMM 1/3 RET. PP", "qty": 3.0, "unit": "CAJ", "ubic": "AA09A1", "client": "ALOE"}], "ret_items": [{"mat": "CJ13", "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13", "qty": 3.0, "unit": "CAJ", "ubic": "ENVASE", "client": "ALOE"}]}, {"id": "828089037", "name": "BAR PRIEGO", "address": "CALLE ENRIC PRAT DE LA RIBA 49, 08500 VIC", "city": "VIC", "cp": "08500", "lat": 41.9302, "lon": 2.254, "delivery_caj": 22.0, "delivery_brl": 0, "delivery_un": 0, "ret_caj": 22.0, "ret_brl": 0, "items": [{"mat": "ED13", "desc": "ESTRELLA DAMM 1/3 RET. PP", "qty": 14.0, "unit": "CAJ", "ubic": "AA09A1", "client": "BAR PRIEGO"}, {"mat": "ED13", "desc": "ESTRELLA DAMM 1/3 RET. PP", "qty": 8.0, "unit": "CAJ", "ubic": "AA09A1", "client": "BAR PRIEGO"}], "ret_items": [{"mat": "CJ13", "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13", "qty": 14.0, "unit": "CAJ", "ubic": "ENVASE", "client": "BAR PRIEGO"}, {"mat": "CJ13", "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13", "qty": 8.0, "unit": "CAJ", "ubic": "ENVASE", "client": "BAR PRIEGO"}]}, {"id": "828089038", "name": "E.S VIC", "address": "Carretera de Roda 97, 08500 VIC", "city": "VIC", "cp": "08500", "lat": 41.9302, "lon": 2.254, "delivery_caj": 19.0, "delivery_brl": 0, "delivery_un": 0, "ret_caj": 0, "ret_brl": 0, "items": [{"mat": "ED13LT", "desc": "ESTRELLA DAMM 1/3 LATA", "qty": 5.0, "unit": "CAJ", "ubic": "CA01A1", "client": "E.S VIC"}, {"mat": "VO13LT", "desc": "VOLL DAMM 1/3 LATA LC", "qty": 4.0, "unit": "CAJ", "ubic": "CA01A2", "client": "E.S VIC"}, {"mat": "0AG0039", "desc": "FONT D.OR NATURAL 1,5L PET 6U", "qty": 5.0, "unit": "CAJ", "ubic": "EB08A1", "client": "E.S VIC"}, {"mat": "0AG0004", "desc": "FONT D.OR NATURAL 1/2 PET 24U", "qty": 1.0, "unit": "CAJ", "ubic": "EB10A1", "client": "E.S VIC"}, {"mat": "0RF0124", "desc": "/-COCA COLA 2L PET 6U", "qty": 1.0, "unit": "CAJ", "ubic": "ZCG", "client": "E.S VIC"}, {"mat": "0RF0019", "desc": "/-COCA COLA LATA 33CL 24U", "qty": 2.0, "unit": "CAJ", "ubic": "CA04A2", "client": "E.S VIC"}, {"mat": "0RF0079", "desc": "/-COCA COLA ZERO LATA 33CL 24U", "qty": 1.0, "unit": "CAJ", "ubic": "CA03A3", "client": "E.S VIC"}], "ret_items": []}, {"id": "828089039", "name": "FORN ESTADI", "address": "AVENIDA PIUS XII 18, 08500 VIC", "city": "VIC", "cp": "08500", "lat": 41.9302, "lon": 2.254, "delivery_caj": 3.0, "delivery_brl": 0, "delivery_un": 0, "ret_caj": 0, "ret_brl": 0, "items": [{"mat": "ED13LT", "desc": "ESTRELLA DAMM 1/3 LATA", "qty": 1.0, "unit": "CAJ", "ubic": "CA01A1", "client": "FORN ESTADI"}, {"mat": "0LT0412", "desc": "CACAOLAT ORIGINAL 27,5CL PET 24U", "qty": 1.0, "unit": "CAJ", "ubic": "FA01B1", "client": "FORN ESTADI"}, {"mat": "0ZU0309", "desc": "PAGO ACE 1L PET 6U", "qty": 1.0, "unit": "CAJ", "ubic": "ZCG", "client": "FORN ESTADI"}], "ret_items": []}, {"id": "828089040", "name": "FORN DE PA EL REMEI", "address": "CALLE RAIMON D'ABADAL 23, 08500 VIC", "city": "VIC", "cp": "08500", "lat": 41.9302, "lon": 2.254, "delivery_caj": 4.0, "delivery_brl": 0, "delivery_un": 0, "ret_caj": 0, "ret_brl": 0, "items": [{"mat": "ED13LT", "desc": "ESTRELLA DAMM 1/3 LATA", "qty": 1.0, "unit": "CAJ", "ubic": "CA01A1", "client": "FORN DE PA EL REMEI"}, {"mat": "0LT0020", "desc": "CACAOLAT ORIGINAL 1L PET 6U", "qty": 1.0, "unit": "CAJ", "ubic": "FA02B1", "client": "FORN DE PA EL REMEI"}, {"mat": "0ZU0755", "desc": "GRANINI MELOCOTON 3X20CL MINIBRICK 30U", "qty": 1.0, "unit": "CAJ", "ubic": "ZCG", "client": "FORN DE PA EL REMEI"}, {"mat": "0ZU0048", "desc": "PAGO PI\u00d1A 20CL SR 24U", "qty": 1.0, "unit": "CAJ", "ubic": "ZCG", "client": "FORN DE PA EL REMEI"}], "ret_items": []}, {"id": "828089041", "name": "RESTAURANT UNTOK", "address": "CALLE ELS PIRINEUS 21, 08503 GURB", "city": "GURB", "cp": "08503", "lat": 41.9501, "lon": 2.2673, "delivery_caj": 29.0, "delivery_brl": 1.0, "delivery_un": 0, "ret_caj": 20.0, "ret_brl": 1.0, "items": [{"mat": "DL13", "desc": "DAMM LEMON 1/3 RET", "qty": 1.0, "unit": "CAJ", "ubic": "AA02A1", "client": "RESTAURANT UNTOK"}, {"mat": "ED13", "desc": "ESTRELLA DAMM 1/3 RET. PP", "qty": 3.0, "unit": "CAJ", "ubic": "AA09A1", "client": "RESTAURANT UNTOK"}, {"mat": "VO13", "desc": "VOLL-DAMM 1/3 RET.", "qty": 1.0, "unit": "CAJ", "ubic": "AA07A1", "client": "RESTAURANT UNTOK"}, {"mat": "ED30", "desc": "ESTRELLA DAMM BARRIL 30", "qty": 1.0, "unit": "BRL", "ubic": "AA10A1", "client": "RESTAURANT UNTOK"}, {"mat": "VE11", "desc": "AGUA VERI 1/1 VIDRIO RET.", "qty": 15.0, "unit": "CAJ", "ubic": "AA11A1", "client": "RESTAURANT UNTOK"}, {"mat": "VE32SP", "desc": "AGUA VERI 1,5L PET CAJA 12U.", "qty": 4.0, "unit": "CAJ", "ubic": "EB02A1", "client": "RESTAURANT UNTOK"}, {"mat": "VE13SP", "desc": "AGUA VERI 1/3 PET CAJA 35U. T.TH", "qty": 3.0, "unit": "CAJ", "ubic": "EB04A1", "client": "RESTAURANT UNTOK"}, {"mat": "0LT0235", "desc": "LA LEVANTINA AVENA ESP.HOST 1L 6U", "qty": 2.0, "unit": "CAJ", "ubic": "FA02A2", "client": "RESTAURANT UNTOK"}], "ret_items": [{"mat": "CJ13", "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13", "qty": 1.0, "unit": "CAJ", "ubic": "ENVASE", "client": "RESTAURANT UNTOK"}, {"mat": "CJ13", "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13", "qty": 3.0, "unit": "CAJ", "ubic": "ENVASE", "client": "RESTAURANT UNTOK"}, {"mat": "CJ13", "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13", "qty": 1.0, "unit": "CAJ", "ubic": "ENVASE", "client": "RESTAURANT UNTOK"}, {"mat": "BRL30V", "desc": "BARRIL INOX 30L. EURONORMA", "qty": 1.0, "unit": "BRL", "ubic": "ENVASE", "client": "RESTAURANT UNTOK"}, {"mat": "CJ11V", "desc": "CAJAS COMPLETAS 1/1 V", "qty": 15.0, "unit": "CAJ", "ubic": "ENVASE", "client": "RESTAURANT UNTOK"}]}, {"id": "828089042", "name": "FUSSIMANYA ESTADI", "address": "CALLE TAGAMANENT 1, 08500 VIC", "city": "VIC", "cp": "08500", "lat": 41.9302, "lon": 2.254, "delivery_caj": 4.0, "delivery_brl": 0, "delivery_un": 0, "ret_caj": 4.0, "ret_brl": 0, "items": [{"mat": "ED13", "desc": "ESTRELLA DAMM 1/3 RET. PP", "qty": 1.0, "unit": "CAJ", "ubic": "AA09A1", "client": "FUSSIMANYA ESTADI"}, {"mat": "ED15LN", "desc": "ESTRELLA DAMM 1/5 LN", "qty": 1.0, "unit": "CAJ", "ubic": "AA08A1", "client": "FUSSIMANYA ESTADI"}, {"mat": "0LT0032", "desc": "CACAOLAT VIDRIO 20CL RET 30U", "qty": 2.0, "unit": "CAJ", "ubic": "AC04A3", "client": "FUSSIMANYA ESTADI"}], "ret_items": [{"mat": "CJ13", "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13", "qty": 1.0, "unit": "CAJ", "ubic": "ENVASE", "client": "FUSSIMANYA ESTADI"}, {"mat": "CJ15", "desc": "CAJA DAMM+BOT.1/5RET VACIO EN P.PLAS.A13", "qty": 1.0, "unit": "CAJ", "ubic": "ENVASE", "client": "FUSSIMANYA ESTADI"}, {"mat": "3ENV0029", "desc": "C.C. CACAOLAT 30 U.", "qty": 2.0, "unit": "CAJ", "ubic": "ENVASE", "client": "FUSSIMANYA ESTADI"}]}, {"id": "828089043", "name": "GARBI 1 CAFET. ALIMENTACIO", "address": "RONDA FRANCESC CAMPRODON 5, 08500 VIC", "city": "VIC", "cp": "08500", "lat": 41.9302, "lon": 2.254, "delivery_caj": 6.0, "delivery_brl": 0, "delivery_un": 0, "ret_caj": 0, "ret_brl": 0, "items": [{"mat": "0CF1028", "desc": "MALONGO EXPRESO INTENSO CAPSULAS 6G 120U", "qty": 5.0, "unit": "CAJ", "ubic": "EA07C1", "client": "GARBI 1 CAFET. ALIMENTACIO"}, {"mat": "0CF1028", "desc": "MALONGO EXPRESO INTENSO CAPSULAS 6G 120U", "qty": 1.0, "unit": "CAJ", "ubic": "EA07C1", "client": "GARBI 1 CAFET. ALIMENTACIO"}], "ret_items": []}, {"id": "828089044", "name": "GARBI 1 CAFET. ALIMENTACIO", "address": "RONDA FRANCESC CAMPRODON 5, 08500 VIC", "city": "VIC", "cp": "08500", "lat": 41.9302, "lon": 2.254, "delivery_caj": 2.0, "delivery_brl": 0, "delivery_un": 0, "ret_caj": 0, "ret_brl": 0, "items": [{"mat": "0AM1634", "desc": "XPLICIT EDULCORANTE 1G 150U", "qty": 1.0, "unit": "CAJ", "ubic": "FC01C4", "client": "GARBI 1 CAFET. ALIMENTACIO"}, {"mat": "0AM5220", "desc": "AZUCAR GARBI ZEFIR 7G 1000U", "qty": 1.0, "unit": "CAJ", "ubic": "FC04A3", "client": "GARBI 1 CAFET. ALIMENTACIO"}], "ret_items": []}, {"id": "828089045", "name": "GUSTUM AREAS 2 (GIRONA-LLEIDA)", "address": "CARRETERA C-25 EIX TRANSVE KM 174,6, 08503 GURB", "city": "GURB", "cp": "08503", "lat": 41.9501, "lon": 2.2673, "delivery_caj": 6.0, "delivery_brl": 2.0, "delivery_un": 0, "ret_caj": 5.0, "ret_brl": 2.0, "items": [{"mat": "ED13", "desc": "ESTRELLA DAMM 1/3 RET. PP", "qty": 5.0, "unit": "CAJ", "ubic": "AA09A1", "client": "GUSTUM AREAS 2 (GIRONA-LLEIDA)"}, {"mat": "ED30", "desc": "ESTRELLA DAMM BARRIL 30", "qty": 2.0, "unit": "BRL", "ubic": "AA10A1", "client": "GUSTUM AREAS 2 (GIRONA-LLEIDA)"}, {"mat": "0AG0052", "desc": "VICHY CATALAN GAS 1/2 PET 24U", "qty": 1.0, "unit": "CAJ", "ubic": "EA01A3", "client": "GUSTUM AREAS 2 (GIRONA-LLEIDA)"}], "ret_items": [{"mat": "CJ13", "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13", "qty": 5.0, "unit": "CAJ", "ubic": "ENVASE", "client": "GUSTUM AREAS 2 (GIRONA-LLEIDA)"}, {"mat": "BRL30V", "desc": "BARRIL INOX 30L. EURONORMA", "qty": 2.0, "unit": "BRL", "ubic": "ENVASE", "client": "GUSTUM AREAS 2 (GIRONA-LLEIDA)"}]}, {"id": "828089046", "name": "GUSTUM AREAS 1 (LLEIDA-GIRONA)", "address": "CARRETERA C-25 EIX TRANSVE KM 174,6, 08503 GURB", "city": "GURB", "cp": "08503", "lat": 41.9501, "lon": 2.2673, "delivery_caj": 5.0, "delivery_brl": 1.0, "delivery_un": 0, "ret_caj": 4.0, "ret_brl": 1.0, "items": [{"mat": "ED13", "desc": "ESTRELLA DAMM 1/3 RET. PP", "qty": 4.0, "unit": "CAJ", "ubic": "AA09A1", "client": "GUSTUM AREAS 1 (LLEIDA-GIRONA)"}, {"mat": "ED30", "desc": "ESTRELLA DAMM BARRIL 30", "qty": 1.0, "unit": "BRL", "ubic": "AA10A1", "client": "GUSTUM AREAS 1 (LLEIDA-GIRONA)"}, {"mat": "0AG0052", "desc": "VICHY CATALAN GAS 1/2 PET 24U", "qty": 1.0, "unit": "CAJ", "ubic": "EA01A3", "client": "GUSTUM AREAS 1 (LLEIDA-GIRONA)"}], "ret_items": [{"mat": "CJ13", "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13", "qty": 4.0, "unit": "CAJ", "ubic": "ENVASE", "client": "GUSTUM AREAS 1 (LLEIDA-GIRONA)"}, {"mat": "BRL30V", "desc": "BARRIL INOX 30L. EURONORMA", "qty": 1.0, "unit": "BRL", "ubic": "ENVASE", "client": "GUSTUM AREAS 1 (LLEIDA-GIRONA)"}]}, {"id": "828089047", "name": "FONTSECA, BAR", "address": "CARRETERA SANT HILARI SACALM S/N, 08500 VIC", "city": "VIC", "cp": "08500", "lat": 41.9302, "lon": 2.254, "delivery_caj": 13.0, "delivery_brl": 0, "delivery_un": 0, "ret_caj": 13.0, "ret_brl": 0, "items": [{"mat": "ED13", "desc": "ESTRELLA DAMM 1/3 RET. PP", "qty": 2.0, "unit": "CAJ", "ubic": "AA09A1", "client": "FONTSECA, BAR"}, {"mat": "FDT13", "desc": "FREE DAMM TOSTADA 1/3 RET. PP", "qty": 2.0, "unit": "CAJ", "ubic": "AA04A1", "client": "FONTSECA, BAR"}, {"mat": "0AG0010", "desc": "VICHY CATALAN GAS 1L RET 12U", "qty": 7.0, "unit": "CAJ", "ubic": "AC07A2", "client": "FONTSECA, BAR"}, {"mat": "FDT13", "desc": "FREE DAMM TOSTADA 1/3 RET. PP", "qty": 1.0, "unit": "CAJ", "ubic": "AA04A1", "client": "FONTSECA, BAR"}, {"mat": "ED13", "desc": "ESTRELLA DAMM 1/3 RET. PP", "qty": 1.0, "unit": "CAJ", "ubic": "AA09A1", "client": "FONTSECA, BAR"}], "ret_items": [{"mat": "CJ13", "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13", "qty": 2.0, "unit": "CAJ", "ubic": "ENVASE", "client": "FONTSECA, BAR"}, {"mat": "CJ13", "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13", "qty": 2.0, "unit": "CAJ", "ubic": "ENVASE", "client": "FONTSECA, BAR"}, {"mat": "3ENV0042", "desc": "C.C. AGUA 1/1 VICHY-FONT D'OR", "qty": 7.0, "unit": "CAJ", "ubic": "ENVASE", "client": "FONTSECA, BAR"}, {"mat": "CJ13", "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13", "qty": 1.0, "unit": "CAJ", "ubic": "ENVASE", "client": "FONTSECA, BAR"}, {"mat": "CJ13", "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13", "qty": 1.0, "unit": "CAJ", "ubic": "ENVASE", "client": "FONTSECA, BAR"}]}, {"id": "841049011", "name": "PADEL OSONA GURB", "address": "CALLE SANT ROC 29, 08503 GURB", "city": "GURB", "cp": "08503", "lat": 41.9501, "lon": 2.2673, "delivery_caj": 0, "delivery_brl": 0, "delivery_un": 0, "ret_caj": 5.0, "ret_brl": 2.0, "items": [], "ret_items": [{"mat": "BRL20V", "desc": "BARRIL INOX 20L. TANQUETA A16", "qty": 2.0, "unit": "BRL", "ubic": "ENVASE", "client": "PADEL OSONA GURB"}, {"mat": "CJ13", "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13", "qty": 5.0, "unit": "CAJ", "ubic": "ENVASE", "client": "PADEL OSONA GURB"}]}], optRoute=[3, 13, 0, 4, 23, 2, 5, 6, 18, 12, 8, 7, 14, 9, 19, 16, 15, 20, 1, 17, 21, 11, 22, 10, 24], randRoute=[16, 12, 9, 19, 18, 6, 5, 10, 15, 21, 11, 17, 1, 14, 22, 13, 2, 23, 4, 24, 7, 8, 0, 3, 20], depot={"name": "DDI Mollet del Vall\u00e8s", "lat": 41.543, "lon": 2.214};
+const parcels={"1": ["RETURNABLES"], "2": [], "3": [13, 3], "4": [6, 5, 2, 23, 4, 0], "5": [1, 20, 15, 16, 19, 9, 14, 7, 8, 12, 18], "6": [24, 10, 22, 11, 21, 17]}, parcelProds={"1": [{"mat": "CJ13", "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13", "qty": 2.0, "unit": "CAJ", "ubic": "ENVASE", "client": "AURIAL PADEL"}, {"mat": "CJ13", "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13", "qty": 3.0, "unit": "CAJ", "ubic": "ENVASE", "client": "AURIAL PADEL"}, {"mat": "BRL20V", "desc": "BARRIL INOX 20L. TANQUETA A16", "qty": 2.0, "unit": "BRL", "ubic": "ENVASE", "client": "AURIAL PADEL"}, {"mat": "BRL30V", "desc": "BARRIL INOX 30L. EURONORMA", "qty": 5.0, "unit": "BRL", "ubic": "ENVASE", "client": "AURIAL PADEL"}, {"mat": "BRL20V", "desc": "BARRIL INOX 20L. TANQUETA A16", "qty": 3.0, "unit": "BRL", "ubic": "ENVASE", "client": "AURIAL PADEL"}, {"mat": "3ENV0236", "desc": "C.C. AGUA 1/3 VICHY-FONT D'OR", "qty": 1.0, "unit": "CAJ", "ubic": "AA", "client": "AURIAL PADEL"}, {"mat": "3ENV0029", "desc": "C.C. CACAOLAT 30 U.", "qty": 1.0, "unit": "CAJ", "ubic": "ENVASE", "client": "AURIAL PADEL"}, {"mat": "CJ13", "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13", "qty": 2.0, "unit": "CAJ", "ubic": "ENVASE", "client": "AURIAL PADEL"}, {"mat": "CJ13", "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13", "qty": 14.0, "unit": "CAJ", "ubic": "ENVASE", "client": "BAR PRIEGO"}, {"mat": "CJ13", "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13", "qty": 8.0, "unit": "CAJ", "ubic": "ENVASE", "client": "BAR PRIEGO"}, {"mat": "CJ13", "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13", "qty": 8.0, "unit": "CAJ", "ubic": "ENVASE", "client": "ENTREPA I PA"}, {"mat": "CJ15", "desc": "CAJA DAMM+BOT.1/5RET VACIO EN P.PLAS.A13", "qty": 2.0, "unit": "CAJ", "ubic": "ENVASE", "client": "ENTREPA I PA"}, {"mat": "BRL30V", "desc": "BARRIL INOX 30L. EURONORMA", "qty": 1.0, "unit": "BRL", "ubic": "ENVASE", "client": "ENTREPA I PA"}, {"mat": "BRL20V", "desc": "BARRIL INOX 20L. TANQUETA A16", "qty": 1.0, "unit": "BRL", "ubic": "ENVASE", "client": "ENTREPA I PA"}, {"mat": "CJ13", "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13", "qty": 6.0, "unit": "CAJ", "ubic": "ENVASE", "client": "ALASKA BAR"}, {"mat": "CJ13", "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13", "qty": 1.0, "unit": "CAJ", "ubic": "ENVASE", "client": "ALASKA BAR"}, {"mat": "CJ13", "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13", "qty": 1.0, "unit": "CAJ", "ubic": "ENVASE", "client": "ALASKA BAR"}, {"mat": "CJ13", "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13", "qty": 2.0, "unit": "CAJ", "ubic": "ENVASE", "client": "ALASKA BAR"}, {"mat": "CJ13", "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13", "qty": 3.0, "unit": "CAJ", "ubic": "ENVASE", "client": "ALASKA BAR"}, {"mat": "CJ13", "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13", "qty": 1.0, "unit": "CAJ", "ubic": "ENVASE", "client": "ALASKA BAR"}, {"mat": "CJ13", "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13", "qty": 2.0, "unit": "CAJ", "ubic": "ENVASE", "client": "FONTSECA, BAR"}, {"mat": "CJ13", "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13", "qty": 2.0, "unit": "CAJ", "ubic": "ENVASE", "client": "FONTSECA, BAR"}, {"mat": "3ENV0042", "desc": "C.C. AGUA 1/1 VICHY-FONT D'OR", "qty": 7.0, "unit": "CAJ", "ubic": "ENVASE", "client": "FONTSECA, BAR"}, {"mat": "CJ13", "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13", "qty": 1.0, "unit": "CAJ", "ubic": "ENVASE", "client": "FONTSECA, BAR"}, {"mat": "CJ13", "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13", "qty": 1.0, "unit": "CAJ", "ubic": "ENVASE", "client": "FONTSECA, BAR"}, {"mat": "CJ13", "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13", "qty": 4.0, "unit": "CAJ", "ubic": "ENVASE", "client": "INDUSTRIA 52"}, {"mat": "CJ13", "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13", "qty": 1.0, "unit": "CAJ", "ubic": "ENVASE", "client": "INDUSTRIA 52"}, {"mat": "CJ13", "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13", "qty": 1.0, "unit": "CAJ", "ubic": "ENVASE", "client": "INDUSTRIA 52"}, {"mat": "CJ13", "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13", "qty": 2.0, "unit": "CAJ", "ubic": "ENVASE", "client": "INDUSTRIA 52"}, {"mat": "CJ13", "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13", "qty": 1.0, "unit": "CAJ", "ubic": "ENVASE", "client": "INDUSTRIA 52"}, {"mat": "CJ13", "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13", "qty": 2.0, "unit": "CAJ", "ubic": "ENVASE", "client": "CASAL DE LA GENT GRAN"}, {"mat": "CJ15", "desc": "CAJA DAMM+BOT.1/5RET VACIO EN P.PLAS.A13", "qty": 1.0, "unit": "CAJ", "ubic": "ENVASE", "client": "CASAL DE LA GENT GRAN"}, {"mat": "CJ15", "desc": "CAJA DAMM+BOT.1/5RET VACIO EN P.PLAS.A13", "qty": 2.0, "unit": "CAJ", "ubic": "ENVASE", "client": "CASAL DE LA GENT GRAN"}, {"mat": "CJ15", "desc": "CAJA DAMM+BOT.1/5RET VACIO EN P.PLAS.A13", "qty": 1.0, "unit": "CAJ", "ubic": "ENVASE", "client": "CASAL DE LA GENT GRAN"}, {"mat": "CJ13", "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13", "qty": 8.0, "unit": "CAJ", "ubic": "ENVASE", "client": "BAR REST EL TAST"}, {"mat": "3ENV0236", "desc": "C.C. AGUA 1/3 VICHY-FONT D'OR", "qty": 1.0, "unit": "CAJ", "ubic": "AA", "client": "BAR REST EL TAST"}, {"mat": "CJ13", "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13", "qty": 1.0, "unit": "CAJ", "ubic": "ENVASE", "client": "FUSSIMANYA ESTADI"}, {"mat": "CJ15", "desc": "CAJA DAMM+BOT.1/5RET VACIO EN P.PLAS.A13", "qty": 1.0, "unit": "CAJ", "ubic": "ENVASE", "client": "FUSSIMANYA ESTADI"}, {"mat": "3ENV0029", "desc": "C.C. CACAOLAT 30 U.", "qty": 2.0, "unit": "CAJ", "ubic": "ENVASE", "client": "FUSSIMANYA ESTADI"}, {"mat": "CJ13", "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13", "qty": 3.0, "unit": "CAJ", "ubic": "ENVASE", "client": "ALOE"}, {"mat": "CJ13", "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13", "qty": 2.0, "unit": "CAJ", "ubic": "ENVASE", "client": "CAFETERIA PRADALS"}, {"mat": "CJ13", "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13", "qty": 1.0, "unit": "CAJ", "ubic": "ENVASE", "client": "CAFETERIA PRADALS"}, {"mat": "3ENV0029", "desc": "C.C. CACAOLAT 30 U.", "qty": 2.0, "unit": "CAJ", "ubic": "ENVASE", "client": "CAFETERIA PRADALS"}, {"mat": "CJ13", "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13", "qty": 1.0, "unit": "CAJ", "ubic": "ENVASE", "client": "CAFETERIA PRADALS"}, {"mat": "CJ13", "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13", "qty": 1.0, "unit": "CAJ", "ubic": "ENVASE", "client": "RESTAURANT UNTOK"}, {"mat": "CJ13", "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13", "qty": 3.0, "unit": "CAJ", "ubic": "ENVASE", "client": "RESTAURANT UNTOK"}, {"mat": "CJ13", "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13", "qty": 1.0, "unit": "CAJ", "ubic": "ENVASE", "client": "RESTAURANT UNTOK"}, {"mat": "BRL30V", "desc": "BARRIL INOX 30L. EURONORMA", "qty": 1.0, "unit": "BRL", "ubic": "ENVASE", "client": "RESTAURANT UNTOK"}, {"mat": "CJ11V", "desc": "CAJAS COMPLETAS 1/1 V", "qty": 15.0, "unit": "CAJ", "ubic": "ENVASE", "client": "RESTAURANT UNTOK"}, {"mat": "CJ13", "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13", "qty": 5.0, "unit": "CAJ", "ubic": "ENVASE", "client": "GUSTUM AREAS 2 (GIRONA-LLEIDA)"}, {"mat": "BRL30V", "desc": "BARRIL INOX 30L. EURONORMA", "qty": 2.0, "unit": "BRL", "ubic": "ENVASE", "client": "GUSTUM AREAS 2 (GIRONA-LLEIDA)"}, {"mat": "CJ13", "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13", "qty": 2.0, "unit": "CAJ", "ubic": "ENVASE", "client": "PADEL OSONA GURB"}, {"mat": "BRL30V", "desc": "BARRIL INOX 30L. EURONORMA", "qty": 1.0, "unit": "BRL", "ubic": "ENVASE", "client": "PADEL OSONA GURB"}, {"mat": "BRL20V", "desc": "BARRIL INOX 20L. TANQUETA A16", "qty": 1.0, "unit": "BRL", "ubic": "ENVASE", "client": "PADEL OSONA GURB"}, {"mat": "CJ13", "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13", "qty": 1.0, "unit": "CAJ", "ubic": "ENVASE", "client": "PADEL OSONA GURB"}, {"mat": "CJ13", "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13", "qty": 4.0, "unit": "CAJ", "ubic": "ENVASE", "client": "GUSTUM AREAS 1 (LLEIDA-GIRONA)"}, {"mat": "BRL30V", "desc": "BARRIL INOX 30L. EURONORMA", "qty": 1.0, "unit": "BRL", "ubic": "ENVASE", "client": "GUSTUM AREAS 1 (LLEIDA-GIRONA)"}, {"mat": "CJ13", "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13", "qty": 1.0, "unit": "CAJ", "ubic": "ENVASE", "client": "GURBI"}, {"mat": "CJ13", "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13", "qty": 2.0, "unit": "CAJ", "ubic": "ENVASE", "client": "GURBI"}, {"mat": "3ENV0029", "desc": "C.C. CACAOLAT 30 U.", "qty": 3.0, "unit": "CAJ", "ubic": "ENVASE", "client": "GURBI"}, {"mat": "CJ13", "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13", "qty": 1.0, "unit": "CAJ", "ubic": "ENVASE", "client": "GURBI"}, {"mat": "BRL20V", "desc": "BARRIL INOX 20L. TANQUETA A16", "qty": 2.0, "unit": "BRL", "ubic": "ENVASE", "client": "PADEL OSONA GURB"}, {"mat": "CJ13", "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13", "qty": 5.0, "unit": "CAJ", "ubic": "ENVASE", "client": "PADEL OSONA GURB"}], "2": [], "3": [{"mat": "ED13", "desc": "ESTRELLA DAMM 1/3 RET. PP", "qty": 14.0, "unit": "CAJ", "ubic": "AA09A1", "client": "BAR PRIEGO"}, {"mat": "ED13", "desc": "ESTRELLA DAMM 1/3 RET. PP", "qty": 8.0, "unit": "CAJ", "ubic": "AA09A1", "client": "BAR PRIEGO"}, {"mat": "TU13", "desc": "TURIA 1/3 RET.", "qty": 2.0, "unit": "CAJ", "ubic": "AA03A1", "client": "AURIAL PADEL"}, {"mat": "VO13", "desc": "VOLL-DAMM 1/3 RET.", "qty": 3.0, "unit": "CAJ", "ubic": "AA07A1", "client": "AURIAL PADEL"}, {"mat": "DL20", "desc": "DAMM LEMON BARRIL 20L.", "qty": 2.0, "unit": "BRL", "ubic": "AC03A3", "client": "AURIAL PADEL"}, {"mat": "ED30", "desc": "ESTRELLA DAMM BARRIL 30", "qty": 5.0, "unit": "BRL", "ubic": "AA10A1", "client": "AURIAL PADEL"}, {"mat": "TU20", "desc": "TURIA BARRIL 20L.", "qty": 3.0, "unit": "BRL", "ubic": "AC03A2", "client": "AURIAL PADEL"}, {"mat": "VE12SP", "desc": "AGUA VERI 1/2 PET CAJA 24U. T.TH", "qty": 6.0, "unit": "CAJ", "ubic": "EB03A1", "client": "AURIAL PADEL"}, {"mat": "VE32SP", "desc": "AGUA VERI 1,5L PET CAJA 12U.", "qty": 10.0, "unit": "CAJ", "ubic": "EB02A1", "client": "AURIAL PADEL"}, {"mat": "0AG0183", "desc": "VICHY CATALAN GAS 30CL RET 24U", "qty": 1.0, "unit": "CAJ", "ubic": "BA01A1", "client": "AURIAL PADEL"}, {"mat": "0LT0032", "desc": "CACAOLAT VIDRIO 20CL RET 30U", "qty": 1.0, "unit": "CAJ", "ubic": "AC04A3", "client": "AURIAL PADEL"}, {"mat": "0LT0235", "desc": "LA LEVANTINA AVENA ESP.HOST 1L 6U", "qty": 2.0, "unit": "CAJ", "ubic": "FA02A2", "client": "AURIAL PADEL"}, {"mat": "0LT0033", "desc": "LETONA GRAN CREME PET 1,5L PET 6U", "qty": 4.0, "unit": "CAJ", "ubic": "FA06A3", "client": "AURIAL PADEL"}, {"mat": "TU13", "desc": "TURIA 1/3 RET.", "qty": 2.0, "unit": "CAJ", "ubic": "AA03A1", "client": "AURIAL PADEL"}], "4": [{"mat": "ED13", "desc": "ESTRELLA DAMM 1/3 RET. PP", "qty": 8.0, "unit": "CAJ", "ubic": "AA09A1", "client": "BAR REST EL TAST"}, {"mat": "0AG0183", "desc": "VICHY CATALAN GAS 30CL RET 24U", "qty": 1.0, "unit": "CAJ", "ubic": "BA01A1", "client": "BAR REST EL TAST"}, {"mat": "0AG0007", "desc": "FONT D.OR NATURAL 1,5L PET 12U", "qty": 3.0, "unit": "CAJ", "ubic": "EB09A1", "client": "BAR REST EL TAST"}, {"mat": "0AG0004", "desc": "FONT D.OR NATURAL 1/2 PET 24U", "qty": 3.0, "unit": "CAJ", "ubic": "EB10A1", "client": "BAR REST EL TAST"}, {"mat": "0LT0033", "desc": "LETONA GRAN CREME PET 1,5L PET 6U", "qty": 6.0, "unit": "CAJ", "ubic": "FA06A3", "client": "BAR REST EL TAST"}, {"mat": "0VE0531", "desc": "PRIOR  BLANCO VERDEJO 75CL 6U", "qty": 2.0, "unit": "CAJ", "ubic": "EA08B3", "client": "BAR REST EL TAST"}, {"mat": "0VE0532", "desc": "PRIOR BOBAL ROSADO 75CL 6U", "qty": 2.0, "unit": "CAJ", "ubic": "EC08A1", "client": "BAR REST EL TAST"}, {"mat": "0AM1276", "desc": "BARGALLO ACEITE OLIVA SUAVE 5L", "qty": 3.0, "unit": "UN", "ubic": "EC01B3", "client": "BAR REST EL TAST"}, {"mat": "0AM1278", "desc": "BARGALLO ACEITE VIRGEN EXTRA 5L", "qty": 3.0, "unit": "UN", "ubic": "EC01B1", "client": "BAR REST EL TAST"}, {"mat": "0AM3864", "desc": "FRIMASOL ACEITE GIRASOL 25L", "qty": 2.0, "unit": "UN", "ubic": "EA02A3", "client": "BAR REST EL TAST"}, {"mat": "0AM0702", "desc": "SALSA ROMESCO FERRER POT 660G", "qty": 6.0, "unit": "UN", "ubic": "ZCG", "client": "BAR REST EL TAST"}, {"mat": "ED13", "desc": "ESTRELLA DAMM 1/3 RET. PP", "qty": 2.0, "unit": "CAJ", "ubic": "AA09A1", "client": "CASAL DE LA GENT GRAN"}, {"mat": "ED15LN", "desc": "ESTRELLA DAMM 1/5 LN", "qty": 1.0, "unit": "CAJ", "ubic": "AA08A1", "client": "CASAL DE LA GENT GRAN"}, {"mat": "FD15", "desc": "FREE DAMM 1/5 LN RET.", "qty": 2.0, "unit": "CAJ", "ubic": "BA06A2", "client": "CASAL DE LA GENT GRAN"}, {"mat": "FD15", "desc": "FREE DAMM 1/5 LN RET.", "qty": 1.0, "unit": "CAJ", "ubic": "BA06A2", "client": "CASAL DE LA GENT GRAN"}, {"mat": "ED13", "desc": "ESTRELLA DAMM 1/3 RET. PP", "qty": 4.0, "unit": "CAJ", "ubic": "AA09A1", "client": "INDUSTRIA 52"}, {"mat": "FDT13", "desc": "FREE DAMM TOSTADA 1/3 RET. PP", "qty": 1.0, "unit": "CAJ", "ubic": "AA04A1", "client": "INDUSTRIA 52"}, {"mat": "VO13", "desc": "VOLL-DAMM 1/3 RET.", "qty": 1.0, "unit": "CAJ", "ubic": "AA07A1", "client": "INDUSTRIA 52"}, {"mat": "ED13", "desc": "ESTRELLA DAMM 1/3 RET. PP", "qty": 2.0, "unit": "CAJ", "ubic": "AA09A1", "client": "INDUSTRIA 52"}, {"mat": "FDT13", "desc": "FREE DAMM TOSTADA 1/3 RET. PP", "qty": 1.0, "unit": "CAJ", "ubic": "AA04A1", "client": "INDUSTRIA 52"}, {"mat": "ED13", "desc": "ESTRELLA DAMM 1/3 RET. PP", "qty": 2.0, "unit": "CAJ", "ubic": "AA09A1", "client": "FONTSECA, BAR"}, {"mat": "FDT13", "desc": "FREE DAMM TOSTADA 1/3 RET. PP", "qty": 2.0, "unit": "CAJ", "ubic": "AA04A1", "client": "FONTSECA, BAR"}, {"mat": "0AG0010", "desc": "VICHY CATALAN GAS 1L RET 12U", "qty": 7.0, "unit": "CAJ", "ubic": "AC07A2", "client": "FONTSECA, BAR"}, {"mat": "FDT13", "desc": "FREE DAMM TOSTADA 1/3 RET. PP", "qty": 1.0, "unit": "CAJ", "ubic": "AA04A1", "client": "FONTSECA, BAR"}, {"mat": "ED13", "desc": "ESTRELLA DAMM 1/3 RET. PP", "qty": 1.0, "unit": "CAJ", "ubic": "AA09A1", "client": "FONTSECA, BAR"}, {"mat": "ED13", "desc": "ESTRELLA DAMM 1/3 RET. PP", "qty": 6.0, "unit": "CAJ", "ubic": "AA09A1", "client": "ALASKA BAR"}, {"mat": "FD13", "desc": "FREE DAMM 1/3 RET.", "qty": 1.0, "unit": "CAJ", "ubic": "AA06A1", "client": "ALASKA BAR"}, {"mat": "FDT13", "desc": "FREE DAMM TOSTADA 1/3 RET. PP", "qty": 1.0, "unit": "CAJ", "ubic": "AA04A1", "client": "ALASKA BAR"}, {"mat": "VO13", "desc": "VOLL-DAMM 1/3 RET.", "qty": 2.0, "unit": "CAJ", "ubic": "AA07A1", "client": "ALASKA BAR"}, {"mat": "0CF0080", "desc": "XPLICIT NATURAL CREMOSO 1KG", "qty": 1.0, "unit": "UN", "ubic": "FC02A2", "client": "ALASKA BAR"}, {"mat": "0AM1290", "desc": "XPLICIT AZUCAR 7GR  1000U", "qty": 1.0, "unit": "ZPR", "ubic": "FC02A2", "client": "ALASKA BAR"}, {"mat": "0AM1634", "desc": "XPLICIT EDULCORANTE 1G 150U", "qty": 1.0, "unit": "ZPR", "ubic": "FC01C4", "client": "ALASKA BAR"}, {"mat": "ED13", "desc": "ESTRELLA DAMM 1/3 RET. PP", "qty": 3.0, "unit": "CAJ", "ubic": "AA09A1", "client": "ALASKA BAR"}, {"mat": "VO13", "desc": "VOLL-DAMM 1/3 RET.", "qty": 1.0, "unit": "CAJ", "ubic": "AA07A1", "client": "ALASKA BAR"}, {"mat": "ED13", "desc": "ESTRELLA DAMM 1/3 RET. PP", "qty": 8.0, "unit": "CAJ", "ubic": "AA09A1", "client": "ENTREPA I PA"}, {"mat": "ED15LN", "desc": "ESTRELLA DAMM 1/5 LN", "qty": 2.0, "unit": "CAJ", "ubic": "AA08A1", "client": "ENTREPA I PA"}, {"mat": "ED30", "desc": "ESTRELLA DAMM BARRIL 30", "qty": 1.0, "unit": "BRL", "ubic": "AA10A1", "client": "ENTREPA I PA"}, {"mat": "TU20", "desc": "TURIA BARRIL 20L.", "qty": 1.0, "unit": "BRL", "ubic": "AC03A2", "client": "ENTREPA I PA"}, {"mat": "0RF0022", "desc": "/-AQUARIUS LIMON 33CL LATA 24U", "qty": 1.0, "unit": "CAJ", "ubic": "CA06A2", "client": "ENTREPA I PA"}, {"mat": "0RF0021", "desc": "/-FANTA LIMON LATA 33 CL 24U", "qty": 1.0, "unit": "CAJ", "ubic": "CA05A2", "client": "ENTREPA I PA"}], "5": [{"mat": "0RF0019", "desc": "/-COCA COLA LATA 33CL 24U", "qty": 1.0, "unit": "CAJ", "ubic": "CA04A2", "client": "ENTREPA I PA"}, {"mat": "0AM1634", "desc": "XPLICIT EDULCORANTE 1G 150U", "qty": 1.0, "unit": "CAJ", "ubic": "FC01C4", "client": "GARBI 1 CAFET. ALIMENTACIO"}, {"mat": "0AM5220", "desc": "AZUCAR GARBI ZEFIR 7G 1000U", "qty": 1.0, "unit": "CAJ", "ubic": "FC04A3", "client": "GARBI 1 CAFET. ALIMENTACIO"}, {"mat": "ED13LT", "desc": "ESTRELLA DAMM 1/3 LATA", "qty": 1.0, "unit": "CAJ", "ubic": "CA01A1", "client": "FORN ESTADI"}, {"mat": "0LT0412", "desc": "CACAOLAT ORIGINAL 27,5CL PET 24U", "qty": 1.0, "unit": "CAJ", "ubic": "FA01B1", "client": "FORN ESTADI"}, {"mat": "0ZU0309", "desc": "PAGO ACE 1L PET 6U", "qty": 1.0, "unit": "CAJ", "ubic": "ZCG", "client": "FORN ESTADI"}, {"mat": "ED13LT", "desc": "ESTRELLA DAMM 1/3 LATA", "qty": 1.0, "unit": "CAJ", "ubic": "CA01A1", "client": "FORN DE PA EL REMEI"}, {"mat": "0LT0020", "desc": "CACAOLAT ORIGINAL 1L PET 6U", "qty": 1.0, "unit": "CAJ", "ubic": "FA02B1", "client": "FORN DE PA EL REMEI"}, {"mat": "0ZU0755", "desc": "GRANINI MELOCOTON 3X20CL MINIBRICK 30U", "qty": 1.0, "unit": "CAJ", "ubic": "ZCG", "client": "FORN DE PA EL REMEI"}, {"mat": "0ZU0048", "desc": "PAGO PI\u00d1A 20CL SR 24U", "qty": 1.0, "unit": "CAJ", "ubic": "ZCG", "client": "FORN DE PA EL REMEI"}, {"mat": "0CF1028", "desc": "MALONGO EXPRESO INTENSO CAPSULAS 6G 120U", "qty": 5.0, "unit": "CAJ", "ubic": "EA07C1", "client": "GARBI 1 CAFET. ALIMENTACIO"}, {"mat": "0CF1028", "desc": "MALONGO EXPRESO INTENSO CAPSULAS 6G 120U", "qty": 1.0, "unit": "CAJ", "ubic": "EA07C1", "client": "GARBI 1 CAFET. ALIMENTACIO"}, {"mat": "0AG0004", "desc": "FONT D.OR NATURAL 1/2 PET 24U", "qty": 1.0, "unit": "CAJ", "ubic": "EB10A1", "client": "LLAR JUVENIL"}, {"mat": "0LT0033", "desc": "LETONA GRAN CREME PET 1,5L PET 6U", "qty": 4.0, "unit": "CAJ", "ubic": "FA06A3", "client": "LLAR JUVENIL"}, {"mat": "0ZU0755", "desc": "GRANINI MELOCOTON 3X20CL MINIBRICK 30U", "qty": 1.0, "unit": "CAJ", "ubic": "ZCG", "client": "LLAR JUVENIL"}, {"mat": "ED13LT", "desc": "ESTRELLA DAMM 1/3 LATA", "qty": 5.0, "unit": "CAJ", "ubic": "CA01A1", "client": "E.S VIC"}, {"mat": "VO13LT", "desc": "VOLL DAMM 1/3 LATA LC", "qty": 4.0, "unit": "CAJ", "ubic": "CA01A2", "client": "E.S VIC"}, {"mat": "0AG0039", "desc": "FONT D.OR NATURAL 1,5L PET 6U", "qty": 5.0, "unit": "CAJ", "ubic": "EB08A1", "client": "E.S VIC"}, {"mat": "0AG0004", "desc": "FONT D.OR NATURAL 1/2 PET 24U", "qty": 1.0, "unit": "CAJ", "ubic": "EB10A1", "client": "E.S VIC"}, {"mat": "0RF0124", "desc": "/-COCA COLA 2L PET 6U", "qty": 1.0, "unit": "CAJ", "ubic": "ZCG", "client": "E.S VIC"}, {"mat": "0RF0019", "desc": "/-COCA COLA LATA 33CL 24U", "qty": 2.0, "unit": "CAJ", "ubic": "CA04A2", "client": "E.S VIC"}, {"mat": "0RF0079", "desc": "/-COCA COLA ZERO LATA 33CL 24U", "qty": 1.0, "unit": "CAJ", "ubic": "CA03A3", "client": "E.S VIC"}, {"mat": "VO13LT", "desc": "VOLL DAMM 1/3 LATA LC", "qty": 4.0, "unit": "CAJ", "ubic": "CA01A2", "client": "ZONA DIESEL URBAN"}, {"mat": "0AG0182", "desc": "VICHY CATALAN SYSPACK GAS 30CL SR 24U", "qty": 1.0, "unit": "CAJ", "ubic": "DB06A2", "client": "ZONA DIESEL URBAN"}, {"mat": "0AG0046", "desc": "VICHY CATALAN GAS 1,2L PET 6U", "qty": 1.0, "unit": "CAJ", "ubic": "ZCG", "client": "ZONA DIESEL URBAN"}, {"mat": "0LT0020", "desc": "CACAOLAT ORIGINAL 1L PET 6U", "qty": 1.0, "unit": "CAJ", "ubic": "FA02B1", "client": "ZONA DIESEL URBAN"}, {"mat": "0LT0412", "desc": "CACAOLAT ORIGINAL 27,5CL PET 24U", "qty": 2.0, "unit": "CAJ", "ubic": "FA01B1", "client": "ZONA DIESEL URBAN"}, {"mat": "NTL13LT6", "desc": "NESTEA LIMON 1/3 LATA 4U-PACK 6U.", "qty": 1.0, "unit": "CAJ", "ubic": "CB06A2", "client": "ZONA DIESEL URBAN"}, {"mat": "0ZU0006", "desc": "GRANINI NARANJA 33CL PET 12U", "qty": 1.0, "unit": "CAJ", "ubic": "ZCG", "client": "ZONA DIESEL URBAN"}, {"mat": "0ZU0056", "desc": "GRANINI MELOCOTON 33CL PET 12U", "qty": 1.0, "unit": "CAJ", "ubic": "ZCG", "client": "ZONA DIESEL URBAN"}, {"mat": "0ZU0065", "desc": "GRANINI PI\u00d1A 33CL PET 12U", "qty": 1.0, "unit": "CAJ", "ubic": "ZCG", "client": "ZONA DIESEL URBAN"}, {"mat": "0ZU0287", "desc": "GRANINI ZANAHORIA-NARANJA 33CL 12U", "qty": 1.0, "unit": "CAJ", "ubic": "ZCG", "client": "ZONA DIESEL URBAN"}, {"mat": "0ZU0020", "desc": "GRANINI MELOCOTON  20CL 24U", "qty": 1.0, "unit": "CAJ", "ubic": "DA09A1", "client": "ZONA DIESEL URBAN"}, {"mat": "0LI0153", "desc": "RUAVIEJA ORUJO HIERBAS 70CL", "qty": 6.0, "unit": "BOT", "ubic": "ZCG", "client": "ZONA DIESEL URBAN"}, {"mat": "0RF0091", "desc": "/-SCHWEPPES LIMON LATA SLEEK 24U", "qty": 1.0, "unit": "CAJ", "ubic": "ZCG", "client": "ZONA DIESEL URBAN"}, {"mat": "0LI0068", "desc": "NEGRITA RON 70CL", "qty": 4.0, "unit": "BOT", "ubic": "ZCG", "client": "ZONA DIESEL URBAN"}, {"mat": "NTL13LT6", "desc": "NESTEA LIMON 1/3 LATA 4U-PACK 6U.", "qty": 2.0, "unit": "CAJ", "ubic": "CB06A2", "client": "ZONA DIESEL URBAN"}, {"mat": "ED13", "desc": "ESTRELLA DAMM 1/3 RET. PP", "qty": 2.0, "unit": "CAJ", "ubic": "AA09A1", "client": "CAFETERIA PRADALS"}, {"mat": "FDL13", "desc": "FREE DAMM LIMON 1/3 RET. PP", "qty": 1.0, "unit": "CAJ", "ubic": "AA05A1", "client": "CAFETERIA PRADALS"}, {"mat": "ED13LT", "desc": "ESTRELLA DAMM 1/3 LATA", "qty": 1.0, "unit": "CAJ", "ubic": "CA01A1", "client": "CAFETERIA PRADALS"}, {"mat": "0LT0032", "desc": "CACAOLAT VIDRIO 20CL RET 30U", "qty": 2.0, "unit": "CAJ", "ubic": "AC04A3", "client": "CAFETERIA PRADALS"}, {"mat": "0ZU0048", "desc": "PAGO PI\u00d1A 20CL SR 24U", "qty": 2.0, "unit": "CAJ", "ubic": "ZCG", "client": "CAFETERIA PRADALS"}, {"mat": "0ZU0049", "desc": "PAGO MELOCOTON  20CL SR 24U", "qty": 1.0, "unit": "CAJ", "ubic": "ZCG", "client": "CAFETERIA PRADALS"}, {"mat": "ED13", "desc": "ESTRELLA DAMM 1/3 RET. PP", "qty": 1.0, "unit": "CAJ", "ubic": "AA09A1", "client": "CAFETERIA PRADALS"}, {"mat": "ED13", "desc": "ESTRELLA DAMM 1/3 RET. PP", "qty": 3.0, "unit": "CAJ", "ubic": "AA09A1", "client": "ALOE"}, {"mat": "ED13", "desc": "ESTRELLA DAMM 1/3 RET. PP", "qty": 1.0, "unit": "CAJ", "ubic": "AA09A1", "client": "FUSSIMANYA ESTADI"}, {"mat": "ED15LN", "desc": "ESTRELLA DAMM 1/5 LN", "qty": 1.0, "unit": "CAJ", "ubic": "AA08A1", "client": "FUSSIMANYA ESTADI"}, {"mat": "0LT0032", "desc": "CACAOLAT VIDRIO 20CL RET 30U", "qty": 2.0, "unit": "CAJ", "ubic": "AC04A3", "client": "FUSSIMANYA ESTADI"}], "6": [{"mat": "DL13", "desc": "DAMM LEMON 1/3 RET", "qty": 1.0, "unit": "CAJ", "ubic": "AA02A1", "client": "GURBI"}, {"mat": "ED13", "desc": "ESTRELLA DAMM 1/3 RET. PP", "qty": 2.0, "unit": "CAJ", "ubic": "AA09A1", "client": "GURBI"}, {"mat": "0LT0032", "desc": "CACAOLAT VIDRIO 20CL RET 30U", "qty": 3.0, "unit": "CAJ", "ubic": "AC04A3", "client": "GURBI"}, {"mat": "0LT0412", "desc": "CACAOLAT ORIGINAL 27,5CL PET 24U", "qty": 2.0, "unit": "CAJ", "ubic": "FA01B1", "client": "GURBI"}, {"mat": "0ZU0754", "desc": "GRANINI PI\u00d1A 3X20CL MINIBRICK 30U", "qty": 1.0, "unit": "CAJ", "ubic": "ZCG", "client": "GURBI"}, {"mat": "0ZU0311", "desc": "PAGO NARANJA   1L PET 6U", "qty": 1.0, "unit": "CAJ", "ubic": "ZCG", "client": "GURBI"}, {"mat": "0ZU0048", "desc": "PAGO PI\u00d1A 20CL SR 24U", "qty": 2.0, "unit": "CAJ", "ubic": "ZCG", "client": "GURBI"}, {"mat": "0ZU0050", "desc": "PAGO NARANJA-ZANAH-LIM\u00d3N  20CL SR 24U", "qty": 1.0, "unit": "CAJ", "ubic": "ZCG", "client": "GURBI"}, {"mat": "ED13", "desc": "ESTRELLA DAMM 1/3 RET. PP", "qty": 1.0, "unit": "CAJ", "ubic": "AA09A1", "client": "GURBI"}, {"mat": "ED13", "desc": "ESTRELLA DAMM 1/3 RET. PP", "qty": 4.0, "unit": "CAJ", "ubic": "AA09A1", "client": "GUSTUM AREAS 1 (LLEIDA-GIRONA)"}, {"mat": "ED30", "desc": "ESTRELLA DAMM BARRIL 30", "qty": 1.0, "unit": "BRL", "ubic": "AA10A1", "client": "GUSTUM AREAS 1 (LLEIDA-GIRONA)"}, {"mat": "0AG0052", "desc": "VICHY CATALAN GAS 1/2 PET 24U", "qty": 1.0, "unit": "CAJ", "ubic": "EA01A3", "client": "GUSTUM AREAS 1 (LLEIDA-GIRONA)"}, {"mat": "ED13", "desc": "ESTRELLA DAMM 1/3 RET. PP", "qty": 2.0, "unit": "CAJ", "ubic": "AA09A1", "client": "PADEL OSONA GURB"}, {"mat": "ED30", "desc": "ESTRELLA DAMM BARRIL 30", "qty": 1.0, "unit": "BRL", "ubic": "AA10A1", "client": "PADEL OSONA GURB"}, {"mat": "TU20", "desc": "TURIA BARRIL 20L.", "qty": 1.0, "unit": "BRL", "ubic": "AC03A2", "client": "PADEL OSONA GURB"}, {"mat": "VE12SP", "desc": "AGUA VERI 1/2 PET CAJA 24U. T.TH", "qty": 5.0, "unit": "CAJ", "ubic": "EB03A1", "client": "PADEL OSONA GURB"}, {"mat": "VE32SP", "desc": "AGUA VERI 1,5L PET CAJA 12U.", "qty": 8.0, "unit": "CAJ", "ubic": "EB02A1", "client": "PADEL OSONA GURB"}, {"mat": "0LT0103", "desc": "YOSOY AVENA BARISTA 1L BRIK 6U", "qty": 1.0, "unit": "CAJ", "ubic": "FA03A1", "client": "PADEL OSONA GURB"}, {"mat": "0LT0034", "desc": "LETONA SEMI ESPEC HOSTELERIA PET 1,5L 6U", "qty": 2.0, "unit": "CAJ", "ubic": "FA05A2", "client": "PADEL OSONA GURB"}, {"mat": "ED13", "desc": "ESTRELLA DAMM 1/3 RET. PP", "qty": 1.0, "unit": "CAJ", "ubic": "AA09A1", "client": "PADEL OSONA GURB"}, {"mat": "ED13", "desc": "ESTRELLA DAMM 1/3 RET. PP", "qty": 5.0, "unit": "CAJ", "ubic": "AA09A1", "client": "GUSTUM AREAS 2 (GIRONA-LLEIDA)"}, {"mat": "ED30", "desc": "ESTRELLA DAMM BARRIL 30", "qty": 2.0, "unit": "BRL", "ubic": "AA10A1", "client": "GUSTUM AREAS 2 (GIRONA-LLEIDA)"}, {"mat": "0AG0052", "desc": "VICHY CATALAN GAS 1/2 PET 24U", "qty": 1.0, "unit": "CAJ", "ubic": "EA01A3", "client": "GUSTUM AREAS 2 (GIRONA-LLEIDA)"}, {"mat": "DL13", "desc": "DAMM LEMON 1/3 RET", "qty": 1.0, "unit": "CAJ", "ubic": "AA02A1", "client": "RESTAURANT UNTOK"}, {"mat": "ED13", "desc": "ESTRELLA DAMM 1/3 RET. PP", "qty": 3.0, "unit": "CAJ", "ubic": "AA09A1", "client": "RESTAURANT UNTOK"}, {"mat": "VO13", "desc": "VOLL-DAMM 1/3 RET.", "qty": 1.0, "unit": "CAJ", "ubic": "AA07A1", "client": "RESTAURANT UNTOK"}, {"mat": "ED30", "desc": "ESTRELLA DAMM BARRIL 30", "qty": 1.0, "unit": "BRL", "ubic": "AA10A1", "client": "RESTAURANT UNTOK"}, {"mat": "VE11", "desc": "AGUA VERI 1/1 VIDRIO RET.", "qty": 15.0, "unit": "CAJ", "ubic": "AA11A1", "client": "RESTAURANT UNTOK"}, {"mat": "VE32SP", "desc": "AGUA VERI 1,5L PET CAJA 12U.", "qty": 4.0, "unit": "CAJ", "ubic": "EB02A1", "client": "RESTAURANT UNTOK"}, {"mat": "VE13SP", "desc": "AGUA VERI 1/3 PET CAJA 35U. T.TH", "qty": 3.0, "unit": "CAJ", "ubic": "EB04A1", "client": "RESTAURANT UNTOK"}, {"mat": "0LT0235", "desc": "LA LEVANTINA AVENA ESP.HOST 1L 6U", "qty": 2.0, "unit": "CAJ", "ubic": "FA02A2", "client": "RESTAURANT UNTOK"}]};
+const priority=[0.463, 0.009, 0.378, 0.919, 0.426, 0.352, 0.348, 0.173, 0.266, 0.052, 0.271, 0.385, 0.326, 0.49, 0.164, 0.026, 0.035, 0.514, 0.335, 0.052, 0.017, 0.42, 0.356, 0.412, 0.0], density=[1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0], meta={"ruta": "DR0027", "fecha": "02/03/2026", "opt_dist": 91.1, "rand_dist": 106.1, "opt_time": 356, "rand_time": 382, "improvement_pct": 14.1, "time_saved": 26, "alpha": 0.65};
+let maps={};
+
+function showTab(name,btn){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+name).classList.add('active');
+  btn.classList.add('active');
+  if(name==='route' && !maps.main) initMain();
+  if(name==='compare' && !maps.cmp) initCompare();
+  if(name==='heat' && !maps.heat) initHeat();
+  if(name==='truck') buildTruck();
+}
+
+// ── DASHBOARD ──
+document.getElementById('route-meta').textContent =
+  `Ruta: ${meta.ruta}  ·  Fecha: ${meta.fecha || '02/03/2026'}  ·  ${optRoute.length} paradas  ·  α = ${meta.alpha}`;
+
+function metric(val,label,sub,cls=''){
+  return `<div class="metric"><div class="mlabel">${label}</div><div class="mval ${cls}">${val}</div><div class="msub">${sub}</div></div>`;
+}
+document.getElementById('metrics-grid').innerHTML =
+  metric(meta.improvement_pct+'%','Distancia ahorrada',`${meta.rand_dist} km → ${meta.opt_dist} km`,'green') +
+  metric(meta.time_saved+' min','Tiempo ahorrado',`~${Math.floor(meta.time_saved/60)}h ${meta.time_saved%60}m recuperados`,'green') +
+  metric(meta.opt_time+' min','Tiempo ruta opt.',`${meta.opt_dist} km en ruta`,'white') +
+  metric(optRoute.length,'Paradas','clientes en la ruta','white');
+
+const fleetHours = Math.round(meta.time_saved*470/60);
+document.getElementById('metrics2-grid').innerHTML =
+  metric(fleetHours.toLocaleString()+' h','Impacto flota (470 camiones)','horas ahorradas por día','green') +
+  metric(Math.round(stops.reduce((a,s)=>a+s.delivery_caj,0)).toLocaleString(),'Cajas a entregar','volumen total de la ruta','white') +
+  metric(Math.round(stops.reduce((a,s)=>a+s.ret_caj,0)*0.6).toLocaleString(),'Retornos esperados','cajas a recoger (60%)','white');
+
+const tbody = document.getElementById('route-tbody');
+optRoute.forEach((idx,rank)=>{
+  const s=stops[idx], p=priority[idx];
+  const pct=Math.round(p*100);
+  const tag=p>0.6?'<span class="tag tH">HIGH</span>':p>0.3?'<span class="tag tM">MID</span>':'<span class="tag tL">LOW</span>';
+  const del=`${Math.round(s.delivery_caj)} caj${s.delivery_brl?` + ${Math.round(s.delivery_brl)} brl`:''}`;
+  const ret=`${Math.round(s.ret_caj)} caj`;
+  tbody.insertAdjacentHTML('beforeend',`
+    <tr>
+      <td><div class="stopnum">${rank+1}</div></td>
+      <td><b>${s.name}</b></td>
+      <td>
+        <span class="pbar"><span class="pfill" style="width:${pct}%"></span></span>
+        <span style="font-size:10px;color:#555;margin:0 5px">${p.toFixed(2)}</span>${tag}
+      </td>
+      <td style="color:var(--text)">${del}</td>
+      <td style="color:var(--green)">${ret}</td>
+      <td style="color:#444;font-size:11px">${s.address}</td>
+    </tr>`);
+});
+
+// Fill compare stats
+document.getElementById('cr-dist').textContent = meta.rand_dist+' km  ';
+document.getElementById('cr-time').textContent = meta.rand_time+' min  ';
+document.getElementById('co-dist').textContent = meta.opt_dist+' km  ';
+document.getElementById('co-time').textContent = meta.opt_time+' min  ';
+document.getElementById('co-imp').textContent  = '-'+meta.improvement_pct+'%  ';
+
+// ── MAPS ──
+function tileLayer(m){
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',
+    {attribution:'©OpenStreetMap ©CartoDB',maxZoom:18}).addTo(m);
+}
+function numIcon(n,color='#F2A623',size=26){
+  return L.divIcon({className:'',
+    html:`<div style="width:${size}px;height:${size}px;border-radius:50%;background:${color};color:${color==='#F2A623'?'#000':'#fff'};font-size:${size>22?11:9}px;font-weight:700;display:flex;align-items:center;justify-content:center;border:2px solid rgba(255,255,255,.3);box-shadow:0 2px 6px rgba(0,0,0,.5)">${n}</div>`,
+    iconSize:[size,size],iconAnchor:[size/2,size/2]});
+}
+
+function initMain(){
+  const m=L.map('map').setView([depot.lat,depot.lon],9);
+  tileLayer(m); maps.main=m;
+  L.circleMarker([depot.lat,depot.lon],{radius:10,color:'#C8102E',fillColor:'#C8102E',fillOpacity:1})
+   .bindPopup(`<b>Depósito DDI</b>`).addTo(m);
+  const ll=[[depot.lat,depot.lon]];
+  optRoute.forEach((idx,rank)=>{
+    const s=stops[idx]; ll.push([s.lat,s.lon]);
+    L.marker([s.lat,s.lon],{icon:numIcon(rank+1)})
+     .bindPopup(`<b>Parada ${rank+1}: ${s.name}</b><br>${s.address}<br>Entrega: ${Math.round(s.delivery_caj)} caj<br>Retornos: ${Math.round(s.ret_caj)} caj`)
+     .addTo(m);
+  });
+  ll.push([depot.lat,depot.lon]);
+  L.polyline(ll,{color:'#1D9E75',weight:2.5,opacity:.8,dashArray:'6 4'}).addTo(m);
+  m.fitBounds(ll,{padding:[30,30]});
+}
+
+function drawRoute(divId,route,color){
+  const m=L.map(divId,{zoomControl:false,attributionControl:false}).setView([depot.lat,depot.lon],9);
+  tileLayer(m);
+  L.circleMarker([depot.lat,depot.lon],{radius:7,color:'#C8102E',fillColor:'#C8102E',fillOpacity:1}).addTo(m);
+  const ll=[[depot.lat,depot.lon]];
+  route.forEach((idx,rank)=>{
+    const s=stops[idx]; ll.push([s.lat,s.lon]);
+    L.marker([s.lat,s.lon],{icon:numIcon(rank+1,color,20)}).addTo(m);
+  });
+  ll.push([depot.lat,depot.lon]);
+  L.polyline(ll,{color,weight:2,opacity:.85}).addTo(m);
+  m.fitBounds(ll,{padding:[20,20]});
+}
+
+function initCompare(){
+  maps.cmp=true;
+  drawRoute('map-r',randRoute,'#ff4444');
+  drawRoute('map-o',optRoute,'#1D9E75');
+}
+
+function initHeat(){
+  const m=L.map('hm').setView([depot.lat,depot.lon],9);
+  tileLayer(m); maps.heat=m;
+  const bounds=[];
+  stops.forEach((s,i)=>{
+    const d=density[i];
+    const color=d>0.7?'#C8102E':d>0.4?'#F2A623':d>0.2?'#888':'#333';
+    L.circleMarker([s.lat,s.lon],{radius:6+d*16,color,fillColor:color,fillOpacity:.45+d*.45,weight:1})
+     .bindPopup(`<b>${s.name}</b><br>Densidad: ${d.toFixed(2)}`).addTo(m);
+    bounds.push([s.lat,s.lon]);
+  });
+  m.fitBounds(bounds,{padding:[30,30]});
+
+  // Density list
+  const sorted=[...density.map((d,i)=>({d,i}))].sort((a,b)=>b.d-a.d);
+  const dl=document.getElementById('density-list');
+  sorted.forEach(({d,i})=>{
+    const s=stops[i];
+    const color=d>0.7?'#C8102E':d>0.4?'#F2A623':d>0.2?'#888':'#333';
+    dl.insertAdjacentHTML('beforeend',`
+      <div class="dl-row">
+        <div class="dl-dot" style="background:${color}"></div>
+        <div style="flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#aaa">${s.name}</div>
+        <div class="dl-bar" style="width:60px"><div class="dl-fill" style="width:${Math.round(d*100)}%;background:${color}"></div></div>
+        <div style="min-width:28px;text-align:right;color:#444;font-size:10px">${d.toFixed(2)}</div>
+      </div>`);
+  });
+}
+
+// ── TRUCK ──
+function buildTruck(){
+  const tv=document.getElementById('truck-visual');
+  tv.innerHTML='';
+  tv.insertAdjacentHTML('beforeend','<div class="tcab">🚛<br>CAB</div>');
+  const pclasses={6:'p6',5:'p5',4:'p4',3:'p3',2:'p2'};
+  for(let p=6;p>=2;p--){
+    const cls=pclasses[p]||'p3';
+    const clients=(parcels[p]||[]).filter(c=>typeof c==='number').map(c=>stops[c].name.split(' ')[0]);
+    tv.insertAdjacentHTML('beforeend',`
+      <div class="tpar ${cls}">
+        <div class="pnum">P${p}</div>
+        <div class="pcl">${clients.slice(0,2).join('<br>')}${clients.length>2?`<br>+${clients.length-2}`:''}
+        </div>
+      </div>`);
+  }
+  tv.insertAdjacentHTML('beforeend',`
+    <div class="tpar ret">
+      <div class="pnum" style="color:rgba(29,158,117,.5)">P1</div>
+      <div class="pcl">Retornos</div>
+    </div>
+    <div class="tdoor">🚪<br>PUERTA</div>`);
+
+  const tl=document.getElementById('timeline');
+  tl.innerHTML='';
+  const totalDel=stops.reduce((a,s)=>a+s.delivery_caj+s.delivery_brl*5,0)||1;
+  const totalRet=totalDel*0.6||1;
+  let cumDel=0,cumRet=0;
+  optRoute.forEach((idx,rank)=>{
+    const s=stops[idx];
+    const vol=s.delivery_caj+s.delivery_brl*5;
+    const ret=s.ret_caj+s.ret_brl*5;
+    cumDel+=vol; cumRet+=ret;
+    const delLeft=Math.max(0,(totalDel-cumDel)/totalDel*100);
+    const retFill=Math.min(100,cumRet/totalRet*100);
+    tl.insertAdjacentHTML('beforeend',`
+      <div class="timeline-row">
+        <div class="tls">${rank+1}</div>
+        <div style="color:#888;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${s.name.substring(0,22)}</div>
+        <div>
+          <div style="font-size:9px;color:#444;margin-bottom:2px">Restante: ${Math.round(totalDel-cumDel)} ud</div>
+          <div class="sbar"><div class="sbar-d" style="width:${delLeft.toFixed(0)}%"></div></div>
+        </div>
+        <div>
+          <div style="font-size:9px;color:var(--green);margin-bottom:2px">Recogido: ${Math.round(cumRet)} ud</div>
+          <div class="sbar"><div class="sbar-r" style="width:${retFill.toFixed(0)}%"></div></div>
+        </div>
+      </div>`);
+  });
+}
+
+// ── UPLOAD / ALPHA SLIDER ──
+document.getElementById('alpha-slider').oninput=function(){
+  document.getElementById('alpha-val').textContent=(this.value/100).toFixed(2);
+};
+
+const dz=document.getElementById('drop-zone');
+dz.addEventListener('dragover',e=>{e.preventDefault();dz.classList.add('drag')});
+dz.addEventListener('dragleave',()=>dz.classList.remove('drag'));
+dz.addEventListener('drop',e=>{e.preventDefault();dz.classList.remove('drag');
+  const f=e.dataTransfer.files[0];
+  if(f) document.getElementById('upload-result').innerHTML=
+    `<div class="alert">✓ Archivo cargado: <b>${f.name}</b> (${(f.size/1024).toFixed(0)} KB)<br>
+    Procesamiento completo de CSV disponible ejecutando el script Python localmente.</div>`;
+});
+
+function runDemo(){
+  const ruta=document.getElementById('sel-ruta').value;
+  const alpha=document.getElementById('alpha-val').textContent;
+  document.getElementById('upload-result').innerHTML=
+    `<div class="alert">✓ Demo ejecutado con ruta <b>${ruta}</b> · α = <b>${alpha}</b><br>
+    En producción, esto re-ejecuta el motor Python y regenera los 3 documentos PDF.<br>
+    Los mapas y la tabla se actualizarían en tiempo real.</div>`;
+}
+</script>
+</body>
+</html>

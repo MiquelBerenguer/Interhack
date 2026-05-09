@@ -1,0 +1,3756 @@
+{
+  "ruta": "DR0027",
+  "fecha": "02/03/2026",
+  "depot": {
+    "name": "DDI Mollet del Vall\u00e8s",
+    "lat": 41.543,
+    "lon": 2.214
+  },
+  "stops": [
+    {
+      "id": "828089024",
+      "name": "ENTREPA I PA",
+      "address": "Carrer de la Provid\u00e8ncia 23, 08500 VIC",
+      "city": "VIC",
+      "cp": "08500",
+      "lat": 41.9302,
+      "lon": 2.254,
+      "delivery_caj": 12.0,
+      "delivery_brl": 2.0,
+      "delivery_un": 0,
+      "ret_caj": 10.0,
+      "ret_brl": 2.0,
+      "items": [
+        {
+          "mat": "ED13",
+          "desc": "ESTRELLA DAMM 1/3 RET. PP",
+          "qty": 8.0,
+          "unit": "CAJ",
+          "ubic": "AA09A1",
+          "client": "ENTREPA I PA"
+        },
+        {
+          "mat": "ED15LN",
+          "desc": "ESTRELLA DAMM 1/5 LN",
+          "qty": 2.0,
+          "unit": "CAJ",
+          "ubic": "AA08A1",
+          "client": "ENTREPA I PA"
+        },
+        {
+          "mat": "ED30",
+          "desc": "ESTRELLA DAMM BARRIL 30",
+          "qty": 1.0,
+          "unit": "BRL",
+          "ubic": "AA10A1",
+          "client": "ENTREPA I PA"
+        },
+        {
+          "mat": "TU20",
+          "desc": "TURIA BARRIL 20L.",
+          "qty": 1.0,
+          "unit": "BRL",
+          "ubic": "AC03A2",
+          "client": "ENTREPA I PA"
+        },
+        {
+          "mat": "0RF0022",
+          "desc": "/-AQUARIUS LIMON 33CL LATA 24U",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "CA06A2",
+          "client": "ENTREPA I PA"
+        },
+        {
+          "mat": "0RF0021",
+          "desc": "/-FANTA LIMON LATA 33 CL 24U",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "CA05A2",
+          "client": "ENTREPA I PA"
+        }
+      ],
+      "ret_items": [
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 8.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE",
+          "client": "ENTREPA I PA"
+        },
+        {
+          "mat": "CJ15",
+          "desc": "CAJA DAMM+BOT.1/5RET VACIO EN P.PLAS.A13",
+          "qty": 2.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE",
+          "client": "ENTREPA I PA"
+        },
+        {
+          "mat": "BRL30V",
+          "desc": "BARRIL INOX 30L. EURONORMA",
+          "qty": 1.0,
+          "unit": "BRL",
+          "ubic": "ENVASE",
+          "client": "ENTREPA I PA"
+        },
+        {
+          "mat": "BRL20V",
+          "desc": "BARRIL INOX 20L. TANQUETA A16",
+          "qty": 1.0,
+          "unit": "BRL",
+          "ubic": "ENVASE",
+          "client": "ENTREPA I PA"
+        }
+      ]
+    },
+    {
+      "id": "828089025",
+      "name": "ENTREPA I PA",
+      "address": "Carrer de la Provid\u00e8ncia 23, 08500 VIC",
+      "city": "VIC",
+      "cp": "08500",
+      "lat": 41.9302,
+      "lon": 2.254,
+      "delivery_caj": 1.0,
+      "delivery_brl": 0,
+      "delivery_un": 0,
+      "ret_caj": 0,
+      "ret_brl": 0,
+      "items": [
+        {
+          "mat": "0RF0019",
+          "desc": "/-COCA COLA LATA 33CL 24U",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "CA04A2",
+          "client": "ENTREPA I PA"
+        }
+      ],
+      "ret_items": []
+    },
+    {
+      "id": "828089026",
+      "name": "INDUSTRIA 52",
+      "address": "Carrer de la Ind\u00fastria 52, 08500 VIC",
+      "city": "VIC",
+      "cp": "08500",
+      "lat": 41.9302,
+      "lon": 2.254,
+      "delivery_caj": 9.0,
+      "delivery_brl": 0,
+      "delivery_un": 0,
+      "ret_caj": 9.0,
+      "ret_brl": 0,
+      "items": [
+        {
+          "mat": "ED13",
+          "desc": "ESTRELLA DAMM 1/3 RET. PP",
+          "qty": 4.0,
+          "unit": "CAJ",
+          "ubic": "AA09A1",
+          "client": "INDUSTRIA 52"
+        },
+        {
+          "mat": "FDT13",
+          "desc": "FREE DAMM TOSTADA 1/3 RET. PP",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "AA04A1",
+          "client": "INDUSTRIA 52"
+        },
+        {
+          "mat": "VO13",
+          "desc": "VOLL-DAMM 1/3 RET.",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "AA07A1",
+          "client": "INDUSTRIA 52"
+        },
+        {
+          "mat": "ED13",
+          "desc": "ESTRELLA DAMM 1/3 RET. PP",
+          "qty": 2.0,
+          "unit": "CAJ",
+          "ubic": "AA09A1",
+          "client": "INDUSTRIA 52"
+        },
+        {
+          "mat": "FDT13",
+          "desc": "FREE DAMM TOSTADA 1/3 RET. PP",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "AA04A1",
+          "client": "INDUSTRIA 52"
+        }
+      ],
+      "ret_items": [
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 4.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE",
+          "client": "INDUSTRIA 52"
+        },
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE",
+          "client": "INDUSTRIA 52"
+        },
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE",
+          "client": "INDUSTRIA 52"
+        },
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 2.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE",
+          "client": "INDUSTRIA 52"
+        },
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE",
+          "client": "INDUSTRIA 52"
+        }
+      ]
+    },
+    {
+      "id": "828089027",
+      "name": "AURIAL PADEL",
+      "address": "Carrer de Figueres 14, 08500 VIC",
+      "city": "VIC",
+      "cp": "08500",
+      "lat": 41.9302,
+      "lon": 2.254,
+      "delivery_caj": 31.0,
+      "delivery_brl": 10.0,
+      "delivery_un": 0,
+      "ret_caj": 9.0,
+      "ret_brl": 10.0,
+      "items": [
+        {
+          "mat": "TU13",
+          "desc": "TURIA 1/3 RET.",
+          "qty": 2.0,
+          "unit": "CAJ",
+          "ubic": "AA03A1",
+          "client": "AURIAL PADEL"
+        },
+        {
+          "mat": "VO13",
+          "desc": "VOLL-DAMM 1/3 RET.",
+          "qty": 3.0,
+          "unit": "CAJ",
+          "ubic": "AA07A1",
+          "client": "AURIAL PADEL"
+        },
+        {
+          "mat": "DL20",
+          "desc": "DAMM LEMON BARRIL 20L.",
+          "qty": 2.0,
+          "unit": "BRL",
+          "ubic": "AC03A3",
+          "client": "AURIAL PADEL"
+        },
+        {
+          "mat": "ED30",
+          "desc": "ESTRELLA DAMM BARRIL 30",
+          "qty": 5.0,
+          "unit": "BRL",
+          "ubic": "AA10A1",
+          "client": "AURIAL PADEL"
+        },
+        {
+          "mat": "TU20",
+          "desc": "TURIA BARRIL 20L.",
+          "qty": 3.0,
+          "unit": "BRL",
+          "ubic": "AC03A2",
+          "client": "AURIAL PADEL"
+        },
+        {
+          "mat": "VE12SP",
+          "desc": "AGUA VERI 1/2 PET CAJA 24U. T.TH",
+          "qty": 6.0,
+          "unit": "CAJ",
+          "ubic": "EB03A1",
+          "client": "AURIAL PADEL"
+        },
+        {
+          "mat": "VE32SP",
+          "desc": "AGUA VERI 1,5L PET CAJA 12U.",
+          "qty": 10.0,
+          "unit": "CAJ",
+          "ubic": "EB02A1",
+          "client": "AURIAL PADEL"
+        },
+        {
+          "mat": "0AG0183",
+          "desc": "VICHY CATALAN GAS 30CL RET 24U",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "BA01A1",
+          "client": "AURIAL PADEL"
+        },
+        {
+          "mat": "0LT0032",
+          "desc": "CACAOLAT VIDRIO 20CL RET 30U",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "AC04A3",
+          "client": "AURIAL PADEL"
+        },
+        {
+          "mat": "0LT0235",
+          "desc": "LA LEVANTINA AVENA ESP.HOST 1L 6U",
+          "qty": 2.0,
+          "unit": "CAJ",
+          "ubic": "FA02A2",
+          "client": "AURIAL PADEL"
+        },
+        {
+          "mat": "0LT0033",
+          "desc": "LETONA GRAN CREME PET 1,5L PET 6U",
+          "qty": 4.0,
+          "unit": "CAJ",
+          "ubic": "FA06A3",
+          "client": "AURIAL PADEL"
+        },
+        {
+          "mat": "TU13",
+          "desc": "TURIA 1/3 RET.",
+          "qty": 2.0,
+          "unit": "CAJ",
+          "ubic": "AA03A1",
+          "client": "AURIAL PADEL"
+        }
+      ],
+      "ret_items": [
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 2.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE",
+          "client": "AURIAL PADEL"
+        },
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 3.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE",
+          "client": "AURIAL PADEL"
+        },
+        {
+          "mat": "BRL20V",
+          "desc": "BARRIL INOX 20L. TANQUETA A16",
+          "qty": 2.0,
+          "unit": "BRL",
+          "ubic": "ENVASE",
+          "client": "AURIAL PADEL"
+        },
+        {
+          "mat": "BRL30V",
+          "desc": "BARRIL INOX 30L. EURONORMA",
+          "qty": 5.0,
+          "unit": "BRL",
+          "ubic": "ENVASE",
+          "client": "AURIAL PADEL"
+        },
+        {
+          "mat": "BRL20V",
+          "desc": "BARRIL INOX 20L. TANQUETA A16",
+          "qty": 3.0,
+          "unit": "BRL",
+          "ubic": "ENVASE",
+          "client": "AURIAL PADEL"
+        },
+        {
+          "mat": "3ENV0236",
+          "desc": "C.C. AGUA 1/3 VICHY-FONT D'OR",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "AA",
+          "client": "AURIAL PADEL"
+        },
+        {
+          "mat": "3ENV0029",
+          "desc": "C.C. CACAOLAT 30 U.",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE",
+          "client": "AURIAL PADEL"
+        },
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 2.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE",
+          "client": "AURIAL PADEL"
+        }
+      ]
+    },
+    {
+      "id": "828089028",
+      "name": "ALASKA BAR",
+      "address": "Carrer de Manuel Serra i Moret 4, 08500 VIC",
+      "city": "VIC",
+      "cp": "08500",
+      "lat": 41.9302,
+      "lon": 2.254,
+      "delivery_caj": 14.0,
+      "delivery_brl": 0,
+      "delivery_un": 3.0,
+      "ret_caj": 14.0,
+      "ret_brl": 0,
+      "items": [
+        {
+          "mat": "ED13",
+          "desc": "ESTRELLA DAMM 1/3 RET. PP",
+          "qty": 6.0,
+          "unit": "CAJ",
+          "ubic": "AA09A1",
+          "client": "ALASKA BAR"
+        },
+        {
+          "mat": "FD13",
+          "desc": "FREE DAMM 1/3 RET.",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "AA06A1",
+          "client": "ALASKA BAR"
+        },
+        {
+          "mat": "FDT13",
+          "desc": "FREE DAMM TOSTADA 1/3 RET. PP",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "AA04A1",
+          "client": "ALASKA BAR"
+        },
+        {
+          "mat": "VO13",
+          "desc": "VOLL-DAMM 1/3 RET.",
+          "qty": 2.0,
+          "unit": "CAJ",
+          "ubic": "AA07A1",
+          "client": "ALASKA BAR"
+        },
+        {
+          "mat": "0CF0080",
+          "desc": "XPLICIT NATURAL CREMOSO 1KG",
+          "qty": 1.0,
+          "unit": "UN",
+          "ubic": "FC02A2",
+          "client": "ALASKA BAR"
+        },
+        {
+          "mat": "0AM1290",
+          "desc": "XPLICIT AZUCAR 7GR  1000U",
+          "qty": 1.0,
+          "unit": "ZPR",
+          "ubic": "FC02A2",
+          "client": "ALASKA BAR"
+        },
+        {
+          "mat": "0AM1634",
+          "desc": "XPLICIT EDULCORANTE 1G 150U",
+          "qty": 1.0,
+          "unit": "ZPR",
+          "ubic": "FC01C4",
+          "client": "ALASKA BAR"
+        },
+        {
+          "mat": "ED13",
+          "desc": "ESTRELLA DAMM 1/3 RET. PP",
+          "qty": 3.0,
+          "unit": "CAJ",
+          "ubic": "AA09A1",
+          "client": "ALASKA BAR"
+        },
+        {
+          "mat": "VO13",
+          "desc": "VOLL-DAMM 1/3 RET.",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "AA07A1",
+          "client": "ALASKA BAR"
+        }
+      ],
+      "ret_items": [
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 6.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE",
+          "client": "ALASKA BAR"
+        },
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE",
+          "client": "ALASKA BAR"
+        },
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE",
+          "client": "ALASKA BAR"
+        },
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 2.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE",
+          "client": "ALASKA BAR"
+        },
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 3.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE",
+          "client": "ALASKA BAR"
+        },
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE",
+          "client": "ALASKA BAR"
+        }
+      ]
+    },
+    {
+      "id": "828089029",
+      "name": "CASAL DE LA GENT GRAN",
+      "address": "CALLE SOLEDAT 13, 08500 VIC",
+      "city": "VIC",
+      "cp": "08500",
+      "lat": 41.9302,
+      "lon": 2.254,
+      "delivery_caj": 6.0,
+      "delivery_brl": 0,
+      "delivery_un": 0,
+      "ret_caj": 6.0,
+      "ret_brl": 0,
+      "items": [
+        {
+          "mat": "ED13",
+          "desc": "ESTRELLA DAMM 1/3 RET. PP",
+          "qty": 2.0,
+          "unit": "CAJ",
+          "ubic": "AA09A1",
+          "client": "CASAL DE LA GENT GRAN"
+        },
+        {
+          "mat": "ED15LN",
+          "desc": "ESTRELLA DAMM 1/5 LN",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "AA08A1",
+          "client": "CASAL DE LA GENT GRAN"
+        },
+        {
+          "mat": "FD15",
+          "desc": "FREE DAMM 1/5 LN RET.",
+          "qty": 2.0,
+          "unit": "CAJ",
+          "ubic": "BA06A2",
+          "client": "CASAL DE LA GENT GRAN"
+        },
+        {
+          "mat": "FD15",
+          "desc": "FREE DAMM 1/5 LN RET.",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "BA06A2",
+          "client": "CASAL DE LA GENT GRAN"
+        }
+      ],
+      "ret_items": [
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 2.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE",
+          "client": "CASAL DE LA GENT GRAN"
+        },
+        {
+          "mat": "CJ15",
+          "desc": "CAJA DAMM+BOT.1/5RET VACIO EN P.PLAS.A13",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE",
+          "client": "CASAL DE LA GENT GRAN"
+        },
+        {
+          "mat": "CJ15",
+          "desc": "CAJA DAMM+BOT.1/5RET VACIO EN P.PLAS.A13",
+          "qty": 2.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE",
+          "client": "CASAL DE LA GENT GRAN"
+        },
+        {
+          "mat": "CJ15",
+          "desc": "CAJA DAMM+BOT.1/5RET VACIO EN P.PLAS.A13",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE",
+          "client": "CASAL DE LA GENT GRAN"
+        }
+      ]
+    },
+    {
+      "id": "828089030",
+      "name": "BAR REST EL TAST",
+      "address": "RAMON SALA I SA\u00c7ALA 15, 08500 VIC",
+      "city": "VIC",
+      "cp": "08500",
+      "lat": 41.9302,
+      "lon": 2.254,
+      "delivery_caj": 25.0,
+      "delivery_brl": 0,
+      "delivery_un": 14.0,
+      "ret_caj": 9.0,
+      "ret_brl": 0,
+      "items": [
+        {
+          "mat": "ED13",
+          "desc": "ESTRELLA DAMM 1/3 RET. PP",
+          "qty": 8.0,
+          "unit": "CAJ",
+          "ubic": "AA09A1",
+          "client": "BAR REST EL TAST"
+        },
+        {
+          "mat": "0AG0183",
+          "desc": "VICHY CATALAN GAS 30CL RET 24U",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "BA01A1",
+          "client": "BAR REST EL TAST"
+        },
+        {
+          "mat": "0AG0007",
+          "desc": "FONT D.OR NATURAL 1,5L PET 12U",
+          "qty": 3.0,
+          "unit": "CAJ",
+          "ubic": "EB09A1",
+          "client": "BAR REST EL TAST"
+        },
+        {
+          "mat": "0AG0004",
+          "desc": "FONT D.OR NATURAL 1/2 PET 24U",
+          "qty": 3.0,
+          "unit": "CAJ",
+          "ubic": "EB10A1",
+          "client": "BAR REST EL TAST"
+        },
+        {
+          "mat": "0LT0033",
+          "desc": "LETONA GRAN CREME PET 1,5L PET 6U",
+          "qty": 6.0,
+          "unit": "CAJ",
+          "ubic": "FA06A3",
+          "client": "BAR REST EL TAST"
+        },
+        {
+          "mat": "0VE0531",
+          "desc": "PRIOR  BLANCO VERDEJO 75CL 6U",
+          "qty": 2.0,
+          "unit": "CAJ",
+          "ubic": "EA08B3",
+          "client": "BAR REST EL TAST"
+        },
+        {
+          "mat": "0VE0532",
+          "desc": "PRIOR BOBAL ROSADO 75CL 6U",
+          "qty": 2.0,
+          "unit": "CAJ",
+          "ubic": "EC08A1",
+          "client": "BAR REST EL TAST"
+        },
+        {
+          "mat": "0AM1276",
+          "desc": "BARGALLO ACEITE OLIVA SUAVE 5L",
+          "qty": 3.0,
+          "unit": "UN",
+          "ubic": "EC01B3",
+          "client": "BAR REST EL TAST"
+        },
+        {
+          "mat": "0AM1278",
+          "desc": "BARGALLO ACEITE VIRGEN EXTRA 5L",
+          "qty": 3.0,
+          "unit": "UN",
+          "ubic": "EC01B1",
+          "client": "BAR REST EL TAST"
+        },
+        {
+          "mat": "0AM3864",
+          "desc": "FRIMASOL ACEITE GIRASOL 25L",
+          "qty": 2.0,
+          "unit": "UN",
+          "ubic": "EA02A3",
+          "client": "BAR REST EL TAST"
+        },
+        {
+          "mat": "0AM0702",
+          "desc": "SALSA ROMESCO FERRER POT 660G",
+          "qty": 6.0,
+          "unit": "UN",
+          "ubic": "ZCG",
+          "client": "BAR REST EL TAST"
+        }
+      ],
+      "ret_items": [
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 8.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE",
+          "client": "BAR REST EL TAST"
+        },
+        {
+          "mat": "3ENV0236",
+          "desc": "C.C. AGUA 1/3 VICHY-FONT D'OR",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "AA",
+          "client": "BAR REST EL TAST"
+        }
+      ]
+    },
+    {
+      "id": "828089031",
+      "name": "ZONA DIESEL URBAN",
+      "address": "CALLE MATARO S/N, 08500 VIC",
+      "city": "VIC",
+      "cp": "08500",
+      "lat": 41.9302,
+      "lon": 2.254,
+      "delivery_caj": 18.0,
+      "delivery_brl": 0,
+      "delivery_un": 10.0,
+      "ret_caj": 0,
+      "ret_brl": 0,
+      "items": [
+        {
+          "mat": "VO13LT",
+          "desc": "VOLL DAMM 1/3 LATA LC",
+          "qty": 4.0,
+          "unit": "CAJ",
+          "ubic": "CA01A2",
+          "client": "ZONA DIESEL URBAN"
+        },
+        {
+          "mat": "0AG0182",
+          "desc": "VICHY CATALAN SYSPACK GAS 30CL SR 24U",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "DB06A2",
+          "client": "ZONA DIESEL URBAN"
+        },
+        {
+          "mat": "0AG0046",
+          "desc": "VICHY CATALAN GAS 1,2L PET 6U",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "ZCG",
+          "client": "ZONA DIESEL URBAN"
+        },
+        {
+          "mat": "0LT0020",
+          "desc": "CACAOLAT ORIGINAL 1L PET 6U",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "FA02B1",
+          "client": "ZONA DIESEL URBAN"
+        },
+        {
+          "mat": "0LT0412",
+          "desc": "CACAOLAT ORIGINAL 27,5CL PET 24U",
+          "qty": 2.0,
+          "unit": "CAJ",
+          "ubic": "FA01B1",
+          "client": "ZONA DIESEL URBAN"
+        },
+        {
+          "mat": "NTL13LT6",
+          "desc": "NESTEA LIMON 1/3 LATA 4U-PACK 6U.",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "CB06A2",
+          "client": "ZONA DIESEL URBAN"
+        },
+        {
+          "mat": "0ZU0006",
+          "desc": "GRANINI NARANJA 33CL PET 12U",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "ZCG",
+          "client": "ZONA DIESEL URBAN"
+        },
+        {
+          "mat": "0ZU0056",
+          "desc": "GRANINI MELOCOTON 33CL PET 12U",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "ZCG",
+          "client": "ZONA DIESEL URBAN"
+        },
+        {
+          "mat": "0ZU0065",
+          "desc": "GRANINI PI\u00d1A 33CL PET 12U",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "ZCG",
+          "client": "ZONA DIESEL URBAN"
+        },
+        {
+          "mat": "0ZU0287",
+          "desc": "GRANINI ZANAHORIA-NARANJA 33CL 12U",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "ZCG",
+          "client": "ZONA DIESEL URBAN"
+        },
+        {
+          "mat": "0ZU0020",
+          "desc": "GRANINI MELOCOTON  20CL 24U",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "DA09A1",
+          "client": "ZONA DIESEL URBAN"
+        },
+        {
+          "mat": "0LI0153",
+          "desc": "RUAVIEJA ORUJO HIERBAS 70CL",
+          "qty": 6.0,
+          "unit": "BOT",
+          "ubic": "ZCG",
+          "client": "ZONA DIESEL URBAN"
+        },
+        {
+          "mat": "0RF0091",
+          "desc": "/-SCHWEPPES LIMON LATA SLEEK 24U",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "ZCG",
+          "client": "ZONA DIESEL URBAN"
+        },
+        {
+          "mat": "0LI0068",
+          "desc": "NEGRITA RON 70CL",
+          "qty": 4.0,
+          "unit": "BOT",
+          "ubic": "ZCG",
+          "client": "ZONA DIESEL URBAN"
+        },
+        {
+          "mat": "NTL13LT6",
+          "desc": "NESTEA LIMON 1/3 LATA 4U-PACK 6U.",
+          "qty": 2.0,
+          "unit": "CAJ",
+          "ubic": "CB06A2",
+          "client": "ZONA DIESEL URBAN"
+        }
+      ],
+      "ret_items": []
+    },
+    {
+      "id": "828089032",
+      "name": "CAFETERIA PRADALS",
+      "address": "CTRA. SANT HIP\u00d2LIT 61, 08500 VIC",
+      "city": "VIC",
+      "cp": "08500",
+      "lat": 41.9302,
+      "lon": 2.254,
+      "delivery_caj": 10.0,
+      "delivery_brl": 0,
+      "delivery_un": 0,
+      "ret_caj": 6.0,
+      "ret_brl": 0,
+      "items": [
+        {
+          "mat": "ED13",
+          "desc": "ESTRELLA DAMM 1/3 RET. PP",
+          "qty": 2.0,
+          "unit": "CAJ",
+          "ubic": "AA09A1",
+          "client": "CAFETERIA PRADALS"
+        },
+        {
+          "mat": "FDL13",
+          "desc": "FREE DAMM LIMON 1/3 RET. PP",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "AA05A1",
+          "client": "CAFETERIA PRADALS"
+        },
+        {
+          "mat": "ED13LT",
+          "desc": "ESTRELLA DAMM 1/3 LATA",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "CA01A1",
+          "client": "CAFETERIA PRADALS"
+        },
+        {
+          "mat": "0LT0032",
+          "desc": "CACAOLAT VIDRIO 20CL RET 30U",
+          "qty": 2.0,
+          "unit": "CAJ",
+          "ubic": "AC04A3",
+          "client": "CAFETERIA PRADALS"
+        },
+        {
+          "mat": "0ZU0048",
+          "desc": "PAGO PI\u00d1A 20CL SR 24U",
+          "qty": 2.0,
+          "unit": "CAJ",
+          "ubic": "ZCG",
+          "client": "CAFETERIA PRADALS"
+        },
+        {
+          "mat": "0ZU0049",
+          "desc": "PAGO MELOCOTON  20CL SR 24U",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "ZCG",
+          "client": "CAFETERIA PRADALS"
+        },
+        {
+          "mat": "ED13",
+          "desc": "ESTRELLA DAMM 1/3 RET. PP",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "AA09A1",
+          "client": "CAFETERIA PRADALS"
+        }
+      ],
+      "ret_items": [
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 2.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE",
+          "client": "CAFETERIA PRADALS"
+        },
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE",
+          "client": "CAFETERIA PRADALS"
+        },
+        {
+          "mat": "3ENV0029",
+          "desc": "C.C. CACAOLAT 30 U.",
+          "qty": 2.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE",
+          "client": "CAFETERIA PRADALS"
+        },
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE",
+          "client": "CAFETERIA PRADALS"
+        }
+      ]
+    },
+    {
+      "id": "828089033",
+      "name": "LLAR JUVENIL",
+      "address": "CALLE PIUS XII 20, 08500 VIC",
+      "city": "VIC",
+      "cp": "08500",
+      "lat": 41.9302,
+      "lon": 2.254,
+      "delivery_caj": 6.0,
+      "delivery_brl": 0,
+      "delivery_un": 0,
+      "ret_caj": 0,
+      "ret_brl": 0,
+      "items": [
+        {
+          "mat": "0AG0004",
+          "desc": "FONT D.OR NATURAL 1/2 PET 24U",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "EB10A1",
+          "client": "LLAR JUVENIL"
+        },
+        {
+          "mat": "0LT0033",
+          "desc": "LETONA GRAN CREME PET 1,5L PET 6U",
+          "qty": 4.0,
+          "unit": "CAJ",
+          "ubic": "FA06A3",
+          "client": "LLAR JUVENIL"
+        },
+        {
+          "mat": "0ZU0755",
+          "desc": "GRANINI MELOCOTON 3X20CL MINIBRICK 30U",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "ZCG",
+          "client": "LLAR JUVENIL"
+        }
+      ],
+      "ret_items": []
+    },
+    {
+      "id": "828089034",
+      "name": "GURBI",
+      "address": "CALLE JACINT VERDAGUER 20, 08503 GURB",
+      "city": "GURB",
+      "cp": "08503",
+      "lat": 41.9501,
+      "lon": 2.2673,
+      "delivery_caj": 14.0,
+      "delivery_brl": 0,
+      "delivery_un": 0,
+      "ret_caj": 7.0,
+      "ret_brl": 0,
+      "items": [
+        {
+          "mat": "DL13",
+          "desc": "DAMM LEMON 1/3 RET",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "AA02A1",
+          "client": "GURBI"
+        },
+        {
+          "mat": "ED13",
+          "desc": "ESTRELLA DAMM 1/3 RET. PP",
+          "qty": 2.0,
+          "unit": "CAJ",
+          "ubic": "AA09A1",
+          "client": "GURBI"
+        },
+        {
+          "mat": "0LT0032",
+          "desc": "CACAOLAT VIDRIO 20CL RET 30U",
+          "qty": 3.0,
+          "unit": "CAJ",
+          "ubic": "AC04A3",
+          "client": "GURBI"
+        },
+        {
+          "mat": "0LT0412",
+          "desc": "CACAOLAT ORIGINAL 27,5CL PET 24U",
+          "qty": 2.0,
+          "unit": "CAJ",
+          "ubic": "FA01B1",
+          "client": "GURBI"
+        },
+        {
+          "mat": "0ZU0754",
+          "desc": "GRANINI PI\u00d1A 3X20CL MINIBRICK 30U",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "ZCG",
+          "client": "GURBI"
+        },
+        {
+          "mat": "0ZU0311",
+          "desc": "PAGO NARANJA   1L PET 6U",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "ZCG",
+          "client": "GURBI"
+        },
+        {
+          "mat": "0ZU0048",
+          "desc": "PAGO PI\u00d1A 20CL SR 24U",
+          "qty": 2.0,
+          "unit": "CAJ",
+          "ubic": "ZCG",
+          "client": "GURBI"
+        },
+        {
+          "mat": "0ZU0050",
+          "desc": "PAGO NARANJA-ZANAH-LIM\u00d3N  20CL SR 24U",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "ZCG",
+          "client": "GURBI"
+        },
+        {
+          "mat": "ED13",
+          "desc": "ESTRELLA DAMM 1/3 RET. PP",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "AA09A1",
+          "client": "GURBI"
+        }
+      ],
+      "ret_items": [
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE",
+          "client": "GURBI"
+        },
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 2.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE",
+          "client": "GURBI"
+        },
+        {
+          "mat": "3ENV0029",
+          "desc": "C.C. CACAOLAT 30 U.",
+          "qty": 3.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE",
+          "client": "GURBI"
+        },
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE",
+          "client": "GURBI"
+        }
+      ]
+    },
+    {
+      "id": "828089035",
+      "name": "PADEL OSONA GURB",
+      "address": "CALLE SANT ROC 29, 08503 GURB",
+      "city": "GURB",
+      "cp": "08503",
+      "lat": 41.9501,
+      "lon": 2.2673,
+      "delivery_caj": 19.0,
+      "delivery_brl": 2.0,
+      "delivery_un": 0,
+      "ret_caj": 3.0,
+      "ret_brl": 2.0,
+      "items": [
+        {
+          "mat": "ED13",
+          "desc": "ESTRELLA DAMM 1/3 RET. PP",
+          "qty": 2.0,
+          "unit": "CAJ",
+          "ubic": "AA09A1",
+          "client": "PADEL OSONA GURB"
+        },
+        {
+          "mat": "ED30",
+          "desc": "ESTRELLA DAMM BARRIL 30",
+          "qty": 1.0,
+          "unit": "BRL",
+          "ubic": "AA10A1",
+          "client": "PADEL OSONA GURB"
+        },
+        {
+          "mat": "TU20",
+          "desc": "TURIA BARRIL 20L.",
+          "qty": 1.0,
+          "unit": "BRL",
+          "ubic": "AC03A2",
+          "client": "PADEL OSONA GURB"
+        },
+        {
+          "mat": "VE12SP",
+          "desc": "AGUA VERI 1/2 PET CAJA 24U. T.TH",
+          "qty": 5.0,
+          "unit": "CAJ",
+          "ubic": "EB03A1",
+          "client": "PADEL OSONA GURB"
+        },
+        {
+          "mat": "VE32SP",
+          "desc": "AGUA VERI 1,5L PET CAJA 12U.",
+          "qty": 8.0,
+          "unit": "CAJ",
+          "ubic": "EB02A1",
+          "client": "PADEL OSONA GURB"
+        },
+        {
+          "mat": "0LT0103",
+          "desc": "YOSOY AVENA BARISTA 1L BRIK 6U",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "FA03A1",
+          "client": "PADEL OSONA GURB"
+        },
+        {
+          "mat": "0LT0034",
+          "desc": "LETONA SEMI ESPEC HOSTELERIA PET 1,5L 6U",
+          "qty": 2.0,
+          "unit": "CAJ",
+          "ubic": "FA05A2",
+          "client": "PADEL OSONA GURB"
+        },
+        {
+          "mat": "ED13",
+          "desc": "ESTRELLA DAMM 1/3 RET. PP",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "AA09A1",
+          "client": "PADEL OSONA GURB"
+        }
+      ],
+      "ret_items": [
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 2.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE",
+          "client": "PADEL OSONA GURB"
+        },
+        {
+          "mat": "BRL30V",
+          "desc": "BARRIL INOX 30L. EURONORMA",
+          "qty": 1.0,
+          "unit": "BRL",
+          "ubic": "ENVASE",
+          "client": "PADEL OSONA GURB"
+        },
+        {
+          "mat": "BRL20V",
+          "desc": "BARRIL INOX 20L. TANQUETA A16",
+          "qty": 1.0,
+          "unit": "BRL",
+          "ubic": "ENVASE",
+          "client": "PADEL OSONA GURB"
+        },
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE",
+          "client": "PADEL OSONA GURB"
+        }
+      ]
+    },
+    {
+      "id": "828089036",
+      "name": "ALOE",
+      "address": "MENENDEZ I PELAYO 1, 08500 VIC",
+      "city": "VIC",
+      "cp": "08500",
+      "lat": 41.9302,
+      "lon": 2.254,
+      "delivery_caj": 3.0,
+      "delivery_brl": 0,
+      "delivery_un": 0,
+      "ret_caj": 3.0,
+      "ret_brl": 0,
+      "items": [
+        {
+          "mat": "ED13",
+          "desc": "ESTRELLA DAMM 1/3 RET. PP",
+          "qty": 3.0,
+          "unit": "CAJ",
+          "ubic": "AA09A1",
+          "client": "ALOE"
+        }
+      ],
+      "ret_items": [
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 3.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE",
+          "client": "ALOE"
+        }
+      ]
+    },
+    {
+      "id": "828089037",
+      "name": "BAR PRIEGO",
+      "address": "CALLE ENRIC PRAT DE LA RIBA 49, 08500 VIC",
+      "city": "VIC",
+      "cp": "08500",
+      "lat": 41.9302,
+      "lon": 2.254,
+      "delivery_caj": 22.0,
+      "delivery_brl": 0,
+      "delivery_un": 0,
+      "ret_caj": 22.0,
+      "ret_brl": 0,
+      "items": [
+        {
+          "mat": "ED13",
+          "desc": "ESTRELLA DAMM 1/3 RET. PP",
+          "qty": 14.0,
+          "unit": "CAJ",
+          "ubic": "AA09A1",
+          "client": "BAR PRIEGO"
+        },
+        {
+          "mat": "ED13",
+          "desc": "ESTRELLA DAMM 1/3 RET. PP",
+          "qty": 8.0,
+          "unit": "CAJ",
+          "ubic": "AA09A1",
+          "client": "BAR PRIEGO"
+        }
+      ],
+      "ret_items": [
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 14.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE",
+          "client": "BAR PRIEGO"
+        },
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 8.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE",
+          "client": "BAR PRIEGO"
+        }
+      ]
+    },
+    {
+      "id": "828089038",
+      "name": "E.S VIC",
+      "address": "Carretera de Roda 97, 08500 VIC",
+      "city": "VIC",
+      "cp": "08500",
+      "lat": 41.9302,
+      "lon": 2.254,
+      "delivery_caj": 19.0,
+      "delivery_brl": 0,
+      "delivery_un": 0,
+      "ret_caj": 0,
+      "ret_brl": 0,
+      "items": [
+        {
+          "mat": "ED13LT",
+          "desc": "ESTRELLA DAMM 1/3 LATA",
+          "qty": 5.0,
+          "unit": "CAJ",
+          "ubic": "CA01A1",
+          "client": "E.S VIC"
+        },
+        {
+          "mat": "VO13LT",
+          "desc": "VOLL DAMM 1/3 LATA LC",
+          "qty": 4.0,
+          "unit": "CAJ",
+          "ubic": "CA01A2",
+          "client": "E.S VIC"
+        },
+        {
+          "mat": "0AG0039",
+          "desc": "FONT D.OR NATURAL 1,5L PET 6U",
+          "qty": 5.0,
+          "unit": "CAJ",
+          "ubic": "EB08A1",
+          "client": "E.S VIC"
+        },
+        {
+          "mat": "0AG0004",
+          "desc": "FONT D.OR NATURAL 1/2 PET 24U",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "EB10A1",
+          "client": "E.S VIC"
+        },
+        {
+          "mat": "0RF0124",
+          "desc": "/-COCA COLA 2L PET 6U",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "ZCG",
+          "client": "E.S VIC"
+        },
+        {
+          "mat": "0RF0019",
+          "desc": "/-COCA COLA LATA 33CL 24U",
+          "qty": 2.0,
+          "unit": "CAJ",
+          "ubic": "CA04A2",
+          "client": "E.S VIC"
+        },
+        {
+          "mat": "0RF0079",
+          "desc": "/-COCA COLA ZERO LATA 33CL 24U",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "CA03A3",
+          "client": "E.S VIC"
+        }
+      ],
+      "ret_items": []
+    },
+    {
+      "id": "828089039",
+      "name": "FORN ESTADI",
+      "address": "AVENIDA PIUS XII 18, 08500 VIC",
+      "city": "VIC",
+      "cp": "08500",
+      "lat": 41.9302,
+      "lon": 2.254,
+      "delivery_caj": 3.0,
+      "delivery_brl": 0,
+      "delivery_un": 0,
+      "ret_caj": 0,
+      "ret_brl": 0,
+      "items": [
+        {
+          "mat": "ED13LT",
+          "desc": "ESTRELLA DAMM 1/3 LATA",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "CA01A1",
+          "client": "FORN ESTADI"
+        },
+        {
+          "mat": "0LT0412",
+          "desc": "CACAOLAT ORIGINAL 27,5CL PET 24U",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "FA01B1",
+          "client": "FORN ESTADI"
+        },
+        {
+          "mat": "0ZU0309",
+          "desc": "PAGO ACE 1L PET 6U",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "ZCG",
+          "client": "FORN ESTADI"
+        }
+      ],
+      "ret_items": []
+    },
+    {
+      "id": "828089040",
+      "name": "FORN DE PA EL REMEI",
+      "address": "CALLE RAIMON D'ABADAL 23, 08500 VIC",
+      "city": "VIC",
+      "cp": "08500",
+      "lat": 41.9302,
+      "lon": 2.254,
+      "delivery_caj": 4.0,
+      "delivery_brl": 0,
+      "delivery_un": 0,
+      "ret_caj": 0,
+      "ret_brl": 0,
+      "items": [
+        {
+          "mat": "ED13LT",
+          "desc": "ESTRELLA DAMM 1/3 LATA",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "CA01A1",
+          "client": "FORN DE PA EL REMEI"
+        },
+        {
+          "mat": "0LT0020",
+          "desc": "CACAOLAT ORIGINAL 1L PET 6U",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "FA02B1",
+          "client": "FORN DE PA EL REMEI"
+        },
+        {
+          "mat": "0ZU0755",
+          "desc": "GRANINI MELOCOTON 3X20CL MINIBRICK 30U",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "ZCG",
+          "client": "FORN DE PA EL REMEI"
+        },
+        {
+          "mat": "0ZU0048",
+          "desc": "PAGO PI\u00d1A 20CL SR 24U",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "ZCG",
+          "client": "FORN DE PA EL REMEI"
+        }
+      ],
+      "ret_items": []
+    },
+    {
+      "id": "828089041",
+      "name": "RESTAURANT UNTOK",
+      "address": "CALLE ELS PIRINEUS 21, 08503 GURB",
+      "city": "GURB",
+      "cp": "08503",
+      "lat": 41.9501,
+      "lon": 2.2673,
+      "delivery_caj": 29.0,
+      "delivery_brl": 1.0,
+      "delivery_un": 0,
+      "ret_caj": 20.0,
+      "ret_brl": 1.0,
+      "items": [
+        {
+          "mat": "DL13",
+          "desc": "DAMM LEMON 1/3 RET",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "AA02A1",
+          "client": "RESTAURANT UNTOK"
+        },
+        {
+          "mat": "ED13",
+          "desc": "ESTRELLA DAMM 1/3 RET. PP",
+          "qty": 3.0,
+          "unit": "CAJ",
+          "ubic": "AA09A1",
+          "client": "RESTAURANT UNTOK"
+        },
+        {
+          "mat": "VO13",
+          "desc": "VOLL-DAMM 1/3 RET.",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "AA07A1",
+          "client": "RESTAURANT UNTOK"
+        },
+        {
+          "mat": "ED30",
+          "desc": "ESTRELLA DAMM BARRIL 30",
+          "qty": 1.0,
+          "unit": "BRL",
+          "ubic": "AA10A1",
+          "client": "RESTAURANT UNTOK"
+        },
+        {
+          "mat": "VE11",
+          "desc": "AGUA VERI 1/1 VIDRIO RET.",
+          "qty": 15.0,
+          "unit": "CAJ",
+          "ubic": "AA11A1",
+          "client": "RESTAURANT UNTOK"
+        },
+        {
+          "mat": "VE32SP",
+          "desc": "AGUA VERI 1,5L PET CAJA 12U.",
+          "qty": 4.0,
+          "unit": "CAJ",
+          "ubic": "EB02A1",
+          "client": "RESTAURANT UNTOK"
+        },
+        {
+          "mat": "VE13SP",
+          "desc": "AGUA VERI 1/3 PET CAJA 35U. T.TH",
+          "qty": 3.0,
+          "unit": "CAJ",
+          "ubic": "EB04A1",
+          "client": "RESTAURANT UNTOK"
+        },
+        {
+          "mat": "0LT0235",
+          "desc": "LA LEVANTINA AVENA ESP.HOST 1L 6U",
+          "qty": 2.0,
+          "unit": "CAJ",
+          "ubic": "FA02A2",
+          "client": "RESTAURANT UNTOK"
+        }
+      ],
+      "ret_items": [
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE",
+          "client": "RESTAURANT UNTOK"
+        },
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 3.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE",
+          "client": "RESTAURANT UNTOK"
+        },
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE",
+          "client": "RESTAURANT UNTOK"
+        },
+        {
+          "mat": "BRL30V",
+          "desc": "BARRIL INOX 30L. EURONORMA",
+          "qty": 1.0,
+          "unit": "BRL",
+          "ubic": "ENVASE",
+          "client": "RESTAURANT UNTOK"
+        },
+        {
+          "mat": "CJ11V",
+          "desc": "CAJAS COMPLETAS 1/1 V",
+          "qty": 15.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE",
+          "client": "RESTAURANT UNTOK"
+        }
+      ]
+    },
+    {
+      "id": "828089042",
+      "name": "FUSSIMANYA ESTADI",
+      "address": "CALLE TAGAMANENT 1, 08500 VIC",
+      "city": "VIC",
+      "cp": "08500",
+      "lat": 41.9302,
+      "lon": 2.254,
+      "delivery_caj": 4.0,
+      "delivery_brl": 0,
+      "delivery_un": 0,
+      "ret_caj": 4.0,
+      "ret_brl": 0,
+      "items": [
+        {
+          "mat": "ED13",
+          "desc": "ESTRELLA DAMM 1/3 RET. PP",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "AA09A1",
+          "client": "FUSSIMANYA ESTADI"
+        },
+        {
+          "mat": "ED15LN",
+          "desc": "ESTRELLA DAMM 1/5 LN",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "AA08A1",
+          "client": "FUSSIMANYA ESTADI"
+        },
+        {
+          "mat": "0LT0032",
+          "desc": "CACAOLAT VIDRIO 20CL RET 30U",
+          "qty": 2.0,
+          "unit": "CAJ",
+          "ubic": "AC04A3",
+          "client": "FUSSIMANYA ESTADI"
+        }
+      ],
+      "ret_items": [
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE",
+          "client": "FUSSIMANYA ESTADI"
+        },
+        {
+          "mat": "CJ15",
+          "desc": "CAJA DAMM+BOT.1/5RET VACIO EN P.PLAS.A13",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE",
+          "client": "FUSSIMANYA ESTADI"
+        },
+        {
+          "mat": "3ENV0029",
+          "desc": "C.C. CACAOLAT 30 U.",
+          "qty": 2.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE",
+          "client": "FUSSIMANYA ESTADI"
+        }
+      ]
+    },
+    {
+      "id": "828089043",
+      "name": "GARBI 1 CAFET. ALIMENTACIO",
+      "address": "RONDA FRANCESC CAMPRODON 5, 08500 VIC",
+      "city": "VIC",
+      "cp": "08500",
+      "lat": 41.9302,
+      "lon": 2.254,
+      "delivery_caj": 6.0,
+      "delivery_brl": 0,
+      "delivery_un": 0,
+      "ret_caj": 0,
+      "ret_brl": 0,
+      "items": [
+        {
+          "mat": "0CF1028",
+          "desc": "MALONGO EXPRESO INTENSO CAPSULAS 6G 120U",
+          "qty": 5.0,
+          "unit": "CAJ",
+          "ubic": "EA07C1",
+          "client": "GARBI 1 CAFET. ALIMENTACIO"
+        },
+        {
+          "mat": "0CF1028",
+          "desc": "MALONGO EXPRESO INTENSO CAPSULAS 6G 120U",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "EA07C1",
+          "client": "GARBI 1 CAFET. ALIMENTACIO"
+        }
+      ],
+      "ret_items": []
+    },
+    {
+      "id": "828089044",
+      "name": "GARBI 1 CAFET. ALIMENTACIO",
+      "address": "RONDA FRANCESC CAMPRODON 5, 08500 VIC",
+      "city": "VIC",
+      "cp": "08500",
+      "lat": 41.9302,
+      "lon": 2.254,
+      "delivery_caj": 2.0,
+      "delivery_brl": 0,
+      "delivery_un": 0,
+      "ret_caj": 0,
+      "ret_brl": 0,
+      "items": [
+        {
+          "mat": "0AM1634",
+          "desc": "XPLICIT EDULCORANTE 1G 150U",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "FC01C4",
+          "client": "GARBI 1 CAFET. ALIMENTACIO"
+        },
+        {
+          "mat": "0AM5220",
+          "desc": "AZUCAR GARBI ZEFIR 7G 1000U",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "FC04A3",
+          "client": "GARBI 1 CAFET. ALIMENTACIO"
+        }
+      ],
+      "ret_items": []
+    },
+    {
+      "id": "828089045",
+      "name": "GUSTUM AREAS 2 (GIRONA-LLEIDA)",
+      "address": "CARRETERA C-25 EIX TRANSVE KM 174,6, 08503 GURB",
+      "city": "GURB",
+      "cp": "08503",
+      "lat": 41.9501,
+      "lon": 2.2673,
+      "delivery_caj": 6.0,
+      "delivery_brl": 2.0,
+      "delivery_un": 0,
+      "ret_caj": 5.0,
+      "ret_brl": 2.0,
+      "items": [
+        {
+          "mat": "ED13",
+          "desc": "ESTRELLA DAMM 1/3 RET. PP",
+          "qty": 5.0,
+          "unit": "CAJ",
+          "ubic": "AA09A1",
+          "client": "GUSTUM AREAS 2 (GIRONA-LLEIDA)"
+        },
+        {
+          "mat": "ED30",
+          "desc": "ESTRELLA DAMM BARRIL 30",
+          "qty": 2.0,
+          "unit": "BRL",
+          "ubic": "AA10A1",
+          "client": "GUSTUM AREAS 2 (GIRONA-LLEIDA)"
+        },
+        {
+          "mat": "0AG0052",
+          "desc": "VICHY CATALAN GAS 1/2 PET 24U",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "EA01A3",
+          "client": "GUSTUM AREAS 2 (GIRONA-LLEIDA)"
+        }
+      ],
+      "ret_items": [
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 5.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE",
+          "client": "GUSTUM AREAS 2 (GIRONA-LLEIDA)"
+        },
+        {
+          "mat": "BRL30V",
+          "desc": "BARRIL INOX 30L. EURONORMA",
+          "qty": 2.0,
+          "unit": "BRL",
+          "ubic": "ENVASE",
+          "client": "GUSTUM AREAS 2 (GIRONA-LLEIDA)"
+        }
+      ]
+    },
+    {
+      "id": "828089046",
+      "name": "GUSTUM AREAS 1 (LLEIDA-GIRONA)",
+      "address": "CARRETERA C-25 EIX TRANSVE KM 174,6, 08503 GURB",
+      "city": "GURB",
+      "cp": "08503",
+      "lat": 41.9501,
+      "lon": 2.2673,
+      "delivery_caj": 5.0,
+      "delivery_brl": 1.0,
+      "delivery_un": 0,
+      "ret_caj": 4.0,
+      "ret_brl": 1.0,
+      "items": [
+        {
+          "mat": "ED13",
+          "desc": "ESTRELLA DAMM 1/3 RET. PP",
+          "qty": 4.0,
+          "unit": "CAJ",
+          "ubic": "AA09A1",
+          "client": "GUSTUM AREAS 1 (LLEIDA-GIRONA)"
+        },
+        {
+          "mat": "ED30",
+          "desc": "ESTRELLA DAMM BARRIL 30",
+          "qty": 1.0,
+          "unit": "BRL",
+          "ubic": "AA10A1",
+          "client": "GUSTUM AREAS 1 (LLEIDA-GIRONA)"
+        },
+        {
+          "mat": "0AG0052",
+          "desc": "VICHY CATALAN GAS 1/2 PET 24U",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "EA01A3",
+          "client": "GUSTUM AREAS 1 (LLEIDA-GIRONA)"
+        }
+      ],
+      "ret_items": [
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 4.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE",
+          "client": "GUSTUM AREAS 1 (LLEIDA-GIRONA)"
+        },
+        {
+          "mat": "BRL30V",
+          "desc": "BARRIL INOX 30L. EURONORMA",
+          "qty": 1.0,
+          "unit": "BRL",
+          "ubic": "ENVASE",
+          "client": "GUSTUM AREAS 1 (LLEIDA-GIRONA)"
+        }
+      ]
+    },
+    {
+      "id": "828089047",
+      "name": "FONTSECA, BAR",
+      "address": "CARRETERA SANT HILARI SACALM S/N, 08500 VIC",
+      "city": "VIC",
+      "cp": "08500",
+      "lat": 41.9302,
+      "lon": 2.254,
+      "delivery_caj": 13.0,
+      "delivery_brl": 0,
+      "delivery_un": 0,
+      "ret_caj": 13.0,
+      "ret_brl": 0,
+      "items": [
+        {
+          "mat": "ED13",
+          "desc": "ESTRELLA DAMM 1/3 RET. PP",
+          "qty": 2.0,
+          "unit": "CAJ",
+          "ubic": "AA09A1",
+          "client": "FONTSECA, BAR"
+        },
+        {
+          "mat": "FDT13",
+          "desc": "FREE DAMM TOSTADA 1/3 RET. PP",
+          "qty": 2.0,
+          "unit": "CAJ",
+          "ubic": "AA04A1",
+          "client": "FONTSECA, BAR"
+        },
+        {
+          "mat": "0AG0010",
+          "desc": "VICHY CATALAN GAS 1L RET 12U",
+          "qty": 7.0,
+          "unit": "CAJ",
+          "ubic": "AC07A2",
+          "client": "FONTSECA, BAR"
+        },
+        {
+          "mat": "FDT13",
+          "desc": "FREE DAMM TOSTADA 1/3 RET. PP",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "AA04A1",
+          "client": "FONTSECA, BAR"
+        },
+        {
+          "mat": "ED13",
+          "desc": "ESTRELLA DAMM 1/3 RET. PP",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "AA09A1",
+          "client": "FONTSECA, BAR"
+        }
+      ],
+      "ret_items": [
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 2.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE",
+          "client": "FONTSECA, BAR"
+        },
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 2.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE",
+          "client": "FONTSECA, BAR"
+        },
+        {
+          "mat": "3ENV0042",
+          "desc": "C.C. AGUA 1/1 VICHY-FONT D'OR",
+          "qty": 7.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE",
+          "client": "FONTSECA, BAR"
+        },
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE",
+          "client": "FONTSECA, BAR"
+        },
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE",
+          "client": "FONTSECA, BAR"
+        }
+      ]
+    },
+    {
+      "id": "841049011",
+      "name": "PADEL OSONA GURB",
+      "address": "CALLE SANT ROC 29, 08503 GURB",
+      "city": "GURB",
+      "cp": "08503",
+      "lat": 41.9501,
+      "lon": 2.2673,
+      "delivery_caj": 0,
+      "delivery_brl": 0,
+      "delivery_un": 0,
+      "ret_caj": 5.0,
+      "ret_brl": 2.0,
+      "items": [],
+      "ret_items": [
+        {
+          "mat": "BRL20V",
+          "desc": "BARRIL INOX 20L. TANQUETA A16",
+          "qty": 2.0,
+          "unit": "BRL",
+          "ubic": "ENVASE",
+          "client": "PADEL OSONA GURB"
+        },
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 5.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE",
+          "client": "PADEL OSONA GURB"
+        }
+      ]
+    }
+  ],
+  "priority": [
+    0.463,
+    0.009,
+    0.378,
+    0.919,
+    0.426,
+    0.352,
+    0.348,
+    0.173,
+    0.266,
+    0.052,
+    0.271,
+    0.385,
+    0.326,
+    0.49,
+    0.164,
+    0.026,
+    0.035,
+    0.514,
+    0.335,
+    0.052,
+    0.017,
+    0.42,
+    0.356,
+    0.412,
+    0.0
+  ],
+  "density": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+  ],
+  "opt_route": [
+    3,
+    13,
+    0,
+    4,
+    23,
+    2,
+    5,
+    6,
+    18,
+    12,
+    8,
+    7,
+    14,
+    9,
+    19,
+    16,
+    15,
+    20,
+    1,
+    17,
+    21,
+    11,
+    22,
+    10,
+    24
+  ],
+  "rand_route": [
+    16,
+    12,
+    9,
+    19,
+    18,
+    6,
+    5,
+    10,
+    15,
+    21,
+    11,
+    17,
+    1,
+    14,
+    22,
+    13,
+    2,
+    23,
+    4,
+    24,
+    7,
+    8,
+    0,
+    3,
+    20
+  ],
+  "opt_dist": 91.1,
+  "rand_dist": 106.1,
+  "opt_time": 356,
+  "rand_time": 382,
+  "improvement_pct": 14.1,
+  "time_saved": 26,
+  "parcels": {
+    "1": [
+      "RETURNABLES"
+    ],
+    "2": [],
+    "3": [
+      13,
+      3
+    ],
+    "4": [
+      6,
+      5,
+      2,
+      23,
+      4,
+      0
+    ],
+    "5": [
+      1,
+      20,
+      15,
+      16,
+      19,
+      9,
+      14,
+      7,
+      8,
+      12,
+      18
+    ],
+    "6": [
+      24,
+      10,
+      22,
+      11,
+      21,
+      17
+    ]
+  },
+  "parcel_products": {
+    "1": [
+      {
+        "mat": "CJ13",
+        "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+        "qty": 2.0,
+        "unit": "CAJ",
+        "ubic": "ENVASE",
+        "client": "AURIAL PADEL"
+      },
+      {
+        "mat": "CJ13",
+        "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+        "qty": 3.0,
+        "unit": "CAJ",
+        "ubic": "ENVASE",
+        "client": "AURIAL PADEL"
+      },
+      {
+        "mat": "BRL20V",
+        "desc": "BARRIL INOX 20L. TANQUETA A16",
+        "qty": 2.0,
+        "unit": "BRL",
+        "ubic": "ENVASE",
+        "client": "AURIAL PADEL"
+      },
+      {
+        "mat": "BRL30V",
+        "desc": "BARRIL INOX 30L. EURONORMA",
+        "qty": 5.0,
+        "unit": "BRL",
+        "ubic": "ENVASE",
+        "client": "AURIAL PADEL"
+      },
+      {
+        "mat": "BRL20V",
+        "desc": "BARRIL INOX 20L. TANQUETA A16",
+        "qty": 3.0,
+        "unit": "BRL",
+        "ubic": "ENVASE",
+        "client": "AURIAL PADEL"
+      },
+      {
+        "mat": "3ENV0236",
+        "desc": "C.C. AGUA 1/3 VICHY-FONT D'OR",
+        "qty": 1.0,
+        "unit": "CAJ",
+        "ubic": "AA",
+        "client": "AURIAL PADEL"
+      },
+      {
+        "mat": "3ENV0029",
+        "desc": "C.C. CACAOLAT 30 U.",
+        "qty": 1.0,
+        "unit": "CAJ",
+        "ubic": "ENVASE",
+        "client": "AURIAL PADEL"
+      },
+      {
+        "mat": "CJ13",
+        "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+        "qty": 2.0,
+        "unit": "CAJ",
+        "ubic": "ENVASE",
+        "client": "AURIAL PADEL"
+      },
+      {
+        "mat": "CJ13",
+        "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+        "qty": 14.0,
+        "unit": "CAJ",
+        "ubic": "ENVASE",
+        "client": "BAR PRIEGO"
+      },
+      {
+        "mat": "CJ13",
+        "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+        "qty": 8.0,
+        "unit": "CAJ",
+        "ubic": "ENVASE",
+        "client": "BAR PRIEGO"
+      },
+      {
+        "mat": "CJ13",
+        "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+        "qty": 8.0,
+        "unit": "CAJ",
+        "ubic": "ENVASE",
+        "client": "ENTREPA I PA"
+      },
+      {
+        "mat": "CJ15",
+        "desc": "CAJA DAMM+BOT.1/5RET VACIO EN P.PLAS.A13",
+        "qty": 2.0,
+        "unit": "CAJ",
+        "ubic": "ENVASE",
+        "client": "ENTREPA I PA"
+      },
+      {
+        "mat": "BRL30V",
+        "desc": "BARRIL INOX 30L. EURONORMA",
+        "qty": 1.0,
+        "unit": "BRL",
+        "ubic": "ENVASE",
+        "client": "ENTREPA I PA"
+      },
+      {
+        "mat": "BRL20V",
+        "desc": "BARRIL INOX 20L. TANQUETA A16",
+        "qty": 1.0,
+        "unit": "BRL",
+        "ubic": "ENVASE",
+        "client": "ENTREPA I PA"
+      },
+      {
+        "mat": "CJ13",
+        "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+        "qty": 6.0,
+        "unit": "CAJ",
+        "ubic": "ENVASE",
+        "client": "ALASKA BAR"
+      },
+      {
+        "mat": "CJ13",
+        "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+        "qty": 1.0,
+        "unit": "CAJ",
+        "ubic": "ENVASE",
+        "client": "ALASKA BAR"
+      },
+      {
+        "mat": "CJ13",
+        "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+        "qty": 1.0,
+        "unit": "CAJ",
+        "ubic": "ENVASE",
+        "client": "ALASKA BAR"
+      },
+      {
+        "mat": "CJ13",
+        "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+        "qty": 2.0,
+        "unit": "CAJ",
+        "ubic": "ENVASE",
+        "client": "ALASKA BAR"
+      },
+      {
+        "mat": "CJ13",
+        "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+        "qty": 3.0,
+        "unit": "CAJ",
+        "ubic": "ENVASE",
+        "client": "ALASKA BAR"
+      },
+      {
+        "mat": "CJ13",
+        "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+        "qty": 1.0,
+        "unit": "CAJ",
+        "ubic": "ENVASE",
+        "client": "ALASKA BAR"
+      },
+      {
+        "mat": "CJ13",
+        "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+        "qty": 2.0,
+        "unit": "CAJ",
+        "ubic": "ENVASE",
+        "client": "FONTSECA, BAR"
+      },
+      {
+        "mat": "CJ13",
+        "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+        "qty": 2.0,
+        "unit": "CAJ",
+        "ubic": "ENVASE",
+        "client": "FONTSECA, BAR"
+      },
+      {
+        "mat": "3ENV0042",
+        "desc": "C.C. AGUA 1/1 VICHY-FONT D'OR",
+        "qty": 7.0,
+        "unit": "CAJ",
+        "ubic": "ENVASE",
+        "client": "FONTSECA, BAR"
+      },
+      {
+        "mat": "CJ13",
+        "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+        "qty": 1.0,
+        "unit": "CAJ",
+        "ubic": "ENVASE",
+        "client": "FONTSECA, BAR"
+      },
+      {
+        "mat": "CJ13",
+        "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+        "qty": 1.0,
+        "unit": "CAJ",
+        "ubic": "ENVASE",
+        "client": "FONTSECA, BAR"
+      },
+      {
+        "mat": "CJ13",
+        "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+        "qty": 4.0,
+        "unit": "CAJ",
+        "ubic": "ENVASE",
+        "client": "INDUSTRIA 52"
+      },
+      {
+        "mat": "CJ13",
+        "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+        "qty": 1.0,
+        "unit": "CAJ",
+        "ubic": "ENVASE",
+        "client": "INDUSTRIA 52"
+      },
+      {
+        "mat": "CJ13",
+        "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+        "qty": 1.0,
+        "unit": "CAJ",
+        "ubic": "ENVASE",
+        "client": "INDUSTRIA 52"
+      },
+      {
+        "mat": "CJ13",
+        "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+        "qty": 2.0,
+        "unit": "CAJ",
+        "ubic": "ENVASE",
+        "client": "INDUSTRIA 52"
+      },
+      {
+        "mat": "CJ13",
+        "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+        "qty": 1.0,
+        "unit": "CAJ",
+        "ubic": "ENVASE",
+        "client": "INDUSTRIA 52"
+      },
+      {
+        "mat": "CJ13",
+        "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+        "qty": 2.0,
+        "unit": "CAJ",
+        "ubic": "ENVASE",
+        "client": "CASAL DE LA GENT GRAN"
+      },
+      {
+        "mat": "CJ15",
+        "desc": "CAJA DAMM+BOT.1/5RET VACIO EN P.PLAS.A13",
+        "qty": 1.0,
+        "unit": "CAJ",
+        "ubic": "ENVASE",
+        "client": "CASAL DE LA GENT GRAN"
+      },
+      {
+        "mat": "CJ15",
+        "desc": "CAJA DAMM+BOT.1/5RET VACIO EN P.PLAS.A13",
+        "qty": 2.0,
+        "unit": "CAJ",
+        "ubic": "ENVASE",
+        "client": "CASAL DE LA GENT GRAN"
+      },
+      {
+        "mat": "CJ15",
+        "desc": "CAJA DAMM+BOT.1/5RET VACIO EN P.PLAS.A13",
+        "qty": 1.0,
+        "unit": "CAJ",
+        "ubic": "ENVASE",
+        "client": "CASAL DE LA GENT GRAN"
+      },
+      {
+        "mat": "CJ13",
+        "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+        "qty": 8.0,
+        "unit": "CAJ",
+        "ubic": "ENVASE",
+        "client": "BAR REST EL TAST"
+      },
+      {
+        "mat": "3ENV0236",
+        "desc": "C.C. AGUA 1/3 VICHY-FONT D'OR",
+        "qty": 1.0,
+        "unit": "CAJ",
+        "ubic": "AA",
+        "client": "BAR REST EL TAST"
+      },
+      {
+        "mat": "CJ13",
+        "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+        "qty": 1.0,
+        "unit": "CAJ",
+        "ubic": "ENVASE",
+        "client": "FUSSIMANYA ESTADI"
+      },
+      {
+        "mat": "CJ15",
+        "desc": "CAJA DAMM+BOT.1/5RET VACIO EN P.PLAS.A13",
+        "qty": 1.0,
+        "unit": "CAJ",
+        "ubic": "ENVASE",
+        "client": "FUSSIMANYA ESTADI"
+      },
+      {
+        "mat": "3ENV0029",
+        "desc": "C.C. CACAOLAT 30 U.",
+        "qty": 2.0,
+        "unit": "CAJ",
+        "ubic": "ENVASE",
+        "client": "FUSSIMANYA ESTADI"
+      },
+      {
+        "mat": "CJ13",
+        "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+        "qty": 3.0,
+        "unit": "CAJ",
+        "ubic": "ENVASE",
+        "client": "ALOE"
+      },
+      {
+        "mat": "CJ13",
+        "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+        "qty": 2.0,
+        "unit": "CAJ",
+        "ubic": "ENVASE",
+        "client": "CAFETERIA PRADALS"
+      },
+      {
+        "mat": "CJ13",
+        "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+        "qty": 1.0,
+        "unit": "CAJ",
+        "ubic": "ENVASE",
+        "client": "CAFETERIA PRADALS"
+      },
+      {
+        "mat": "3ENV0029",
+        "desc": "C.C. CACAOLAT 30 U.",
+        "qty": 2.0,
+        "unit": "CAJ",
+        "ubic": "ENVASE",
+        "client": "CAFETERIA PRADALS"
+      },
+      {
+        "mat": "CJ13",
+        "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+        "qty": 1.0,
+        "unit": "CAJ",
+        "ubic": "ENVASE",
+        "client": "CAFETERIA PRADALS"
+      },
+      {
+        "mat": "CJ13",
+        "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+        "qty": 1.0,
+        "unit": "CAJ",
+        "ubic": "ENVASE",
+        "client": "RESTAURANT UNTOK"
+      },
+      {
+        "mat": "CJ13",
+        "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+        "qty": 3.0,
+        "unit": "CAJ",
+        "ubic": "ENVASE",
+        "client": "RESTAURANT UNTOK"
+      },
+      {
+        "mat": "CJ13",
+        "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+        "qty": 1.0,
+        "unit": "CAJ",
+        "ubic": "ENVASE",
+        "client": "RESTAURANT UNTOK"
+      },
+      {
+        "mat": "BRL30V",
+        "desc": "BARRIL INOX 30L. EURONORMA",
+        "qty": 1.0,
+        "unit": "BRL",
+        "ubic": "ENVASE",
+        "client": "RESTAURANT UNTOK"
+      },
+      {
+        "mat": "CJ11V",
+        "desc": "CAJAS COMPLETAS 1/1 V",
+        "qty": 15.0,
+        "unit": "CAJ",
+        "ubic": "ENVASE",
+        "client": "RESTAURANT UNTOK"
+      },
+      {
+        "mat": "CJ13",
+        "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+        "qty": 5.0,
+        "unit": "CAJ",
+        "ubic": "ENVASE",
+        "client": "GUSTUM AREAS 2 (GIRONA-LLEIDA)"
+      },
+      {
+        "mat": "BRL30V",
+        "desc": "BARRIL INOX 30L. EURONORMA",
+        "qty": 2.0,
+        "unit": "BRL",
+        "ubic": "ENVASE",
+        "client": "GUSTUM AREAS 2 (GIRONA-LLEIDA)"
+      },
+      {
+        "mat": "CJ13",
+        "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+        "qty": 2.0,
+        "unit": "CAJ",
+        "ubic": "ENVASE",
+        "client": "PADEL OSONA GURB"
+      },
+      {
+        "mat": "BRL30V",
+        "desc": "BARRIL INOX 30L. EURONORMA",
+        "qty": 1.0,
+        "unit": "BRL",
+        "ubic": "ENVASE",
+        "client": "PADEL OSONA GURB"
+      },
+      {
+        "mat": "BRL20V",
+        "desc": "BARRIL INOX 20L. TANQUETA A16",
+        "qty": 1.0,
+        "unit": "BRL",
+        "ubic": "ENVASE",
+        "client": "PADEL OSONA GURB"
+      },
+      {
+        "mat": "CJ13",
+        "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+        "qty": 1.0,
+        "unit": "CAJ",
+        "ubic": "ENVASE",
+        "client": "PADEL OSONA GURB"
+      },
+      {
+        "mat": "CJ13",
+        "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+        "qty": 4.0,
+        "unit": "CAJ",
+        "ubic": "ENVASE",
+        "client": "GUSTUM AREAS 1 (LLEIDA-GIRONA)"
+      },
+      {
+        "mat": "BRL30V",
+        "desc": "BARRIL INOX 30L. EURONORMA",
+        "qty": 1.0,
+        "unit": "BRL",
+        "ubic": "ENVASE",
+        "client": "GUSTUM AREAS 1 (LLEIDA-GIRONA)"
+      },
+      {
+        "mat": "CJ13",
+        "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+        "qty": 1.0,
+        "unit": "CAJ",
+        "ubic": "ENVASE",
+        "client": "GURBI"
+      },
+      {
+        "mat": "CJ13",
+        "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+        "qty": 2.0,
+        "unit": "CAJ",
+        "ubic": "ENVASE",
+        "client": "GURBI"
+      },
+      {
+        "mat": "3ENV0029",
+        "desc": "C.C. CACAOLAT 30 U.",
+        "qty": 3.0,
+        "unit": "CAJ",
+        "ubic": "ENVASE",
+        "client": "GURBI"
+      },
+      {
+        "mat": "CJ13",
+        "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+        "qty": 1.0,
+        "unit": "CAJ",
+        "ubic": "ENVASE",
+        "client": "GURBI"
+      },
+      {
+        "mat": "BRL20V",
+        "desc": "BARRIL INOX 20L. TANQUETA A16",
+        "qty": 2.0,
+        "unit": "BRL",
+        "ubic": "ENVASE",
+        "client": "PADEL OSONA GURB"
+      },
+      {
+        "mat": "CJ13",
+        "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+        "qty": 5.0,
+        "unit": "CAJ",
+        "ubic": "ENVASE",
+        "client": "PADEL OSONA GURB"
+      }
+    ],
+    "2": [],
+    "3": [
+      {
+        "mat": "ED13",
+        "desc": "ESTRELLA DAMM 1/3 RET. PP",
+        "qty": 14.0,
+        "unit": "CAJ",
+        "ubic": "AA09A1",
+        "client": "BAR PRIEGO"
+      },
+      {
+        "mat": "ED13",
+        "desc": "ESTRELLA DAMM 1/3 RET. PP",
+        "qty": 8.0,
+        "unit": "CAJ",
+        "ubic": "AA09A1",
+        "client": "BAR PRIEGO"
+      },
+      {
+        "mat": "TU13",
+        "desc": "TURIA 1/3 RET.",
+        "qty": 2.0,
+        "unit": "CAJ",
+        "ubic": "AA03A1",
+        "client": "AURIAL PADEL"
+      },
+      {
+        "mat": "VO13",
+        "desc": "VOLL-DAMM 1/3 RET.",
+        "qty": 3.0,
+        "unit": "CAJ",
+        "ubic": "AA07A1",
+        "client": "AURIAL PADEL"
+      },
+      {
+        "mat": "DL20",
+        "desc": "DAMM LEMON BARRIL 20L.",
+        "qty": 2.0,
+        "unit": "BRL",
+        "ubic": "AC03A3",
+        "client": "AURIAL PADEL"
+      },
+      {
+        "mat": "ED30",
+        "desc": "ESTRELLA DAMM BARRIL 30",
+        "qty": 5.0,
+        "unit": "BRL",
+        "ubic": "AA10A1",
+        "client": "AURIAL PADEL"
+      },
+      {
+        "mat": "TU20",
+        "desc": "TURIA BARRIL 20L.",
+        "qty": 3.0,
+        "unit": "BRL",
+        "ubic": "AC03A2",
+        "client": "AURIAL PADEL"
+      },
+      {
+        "mat": "VE12SP",
+        "desc": "AGUA VERI 1/2 PET CAJA 24U. T.TH",
+        "qty": 6.0,
+        "unit": "CAJ",
+        "ubic": "EB03A1",
+        "client": "AURIAL PADEL"
+      },
+      {
+        "mat": "VE32SP",
+        "desc": "AGUA VERI 1,5L PET CAJA 12U.",
+        "qty": 10.0,
+        "unit": "CAJ",
+        "ubic": "EB02A1",
+        "client": "AURIAL PADEL"
+      },
+      {
+        "mat": "0AG0183",
+        "desc": "VICHY CATALAN GAS 30CL RET 24U",
+        "qty": 1.0,
+        "unit": "CAJ",
+        "ubic": "BA01A1",
+        "client": "AURIAL PADEL"
+      },
+      {
+        "mat": "0LT0032",
+        "desc": "CACAOLAT VIDRIO 20CL RET 30U",
+        "qty": 1.0,
+        "unit": "CAJ",
+        "ubic": "AC04A3",
+        "client": "AURIAL PADEL"
+      },
+      {
+        "mat": "0LT0235",
+        "desc": "LA LEVANTINA AVENA ESP.HOST 1L 6U",
+        "qty": 2.0,
+        "unit": "CAJ",
+        "ubic": "FA02A2",
+        "client": "AURIAL PADEL"
+      },
+      {
+        "mat": "0LT0033",
+        "desc": "LETONA GRAN CREME PET 1,5L PET 6U",
+        "qty": 4.0,
+        "unit": "CAJ",
+        "ubic": "FA06A3",
+        "client": "AURIAL PADEL"
+      },
+      {
+        "mat": "TU13",
+        "desc": "TURIA 1/3 RET.",
+        "qty": 2.0,
+        "unit": "CAJ",
+        "ubic": "AA03A1",
+        "client": "AURIAL PADEL"
+      }
+    ],
+    "4": [
+      {
+        "mat": "ED13",
+        "desc": "ESTRELLA DAMM 1/3 RET. PP",
+        "qty": 8.0,
+        "unit": "CAJ",
+        "ubic": "AA09A1",
+        "client": "BAR REST EL TAST"
+      },
+      {
+        "mat": "0AG0183",
+        "desc": "VICHY CATALAN GAS 30CL RET 24U",
+        "qty": 1.0,
+        "unit": "CAJ",
+        "ubic": "BA01A1",
+        "client": "BAR REST EL TAST"
+      },
+      {
+        "mat": "0AG0007",
+        "desc": "FONT D.OR NATURAL 1,5L PET 12U",
+        "qty": 3.0,
+        "unit": "CAJ",
+        "ubic": "EB09A1",
+        "client": "BAR REST EL TAST"
+      },
+      {
+        "mat": "0AG0004",
+        "desc": "FONT D.OR NATURAL 1/2 PET 24U",
+        "qty": 3.0,
+        "unit": "CAJ",
+        "ubic": "EB10A1",
+        "client": "BAR REST EL TAST"
+      },
+      {
+        "mat": "0LT0033",
+        "desc": "LETONA GRAN CREME PET 1,5L PET 6U",
+        "qty": 6.0,
+        "unit": "CAJ",
+        "ubic": "FA06A3",
+        "client": "BAR REST EL TAST"
+      },
+      {
+        "mat": "0VE0531",
+        "desc": "PRIOR  BLANCO VERDEJO 75CL 6U",
+        "qty": 2.0,
+        "unit": "CAJ",
+        "ubic": "EA08B3",
+        "client": "BAR REST EL TAST"
+      },
+      {
+        "mat": "0VE0532",
+        "desc": "PRIOR BOBAL ROSADO 75CL 6U",
+        "qty": 2.0,
+        "unit": "CAJ",
+        "ubic": "EC08A1",
+        "client": "BAR REST EL TAST"
+      },
+      {
+        "mat": "0AM1276",
+        "desc": "BARGALLO ACEITE OLIVA SUAVE 5L",
+        "qty": 3.0,
+        "unit": "UN",
+        "ubic": "EC01B3",
+        "client": "BAR REST EL TAST"
+      },
+      {
+        "mat": "0AM1278",
+        "desc": "BARGALLO ACEITE VIRGEN EXTRA 5L",
+        "qty": 3.0,
+        "unit": "UN",
+        "ubic": "EC01B1",
+        "client": "BAR REST EL TAST"
+      },
+      {
+        "mat": "0AM3864",
+        "desc": "FRIMASOL ACEITE GIRASOL 25L",
+        "qty": 2.0,
+        "unit": "UN",
+        "ubic": "EA02A3",
+        "client": "BAR REST EL TAST"
+      },
+      {
+        "mat": "0AM0702",
+        "desc": "SALSA ROMESCO FERRER POT 660G",
+        "qty": 6.0,
+        "unit": "UN",
+        "ubic": "ZCG",
+        "client": "BAR REST EL TAST"
+      },
+      {
+        "mat": "ED13",
+        "desc": "ESTRELLA DAMM 1/3 RET. PP",
+        "qty": 2.0,
+        "unit": "CAJ",
+        "ubic": "AA09A1",
+        "client": "CASAL DE LA GENT GRAN"
+      },
+      {
+        "mat": "ED15LN",
+        "desc": "ESTRELLA DAMM 1/5 LN",
+        "qty": 1.0,
+        "unit": "CAJ",
+        "ubic": "AA08A1",
+        "client": "CASAL DE LA GENT GRAN"
+      },
+      {
+        "mat": "FD15",
+        "desc": "FREE DAMM 1/5 LN RET.",
+        "qty": 2.0,
+        "unit": "CAJ",
+        "ubic": "BA06A2",
+        "client": "CASAL DE LA GENT GRAN"
+      },
+      {
+        "mat": "FD15",
+        "desc": "FREE DAMM 1/5 LN RET.",
+        "qty": 1.0,
+        "unit": "CAJ",
+        "ubic": "BA06A2",
+        "client": "CASAL DE LA GENT GRAN"
+      },
+      {
+        "mat": "ED13",
+        "desc": "ESTRELLA DAMM 1/3 RET. PP",
+        "qty": 4.0,
+        "unit": "CAJ",
+        "ubic": "AA09A1",
+        "client": "INDUSTRIA 52"
+      },
+      {
+        "mat": "FDT13",
+        "desc": "FREE DAMM TOSTADA 1/3 RET. PP",
+        "qty": 1.0,
+        "unit": "CAJ",
+        "ubic": "AA04A1",
+        "client": "INDUSTRIA 52"
+      },
+      {
+        "mat": "VO13",
+        "desc": "VOLL-DAMM 1/3 RET.",
+        "qty": 1.0,
+        "unit": "CAJ",
+        "ubic": "AA07A1",
+        "client": "INDUSTRIA 52"
+      },
+      {
+        "mat": "ED13",
+        "desc": "ESTRELLA DAMM 1/3 RET. PP",
+        "qty": 2.0,
+        "unit": "CAJ",
+        "ubic": "AA09A1",
+        "client": "INDUSTRIA 52"
+      },
+      {
+        "mat": "FDT13",
+        "desc": "FREE DAMM TOSTADA 1/3 RET. PP",
+        "qty": 1.0,
+        "unit": "CAJ",
+        "ubic": "AA04A1",
+        "client": "INDUSTRIA 52"
+      },
+      {
+        "mat": "ED13",
+        "desc": "ESTRELLA DAMM 1/3 RET. PP",
+        "qty": 2.0,
+        "unit": "CAJ",
+        "ubic": "AA09A1",
+        "client": "FONTSECA, BAR"
+      },
+      {
+        "mat": "FDT13",
+        "desc": "FREE DAMM TOSTADA 1/3 RET. PP",
+        "qty": 2.0,
+        "unit": "CAJ",
+        "ubic": "AA04A1",
+        "client": "FONTSECA, BAR"
+      },
+      {
+        "mat": "0AG0010",
+        "desc": "VICHY CATALAN GAS 1L RET 12U",
+        "qty": 7.0,
+        "unit": "CAJ",
+        "ubic": "AC07A2",
+        "client": "FONTSECA, BAR"
+      },
+      {
+        "mat": "FDT13",
+        "desc": "FREE DAMM TOSTADA 1/3 RET. PP",
+        "qty": 1.0,
+        "unit": "CAJ",
+        "ubic": "AA04A1",
+        "client": "FONTSECA, BAR"
+      },
+      {
+        "mat": "ED13",
+        "desc": "ESTRELLA DAMM 1/3 RET. PP",
+        "qty": 1.0,
+        "unit": "CAJ",
+        "ubic": "AA09A1",
+        "client": "FONTSECA, BAR"
+      },
+      {
+        "mat": "ED13",
+        "desc": "ESTRELLA DAMM 1/3 RET. PP",
+        "qty": 6.0,
+        "unit": "CAJ",
+        "ubic": "AA09A1",
+        "client": "ALASKA BAR"
+      },
+      {
+        "mat": "FD13",
+        "desc": "FREE DAMM 1/3 RET.",
+        "qty": 1.0,
+        "unit": "CAJ",
+        "ubic": "AA06A1",
+        "client": "ALASKA BAR"
+      },
+      {
+        "mat": "FDT13",
+        "desc": "FREE DAMM TOSTADA 1/3 RET. PP",
+        "qty": 1.0,
+        "unit": "CAJ",
+        "ubic": "AA04A1",
+        "client": "ALASKA BAR"
+      },
+      {
+        "mat": "VO13",
+        "desc": "VOLL-DAMM 1/3 RET.",
+        "qty": 2.0,
+        "unit": "CAJ",
+        "ubic": "AA07A1",
+        "client": "ALASKA BAR"
+      },
+      {
+        "mat": "0CF0080",
+        "desc": "XPLICIT NATURAL CREMOSO 1KG",
+        "qty": 1.0,
+        "unit": "UN",
+        "ubic": "FC02A2",
+        "client": "ALASKA BAR"
+      },
+      {
+        "mat": "0AM1290",
+        "desc": "XPLICIT AZUCAR 7GR  1000U",
+        "qty": 1.0,
+        "unit": "ZPR",
+        "ubic": "FC02A2",
+        "client": "ALASKA BAR"
+      },
+      {
+        "mat": "0AM1634",
+        "desc": "XPLICIT EDULCORANTE 1G 150U",
+        "qty": 1.0,
+        "unit": "ZPR",
+        "ubic": "FC01C4",
+        "client": "ALASKA BAR"
+      },
+      {
+        "mat": "ED13",
+        "desc": "ESTRELLA DAMM 1/3 RET. PP",
+        "qty": 3.0,
+        "unit": "CAJ",
+        "ubic": "AA09A1",
+        "client": "ALASKA BAR"
+      },
+      {
+        "mat": "VO13",
+        "desc": "VOLL-DAMM 1/3 RET.",
+        "qty": 1.0,
+        "unit": "CAJ",
+        "ubic": "AA07A1",
+        "client": "ALASKA BAR"
+      },
+      {
+        "mat": "ED13",
+        "desc": "ESTRELLA DAMM 1/3 RET. PP",
+        "qty": 8.0,
+        "unit": "CAJ",
+        "ubic": "AA09A1",
+        "client": "ENTREPA I PA"
+      },
+      {
+        "mat": "ED15LN",
+        "desc": "ESTRELLA DAMM 1/5 LN",
+        "qty": 2.0,
+        "unit": "CAJ",
+        "ubic": "AA08A1",
+        "client": "ENTREPA I PA"
+      },
+      {
+        "mat": "ED30",
+        "desc": "ESTRELLA DAMM BARRIL 30",
+        "qty": 1.0,
+        "unit": "BRL",
+        "ubic": "AA10A1",
+        "client": "ENTREPA I PA"
+      },
+      {
+        "mat": "TU20",
+        "desc": "TURIA BARRIL 20L.",
+        "qty": 1.0,
+        "unit": "BRL",
+        "ubic": "AC03A2",
+        "client": "ENTREPA I PA"
+      },
+      {
+        "mat": "0RF0022",
+        "desc": "/-AQUARIUS LIMON 33CL LATA 24U",
+        "qty": 1.0,
+        "unit": "CAJ",
+        "ubic": "CA06A2",
+        "client": "ENTREPA I PA"
+      },
+      {
+        "mat": "0RF0021",
+        "desc": "/-FANTA LIMON LATA 33 CL 24U",
+        "qty": 1.0,
+        "unit": "CAJ",
+        "ubic": "CA05A2",
+        "client": "ENTREPA I PA"
+      }
+    ],
+    "5": [
+      {
+        "mat": "0RF0019",
+        "desc": "/-COCA COLA LATA 33CL 24U",
+        "qty": 1.0,
+        "unit": "CAJ",
+        "ubic": "CA04A2",
+        "client": "ENTREPA I PA"
+      },
+      {
+        "mat": "0AM1634",
+        "desc": "XPLICIT EDULCORANTE 1G 150U",
+        "qty": 1.0,
+        "unit": "CAJ",
+        "ubic": "FC01C4",
+        "client": "GARBI 1 CAFET. ALIMENTACIO"
+      },
+      {
+        "mat": "0AM5220",
+        "desc": "AZUCAR GARBI ZEFIR 7G 1000U",
+        "qty": 1.0,
+        "unit": "CAJ",
+        "ubic": "FC04A3",
+        "client": "GARBI 1 CAFET. ALIMENTACIO"
+      },
+      {
+        "mat": "ED13LT",
+        "desc": "ESTRELLA DAMM 1/3 LATA",
+        "qty": 1.0,
+        "unit": "CAJ",
+        "ubic": "CA01A1",
+        "client": "FORN ESTADI"
+      },
+      {
+        "mat": "0LT0412",
+        "desc": "CACAOLAT ORIGINAL 27,5CL PET 24U",
+        "qty": 1.0,
+        "unit": "CAJ",
+        "ubic": "FA01B1",
+        "client": "FORN ESTADI"
+      },
+      {
+        "mat": "0ZU0309",
+        "desc": "PAGO ACE 1L PET 6U",
+        "qty": 1.0,
+        "unit": "CAJ",
+        "ubic": "ZCG",
+        "client": "FORN ESTADI"
+      },
+      {
+        "mat": "ED13LT",
+        "desc": "ESTRELLA DAMM 1/3 LATA",
+        "qty": 1.0,
+        "unit": "CAJ",
+        "ubic": "CA01A1",
+        "client": "FORN DE PA EL REMEI"
+      },
+      {
+        "mat": "0LT0020",
+        "desc": "CACAOLAT ORIGINAL 1L PET 6U",
+        "qty": 1.0,
+        "unit": "CAJ",
+        "ubic": "FA02B1",
+        "client": "FORN DE PA EL REMEI"
+      },
+      {
+        "mat": "0ZU0755",
+        "desc": "GRANINI MELOCOTON 3X20CL MINIBRICK 30U",
+        "qty": 1.0,
+        "unit": "CAJ",
+        "ubic": "ZCG",
+        "client": "FORN DE PA EL REMEI"
+      },
+      {
+        "mat": "0ZU0048",
+        "desc": "PAGO PI\u00d1A 20CL SR 24U",
+        "qty": 1.0,
+        "unit": "CAJ",
+        "ubic": "ZCG",
+        "client": "FORN DE PA EL REMEI"
+      },
+      {
+        "mat": "0CF1028",
+        "desc": "MALONGO EXPRESO INTENSO CAPSULAS 6G 120U",
+        "qty": 5.0,
+        "unit": "CAJ",
+        "ubic": "EA07C1",
+        "client": "GARBI 1 CAFET. ALIMENTACIO"
+      },
+      {
+        "mat": "0CF1028",
+        "desc": "MALONGO EXPRESO INTENSO CAPSULAS 6G 120U",
+        "qty": 1.0,
+        "unit": "CAJ",
+        "ubic": "EA07C1",
+        "client": "GARBI 1 CAFET. ALIMENTACIO"
+      },
+      {
+        "mat": "0AG0004",
+        "desc": "FONT D.OR NATURAL 1/2 PET 24U",
+        "qty": 1.0,
+        "unit": "CAJ",
+        "ubic": "EB10A1",
+        "client": "LLAR JUVENIL"
+      },
+      {
+        "mat": "0LT0033",
+        "desc": "LETONA GRAN CREME PET 1,5L PET 6U",
+        "qty": 4.0,
+        "unit": "CAJ",
+        "ubic": "FA06A3",
+        "client": "LLAR JUVENIL"
+      },
+      {
+        "mat": "0ZU0755",
+        "desc": "GRANINI MELOCOTON 3X20CL MINIBRICK 30U",
+        "qty": 1.0,
+        "unit": "CAJ",
+        "ubic": "ZCG",
+        "client": "LLAR JUVENIL"
+      },
+      {
+        "mat": "ED13LT",
+        "desc": "ESTRELLA DAMM 1/3 LATA",
+        "qty": 5.0,
+        "unit": "CAJ",
+        "ubic": "CA01A1",
+        "client": "E.S VIC"
+      },
+      {
+        "mat": "VO13LT",
+        "desc": "VOLL DAMM 1/3 LATA LC",
+        "qty": 4.0,
+        "unit": "CAJ",
+        "ubic": "CA01A2",
+        "client": "E.S VIC"
+      },
+      {
+        "mat": "0AG0039",
+        "desc": "FONT D.OR NATURAL 1,5L PET 6U",
+        "qty": 5.0,
+        "unit": "CAJ",
+        "ubic": "EB08A1",
+        "client": "E.S VIC"
+      },
+      {
+        "mat": "0AG0004",
+        "desc": "FONT D.OR NATURAL 1/2 PET 24U",
+        "qty": 1.0,
+        "unit": "CAJ",
+        "ubic": "EB10A1",
+        "client": "E.S VIC"
+      },
+      {
+        "mat": "0RF0124",
+        "desc": "/-COCA COLA 2L PET 6U",
+        "qty": 1.0,
+        "unit": "CAJ",
+        "ubic": "ZCG",
+        "client": "E.S VIC"
+      },
+      {
+        "mat": "0RF0019",
+        "desc": "/-COCA COLA LATA 33CL 24U",
+        "qty": 2.0,
+        "unit": "CAJ",
+        "ubic": "CA04A2",
+        "client": "E.S VIC"
+      },
+      {
+        "mat": "0RF0079",
+        "desc": "/-COCA COLA ZERO LATA 33CL 24U",
+        "qty": 1.0,
+        "unit": "CAJ",
+        "ubic": "CA03A3",
+        "client": "E.S VIC"
+      },
+      {
+        "mat": "VO13LT",
+        "desc": "VOLL DAMM 1/3 LATA LC",
+        "qty": 4.0,
+        "unit": "CAJ",
+        "ubic": "CA01A2",
+        "client": "ZONA DIESEL URBAN"
+      },
+      {
+        "mat": "0AG0182",
+        "desc": "VICHY CATALAN SYSPACK GAS 30CL SR 24U",
+        "qty": 1.0,
+        "unit": "CAJ",
+        "ubic": "DB06A2",
+        "client": "ZONA DIESEL URBAN"
+      },
+      {
+        "mat": "0AG0046",
+        "desc": "VICHY CATALAN GAS 1,2L PET 6U",
+        "qty": 1.0,
+        "unit": "CAJ",
+        "ubic": "ZCG",
+        "client": "ZONA DIESEL URBAN"
+      },
+      {
+        "mat": "0LT0020",
+        "desc": "CACAOLAT ORIGINAL 1L PET 6U",
+        "qty": 1.0,
+        "unit": "CAJ",
+        "ubic": "FA02B1",
+        "client": "ZONA DIESEL URBAN"
+      },
+      {
+        "mat": "0LT0412",
+        "desc": "CACAOLAT ORIGINAL 27,5CL PET 24U",
+        "qty": 2.0,
+        "unit": "CAJ",
+        "ubic": "FA01B1",
+        "client": "ZONA DIESEL URBAN"
+      },
+      {
+        "mat": "NTL13LT6",
+        "desc": "NESTEA LIMON 1/3 LATA 4U-PACK 6U.",
+        "qty": 1.0,
+        "unit": "CAJ",
+        "ubic": "CB06A2",
+        "client": "ZONA DIESEL URBAN"
+      },
+      {
+        "mat": "0ZU0006",
+        "desc": "GRANINI NARANJA 33CL PET 12U",
+        "qty": 1.0,
+        "unit": "CAJ",
+        "ubic": "ZCG",
+        "client": "ZONA DIESEL URBAN"
+      },
+      {
+        "mat": "0ZU0056",
+        "desc": "GRANINI MELOCOTON 33CL PET 12U",
+        "qty": 1.0,
+        "unit": "CAJ",
+        "ubic": "ZCG",
+        "client": "ZONA DIESEL URBAN"
+      },
+      {
+        "mat": "0ZU0065",
+        "desc": "GRANINI PI\u00d1A 33CL PET 12U",
+        "qty": 1.0,
+        "unit": "CAJ",
+        "ubic": "ZCG",
+        "client": "ZONA DIESEL URBAN"
+      },
+      {
+        "mat": "0ZU0287",
+        "desc": "GRANINI ZANAHORIA-NARANJA 33CL 12U",
+        "qty": 1.0,
+        "unit": "CAJ",
+        "ubic": "ZCG",
+        "client": "ZONA DIESEL URBAN"
+      },
+      {
+        "mat": "0ZU0020",
+        "desc": "GRANINI MELOCOTON  20CL 24U",
+        "qty": 1.0,
+        "unit": "CAJ",
+        "ubic": "DA09A1",
+        "client": "ZONA DIESEL URBAN"
+      },
+      {
+        "mat": "0LI0153",
+        "desc": "RUAVIEJA ORUJO HIERBAS 70CL",
+        "qty": 6.0,
+        "unit": "BOT",
+        "ubic": "ZCG",
+        "client": "ZONA DIESEL URBAN"
+      },
+      {
+        "mat": "0RF0091",
+        "desc": "/-SCHWEPPES LIMON LATA SLEEK 24U",
+        "qty": 1.0,
+        "unit": "CAJ",
+        "ubic": "ZCG",
+        "client": "ZONA DIESEL URBAN"
+      },
+      {
+        "mat": "0LI0068",
+        "desc": "NEGRITA RON 70CL",
+        "qty": 4.0,
+        "unit": "BOT",
+        "ubic": "ZCG",
+        "client": "ZONA DIESEL URBAN"
+      },
+      {
+        "mat": "NTL13LT6",
+        "desc": "NESTEA LIMON 1/3 LATA 4U-PACK 6U.",
+        "qty": 2.0,
+        "unit": "CAJ",
+        "ubic": "CB06A2",
+        "client": "ZONA DIESEL URBAN"
+      },
+      {
+        "mat": "ED13",
+        "desc": "ESTRELLA DAMM 1/3 RET. PP",
+        "qty": 2.0,
+        "unit": "CAJ",
+        "ubic": "AA09A1",
+        "client": "CAFETERIA PRADALS"
+      },
+      {
+        "mat": "FDL13",
+        "desc": "FREE DAMM LIMON 1/3 RET. PP",
+        "qty": 1.0,
+        "unit": "CAJ",
+        "ubic": "AA05A1",
+        "client": "CAFETERIA PRADALS"
+      },
+      {
+        "mat": "ED13LT",
+        "desc": "ESTRELLA DAMM 1/3 LATA",
+        "qty": 1.0,
+        "unit": "CAJ",
+        "ubic": "CA01A1",
+        "client": "CAFETERIA PRADALS"
+      },
+      {
+        "mat": "0LT0032",
+        "desc": "CACAOLAT VIDRIO 20CL RET 30U",
+        "qty": 2.0,
+        "unit": "CAJ",
+        "ubic": "AC04A3",
+        "client": "CAFETERIA PRADALS"
+      },
+      {
+        "mat": "0ZU0048",
+        "desc": "PAGO PI\u00d1A 20CL SR 24U",
+        "qty": 2.0,
+        "unit": "CAJ",
+        "ubic": "ZCG",
+        "client": "CAFETERIA PRADALS"
+      },
+      {
+        "mat": "0ZU0049",
+        "desc": "PAGO MELOCOTON  20CL SR 24U",
+        "qty": 1.0,
+        "unit": "CAJ",
+        "ubic": "ZCG",
+        "client": "CAFETERIA PRADALS"
+      },
+      {
+        "mat": "ED13",
+        "desc": "ESTRELLA DAMM 1/3 RET. PP",
+        "qty": 1.0,
+        "unit": "CAJ",
+        "ubic": "AA09A1",
+        "client": "CAFETERIA PRADALS"
+      },
+      {
+        "mat": "ED13",
+        "desc": "ESTRELLA DAMM 1/3 RET. PP",
+        "qty": 3.0,
+        "unit": "CAJ",
+        "ubic": "AA09A1",
+        "client": "ALOE"
+      },
+      {
+        "mat": "ED13",
+        "desc": "ESTRELLA DAMM 1/3 RET. PP",
+        "qty": 1.0,
+        "unit": "CAJ",
+        "ubic": "AA09A1",
+        "client": "FUSSIMANYA ESTADI"
+      },
+      {
+        "mat": "ED15LN",
+        "desc": "ESTRELLA DAMM 1/5 LN",
+        "qty": 1.0,
+        "unit": "CAJ",
+        "ubic": "AA08A1",
+        "client": "FUSSIMANYA ESTADI"
+      },
+      {
+        "mat": "0LT0032",
+        "desc": "CACAOLAT VIDRIO 20CL RET 30U",
+        "qty": 2.0,
+        "unit": "CAJ",
+        "ubic": "AC04A3",
+        "client": "FUSSIMANYA ESTADI"
+      }
+    ],
+    "6": [
+      {
+        "mat": "DL13",
+        "desc": "DAMM LEMON 1/3 RET",
+        "qty": 1.0,
+        "unit": "CAJ",
+        "ubic": "AA02A1",
+        "client": "GURBI"
+      },
+      {
+        "mat": "ED13",
+        "desc": "ESTRELLA DAMM 1/3 RET. PP",
+        "qty": 2.0,
+        "unit": "CAJ",
+        "ubic": "AA09A1",
+        "client": "GURBI"
+      },
+      {
+        "mat": "0LT0032",
+        "desc": "CACAOLAT VIDRIO 20CL RET 30U",
+        "qty": 3.0,
+        "unit": "CAJ",
+        "ubic": "AC04A3",
+        "client": "GURBI"
+      },
+      {
+        "mat": "0LT0412",
+        "desc": "CACAOLAT ORIGINAL 27,5CL PET 24U",
+        "qty": 2.0,
+        "unit": "CAJ",
+        "ubic": "FA01B1",
+        "client": "GURBI"
+      },
+      {
+        "mat": "0ZU0754",
+        "desc": "GRANINI PI\u00d1A 3X20CL MINIBRICK 30U",
+        "qty": 1.0,
+        "unit": "CAJ",
+        "ubic": "ZCG",
+        "client": "GURBI"
+      },
+      {
+        "mat": "0ZU0311",
+        "desc": "PAGO NARANJA   1L PET 6U",
+        "qty": 1.0,
+        "unit": "CAJ",
+        "ubic": "ZCG",
+        "client": "GURBI"
+      },
+      {
+        "mat": "0ZU0048",
+        "desc": "PAGO PI\u00d1A 20CL SR 24U",
+        "qty": 2.0,
+        "unit": "CAJ",
+        "ubic": "ZCG",
+        "client": "GURBI"
+      },
+      {
+        "mat": "0ZU0050",
+        "desc": "PAGO NARANJA-ZANAH-LIM\u00d3N  20CL SR 24U",
+        "qty": 1.0,
+        "unit": "CAJ",
+        "ubic": "ZCG",
+        "client": "GURBI"
+      },
+      {
+        "mat": "ED13",
+        "desc": "ESTRELLA DAMM 1/3 RET. PP",
+        "qty": 1.0,
+        "unit": "CAJ",
+        "ubic": "AA09A1",
+        "client": "GURBI"
+      },
+      {
+        "mat": "ED13",
+        "desc": "ESTRELLA DAMM 1/3 RET. PP",
+        "qty": 4.0,
+        "unit": "CAJ",
+        "ubic": "AA09A1",
+        "client": "GUSTUM AREAS 1 (LLEIDA-GIRONA)"
+      },
+      {
+        "mat": "ED30",
+        "desc": "ESTRELLA DAMM BARRIL 30",
+        "qty": 1.0,
+        "unit": "BRL",
+        "ubic": "AA10A1",
+        "client": "GUSTUM AREAS 1 (LLEIDA-GIRONA)"
+      },
+      {
+        "mat": "0AG0052",
+        "desc": "VICHY CATALAN GAS 1/2 PET 24U",
+        "qty": 1.0,
+        "unit": "CAJ",
+        "ubic": "EA01A3",
+        "client": "GUSTUM AREAS 1 (LLEIDA-GIRONA)"
+      },
+      {
+        "mat": "ED13",
+        "desc": "ESTRELLA DAMM 1/3 RET. PP",
+        "qty": 2.0,
+        "unit": "CAJ",
+        "ubic": "AA09A1",
+        "client": "PADEL OSONA GURB"
+      },
+      {
+        "mat": "ED30",
+        "desc": "ESTRELLA DAMM BARRIL 30",
+        "qty": 1.0,
+        "unit": "BRL",
+        "ubic": "AA10A1",
+        "client": "PADEL OSONA GURB"
+      },
+      {
+        "mat": "TU20",
+        "desc": "TURIA BARRIL 20L.",
+        "qty": 1.0,
+        "unit": "BRL",
+        "ubic": "AC03A2",
+        "client": "PADEL OSONA GURB"
+      },
+      {
+        "mat": "VE12SP",
+        "desc": "AGUA VERI 1/2 PET CAJA 24U. T.TH",
+        "qty": 5.0,
+        "unit": "CAJ",
+        "ubic": "EB03A1",
+        "client": "PADEL OSONA GURB"
+      },
+      {
+        "mat": "VE32SP",
+        "desc": "AGUA VERI 1,5L PET CAJA 12U.",
+        "qty": 8.0,
+        "unit": "CAJ",
+        "ubic": "EB02A1",
+        "client": "PADEL OSONA GURB"
+      },
+      {
+        "mat": "0LT0103",
+        "desc": "YOSOY AVENA BARISTA 1L BRIK 6U",
+        "qty": 1.0,
+        "unit": "CAJ",
+        "ubic": "FA03A1",
+        "client": "PADEL OSONA GURB"
+      },
+      {
+        "mat": "0LT0034",
+        "desc": "LETONA SEMI ESPEC HOSTELERIA PET 1,5L 6U",
+        "qty": 2.0,
+        "unit": "CAJ",
+        "ubic": "FA05A2",
+        "client": "PADEL OSONA GURB"
+      },
+      {
+        "mat": "ED13",
+        "desc": "ESTRELLA DAMM 1/3 RET. PP",
+        "qty": 1.0,
+        "unit": "CAJ",
+        "ubic": "AA09A1",
+        "client": "PADEL OSONA GURB"
+      },
+      {
+        "mat": "ED13",
+        "desc": "ESTRELLA DAMM 1/3 RET. PP",
+        "qty": 5.0,
+        "unit": "CAJ",
+        "ubic": "AA09A1",
+        "client": "GUSTUM AREAS 2 (GIRONA-LLEIDA)"
+      },
+      {
+        "mat": "ED30",
+        "desc": "ESTRELLA DAMM BARRIL 30",
+        "qty": 2.0,
+        "unit": "BRL",
+        "ubic": "AA10A1",
+        "client": "GUSTUM AREAS 2 (GIRONA-LLEIDA)"
+      },
+      {
+        "mat": "0AG0052",
+        "desc": "VICHY CATALAN GAS 1/2 PET 24U",
+        "qty": 1.0,
+        "unit": "CAJ",
+        "ubic": "EA01A3",
+        "client": "GUSTUM AREAS 2 (GIRONA-LLEIDA)"
+      },
+      {
+        "mat": "DL13",
+        "desc": "DAMM LEMON 1/3 RET",
+        "qty": 1.0,
+        "unit": "CAJ",
+        "ubic": "AA02A1",
+        "client": "RESTAURANT UNTOK"
+      },
+      {
+        "mat": "ED13",
+        "desc": "ESTRELLA DAMM 1/3 RET. PP",
+        "qty": 3.0,
+        "unit": "CAJ",
+        "ubic": "AA09A1",
+        "client": "RESTAURANT UNTOK"
+      },
+      {
+        "mat": "VO13",
+        "desc": "VOLL-DAMM 1/3 RET.",
+        "qty": 1.0,
+        "unit": "CAJ",
+        "ubic": "AA07A1",
+        "client": "RESTAURANT UNTOK"
+      },
+      {
+        "mat": "ED30",
+        "desc": "ESTRELLA DAMM BARRIL 30",
+        "qty": 1.0,
+        "unit": "BRL",
+        "ubic": "AA10A1",
+        "client": "RESTAURANT UNTOK"
+      },
+      {
+        "mat": "VE11",
+        "desc": "AGUA VERI 1/1 VIDRIO RET.",
+        "qty": 15.0,
+        "unit": "CAJ",
+        "ubic": "AA11A1",
+        "client": "RESTAURANT UNTOK"
+      },
+      {
+        "mat": "VE32SP",
+        "desc": "AGUA VERI 1,5L PET CAJA 12U.",
+        "qty": 4.0,
+        "unit": "CAJ",
+        "ubic": "EB02A1",
+        "client": "RESTAURANT UNTOK"
+      },
+      {
+        "mat": "VE13SP",
+        "desc": "AGUA VERI 1/3 PET CAJA 35U. T.TH",
+        "qty": 3.0,
+        "unit": "CAJ",
+        "ubic": "EB04A1",
+        "client": "RESTAURANT UNTOK"
+      },
+      {
+        "mat": "0LT0235",
+        "desc": "LA LEVANTINA AVENA ESP.HOST 1L 6U",
+        "qty": 2.0,
+        "unit": "CAJ",
+        "ubic": "FA02A2",
+        "client": "RESTAURANT UNTOK"
+      }
+    ]
+  },
+  "alpha": 0.65,
+  "r_rate": 0.6
+}
