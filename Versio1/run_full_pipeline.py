@@ -19,6 +19,7 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import re
 import sys
 from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timedelta
@@ -59,6 +60,12 @@ from priority_cluster import PRIORITY_WEIGHTS
 
 def _default_out_dir() -> str:
     return os.environ.get("PIPELINE_OUT", os.path.join(_HERE, "pipeline_out"))
+
+
+def _safe_tag(text: str) -> str:
+    s = re.sub(r"[^\w\-]+", "_", str(text or "").strip(), flags=re.UNICODE)
+    s = re.sub(r"_+", "_", s).strip("_")
+    return s or "NA"
 
 
 def _run_one_pair(ruta: str, fecha: str, hackaton: str, maps: str) -> dict:
@@ -691,26 +698,49 @@ def main() -> None:
         json.dump(aggregate, f, indent=2, default=str)
     print(f"Guardado: {agg_path}")
 
-    # Block 3 only for the sample run (avoids huge ZM040 joins for every day)
-    if sample_b1 and sample_b2 and not args.no_block3:
-        b2_path = os.path.join(out_root, "sample_block2.json")
-        with open(b2_path, "w", encoding="utf-8") as f:
-            json.dump(sample_b2, f, indent=2, default=str)
+    # Block 3 per run (all days/routes), keeping sample files for backward compatibility.
+    ok_row_outs = [
+        out
+        for out in row_outs
+        if (out.get("rec") or {}).get("status") == "ok" and out.get("b1") and out.get("b2")
+    ]
+    if not args.no_block3 and ok_row_outs:
         zm040 = os.environ.get("ZM040_XLSX", os.path.join(_HERE, "..", "Hackaton", "ZM040.XLSX"))
-        b3_paths = Block3Paths(
-            block2_json=b2_path,
-            hackaton_xlsx=hackaton_use,
-            zm040_xlsx=os.path.abspath(zm040),
-            materiales_xlsx=hackaton_use,
-        )
-        print("Block 3 (muestra) ...")
-        b3 = run_block3(b3_paths)
-        b3_sample_for_dash = b3
-        b3_ctx_for_dash = {"fecha": str(sample_b1.get("fecha") or ""), "ruta": str(sample_b1.get("ruta") or "")}
-        b3_out = os.path.join(out_root, "block3_sample.json")
-        with open(b3_out, "w", encoding="utf-8") as f:
-            json.dump(b3, f, indent=2, default=str)
-        print(f"Guardado: {b3_out}")
+        b3_all_dir = os.path.join(out_root, "block3_all")
+        os.makedirs(b3_all_dir, exist_ok=True)
+        print(f"Block 3 (todas las rutas OK): {len(ok_row_outs)} ejecuciones ...")
+        for out in ok_row_outs:
+            b1 = out.get("b1") or {}
+            b2 = out.get("b2") or {}
+            ruta_i = str(b1.get("ruta") or (out.get("rec") or {}).get("ruta") or "")
+            fecha_i = str(b1.get("fecha") or (out.get("rec") or {}).get("fecha") or "")
+            tag = f"{_safe_tag(fecha_i)}_{_safe_tag(ruta_i)}"
+            b2_path_i = os.path.join(b3_all_dir, f"block2_{tag}.json")
+            with open(b2_path_i, "w", encoding="utf-8") as f:
+                json.dump(b2, f, indent=2, default=str)
+            try:
+                b3_paths_i = Block3Paths(
+                    block2_json=b2_path_i,
+                    hackaton_xlsx=hackaton_use,
+                    zm040_xlsx=os.path.abspath(zm040),
+                    materiales_xlsx=hackaton_use,
+                )
+                b3_i = run_block3(b3_paths_i)
+                b3_out_i = os.path.join(b3_all_dir, f"block3_{tag}.json")
+                with open(b3_out_i, "w", encoding="utf-8") as f:
+                    json.dump(b3_i, f, indent=2, default=str)
+                print(f"  Block3 OK: {tag}")
+                # Keep first successful result for dashboard exporter compatibility.
+                if b3_sample_for_dash is None:
+                    b3_sample_for_dash = b3_i
+                    b3_ctx_for_dash = {"fecha": fecha_i, "ruta": ruta_i}
+            except Exception as ex:
+                print(f"  AVISO Block3 {tag}: {ex}")
+        if b3_sample_for_dash:
+            sample_b3_out = os.path.join(out_root, "block3_sample.json")
+            with open(sample_b3_out, "w", encoding="utf-8") as f:
+                json.dump(b3_sample_for_dash, f, indent=2, default=str)
+            print(f"Guardado: {sample_b3_out}")
 
     span_days_agg = int(aggregate["interval"].get("span_days") or 1)
     if args.single_pair:
@@ -743,15 +773,32 @@ def main() -> None:
     except Exception as e:
         print(f"AVISO: export dashboard falló ({e}). Revisa datos y dashboard_export.")
 
-    # DDI-style PDFs from the Block 1 sample (one representative route / day)
-    if sample_b1 and not args.no_pdfs:
-        res_path = os.path.join(docs_sample, "result.json")
-        with open(res_path, "w", encoding="utf-8") as f:
-            json.dump(sample_b1, f, indent=2, default=str)
-        print("Generando PDFs de muestra (Hoja de ruta, Hoja de carga, Albaranes) ...")
-        paths = generate_three_pdfs(res_path, docs_sample)
-        for k, p in paths.items():
-            print(f"  {k}: {p}")
+    # Generate PDFs per run/day (all OK), and keep docs_sample for compatibility.
+    if not args.no_pdfs and ok_row_outs:
+        docs_all = os.path.join(out_root, "docs_all")
+        os.makedirs(docs_all, exist_ok=True)
+        print(f"Generando PDFs por ruta/día: {len(ok_row_outs)} ejecuciones ...")
+        for out in ok_row_outs:
+            b1 = out.get("b1") or {}
+            ruta_i = str(b1.get("ruta") or (out.get("rec") or {}).get("ruta") or "")
+            fecha_i = str(b1.get("fecha") or (out.get("rec") or {}).get("fecha") or "")
+            tag = f"{_safe_tag(fecha_i)}_{_safe_tag(ruta_i)}"
+            docs_i = os.path.join(docs_all, tag)
+            os.makedirs(docs_i, exist_ok=True)
+            res_path_i = os.path.join(docs_i, "result.json")
+            with open(res_path_i, "w", encoding="utf-8") as f:
+                json.dump(b1, f, indent=2, default=str)
+            try:
+                _paths = generate_three_pdfs(res_path_i, docs_i)
+                print(f"  PDFs OK: {tag}")
+                if sample_b1 and ruta_i == str(sample_b1.get("ruta") or "") and fecha_i == str(sample_b1.get("fecha") or ""):
+                    # mirror representative run into docs_sample (legacy path)
+                    sample_res = os.path.join(docs_sample, "result.json")
+                    with open(sample_res, "w", encoding="utf-8") as f:
+                        json.dump(sample_b1, f, indent=2, default=str)
+                    _ = generate_three_pdfs(sample_res, docs_sample)
+            except Exception as ex:
+                print(f"  AVISO PDFs {tag}: {ex}")
 
     if not args.no_pdfs:
         cmp_pdf = os.path.join(out_root, "Comparativa_Ahorros.pdf")
