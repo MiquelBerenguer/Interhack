@@ -437,7 +437,65 @@ def build_distance_matrix(
     return cache
 
 
+def _route_positions(rand_route_perm: Sequence[int]) -> Dict[int, int]:
+    """Global stop index → position along Block 1 random permutation."""
+    return {int(g): pos for pos, g in enumerate(rand_route_perm)}
 
+
+def cluster_maps_baseline_tour_cost_dm(
+    route_local: List[int],
+    matrix: Dict[Tuple[int, int], Dict[str, float]],
+) -> Dict[str, float]:
+    """
+    Cost of serving ``route_local`` (local indices) in order using DM edges + the same fuel/op
+    multipliers as the optimized tally (Fuel + operational per leg incl. unloading per stop).
+
+    Mirrors the aggregation loop in optimize_cluster_route (final_route tally + return edge).
+    """
+    if not route_local:
+        return {
+            "total_km": 0.0,
+            "total_fuel_cost": 0.0,
+            "total_operational_cost": 0.0,
+            "baseline_rand_maps_total_eur": 0.0,
+        }
+    total_dist = 0.0
+    total_fuel = 0.0
+    total_op = 0.0
+
+    loc0 = route_local[0]
+    edge = matrix[(0, loc0 + 1)]
+    travel = float(edge["duration_min"])
+    dist_km = float(edge["distance_km"])
+    total_dist += dist_km
+    total_fuel += dist_km * FUEL_COST_PER_KM
+    total_op += (travel + UNLOADING_TIME_MIN) * TRUCK_OPCOST_PER_MIN
+
+    for seq in range(1, len(route_local)):
+        prev = route_local[seq - 1]
+        loc = route_local[seq]
+        edge = matrix[(prev + 1, loc + 1)]
+        travel = float(edge["duration_min"])
+        dist_km = float(edge["distance_km"])
+        total_dist += dist_km
+        total_fuel += dist_km * FUEL_COST_PER_KM
+        total_op += (travel + UNLOADING_TIME_MIN) * TRUCK_OPCOST_PER_MIN
+
+    last = route_local[-1]
+    edge_ret = matrix[(last + 1, 0)]
+    dist_ret = float(edge_ret["distance_km"])
+    travel_ret = float(edge_ret["duration_min"])
+    total_dist += dist_ret
+    total_fuel += dist_ret * FUEL_COST_PER_KM
+    total_op += travel_ret * TRUCK_OPCOST_PER_MIN
+
+    teur = round(total_fuel + total_op, 4)
+    return {
+        "total_km": round(total_dist, 3),
+        "total_fuel_cost": round(total_fuel, 4),
+        "total_operational_cost": round(total_op, 4),
+        "baseline_rand_maps_total_eur": teur,
+    }
 
 
 def _fmt_latlng(ll: Tuple[float, float]) -> str:
@@ -1210,6 +1268,8 @@ def optimize_cluster_route(
 
     global_stop_indices: Optional[List[int]] = None,
 
+    block1_rand_route: Optional[Sequence[int]] = None,
+
 ) -> dict:
 
     get_depot_coordinates()
@@ -1608,6 +1668,42 @@ def optimize_cluster_route(
 
 
 
+    baseline_maps_summary: Dict[str, float] = {
+
+        "total_km": 0.0,
+
+        "total_fuel_cost": 0.0,
+
+        "total_operational_cost": 0.0,
+
+        "baseline_rand_maps_total_eur": 0.0,
+
+    }
+
+    if route_local and global_stop_indices is not None and block1_rand_route is not None:
+
+        try:
+
+            pos = _route_positions(block1_rand_route)
+
+            rank_miss = len(block1_rand_route) + 9999
+
+            br_loc = sorted(
+
+                route_local,
+
+                key=lambda li: float(pos.get(int(global_stop_indices[li]), rank_miss)),
+
+            )
+
+            baseline_maps_summary = cluster_maps_baseline_tour_cost_dm(br_loc, matrix)
+
+        except Exception as exc:
+
+            logger.warning("baseline rand Maps tour failed for %s: %s", transporter_name, exc)
+
+
+
     walk_groups = find_walkable_groups(cluster_stops, WALKING_RADIUS_METERS)
 
     walk_id_map = _assign_walking_group_ids(route_local, walk_groups)
@@ -1754,6 +1850,44 @@ def optimize_cluster_route(
 
 
 
+    route_summary: Dict[str, Any] = {
+
+        "total_stops": len(route_local),
+
+        "total_distance_km": round(total_dist, 3),
+
+        "total_duration_min": round(t - float(departure_abs), 2),
+
+        "total_fuel_cost": round(total_fuel, 4),
+
+        "total_operational_cost": round(total_op, 4),
+
+        "total_revenue": round(total_rev, 2),
+
+        "walking_groups_count": len([g for g in walk_groups if len(g) > 1]),
+
+        "estimated_time_saved_min": round(time_saved, 2),
+
+    }
+
+    route_summary.update(
+
+        {
+
+            "baseline_rand_maps_distance_km": baseline_maps_summary.get("total_km", 0.0),
+
+            "baseline_rand_maps_fuel_cost": baseline_maps_summary.get("total_fuel_cost", 0.0),
+
+            "baseline_rand_maps_operational_cost": baseline_maps_summary.get("total_operational_cost", 0.0),
+
+            "baseline_rand_maps_total_eur": baseline_maps_summary.get("baseline_rand_maps_total_eur", 0.0),
+
+        }
+
+    )
+
+
+
     return {
 
         "transporter_id": transporter_id,
@@ -1770,25 +1904,7 @@ def optimize_cluster_route(
 
         "final_route": final_route,
 
-        "route_summary": {
-
-            "total_stops": len(route_local),
-
-            "total_distance_km": round(total_dist, 3),
-
-            "total_duration_min": round(t - float(departure_abs), 2),
-
-            "total_fuel_cost": round(total_fuel, 4),
-
-            "total_operational_cost": round(total_op, 4),
-
-            "total_revenue": round(total_rev, 2),
-
-            "walking_groups_count": len([g for g in walk_groups if len(g) > 1]),
-
-            "estimated_time_saved_min": round(time_saved, 2),
-
-        },
+        "route_summary": route_summary,
 
         "unserviceable_stops": unserviceable,
 
@@ -1877,6 +1993,14 @@ def _empty_cluster_result(
             "walking_groups_count": 0,
 
             "estimated_time_saved_min": 0.0,
+
+            "baseline_rand_maps_distance_km": 0.0,
+
+            "baseline_rand_maps_fuel_cost": 0.0,
+
+            "baseline_rand_maps_operational_cost": 0.0,
+
+            "baseline_rand_maps_total_eur": 0.0,
 
         },
 
@@ -1994,6 +2118,14 @@ def optimize_all_routes(
 
     results: Dict[str, Any] = {}
 
+    rand_perm = block1_output.get("rand_route")
+
+    if not rand_perm and all_stops:
+
+        rand_perm = list(range(len(all_stops)))
+
+
+
     for zona, stop_indices in clusters.items():
 
         idxs = [int(i) for i in stop_indices]
@@ -2025,6 +2157,8 @@ def optimize_all_routes(
             weights=weights,
 
             global_stop_indices=idxs,
+
+            block1_rand_route=rand_perm,
 
         )
 

@@ -11,6 +11,8 @@ from reportlab.lib.styles import ParagraphStyle
 from reportlab.lib.units import cm
 from reportlab.platypus import Paragraph, SimpleDocTemplate, Spacer, Table, TableStyle
 
+from pipeline_utils import PRIMARY_SAVINGS_MIN_STOPS
+
 DAMM_RED = colors.HexColor("#C8102E")
 LIGHT = colors.HexColor("#f5f5f5")
 MID = colors.HexColor("#e0e0e0")
@@ -39,9 +41,12 @@ def generate_comparativa_pdf(aggregate: Dict[str, Any], out_path: str) -> str:
     story.append(Paragraph("Comparativa: comandas CSV vs rutas generadas", h1))
     story.append(
         Paragraph(
-            "Resumen agregado del pipeline (Block 1 + Block 2). La linea base usa la distancia y tiempo de "
-            "la ruta <b>aleatoria</b> del Block 1 con los mismos EUR/km y EUR/min que el Block 2; "
-            "el optimizado suma combustible y coste operativo de todos los clusters.",
+            "Resumen agregado (Block 1 + Block 2). La linea base principal usa los mismos tramos Distance Matrix por "
+            "cluster que el optimizado, con el orden aleatorio global del Block 1 reordenado dentro de cada cluster "
+            "sobre las paradas efectivamente visitadas — misma geometria rodada que el optimizado, distinto orden "
+            "de secuenciacion."
+            "<br/><br/><i>Los valores tipo Haversine (km rectos Block 1) quedan como referencia en el JSON pero no "
+            "se usan para la comparativa de coste EUR.</i>",
             body,
         )
     )
@@ -49,7 +54,11 @@ def generate_comparativa_pdf(aggregate: Dict[str, Any], out_path: str) -> str:
 
     tot = aggregate.get("totals") or {}
     inter = aggregate.get("interval") or {}
-    pb = aggregate.get("priority_breakdown_eur") or {}
+    pb = (
+        aggregate.get("priority_breakdown_eur_primary_ge8_metric")
+        or aggregate.get("priority_breakdown_eur")
+        or {}
+    )
     wts = aggregate.get("weights") or {}
 
     kpi = [
@@ -58,16 +67,30 @@ def generate_comparativa_pdf(aggregate: Dict[str, Any], out_path: str) -> str:
         ["Paradas servidas (plan)", str(tot.get("total_stops_served", 0))],
         ["Ejecuciones OK", str(tot.get("runs_ok", 0))],
         ["Ejecuciones sin datos / error", str(tot.get("runs_failed", 0))],
-        ["Coste baseline total (EUR)", f"{float(tot.get('total_baseline_eur', 0)):.2f}"],
+        [
+            "Coste baseline EUR (Maps, orden aleatorio B1 sobre paradas servidas)",
+            f"{float(tot.get('total_baseline_eur_maps_dm') or tot.get('total_baseline_eur', 0)):.2f}",
+        ],
         ["Coste optimizado Block 2 (EUR)", f"{float(tot.get('total_optimized_eur', 0)):.2f}"],
-        ["Ahorro total estimado (EUR)", f"{float(tot.get('total_savings_eur', 0)):.2f}"],
+        [
+            "Ahorro metrica principal (>={} paradas, EUR)".format(PRIMARY_SAVINGS_MIN_STOPS),
+            f"{float(tot.get('primary_savings_metric_ge8_stops_eur') or tot.get('total_savings_eur', 0)):.2f}",
+        ],
+        [
+            "Ahorro rutas cortas (<8 paradas, EUR)",
+            f"{float(tot.get('savings_eur_under_8_stops_routes_only', 0)):.2f}",
+        ],
+        [
+            "Suma todos los EUR ahorro (diag.)",
+            f"{float(tot.get('total_savings_eur_all_runs') or tot.get('total_savings_eur', 0)):.2f}",
+        ],
         ["Primera fecha en lote", str(inter.get("fecha_min", "-"))],
         ["Ultima fecha en lote", str(inter.get("fecha_max", "-"))],
         ["Dias cubiertos (calendario)", str(inter.get("span_days", 0))],
         ["Meses equivalentes (~30.44 d)", f"{float(inter.get('months_span', 0)):.2f}"],
         [
-            "Proyeccion anual ahorro (EUR)",
-            f"{float(inter.get('annual_savings_projection_eur', 0)):.2f}  (extrapolacion lineal del intervalo)",
+            "Proyeccion anual GE8 metrica (EUR)",
+            f"{float(inter.get('annual_savings_projection_eur_primary_ge8_stops') or inter.get('annual_savings_projection_eur', 0)):.2f}  (~30.44 d/mes sobre intervalo GE8)",
         ],
     ]
     t0 = Table(kpi, colWidths=[9 * cm, 8 * cm])
@@ -92,8 +115,8 @@ def generate_comparativa_pdf(aggregate: Dict[str, Any], out_path: str) -> str:
     story.append(Paragraph("Desglose ilustrativo del ahorro por peso de prioridad", h1))
     story.append(
         Paragraph(
-            "Cada factor recibe una fraccion del ahorro total igual a su peso en PRIORITY_WEIGHTS "
-            "(mezcla del modelo de scoring, no efecto causal aislado).",
+            "Desglose referido al ahorro metrica principal (>= {} paradas). Cada factor recibe una fraccion "
+            "segun PRIORITY_WEIGHTS (mezcla del modelo, no efecto causal aislado).".format(PRIMARY_SAVINGS_MIN_STOPS),
             small,
         )
     )
@@ -120,25 +143,29 @@ def generate_comparativa_pdf(aggregate: Dict[str, Any], out_path: str) -> str:
 
     story.append(Paragraph("Detalle por ruta y dia (max 35 filas)", h1))
     runs: List[Dict[str, Any]] = list(aggregate.get("runs") or [])
-    head = [["Ruta", "Fecha", "Comandas", "Paradas", "Base.EUR", "Opt.EUR", "Ahorro", "Estado"]]
+    head = [["Ruta", "Fecha", "Seg.", "Comandas", "Paradas", "BaseEUR", "Opt.EUR", "Ahorro", "Estado"]]
     max_rows = 35
     for r in runs[:max_rows]:
         head.append(
             [
-                str(r.get("ruta", ""))[:14],
-                str(r.get("fecha", ""))[:14],
+                str(r.get("ruta", ""))[:12],
+                str(r.get("fecha", ""))[:12],
+                str(r.get("route_value_segment", ""))[:8],
                 str(r.get("comandas_rows", "")),
                 str(r.get("stops_count", "")),
                 f"{float(r.get('baseline_total_eur', 0)):.1f}",
                 f"{float(r.get('optimized_total_eur', 0)):.1f}",
                 f"{float(r.get('savings_eur', 0)):.1f}",
-                str(r.get("status", ""))[:16],
+                str(r.get("status", ""))[:14],
             ]
         )
     if len(runs) > max_rows:
-        head.append([f"... +{len(runs) - max_rows} mas en JSON", "", "", "", "", "", "", ""])
+        head.append([f"... +{len(runs) - max_rows} mas en JSON", "", "", "", "", "", "", "", ""])
 
-    t2 = Table(head, colWidths=[2 * cm, 2.2 * cm, 1.4 * cm, 1.2 * cm, 2 * cm, 2 * cm, 1.8 * cm, 2.2 * cm])
+    t2 = Table(
+        head,
+        colWidths=[1.6 * cm, 1.8 * cm, 1 * cm, 1 * cm, 0.95 * cm, 1.6 * cm, 1.55 * cm, 1.4 * cm, 1.95 * cm],
+    )
     t2.setStyle(
         TableStyle(
             [

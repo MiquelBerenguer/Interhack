@@ -31,6 +31,13 @@ from zm040_up import aggregate_stop_up, build_units_per_pallet_map, load_zm040
 
 # ── CONFIG ──────────────────────────────────────────────────────────────
 XLSX_PATH   = 'Hackaton.xlsx'
+# run_full_pipeline can point Block 1 to a filtered workbook (same schema)
+HACKATON_XLSX_ENV = "INTERHACK_HACKATON_XLSX"
+
+
+def hackaton_xlsx_read_path() -> str:
+    p = os.environ.get(HACKATON_XLSX_ENV, "").strip()
+    return p if p else XLSX_PATH
 ZM040_PATH  = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'Hackaton', 'ZM040.XLSX')
 ALPHA       = 0.65   # priority (transport sector / in-stop value) vs distance in nn_route
 # Truck sizes: small (3) | standard (6) | large (8 pallet slots = UP)
@@ -183,7 +190,7 @@ def _resolved_zm040_path():
 
 # ── LOAD DATA ────────────────────────────────────────────────────────────
 def load_data():
-    xl = pd.read_excel(XLSX_PATH, sheet_name=None)
+    xl = pd.read_excel(hackaton_xlsx_read_path(), sheet_name=None)
     deliveries = xl['Detalle entrega']
     materials  = xl['Materiales zubic']
     mat_loc = dict(zip(materials['Material'].astype(str), materials['Ubic.'].astype(str)))
