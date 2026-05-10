@@ -1,0 +1,628 @@
+{
+  "route_code": "DR0045",
+  "date": "13/02/2026",
+  "transport_id": "DD13100007",
+  "transporter_name": "Transporter DD13100007",
+  "truck_type": "standard",
+  "truck_slots": 6,
+  "zona_key": "DD13100007",
+  "priority_weights_used": {
+    "revenue": 0.3,
+    "distance": 0.2,
+    "fuel_cost": 0.15,
+    "travel_time": 0.1,
+    "operational_cost": 0.1,
+    "route_efficiency": 0.1,
+    "time_window_urgency": 0.05
+  },
+  "depot": {
+    "name": "Estrella Damm Mollet - Magatzem",
+    "address": "Carrer Moli de Can Bassa, Mollet del Valles, Barcelona",
+    "lat": 41.5363,
+    "lon": 2.2131
+  },
+  "baseline_visit_order_global": [
+    8
+  ],
+  "optimized_visit_order_global": [
+    8
+  ],
+  "all_stops": [
+    {
+      "id": "828005577",
+      "entrega_ids": [
+        "828005577"
+      ],
+      "name": "BOKAO",
+      "address": "CALLE VIC 7, 08160 MONTMEL\u00d3",
+      "city": "MONTMEL\u00d3",
+      "cp": "08160",
+      "lat": 41.56,
+      "lon": 2.19,
+      "delivery_caj": 0,
+      "delivery_brl": 8.0,
+      "delivery_un": 0,
+      "ret_caj": 0,
+      "ret_brl": 8.0,
+      "delivery_up": 1.3333333333333333,
+      "return_up": 0.7999999999999999,
+      "delivery_value_eur": 896.0,
+      "items": [
+        {
+          "mat": "ED30",
+          "desc": "ESTRELLA DAMM BARRIL 30",
+          "qty": 8.0,
+          "unit": "BRL",
+          "ubic": "AA10A1",
+          "unit_price_eur": 112.0,
+          "line_total_eur": 896.0
+        }
+      ],
+      "ret_items": [
+        {
+          "mat": "BRL30V",
+          "desc": "BARRIL INOX 30L. EURONORMA",
+          "qty": 8.0,
+          "unit": "BRL",
+          "ubic": "ENVASE"
+        }
+      ],
+      "zona_transp": "DD13100029",
+      "window_open_min": 0,
+      "window_close_min": 1920
+    },
+    {
+      "id": "828005604",
+      "entrega_ids": [
+        "828005604"
+      ],
+      "name": "Bar Castillo",
+      "address": "Carrer de Sant Jordi 56, 08100 MOLLET DEL VALLES",
+      "city": "MOLLET DEL VALLES",
+      "cp": "08100",
+      "lat": 41.543,
+      "lon": 2.214,
+      "delivery_caj": 2.0,
+      "delivery_brl": 0,
+      "delivery_un": 0,
+      "ret_caj": 2.0,
+      "ret_brl": 0,
+      "delivery_up": 0.03333333333333333,
+      "return_up": 0.02,
+      "delivery_value_eur": 52.0,
+      "items": [
+        {
+          "mat": "DL13",
+          "desc": "DAMM LEMON 1/3 RET",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "AA02A1",
+          "unit_price_eur": 26.0,
+          "line_total_eur": 26.0
+        },
+        {
+          "mat": "DL13",
+          "desc": "DAMM LEMON 1/3 RET",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "AA02A1",
+          "unit_price_eur": 26.0,
+          "line_total_eur": 26.0
+        }
+      ],
+      "ret_items": [
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        },
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        }
+      ],
+      "zona_transp": "DD13100004",
+      "window_open_min": 0,
+      "window_close_min": 1920
+    },
+    {
+      "id": "828005605",
+      "entrega_ids": [
+        "828005605"
+      ],
+      "name": "SERGIO MORENO LIEBANA",
+      "address": "CALLE DE LA JUSTADA 18, 08100 MOLLET DEL VALL\u00c8S",
+      "city": "MOLLET DEL VALL\u00c8S",
+      "cp": "08100",
+      "lat": 41.543,
+      "lon": 2.214,
+      "delivery_caj": 1.0,
+      "delivery_brl": 0,
+      "delivery_un": 0,
+      "ret_caj": 0,
+      "ret_brl": 0,
+      "delivery_up": 0.009259259259259259,
+      "return_up": 0.005555555555555555,
+      "delivery_value_eur": 27.5,
+      "items": [
+        {
+          "mat": "0RF0022",
+          "desc": "/-AQUARIUS LIMON 33CL LATA 24U",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "CA06A2",
+          "unit_price_eur": 27.5,
+          "line_total_eur": 27.5
+        }
+      ],
+      "ret_items": [],
+      "zona_transp": "DD13100045",
+      "window_open_min": 0,
+      "window_close_min": 1920
+    },
+    {
+      "id": "828005606",
+      "entrega_ids": [
+        "828005606"
+      ],
+      "name": "EZEQUIEL GUARDIOLA DO\u00d1A",
+      "address": "AVENIDA LLIBERTAT 45, 08100 MOLLET DEL VALL\u00c8S",
+      "city": "MOLLET DEL VALL\u00c8S",
+      "cp": "08100",
+      "lat": 41.543,
+      "lon": 2.214,
+      "delivery_caj": 1.0,
+      "delivery_brl": 0,
+      "delivery_un": 0,
+      "ret_caj": 0,
+      "ret_brl": 0,
+      "delivery_up": 0.009523809523809525,
+      "return_up": 0.005714285714285714,
+      "delivery_value_eur": 24.0,
+      "items": [
+        {
+          "mat": "0VE4962",
+          "desc": "HALLAZGO BLANCO JOVEN 75CL 6U",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "EC03A3",
+          "unit_price_eur": 24.0,
+          "line_total_eur": 24.0
+        }
+      ],
+      "ret_items": [],
+      "zona_transp": "DD13100045",
+      "window_open_min": 0,
+      "window_close_min": 1920
+    },
+    {
+      "id": "828005649",
+      "entrega_ids": [
+        "828005649"
+      ],
+      "name": "CASAL AVIS MASIA CAN CARRANCA JUNTA",
+      "address": "MASIA CAN CARRANCA S/N -, 08107 MARTORELLES",
+      "city": "MARTORELLES",
+      "cp": "08107",
+      "lat": 41.524,
+      "lon": 2.207,
+      "delivery_caj": 0,
+      "delivery_brl": 0,
+      "delivery_un": 12.0,
+      "ret_caj": 0,
+      "ret_brl": 0,
+      "delivery_up": 0.12,
+      "return_up": 0.072,
+      "delivery_value_eur": 13.799999999999999,
+      "items": [
+        {
+          "mat": "0AM0285",
+          "desc": "JUANFRA ACEITUNAS RELLENAS DE ANCHOA 2KG",
+          "qty": 12.0,
+          "unit": "UN",
+          "ubic": "ZCG",
+          "unit_price_eur": 1.15,
+          "line_total_eur": 13.8
+        }
+      ],
+      "ret_items": [],
+      "zona_transp": "DD13100030",
+      "window_open_min": 0,
+      "window_close_min": 1920
+    },
+    {
+      "id": "828005693",
+      "entrega_ids": [
+        "828005693"
+      ],
+      "name": "RESTAURANT NOU PAMPLONA",
+      "address": "CALLE EIX ONZE DE SETEMBRE 11, 08500 VIC",
+      "city": "VIC",
+      "cp": "08500",
+      "lat": 41.9302,
+      "lon": 2.254,
+      "delivery_caj": 0,
+      "delivery_brl": 0,
+      "delivery_un": 7.0,
+      "ret_caj": 0,
+      "ret_brl": 0,
+      "delivery_up": 0.1411111111111111,
+      "return_up": 0.08466666666666665,
+      "delivery_value_eur": 8.049999999999999,
+      "items": [
+        {
+          "mat": "0AM1278",
+          "desc": "BARGALLO ACEITE VIRGEN EXTRA 5L",
+          "qty": 2.0,
+          "unit": "UN",
+          "ubic": "EC01B1",
+          "unit_price_eur": 1.15,
+          "line_total_eur": 2.3
+        },
+        {
+          "mat": "0AM5506",
+          "desc": "LA FRAGUA MERMEL. MELOC. CUBO 4,2KG 1U",
+          "qty": 1.0,
+          "unit": "UN",
+          "ubic": "ZCG",
+          "unit_price_eur": 1.15,
+          "line_total_eur": 1.15
+        },
+        {
+          "mat": "0AM1104",
+          "desc": "MAIZENA EXPRESS OSCURA 1KG",
+          "qty": 4.0,
+          "unit": "UN",
+          "ubic": "ZCG",
+          "unit_price_eur": 1.15,
+          "line_total_eur": 4.6
+        }
+      ],
+      "ret_items": [],
+      "zona_transp": "DD13100068",
+      "window_open_min": 0,
+      "window_close_min": 1920
+    },
+    {
+      "id": "828005781",
+      "entrega_ids": [
+        "828005781"
+      ],
+      "name": "BAR  EL NOU TUNEL",
+      "address": "CALLE MAS ESTAPER 8, 08400 GRANOLLERS",
+      "city": "GRANOLLERS",
+      "cp": "08400",
+      "lat": 41.609,
+      "lon": 2.202,
+      "delivery_caj": 0,
+      "delivery_brl": 0,
+      "delivery_un": 1.0,
+      "ret_caj": 0,
+      "ret_brl": 0,
+      "delivery_up": 0.04,
+      "return_up": 0.024,
+      "delivery_value_eur": 20.0,
+      "items": [
+        {
+          "mat": "TB8",
+          "desc": "BOTELLAS CARBONICO\u00a08 KILOS",
+          "qty": 1.0,
+          "unit": "TB",
+          "ubic": "AC01A1",
+          "unit_price_eur": 20.0,
+          "line_total_eur": 20.0
+        }
+      ],
+      "ret_items": [
+        {
+          "mat": "TB8V",
+          "desc": "BOTELLAS CARBONICO 8 KG.VACIOS",
+          "qty": 1.0,
+          "unit": "TB",
+          "ubic": "ENVASE"
+        }
+      ],
+      "zona_transp": "DD13100019",
+      "window_open_min": 0,
+      "window_close_min": 1920
+    },
+    {
+      "id": "828006493",
+      "entrega_ids": [
+        "828006493"
+      ],
+      "name": "JULIO ALEJANDRO SANCHEZ FERNANDEZ",
+      "address": "CALLE MOLI DE CAN BASSA S/N, 08100 MOLLET DEL VALL\u00c8S",
+      "city": "MOLLET DEL VALL\u00c8S",
+      "cp": "08100",
+      "lat": 41.543,
+      "lon": 2.214,
+      "delivery_caj": 5.0,
+      "delivery_brl": 0,
+      "delivery_un": 0,
+      "ret_caj": 0,
+      "ret_brl": 0,
+      "delivery_up": 0.05952380952380952,
+      "return_up": 0.03571428571428571,
+      "delivery_value_eur": 137.5,
+      "items": [
+        {
+          "mat": "VE32P6",
+          "desc": "AGUA VERI 1,5L PET PACK 6U.",
+          "qty": 5.0,
+          "unit": "CAJ",
+          "ubic": "EB05A1",
+          "unit_price_eur": 27.5,
+          "line_total_eur": 137.5
+        }
+      ],
+      "ret_items": [],
+      "zona_transp": "DD13100045",
+      "window_open_min": 0,
+      "window_close_min": 1920
+    },
+    {
+      "id": "828006801",
+      "entrega_ids": [
+        "828006801",
+        "841039015"
+      ],
+      "name": "VENECIA BAR",
+      "address": "RONDA ORIENT 14, 08100 MOLLET DEL VALLES",
+      "city": "MOLLET DEL VALLES",
+      "cp": "08100",
+      "lat": 41.543,
+      "lon": 2.214,
+      "delivery_caj": 6.0,
+      "delivery_brl": 0,
+      "delivery_un": 0,
+      "ret_caj": 6.0,
+      "ret_brl": 0,
+      "delivery_up": 0.1,
+      "return_up": 0.06,
+      "delivery_value_eur": 156.0,
+      "items": [
+        {
+          "mat": "FD13",
+          "desc": "FREE DAMM 1/3 RET.",
+          "qty": 2.0,
+          "unit": "CAJ",
+          "ubic": "AA06A1",
+          "unit_price_eur": 26.0,
+          "line_total_eur": 52.0
+        },
+        {
+          "mat": "FDL13",
+          "desc": "FREE DAMM LIMON 1/3 RET. PP",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "AA05A1",
+          "unit_price_eur": 26.0,
+          "line_total_eur": 26.0
+        },
+        {
+          "mat": "FDT13",
+          "desc": "FREE DAMM TOSTADA 1/3 RET. PP",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "AA04A1",
+          "unit_price_eur": 26.0,
+          "line_total_eur": 26.0
+        },
+        {
+          "mat": "FD13",
+          "desc": "FREE DAMM 1/3 RET.",
+          "qty": 2.0,
+          "unit": "CAJ",
+          "ubic": "AA06A1",
+          "unit_price_eur": 26.0,
+          "line_total_eur": 52.0
+        }
+      ],
+      "ret_items": [
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 2.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        },
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        },
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        },
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 2.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        }
+      ],
+      "zona_transp": "DD13100007",
+      "window_open_min": 0,
+      "window_close_min": 1920
+    },
+    {
+      "id": "828008751",
+      "entrega_ids": [
+        "828008751"
+      ],
+      "name": "RAUL MOLIST SANZ",
+      "address": "CALLE ONZE DE SETEMBRE 9-13, 08100 MOLLET DEL VALL\u00c8S",
+      "city": "MOLLET DEL VALL\u00c8S",
+      "cp": "08100",
+      "lat": 41.543,
+      "lon": 2.214,
+      "delivery_caj": 2.0,
+      "delivery_brl": 0,
+      "delivery_un": 0,
+      "ret_caj": 0,
+      "ret_brl": 0,
+      "delivery_up": 0.020202020202020204,
+      "return_up": 0.012121212121212121,
+      "delivery_value_eur": 55.0,
+      "items": [
+        {
+          "mat": "ED13LT",
+          "desc": "ESTRELLA DAMM 1/3 LATA",
+          "qty": 2.0,
+          "unit": "CAJ",
+          "ubic": "CA01A1",
+          "unit_price_eur": 27.5,
+          "line_total_eur": 55.0
+        }
+      ],
+      "ret_items": [],
+      "zona_transp": "DD13100045",
+      "window_open_min": 0,
+      "window_close_min": 1920
+    },
+    {
+      "id": "828008752",
+      "entrega_ids": [
+        "828008752"
+      ],
+      "name": "GUERMAN KAZANNIKOV KAZANNIKOV",
+      "address": "Carrer de V\u00e9lez Rubio 12, 08918 BADALONA",
+      "city": "BADALONA",
+      "cp": "08918",
+      "lat": 41.591,
+      "lon": 2.1910000000000003,
+      "delivery_caj": 5.0,
+      "delivery_brl": 0,
+      "delivery_un": 0,
+      "ret_caj": 0,
+      "ret_brl": 0,
+      "delivery_up": 0.05050505050505051,
+      "return_up": 0.030303030303030304,
+      "delivery_value_eur": 137.5,
+      "items": [
+        {
+          "mat": "ED13LT",
+          "desc": "ESTRELLA DAMM 1/3 LATA",
+          "qty": 2.0,
+          "unit": "CAJ",
+          "ubic": "CA01A1",
+          "unit_price_eur": 27.5,
+          "line_total_eur": 55.0
+        },
+        {
+          "mat": "FDT13LT",
+          "desc": "FREE DAMM TOSTADA 1/3 LATA LC",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "CA03A1",
+          "unit_price_eur": 27.5,
+          "line_total_eur": 27.5
+        },
+        {
+          "mat": "DL13LT",
+          "desc": "DAMM LEMON 1/3 LATA LC",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "CA02A3",
+          "unit_price_eur": 27.5,
+          "line_total_eur": 27.5
+        },
+        {
+          "mat": "FDL13LT",
+          "desc": "FREE DAMM LIMON 1/3 LATA",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "CA02A3",
+          "unit_price_eur": 27.5,
+          "line_total_eur": 27.5
+        }
+      ],
+      "ret_items": [],
+      "zona_transp": "DD13100045",
+      "window_open_min": 0,
+      "window_close_min": 1920
+    }
+  ],
+  "final_route_detail": [
+    {
+      "stop_index": 8,
+      "customer_id": "828006801",
+      "customer_name": "VENECIA BAR",
+      "arrival_time": "06:06",
+      "departure_time": "06:14",
+      "travel_time_min": 5.57,
+      "distance_km": 1.036,
+      "fuel_cost": 0.1243,
+      "operational_cost": 4.7483,
+      "priority_score": 1.0,
+      "walking_group_id": null,
+      "window_open": "06:00",
+      "window_close": "14:00",
+      "window_status": "on_time",
+      "lat": 41.543,
+      "lon": 2.214,
+      "delivery_caj": 6.0,
+      "delivery_brl": 0.0,
+      "return_caj": 6.0,
+      "return_brl": 0.0,
+      "priority_breakdown_estimated": {
+        "revenue": 0.2069,
+        "distance": 0.1379,
+        "fuel_cost": 0.1034,
+        "travel_time": 0.069,
+        "operational_cost": 0.069,
+        "route_efficiency": 0.069,
+        "time_window_urgency": 0.0345
+      }
+    }
+  ],
+  "metrics_comparison": {
+    "baseline": {
+      "distance_km": 3.054,
+      "duration_min": 22.78,
+      "fuel_liters_est": 0.27,
+      "co2_kg_est": 0.71,
+      "cost_eur": 8.3406,
+      "fuel_cost_eur": 0.3665,
+      "operational_cost_eur": 7.9742
+    },
+    "optimized": {
+      "distance_km": 3.054,
+      "duration_min": 22.78,
+      "fuel_liters_est": 0.27,
+      "co2_kg_est": 0.71,
+      "cost_eur": 8.3407,
+      "fuel_cost_eur": 0.3665,
+      "operational_cost_eur": 7.9742
+    }
+  },
+  "route_summary": {
+    "total_stops": 1,
+    "total_distance_km": 3.054,
+    "total_duration_min": 22.78,
+    "total_fuel_cost": 0.3665,
+    "total_operational_cost": 7.9742,
+    "total_revenue": 156.0,
+    "walking_groups_count": 0,
+    "estimated_time_saved_min": 0.0,
+    "baseline_rand_maps_distance_km": 3.054,
+    "baseline_rand_maps_fuel_cost": 0.3665,
+    "baseline_rand_maps_operational_cost": 7.9742,
+    "baseline_rand_maps_total_eur": 8.3406,
+    "baseline_rand_maps_drive_service_min": 22.78
+  },
+  "unload_time_saved_min_estimate": 0.0
+}

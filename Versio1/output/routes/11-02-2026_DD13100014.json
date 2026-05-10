@@ -1,0 +1,214 @@
+{
+  "route_code": "DR0045",
+  "date": "11/02/2026",
+  "transport_id": "DD13100014",
+  "transporter_name": "Transporter DD13100014",
+  "truck_type": "standard",
+  "truck_slots": 6,
+  "zona_key": "DD13100014",
+  "priority_weights_used": {
+    "revenue": 0.3,
+    "distance": 0.2,
+    "fuel_cost": 0.15,
+    "travel_time": 0.1,
+    "operational_cost": 0.1,
+    "route_efficiency": 0.1,
+    "time_window_urgency": 0.05
+  },
+  "depot": {
+    "name": "Estrella Damm Mollet - Magatzem",
+    "address": "Carrer Moli de Can Bassa, Mollet del Valles, Barcelona",
+    "lat": 41.5363,
+    "lon": 2.2131
+  },
+  "baseline_visit_order_global": [
+    1
+  ],
+  "optimized_visit_order_global": [
+    1
+  ],
+  "all_stops": [
+    {
+      "id": "827989892",
+      "entrega_ids": [
+        "827989892"
+      ],
+      "name": "MATADERO FRIGORIFICO AVINYO",
+      "address": "Carretera de Prats de Llu\u00e7a Km 53,5, 08279 AVINY\u00d3",
+      "city": "AVINY\u00d3",
+      "cp": "08279",
+      "lat": 41.615,
+      "lon": 2.204,
+      "delivery_caj": 36.0,
+      "delivery_brl": 0,
+      "delivery_un": 0,
+      "ret_caj": 0,
+      "ret_brl": 0,
+      "delivery_up": 1.0,
+      "return_up": 0.6,
+      "delivery_value_eur": 864.0,
+      "items": [
+        {
+          "mat": "0AG0119",
+          "desc": "FONT D.OR NATURAL 5L PET 4U",
+          "qty": 36.0,
+          "unit": "CAJ",
+          "ubic": "EA05A3",
+          "unit_price_eur": 24.0,
+          "line_total_eur": 864.0
+        }
+      ],
+      "ret_items": [],
+      "zona_transp": "DD13100045",
+      "window_open_min": 0,
+      "window_close_min": 1920
+    },
+    {
+      "id": "827989904",
+      "entrega_ids": [
+        "827989904"
+      ],
+      "name": "CASA CHUECOS",
+      "address": "CALLE ANNIBAL 26, 08401 GRANOLLERS",
+      "city": "GRANOLLERS",
+      "cp": "08401",
+      "lat": 41.609,
+      "lon": 2.289,
+      "delivery_caj": 0,
+      "delivery_brl": 0,
+      "delivery_un": 1.0,
+      "ret_caj": 0,
+      "ret_brl": 0,
+      "delivery_up": 0.04,
+      "return_up": 0.024,
+      "delivery_value_eur": 20.0,
+      "items": [
+        {
+          "mat": "TB8",
+          "desc": "BOTELLAS CARBONICO\u00a08 KILOS",
+          "qty": 1.0,
+          "unit": "TB",
+          "ubic": "AC01A1",
+          "unit_price_eur": 20.0,
+          "line_total_eur": 20.0
+        }
+      ],
+      "ret_items": [
+        {
+          "mat": "TB8V",
+          "desc": "BOTELLAS CARBONICO 8 KG.VACIOS",
+          "qty": 1.0,
+          "unit": "TB",
+          "ubic": "ENVASE"
+        }
+      ],
+      "zona_transp": "DD13100014",
+      "window_open_min": 390,
+      "window_close_min": 480
+    },
+    {
+      "id": "827990201",
+      "entrega_ids": [
+        "827990201"
+      ],
+      "name": "ANDRADES JIMENEZ MANUEL",
+      "address": "CALLE PRUIT S/N, 08500 VIC",
+      "city": "VIC",
+      "cp": "08500",
+      "lat": 41.9302,
+      "lon": 2.254,
+      "delivery_caj": 1.0,
+      "delivery_brl": 0,
+      "delivery_un": 0,
+      "ret_caj": 0,
+      "ret_brl": 0,
+      "delivery_up": 0.010101010101010102,
+      "return_up": 0.006060606060606061,
+      "delivery_value_eur": 27.5,
+      "items": [
+        {
+          "mat": "ED13LT",
+          "desc": "ESTRELLA DAMM 1/3 LATA",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "CA01A1",
+          "unit_price_eur": 27.5,
+          "line_total_eur": 27.5
+        }
+      ],
+      "ret_items": [],
+      "zona_transp": "DD13100045",
+      "window_open_min": 0,
+      "window_close_min": 1920
+    }
+  ],
+  "final_route_detail": [
+    {
+      "stop_index": 1,
+      "customer_id": "827989904",
+      "customer_name": "CASA CHUECOS",
+      "arrival_time": "12:30",
+      "departure_time": "12:38",
+      "travel_time_min": 20.82,
+      "distance_km": 11.686,
+      "fuel_cost": 1.4023,
+      "operational_cost": 10.0858,
+      "priority_score": 1.0,
+      "walking_group_id": null,
+      "window_open": "12:30",
+      "window_close": "14:00",
+      "window_status": "on_time",
+      "lat": 41.609,
+      "lon": 2.289,
+      "delivery_caj": 0.0,
+      "delivery_brl": 0.0,
+      "return_caj": 0.0,
+      "return_brl": 0.0,
+      "priority_breakdown_estimated": {
+        "revenue": 0.2069,
+        "distance": 0.1379,
+        "fuel_cost": 0.1034,
+        "travel_time": 0.069,
+        "operational_cost": 0.069,
+        "route_efficiency": 0.069,
+        "time_window_urgency": 0.0345
+      }
+    }
+  ],
+  "metrics_comparison": {
+    "baseline": {
+      "distance_km": 24.907,
+      "duration_min": 47.78,
+      "fuel_liters_est": 2.21,
+      "co2_kg_est": 5.83,
+      "cost_eur": 19.713,
+      "fuel_cost_eur": 2.9888,
+      "operational_cost_eur": 16.7242
+    },
+    "optimized": {
+      "distance_km": 24.907,
+      "duration_min": 47.97,
+      "fuel_liters_est": 2.21,
+      "co2_kg_est": 5.83,
+      "cost_eur": 19.713,
+      "fuel_cost_eur": 2.9888,
+      "operational_cost_eur": 16.7242
+    }
+  },
+  "route_summary": {
+    "total_stops": 1,
+    "total_distance_km": 24.907,
+    "total_duration_min": 47.97,
+    "total_fuel_cost": 2.9888,
+    "total_operational_cost": 16.7242,
+    "total_revenue": 20.0,
+    "walking_groups_count": 0,
+    "estimated_time_saved_min": 0.0,
+    "baseline_rand_maps_distance_km": 24.907,
+    "baseline_rand_maps_fuel_cost": 2.9888,
+    "baseline_rand_maps_operational_cost": 16.7242,
+    "baseline_rand_maps_total_eur": 19.713,
+    "baseline_rand_maps_drive_service_min": 47.78
+  },
+  "unload_time_saved_min_estimate": 0.0
+}

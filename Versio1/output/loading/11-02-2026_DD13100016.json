@@ -1,0 +1,216 @@
+{
+  "route_code": "DR0011",
+  "date": "11/02/2026",
+  "transport_id": "DD13100016",
+  "transporter_name": "Transporter DD13100016",
+  "truck_type": "large",
+  "truck_slots": 8,
+  "loading_after_lifo": [
+    {
+      "parcela": 1,
+      "customer_name": "Devoluciones (consolidado)",
+      "parcela_volume_pct": 100.0,
+      "items": [
+        {
+          "material": "RET",
+          "quantity": 109
+        }
+      ]
+    },
+    {
+      "parcela": 2,
+      "customer_name": "LA TASKA DE CARMEN \u00b7 RSTE. MESON BELLAVISTA",
+      "parcela_volume_pct": 100.0,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 48
+        },
+        {
+          "material": "ENT",
+          "quantity": 31
+        }
+      ]
+    },
+    {
+      "parcela": 3,
+      "customer_name": "BAR CAN MOI",
+      "parcela_volume_pct": 75.0,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 18
+        }
+      ]
+    },
+    {
+      "parcela": 4,
+      "customer_name": "BAR LA PLA\u00c7A LES FRANQUESES \u00b7 CAFETERIA DEGUSTACION LA CANTONADA \u00b7 BAR LA CAVERNA",
+      "parcela_volume_pct": 100.0,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 22
+        },
+        {
+          "material": "ENT",
+          "quantity": 8
+        },
+        {
+          "material": "ENT",
+          "quantity": 13
+        }
+      ]
+    },
+    {
+      "parcela": 5,
+      "customer_name": "Casal Avis Extremadura",
+      "parcela_volume_pct": 26.0,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 4
+        }
+      ]
+    },
+    {
+      "parcela": 6,
+      "customer_name": "BAR MIRADOR \u00b7 CARNICERIA RODRIGUEZ \u00b7 FLECA BRETCHA (CORRO D'AVALL)",
+      "parcela_volume_pct": 42.8,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 5
+        },
+        {
+          "material": "ENT",
+          "quantity": 3
+        },
+        {
+          "material": "ENT",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "parcela": 7,
+      "customer_name": "FLECA P.BRETCHA (BELLAVISTA)",
+      "parcela_volume_pct": 43.5,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 9
+        }
+      ]
+    }
+  ],
+  "loading_before_randomized": [
+    {
+      "parcela": 1,
+      "customer_name": "Devoluciones (consolidado)",
+      "parcela_volume_pct": 100.0,
+      "items": [
+        {
+          "material": "RET",
+          "quantity": 109
+        }
+      ]
+    },
+    {
+      "parcela": 2,
+      "customer_name": "LA TASKA DE CARMEN \u00b7 RSTE. MESON BELLAVISTA",
+      "parcela_volume_pct": 100.0,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 48
+        },
+        {
+          "material": "ENT",
+          "quantity": 31
+        }
+      ]
+    },
+    {
+      "parcela": 3,
+      "customer_name": "BAR CAN MOI",
+      "parcela_volume_pct": 75.0,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 18
+        }
+      ]
+    },
+    {
+      "parcela": 4,
+      "customer_name": "BAR LA PLA\u00c7A LES FRANQUESES \u00b7 CAFETERIA DEGUSTACION LA CANTONADA \u00b7 BAR LA CAVERNA",
+      "parcela_volume_pct": 100.0,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 22
+        },
+        {
+          "material": "ENT",
+          "quantity": 8
+        },
+        {
+          "material": "ENT",
+          "quantity": 13
+        }
+      ]
+    },
+    {
+      "parcela": 5,
+      "customer_name": "Casal Avis Extremadura",
+      "parcela_volume_pct": 26.0,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 4
+        }
+      ]
+    },
+    {
+      "parcela": 6,
+      "customer_name": "BAR MIRADOR \u00b7 CARNICERIA RODRIGUEZ \u00b7 FLECA BRETCHA (CORRO D'AVALL)",
+      "parcela_volume_pct": 42.8,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 5
+        },
+        {
+          "material": "ENT",
+          "quantity": 3
+        },
+        {
+          "material": "ENT",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "parcela": 7,
+      "customer_name": "FLECA P.BRETCHA (BELLAVISTA)",
+      "parcela_volume_pct": 43.5,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 9
+        }
+      ]
+    }
+  ],
+  "warehouse_pick_sequence": [],
+  "plan_summary": {
+    "total_weight_kg": 9015.0,
+    "total_volume_l": 111786.0,
+    "most_loaded_parcela_pct": 100.0,
+    "synthetic_from_route": true
+  },
+  "warnings": [
+    "Distribuci\u00f3n sint\u00e9tica (orden de visita \u00b7 demo). Ejecutar Block 3 para plan almac\u00e9n + ZM040."
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "route_code": "DR0051",
+  "date": "10/02/2026",
+  "transport_id": "DD13100055",
+  "transporter_name": "Transporter DD13100055",
+  "truck_type": "large",
+  "truck_slots": 8,
+  "loading_after_lifo": [
+    {
+      "parcela": 1,
+      "customer_name": "Devoluciones (consolidado)",
+      "parcela_volume_pct": 32.0,
+      "items": [
+        {
+          "material": "RET",
+          "quantity": 12
+        }
+      ]
+    },
+    {
+      "parcela": 2,
+      "customer_name": "PALACIO DE ORIENTE",
+      "parcela_volume_pct": 71.5,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 17
+        }
+      ]
+    }
+  ],
+  "loading_before_randomized": [
+    {
+      "parcela": 1,
+      "customer_name": "Devoluciones (consolidado)",
+      "parcela_volume_pct": 32.0,
+      "items": [
+        {
+          "material": "RET",
+          "quantity": 12
+        }
+      ]
+    },
+    {
+      "parcela": 2,
+      "customer_name": "PALACIO DE ORIENTE",
+      "parcela_volume_pct": 71.5,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 17
+        }
+      ]
+    }
+  ],
+  "warehouse_pick_sequence": [],
+  "plan_summary": {
+    "total_weight_kg": 1914.8,
+    "total_volume_l": 23743.5,
+    "most_loaded_parcela_pct": 71.5,
+    "synthetic_from_route": true
+  },
+  "warnings": [
+    "Distribuci\u00f3n sint\u00e9tica (orden de visita \u00b7 demo). Ejecutar Block 3 para plan almac\u00e9n + ZM040."
+  ]
+}

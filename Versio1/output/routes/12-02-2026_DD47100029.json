@@ -1,0 +1,1872 @@
+{
+  "route_code": "DR0050",
+  "date": "12/02/2026",
+  "transport_id": "DD47100029",
+  "transporter_name": "Transporter DD47100029",
+  "truck_type": "standard",
+  "truck_slots": 6,
+  "zona_key": "DD47100029",
+  "priority_weights_used": {
+    "revenue": 0.3,
+    "distance": 0.2,
+    "fuel_cost": 0.15,
+    "travel_time": 0.1,
+    "operational_cost": 0.1,
+    "route_efficiency": 0.1,
+    "time_window_urgency": 0.05
+  },
+  "depot": {
+    "name": "Estrella Damm Mollet - Magatzem",
+    "address": "Carrer Moli de Can Bassa, Mollet del Valles, Barcelona",
+    "lat": 41.5363,
+    "lon": 2.2131
+  },
+  "baseline_visit_order_global": [
+    0
+  ],
+  "optimized_visit_order_global": [
+    0
+  ],
+  "all_stops": [
+    {
+      "id": "827999545",
+      "entrega_ids": [
+        "827999545"
+      ],
+      "name": "Restaurant L'Arum\u00ed",
+      "address": "Carretera d'Arb\u00facies 21, 08507 SANTA EUG\u00c8NIA DE BERGA",
+      "city": "SANTA EUG\u00c8NIA DE BERGA",
+      "cp": "08507",
+      "lat": 41.9512,
+      "lon": 2.249,
+      "delivery_caj": 3.0,
+      "delivery_brl": 2.0,
+      "delivery_un": 1.0,
+      "ret_caj": 1.0,
+      "ret_brl": 2.0,
+      "delivery_up": 0.3186195286195286,
+      "return_up": 0.19117171717171713,
+      "delivery_value_eur": 309.0,
+      "items": [
+        {
+          "mat": "ED13",
+          "desc": "ESTRELLA DAMM 1/3 RET. PP",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "AA09A1",
+          "unit_price_eur": 26.0,
+          "line_total_eur": 26.0
+        },
+        {
+          "mat": "ED30",
+          "desc": "ESTRELLA DAMM BARRIL 30",
+          "qty": 1.0,
+          "unit": "BRL",
+          "ubic": "AA10A1",
+          "unit_price_eur": 112.0,
+          "line_total_eur": 112.0
+        },
+        {
+          "mat": "VO20",
+          "desc": "VOLL DAMM BARRIL 20L.",
+          "qty": 1.0,
+          "unit": "BRL",
+          "ubic": "AC03A1",
+          "unit_price_eur": 96.0,
+          "line_total_eur": 96.0
+        },
+        {
+          "mat": "EC13P6",
+          "desc": "DAURA DAMM 1/3 SR PACK CESTA ABIERTA 6U.",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "DB03A2",
+          "unit_price_eur": 27.5,
+          "line_total_eur": 27.5
+        },
+        {
+          "mat": "VO13LT",
+          "desc": "VOLL DAMM 1/3 LATA LC",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "CA01A2",
+          "unit_price_eur": 27.5,
+          "line_total_eur": 27.5
+        },
+        {
+          "mat": "TB8",
+          "desc": "BOTELLAS CARBONICO\u00a08 KILOS",
+          "qty": 1.0,
+          "unit": "TB",
+          "ubic": "AC01A1",
+          "unit_price_eur": 20.0,
+          "line_total_eur": 20.0
+        }
+      ],
+      "ret_items": [
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        },
+        {
+          "mat": "BRL30V",
+          "desc": "BARRIL INOX 30L. EURONORMA",
+          "qty": 1.0,
+          "unit": "BRL",
+          "ubic": "ENVASE"
+        },
+        {
+          "mat": "BRL20V",
+          "desc": "BARRIL INOX 20L. TANQUETA A16",
+          "qty": 1.0,
+          "unit": "BRL",
+          "ubic": "ENVASE"
+        },
+        {
+          "mat": "TB8V",
+          "desc": "BOTELLAS CARBONICO 8 KG.VACIOS",
+          "qty": 1.0,
+          "unit": "TB",
+          "ubic": "ENVASE"
+        }
+      ],
+      "zona_transp": "DD47100029",
+      "window_open_min": 0,
+      "window_close_min": 1920
+    },
+    {
+      "id": "827999546",
+      "entrega_ids": [
+        "827999546",
+        "827999547"
+      ],
+      "name": "BAR EL TUP\u00cd",
+      "address": "Avinguda Nostra Senyora de Monts 22, 08504 SANT JULI\u00c0 DE VILATORTA",
+      "city": "SANT JULI\u00c0 DE VILATORTA",
+      "cp": "08504",
+      "lat": 41.9352,
+      "lon": 2.258,
+      "delivery_caj": 25.0,
+      "delivery_brl": 0,
+      "delivery_un": 12.0,
+      "ret_caj": 24.0,
+      "ret_brl": 0,
+      "delivery_up": 0.41672077922077927,
+      "return_up": 0.25003246753246755,
+      "delivery_value_eur": 661.8,
+      "items": [
+        {
+          "mat": "ED13",
+          "desc": "ESTRELLA DAMM 1/3 RET. PP",
+          "qty": 6.0,
+          "unit": "CAJ",
+          "ubic": "AA09A1",
+          "unit_price_eur": 26.0,
+          "line_total_eur": 156.0
+        },
+        {
+          "mat": "ED15LN",
+          "desc": "ESTRELLA DAMM 1/5 LN",
+          "qty": 2.0,
+          "unit": "CAJ",
+          "ubic": "AA08A1",
+          "unit_price_eur": 26.0,
+          "line_total_eur": 52.0
+        },
+        {
+          "mat": "VO13",
+          "desc": "VOLL-DAMM 1/3 RET.",
+          "qty": 2.0,
+          "unit": "CAJ",
+          "ubic": "AA07A1",
+          "unit_price_eur": 26.0,
+          "line_total_eur": 52.0
+        },
+        {
+          "mat": "UE902",
+          "desc": "COPA GRANDE ED",
+          "qty": 12.0,
+          "unit": "UN",
+          "ubic": "PLV",
+          "unit_price_eur": 1.15,
+          "line_total_eur": 13.8
+        },
+        {
+          "mat": "0ZU0031",
+          "desc": "JUVER NECTAR MELOCOTON 20CL 24U",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "ZCG",
+          "unit_price_eur": 24.0,
+          "line_total_eur": 24.0
+        },
+        {
+          "mat": "ED15LN",
+          "desc": "ESTRELLA DAMM 1/5 LN",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "AA08A1",
+          "unit_price_eur": 26.0,
+          "line_total_eur": 26.0
+        },
+        {
+          "mat": "ED13",
+          "desc": "ESTRELLA DAMM 1/3 RET. PP",
+          "qty": 3.0,
+          "unit": "CAJ",
+          "ubic": "AA09A1",
+          "unit_price_eur": 26.0,
+          "line_total_eur": 78.0
+        },
+        {
+          "mat": "VO13",
+          "desc": "VOLL-DAMM 1/3 RET.",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "AA07A1",
+          "unit_price_eur": 26.0,
+          "line_total_eur": 26.0
+        },
+        {
+          "mat": "ED13",
+          "desc": "ESTRELLA DAMM 1/3 RET. PP",
+          "qty": 6.0,
+          "unit": "CAJ",
+          "ubic": "AA09A1",
+          "unit_price_eur": 26.0,
+          "line_total_eur": 156.0
+        },
+        {
+          "mat": "ED13",
+          "desc": "ESTRELLA DAMM 1/3 RET. PP",
+          "qty": 3.0,
+          "unit": "CAJ",
+          "ubic": "AA09A1",
+          "unit_price_eur": 26.0,
+          "line_total_eur": 78.0
+        }
+      ],
+      "ret_items": [
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 6.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        },
+        {
+          "mat": "CJ15",
+          "desc": "CAJA DAMM+BOT.1/5RET VACIO EN P.PLAS.A13",
+          "qty": 2.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        },
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 2.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        },
+        {
+          "mat": "CJ15",
+          "desc": "CAJA DAMM+BOT.1/5RET VACIO EN P.PLAS.A13",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        },
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 3.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        },
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        },
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 6.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        },
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 3.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        }
+      ],
+      "zona_transp": "DD13100063",
+      "window_open_min": 0,
+      "window_close_min": 1920
+    },
+    {
+      "id": "827999548",
+      "entrega_ids": [
+        "827999548"
+      ],
+      "name": "BAR PAVELLO ST JULIA VILATORTA",
+      "address": "AVENIDA SANT LLOREN\u00c7 S/N, 08504 SANT JULI\u00c0 DE VILATORTA",
+      "city": "SANT JULI\u00c0 DE VILATORTA",
+      "cp": "08504",
+      "lat": 41.9352,
+      "lon": 2.258,
+      "delivery_caj": 14.0,
+      "delivery_brl": 0,
+      "delivery_un": 0,
+      "ret_caj": 7.0,
+      "ret_brl": 0,
+      "delivery_up": 0.23968253968253964,
+      "return_up": 0.14380952380952378,
+      "delivery_value_eur": 302.0,
+      "items": [
+        {
+          "mat": "ED13",
+          "desc": "ESTRELLA DAMM 1/3 RET. PP",
+          "qty": 2.0,
+          "unit": "CAJ",
+          "ubic": "AA09A1",
+          "unit_price_eur": 26.0,
+          "line_total_eur": 52.0
+        },
+        {
+          "mat": "ED15LN",
+          "desc": "ESTRELLA DAMM 1/5 LN",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "AA08A1",
+          "unit_price_eur": 26.0,
+          "line_total_eur": 26.0
+        },
+        {
+          "mat": "FDT13",
+          "desc": "FREE DAMM TOSTADA 1/3 RET. PP",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "AA04A1",
+          "unit_price_eur": 26.0,
+          "line_total_eur": 26.0
+        },
+        {
+          "mat": "VO13",
+          "desc": "VOLL-DAMM 1/3 RET.",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "AA07A1",
+          "unit_price_eur": 26.0,
+          "line_total_eur": 26.0
+        },
+        {
+          "mat": "VE12SP",
+          "desc": "AGUA VERI 1/2 PET CAJA 24U. T.TH",
+          "qty": 3.0,
+          "unit": "CAJ",
+          "ubic": "EB03A1",
+          "unit_price_eur": 16.0,
+          "line_total_eur": 48.0
+        },
+        {
+          "mat": "VE32SP",
+          "desc": "AGUA VERI 1,5L PET CAJA 12U.",
+          "qty": 3.0,
+          "unit": "CAJ",
+          "ubic": "EB02A1",
+          "unit_price_eur": 16.0,
+          "line_total_eur": 48.0
+        },
+        {
+          "mat": "0ZU0048",
+          "desc": "PAGO PI\u00d1A 20CL SR 24U",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "ZCG",
+          "unit_price_eur": 24.0,
+          "line_total_eur": 24.0
+        },
+        {
+          "mat": "ED13",
+          "desc": "ESTRELLA DAMM 1/3 RET. PP",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "AA09A1",
+          "unit_price_eur": 26.0,
+          "line_total_eur": 26.0
+        },
+        {
+          "mat": "ED13",
+          "desc": "ESTRELLA DAMM 1/3 RET. PP",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "AA09A1",
+          "unit_price_eur": 26.0,
+          "line_total_eur": 26.0
+        }
+      ],
+      "ret_items": [
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 2.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        },
+        {
+          "mat": "CJ15",
+          "desc": "CAJA DAMM+BOT.1/5RET VACIO EN P.PLAS.A13",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        },
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        },
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        },
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        },
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        }
+      ],
+      "zona_transp": "DD13100063",
+      "window_open_min": 0,
+      "window_close_min": 1920
+    },
+    {
+      "id": "827999549",
+      "entrega_ids": [
+        "827999549"
+      ],
+      "name": "LA NOVA LLIMA",
+      "address": "JAUME I 14, 08507 SANTA EUG\u00c8NIA DE BERGA",
+      "city": "SANTA EUG\u00c8NIA DE BERGA",
+      "cp": "08507",
+      "lat": 41.9512,
+      "lon": 2.249,
+      "delivery_caj": 23.0,
+      "delivery_brl": 0,
+      "delivery_un": 1.0,
+      "ret_caj": 22.0,
+      "ret_brl": 0,
+      "delivery_up": 0.3751763668430335,
+      "return_up": 0.2251058201058201,
+      "delivery_value_eur": 616.0,
+      "items": [
+        {
+          "mat": "ED13",
+          "desc": "ESTRELLA DAMM 1/3 RET. PP",
+          "qty": 15.0,
+          "unit": "CAJ",
+          "ubic": "AA09A1",
+          "unit_price_eur": 26.0,
+          "line_total_eur": 390.0
+        },
+        {
+          "mat": "ED15LN",
+          "desc": "ESTRELLA DAMM 1/5 LN",
+          "qty": 2.0,
+          "unit": "CAJ",
+          "ubic": "AA08A1",
+          "unit_price_eur": 26.0,
+          "line_total_eur": 52.0
+        },
+        {
+          "mat": "TU13",
+          "desc": "TURIA 1/3 RET.",
+          "qty": 2.0,
+          "unit": "CAJ",
+          "ubic": "AA03A1",
+          "unit_price_eur": 26.0,
+          "line_total_eur": 52.0
+        },
+        {
+          "mat": "VO13",
+          "desc": "VOLL-DAMM 1/3 RET.",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "AA07A1",
+          "unit_price_eur": 26.0,
+          "line_total_eur": 26.0
+        },
+        {
+          "mat": "0AM1290",
+          "desc": "XPLICIT AZUCAR 7GR  1000U",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "FC02A2",
+          "unit_price_eur": 24.0,
+          "line_total_eur": 24.0
+        },
+        {
+          "mat": "TU13",
+          "desc": "TURIA 1/3 RET.",
+          "qty": 2.0,
+          "unit": "CAJ",
+          "ubic": "AA03A1",
+          "unit_price_eur": 26.0,
+          "line_total_eur": 52.0
+        },
+        {
+          "mat": "0AM1634",
+          "desc": "XPLICIT EDULCORANTE 1G 150U",
+          "qty": 1.0,
+          "unit": "ZPR",
+          "ubic": "FC01C4",
+          "unit_price_eur": 20.0,
+          "line_total_eur": 20.0
+        }
+      ],
+      "ret_items": [
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 15.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        },
+        {
+          "mat": "CJ15",
+          "desc": "CAJA DAMM+BOT.1/5RET VACIO EN P.PLAS.A13",
+          "qty": 2.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        },
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 2.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        },
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        },
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 2.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        }
+      ],
+      "zona_transp": "DD13100063",
+      "window_open_min": 0,
+      "window_close_min": 1920
+    },
+    {
+      "id": "827999550",
+      "entrega_ids": [
+        "827999550"
+      ],
+      "name": "PASTISSERIA CROSSANDRA",
+      "address": "CALLE NURIA 12, 08504 SANT JULI\u00c0 DE VILATORTA",
+      "city": "SANT JULI\u00c0 DE VILATORTA",
+      "cp": "08504",
+      "lat": 41.9352,
+      "lon": 2.258,
+      "delivery_caj": 4.0,
+      "delivery_brl": 0,
+      "delivery_un": 0,
+      "ret_caj": 0,
+      "ret_brl": 0,
+      "delivery_up": 0.0432012432012432,
+      "return_up": 0.025920745920745922,
+      "delivery_value_eur": 96.0,
+      "items": [
+        {
+          "mat": "0LT0412",
+          "desc": "CACAOLAT ORIGINAL 27,5CL PET 24U",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "FA01B1",
+          "unit_price_eur": 24.0,
+          "line_total_eur": 24.0
+        },
+        {
+          "mat": "0ZU0311",
+          "desc": "PAGO NARANJA   1L PET 6U",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "ZCG",
+          "unit_price_eur": 24.0,
+          "line_total_eur": 24.0
+        },
+        {
+          "mat": "0ZU0048",
+          "desc": "PAGO PI\u00d1A 20CL SR 24U",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "ZCG",
+          "unit_price_eur": 24.0,
+          "line_total_eur": 24.0
+        },
+        {
+          "mat": "0ZU0050",
+          "desc": "PAGO NARANJA-ZANAH-LIM\u00d3N  20CL SR 24U",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "ZCG",
+          "unit_price_eur": 24.0,
+          "line_total_eur": 24.0
+        }
+      ],
+      "ret_items": [],
+      "zona_transp": "DD13100063",
+      "window_open_min": 0,
+      "window_close_min": 1920
+    },
+    {
+      "id": "827999551",
+      "entrega_ids": [
+        "827999551"
+      ],
+      "name": "COCA DEL MOSSEN",
+      "address": "Avinguda de l'Atl\u00e0ntida 8, 08519 FOLGUEROLES",
+      "city": "FOLGUEROLES",
+      "cp": "08519",
+      "lat": 41.9332,
+      "lon": 2.259,
+      "delivery_caj": 8.0,
+      "delivery_brl": 0,
+      "delivery_un": 0,
+      "ret_caj": 0,
+      "ret_brl": 0,
+      "delivery_up": 0.10004810004810004,
+      "return_up": 0.06002886002886002,
+      "delivery_value_eur": 192.0,
+      "items": [
+        {
+          "mat": "0AG0052",
+          "desc": "VICHY CATALAN GAS 1/2 PET 24U",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "EA01A3",
+          "unit_price_eur": 24.0,
+          "line_total_eur": 24.0
+        },
+        {
+          "mat": "0AG0046",
+          "desc": "VICHY CATALAN GAS 1,2L PET 6U",
+          "qty": 6.0,
+          "unit": "CAJ",
+          "ubic": "ZCG",
+          "unit_price_eur": 24.0,
+          "line_total_eur": 144.0
+        },
+        {
+          "mat": "0AG0082",
+          "desc": "VICHY CATALAN FRUIT LIMON 1,2L PET 6U",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "ZCG",
+          "unit_price_eur": 24.0,
+          "line_total_eur": 24.0
+        }
+      ],
+      "ret_items": [],
+      "zona_transp": "DD13100063",
+      "window_open_min": 0,
+      "window_close_min": 1920
+    },
+    {
+      "id": "827999552",
+      "entrega_ids": [
+        "827999552"
+      ],
+      "name": "LA COCA DE FOLGUEROLES",
+      "address": "Carrer Cam\u00ed Vell de Vic 16, 08519 FOLGUEROLES",
+      "city": "FOLGUEROLES",
+      "cp": "08519",
+      "lat": 41.9332,
+      "lon": 2.259,
+      "delivery_caj": 14.0,
+      "delivery_brl": 1.0,
+      "delivery_un": 2.0,
+      "ret_caj": 5.0,
+      "ret_brl": 1.0,
+      "delivery_up": 0.3137513227513227,
+      "return_up": 0.18825079365079364,
+      "delivery_value_eur": 459.5,
+      "items": [
+        {
+          "mat": "ID20",
+          "desc": "INEDIT DAMM BARRIL 20L",
+          "qty": 1.0,
+          "unit": "BRL",
+          "ubic": "AC01A1",
+          "unit_price_eur": 96.0,
+          "line_total_eur": 96.0
+        },
+        {
+          "mat": "VE12SP",
+          "desc": "AGUA VERI 1/2 PET CAJA 24U. T.TH",
+          "qty": 2.0,
+          "unit": "CAJ",
+          "ubic": "EB03A1",
+          "unit_price_eur": 16.0,
+          "line_total_eur": 32.0
+        },
+        {
+          "mat": "0AG0183",
+          "desc": "VICHY CATALAN GAS 30CL RET 24U",
+          "qty": 2.0,
+          "unit": "CAJ",
+          "ubic": "BA01A1",
+          "unit_price_eur": 24.0,
+          "line_total_eur": 48.0
+        },
+        {
+          "mat": "0LT0100",
+          "desc": "YOSOY SOJA 1L BRIK 6U",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "A0DISTRIDA",
+          "unit_price_eur": 24.0,
+          "line_total_eur": 24.0
+        },
+        {
+          "mat": "0LT0103",
+          "desc": "YOSOY AVENA BARISTA 1L BRIK 6U",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "FA03A1",
+          "unit_price_eur": 24.0,
+          "line_total_eur": 24.0
+        },
+        {
+          "mat": "0LT0032",
+          "desc": "CACAOLAT VIDRIO 20CL RET 30U",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "AC04A3",
+          "unit_price_eur": 24.0,
+          "line_total_eur": 24.0
+        },
+        {
+          "mat": "0LT0009",
+          "desc": "LETONA GRAN CREME 1L VR 12U",
+          "qty": 2.0,
+          "unit": "CAJ",
+          "ubic": "AC05A2",
+          "unit_price_eur": 24.0,
+          "line_total_eur": 48.0
+        },
+        {
+          "mat": "0LT0090",
+          "desc": "LETONA SEMI SIN LACTOSA 1L PET 6U",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "FA02A2",
+          "unit_price_eur": 24.0,
+          "line_total_eur": 24.0
+        },
+        {
+          "mat": "0RF0019",
+          "desc": "/-COCA COLA LATA 33CL 24U",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "CA04A2",
+          "unit_price_eur": 27.5,
+          "line_total_eur": 27.5
+        },
+        {
+          "mat": "0ZU0020",
+          "desc": "GRANINI MELOCOTON  20CL 24U",
+          "qty": 3.0,
+          "unit": "CAJ",
+          "ubic": "DA09A1",
+          "unit_price_eur": 24.0,
+          "line_total_eur": 72.0
+        },
+        {
+          "mat": "0ZU0024",
+          "desc": "GRANINI PI\u00d1A 20CL 24U",
+          "qty": 2.0,
+          "unit": "ZPR",
+          "ubic": "DA09A3",
+          "unit_price_eur": 20.0,
+          "line_total_eur": 40.0
+        }
+      ],
+      "ret_items": [
+        {
+          "mat": "BRL20V",
+          "desc": "BARRIL INOX 20L. TANQUETA A16",
+          "qty": 1.0,
+          "unit": "BRL",
+          "ubic": "ENVASE"
+        },
+        {
+          "mat": "3ENV0236",
+          "desc": "C.C. AGUA 1/3 VICHY-FONT D'OR",
+          "qty": 2.0,
+          "unit": "CAJ",
+          "ubic": "AA"
+        },
+        {
+          "mat": "3ENV0029",
+          "desc": "C.C. CACAOLAT 30 U.",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        },
+        {
+          "mat": "3ENV1281",
+          "desc": "C.C. LECHE LETONA (NUEVO)",
+          "qty": 2.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        }
+      ],
+      "zona_transp": "DD13100063",
+      "window_open_min": 0,
+      "window_close_min": 1920
+    },
+    {
+      "id": "827999553",
+      "entrega_ids": [
+        "827999553"
+      ],
+      "name": "LA PIZZETA",
+      "address": "CALLE CANIGO 1, 08507 SANTA EUG\u00c8NIA DE BERGA",
+      "city": "SANTA EUG\u00c8NIA DE BERGA",
+      "cp": "08507",
+      "lat": 41.9512,
+      "lon": 2.249,
+      "delivery_caj": 18.0,
+      "delivery_brl": 1.0,
+      "delivery_un": 0,
+      "ret_caj": 12.0,
+      "ret_brl": 1.0,
+      "delivery_up": 0.3714766714766715,
+      "return_up": 0.2228860028860029,
+      "delivery_value_eur": 527.0,
+      "items": [
+        {
+          "mat": "DL13",
+          "desc": "DAMM LEMON 1/3 RET",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "AA02A1",
+          "unit_price_eur": 26.0,
+          "line_total_eur": 26.0
+        },
+        {
+          "mat": "ED13",
+          "desc": "ESTRELLA DAMM 1/3 RET. PP",
+          "qty": 6.0,
+          "unit": "CAJ",
+          "ubic": "AA09A1",
+          "unit_price_eur": 26.0,
+          "line_total_eur": 156.0
+        },
+        {
+          "mat": "VO13",
+          "desc": "VOLL-DAMM 1/3 RET.",
+          "qty": 2.0,
+          "unit": "CAJ",
+          "ubic": "AA07A1",
+          "unit_price_eur": 26.0,
+          "line_total_eur": 52.0
+        },
+        {
+          "mat": "TU20",
+          "desc": "TURIA BARRIL 20L.",
+          "qty": 1.0,
+          "unit": "BRL",
+          "ubic": "AC03A2",
+          "unit_price_eur": 96.0,
+          "line_total_eur": 96.0
+        },
+        {
+          "mat": "EC13P6",
+          "desc": "DAURA DAMM 1/3 SR PACK CESTA ABIERTA 6U.",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "DB03A2",
+          "unit_price_eur": 27.5,
+          "line_total_eur": 27.5
+        },
+        {
+          "mat": "ED13LT",
+          "desc": "ESTRELLA DAMM 1/3 LATA",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "CA01A1",
+          "unit_price_eur": 27.5,
+          "line_total_eur": 27.5
+        },
+        {
+          "mat": "VE12SP",
+          "desc": "AGUA VERI 1/2 PET CAJA 24U. T.TH",
+          "qty": 2.0,
+          "unit": "CAJ",
+          "ubic": "EB03A1",
+          "unit_price_eur": 16.0,
+          "line_total_eur": 32.0
+        },
+        {
+          "mat": "VE32SP",
+          "desc": "AGUA VERI 1,5L PET CAJA 12U.",
+          "qty": 2.0,
+          "unit": "CAJ",
+          "ubic": "EB02A1",
+          "unit_price_eur": 16.0,
+          "line_total_eur": 32.0
+        },
+        {
+          "mat": "ED13",
+          "desc": "ESTRELLA DAMM 1/3 RET. PP",
+          "qty": 3.0,
+          "unit": "CAJ",
+          "ubic": "AA09A1",
+          "unit_price_eur": 26.0,
+          "line_total_eur": 78.0
+        }
+      ],
+      "ret_items": [
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        },
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 6.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        },
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 2.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        },
+        {
+          "mat": "BRL20V",
+          "desc": "BARRIL INOX 20L. TANQUETA A16",
+          "qty": 1.0,
+          "unit": "BRL",
+          "ubic": "ENVASE"
+        },
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 3.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        }
+      ],
+      "zona_transp": "DD13100063",
+      "window_open_min": 0,
+      "window_close_min": 1920
+    },
+    {
+      "id": "827999554",
+      "entrega_ids": [
+        "827999554",
+        "841038131"
+      ],
+      "name": "BAR KARNAK",
+      "address": "CALLE MAJOR 12, 08519 FOLGUEROLES",
+      "city": "FOLGUEROLES",
+      "cp": "08519",
+      "lat": 41.9332,
+      "lon": 2.259,
+      "delivery_caj": 19.0,
+      "delivery_brl": 0,
+      "delivery_un": 5.0,
+      "ret_caj": 16.0,
+      "ret_brl": 0,
+      "delivery_up": 0.31943353174603173,
+      "return_up": 0.19166011904761904,
+      "delivery_value_eur": 550.3,
+      "items": [
+        {
+          "mat": "ED13",
+          "desc": "ESTRELLA DAMM 1/3 RET. PP",
+          "qty": 6.0,
+          "unit": "CAJ",
+          "ubic": "AA09A1",
+          "unit_price_eur": 26.0,
+          "line_total_eur": 156.0
+        },
+        {
+          "mat": "ED15LN",
+          "desc": "ESTRELLA DAMM 1/5 LN",
+          "qty": 2.0,
+          "unit": "CAJ",
+          "ubic": "AA08A1",
+          "unit_price_eur": 26.0,
+          "line_total_eur": 52.0
+        },
+        {
+          "mat": "FD13",
+          "desc": "FREE DAMM 1/3 RET.",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "AA06A1",
+          "unit_price_eur": 26.0,
+          "line_total_eur": 26.0
+        },
+        {
+          "mat": "TU13",
+          "desc": "TURIA 1/3 RET.",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "AA03A1",
+          "unit_price_eur": 26.0,
+          "line_total_eur": 26.0
+        },
+        {
+          "mat": "VO13",
+          "desc": "VOLL-DAMM 1/3 RET.",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "AA07A1",
+          "unit_price_eur": 26.0,
+          "line_total_eur": 26.0
+        },
+        {
+          "mat": "0LT0033",
+          "desc": "LETONA GRAN CREME PET 1,5L PET 6U",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "FA06A3",
+          "unit_price_eur": 24.0,
+          "line_total_eur": 24.0
+        },
+        {
+          "mat": "0VE0437",
+          "desc": "ESPINALER VERMUT TINTO 75CL 1U",
+          "qty": 1.0,
+          "unit": "UN",
+          "ubic": "ZCG",
+          "unit_price_eur": 1.15,
+          "line_total_eur": 1.15
+        },
+        {
+          "mat": "0ZU0047",
+          "desc": "PAGO NARANJA  20CL SR 24U",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "ZCG",
+          "unit_price_eur": 24.0,
+          "line_total_eur": 24.0
+        },
+        {
+          "mat": "0LI0172",
+          "desc": "SEAGRAM'S GIN  EXTRA DRY 70CL",
+          "qty": 1.0,
+          "unit": "BOT",
+          "ubic": "ZCG",
+          "unit_price_eur": 20.0,
+          "line_total_eur": 20.0
+        },
+        {
+          "mat": "0LI0346",
+          "desc": "PUERTO DE INDIAS STRAWBERRY GIN 70CL",
+          "qty": 1.0,
+          "unit": "BOT",
+          "ubic": "ZCG",
+          "unit_price_eur": 20.0,
+          "line_total_eur": 20.0
+        },
+        {
+          "mat": "0LI0141",
+          "desc": "MARIE BRIZARD ANIS 1L",
+          "qty": 1.0,
+          "unit": "BOT",
+          "ubic": "ZCG",
+          "unit_price_eur": 20.0,
+          "line_total_eur": 20.0
+        },
+        {
+          "mat": "0AM0147",
+          "desc": "BOCARI BOQUERON FRESCO 570 G.",
+          "qty": 1.0,
+          "unit": "UN",
+          "ubic": "ZCG",
+          "unit_price_eur": 1.15,
+          "line_total_eur": 1.15
+        },
+        {
+          "mat": "ED15LN",
+          "desc": "ESTRELLA DAMM 1/5 LN",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "AA08A1",
+          "unit_price_eur": 26.0,
+          "line_total_eur": 26.0
+        },
+        {
+          "mat": "TU13",
+          "desc": "TURIA 1/3 RET.",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "AA03A1",
+          "unit_price_eur": 26.0,
+          "line_total_eur": 26.0
+        },
+        {
+          "mat": "ED13",
+          "desc": "ESTRELLA DAMM 1/3 RET. PP",
+          "qty": 3.0,
+          "unit": "CAJ",
+          "ubic": "AA09A1",
+          "unit_price_eur": 26.0,
+          "line_total_eur": 78.0
+        },
+        {
+          "mat": "0ZU0050",
+          "desc": "PAGO NARANJA-ZANAH-LIM\u00d3N  20CL SR 24U",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "ZCG",
+          "unit_price_eur": 24.0,
+          "line_total_eur": 24.0
+        }
+      ],
+      "ret_items": [
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 6.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        },
+        {
+          "mat": "CJ15",
+          "desc": "CAJA DAMM+BOT.1/5RET VACIO EN P.PLAS.A13",
+          "qty": 2.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        },
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        },
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        },
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        },
+        {
+          "mat": "CJ15",
+          "desc": "CAJA DAMM+BOT.1/5RET VACIO EN P.PLAS.A13",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        },
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        },
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 3.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        }
+      ],
+      "zona_transp": "DD13100063",
+      "window_open_min": 0,
+      "window_close_min": 1920
+    },
+    {
+      "id": "827999555",
+      "entrega_ids": [
+        "827999555"
+      ],
+      "name": "SUKIPA",
+      "address": "CALLE GRAN 9, 08506 CALLDETENES",
+      "city": "CALLDETENES",
+      "cp": "08506",
+      "lat": 41.9611,
+      "lon": 2.281,
+      "delivery_caj": 30.0,
+      "delivery_brl": 0,
+      "delivery_un": 0,
+      "ret_caj": 22.0,
+      "ret_brl": 0,
+      "delivery_up": 0.44747474747474747,
+      "return_up": 0.2684848484848485,
+      "delivery_value_eur": 792.0,
+      "items": [
+        {
+          "mat": "ED13",
+          "desc": "ESTRELLA DAMM 1/3 RET. PP",
+          "qty": 14.0,
+          "unit": "CAJ",
+          "ubic": "AA09A1",
+          "unit_price_eur": 26.0,
+          "line_total_eur": 364.0
+        },
+        {
+          "mat": "ED13LT",
+          "desc": "ESTRELLA DAMM 1/3 LATA",
+          "qty": 8.0,
+          "unit": "CAJ",
+          "ubic": "CA01A1",
+          "unit_price_eur": 27.5,
+          "line_total_eur": 220.0
+        },
+        {
+          "mat": "ED13",
+          "desc": "ESTRELLA DAMM 1/3 RET. PP",
+          "qty": 8.0,
+          "unit": "CAJ",
+          "ubic": "AA09A1",
+          "unit_price_eur": 26.0,
+          "line_total_eur": 208.0
+        }
+      ],
+      "ret_items": [
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 14.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        },
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 8.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        }
+      ],
+      "zona_transp": "DD13100063",
+      "window_open_min": 0,
+      "window_close_min": 1920
+    },
+    {
+      "id": "827999556",
+      "entrega_ids": [
+        "827999556"
+      ],
+      "name": "MAS L' ALBAREDA",
+      "address": "Avinguda de Sant Lloren\u00e7 68, 08504 SANT JULI\u00c0 DE VILATORTA",
+      "city": "SANT JULI\u00c0 DE VILATORTA",
+      "cp": "08504",
+      "lat": 41.9352,
+      "lon": 2.258,
+      "delivery_caj": 43.0,
+      "delivery_brl": 0,
+      "delivery_un": 0,
+      "ret_caj": 22.0,
+      "ret_brl": 0,
+      "delivery_up": 0.8664171476671476,
+      "return_up": 0.5198502886002886,
+      "delivery_value_eur": 787.0,
+      "items": [
+        {
+          "mat": "ED13SR",
+          "desc": "ESTRELLA DAMM 1/3 SIN RETORNO",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "BA03A3",
+          "unit_price_eur": 26.0,
+          "line_total_eur": 26.0
+        },
+        {
+          "mat": "ED14P6",
+          "desc": "ESTRELLA DAMM 1/4 PACK SEMICERRADO 6U.",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "DB04A3",
+          "unit_price_eur": 27.5,
+          "line_total_eur": 27.5
+        },
+        {
+          "mat": "EDI34SR",
+          "desc": "INEDIT DAMM 3/4 SR CAJA 12U.",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "DB01B1",
+          "unit_price_eur": 26.0,
+          "line_total_eur": 26.0
+        },
+        {
+          "mat": "FD14P6",
+          "desc": "FREE DAMM 1/4 PACK 6U.",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "DB02A3",
+          "unit_price_eur": 27.5,
+          "line_total_eur": 27.5
+        },
+        {
+          "mat": "VE11",
+          "desc": "AGUA VERI 1/1 VIDRIO RET.",
+          "qty": 18.0,
+          "unit": "CAJ",
+          "ubic": "AA11A1",
+          "unit_price_eur": 16.0,
+          "line_total_eur": 288.0
+        },
+        {
+          "mat": "VE13",
+          "desc": "AGUA VERI 1/3 VIDRIO RET.",
+          "qty": 2.0,
+          "unit": "CAJ",
+          "ubic": "BA03A2",
+          "unit_price_eur": 16.0,
+          "line_total_eur": 32.0
+        },
+        {
+          "mat": "VE12SP",
+          "desc": "AGUA VERI 1/2 PET CAJA 24U. T.TH",
+          "qty": 3.0,
+          "unit": "CAJ",
+          "ubic": "EB03A1",
+          "unit_price_eur": 16.0,
+          "line_total_eur": 48.0
+        },
+        {
+          "mat": "VE32SP",
+          "desc": "AGUA VERI 1,5L PET CAJA 12U.",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "EB02A1",
+          "unit_price_eur": 16.0,
+          "line_total_eur": 16.0
+        },
+        {
+          "mat": "VE51SP",
+          "desc": "AGUA VERI 5/1 CAJA 3U.",
+          "qty": 8.0,
+          "unit": "CAJ",
+          "ubic": "BC04A3",
+          "unit_price_eur": 16.0,
+          "line_total_eur": 128.0
+        },
+        {
+          "mat": "0AG0010",
+          "desc": "VICHY CATALAN GAS 1L RET 12U",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "AC07A2",
+          "unit_price_eur": 24.0,
+          "line_total_eur": 24.0
+        },
+        {
+          "mat": "0LT0032",
+          "desc": "CACAOLAT VIDRIO 20CL RET 30U",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "AC04A3",
+          "unit_price_eur": 24.0,
+          "line_total_eur": 24.0
+        },
+        {
+          "mat": "0LT0033",
+          "desc": "LETONA GRAN CREME PET 1,5L PET 6U",
+          "qty": 4.0,
+          "unit": "CAJ",
+          "ubic": "FA06A3",
+          "unit_price_eur": 24.0,
+          "line_total_eur": 96.0
+        },
+        {
+          "mat": "0ZU0049",
+          "desc": "PAGO MELOCOTON  20CL SR 24U",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "ZCG",
+          "unit_price_eur": 24.0,
+          "line_total_eur": 24.0
+        }
+      ],
+      "ret_items": [
+        {
+          "mat": "CJ11V",
+          "desc": "CAJAS COMPLETAS 1/1 V",
+          "qty": 18.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        },
+        {
+          "mat": "CJ13V",
+          "desc": "CAJAS COMPLETAS 1/3 V",
+          "qty": 2.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        },
+        {
+          "mat": "3ENV0042",
+          "desc": "C.C. AGUA 1/1 VICHY-FONT D'OR",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        },
+        {
+          "mat": "3ENV0029",
+          "desc": "C.C. CACAOLAT 30 U.",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        }
+      ],
+      "zona_transp": "DD13100063",
+      "window_open_min": 0,
+      "window_close_min": 1920
+    },
+    {
+      "id": "827999557",
+      "entrega_ids": [
+        "827999557"
+      ],
+      "name": "L'ESPAI RESTAURANT",
+      "address": "CALLE REC D'ACUMULADA 9, 08519 FOLGUEROLES",
+      "city": "FOLGUEROLES",
+      "cp": "08519",
+      "lat": 41.9332,
+      "lon": 2.259,
+      "delivery_caj": 11.0,
+      "delivery_brl": 2.0,
+      "delivery_un": 0,
+      "ret_caj": 9.0,
+      "ret_brl": 2.0,
+      "delivery_up": 0.3119047619047619,
+      "return_up": 0.18714285714285714,
+      "delivery_value_eur": 474.0,
+      "items": [
+        {
+          "mat": "ED13",
+          "desc": "ESTRELLA DAMM 1/3 RET. PP",
+          "qty": 6.0,
+          "unit": "CAJ",
+          "ubic": "AA09A1",
+          "unit_price_eur": 26.0,
+          "line_total_eur": 156.0
+        },
+        {
+          "mat": "DL20",
+          "desc": "DAMM LEMON BARRIL 20L.",
+          "qty": 1.0,
+          "unit": "BRL",
+          "ubic": "AC03A3",
+          "unit_price_eur": 96.0,
+          "line_total_eur": 96.0
+        },
+        {
+          "mat": "TU20",
+          "desc": "TURIA BARRIL 20L.",
+          "qty": 1.0,
+          "unit": "BRL",
+          "ubic": "AC03A2",
+          "unit_price_eur": 96.0,
+          "line_total_eur": 96.0
+        },
+        {
+          "mat": "0CF0413",
+          "desc": "MOMENT\u00a0TEA\u00a0INFUANIS DIGST\u00a015U",
+          "qty": 2.0,
+          "unit": "CAJ",
+          "ubic": "ZCG",
+          "unit_price_eur": 24.0,
+          "line_total_eur": 48.0
+        },
+        {
+          "mat": "ED13",
+          "desc": "ESTRELLA DAMM 1/3 RET. PP",
+          "qty": 3.0,
+          "unit": "CAJ",
+          "ubic": "AA09A1",
+          "unit_price_eur": 26.0,
+          "line_total_eur": 78.0
+        }
+      ],
+      "ret_items": [
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 6.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        },
+        {
+          "mat": "BRL20V",
+          "desc": "BARRIL INOX 20L. TANQUETA A16",
+          "qty": 1.0,
+          "unit": "BRL",
+          "ubic": "ENVASE"
+        },
+        {
+          "mat": "BRL20V",
+          "desc": "BARRIL INOX 20L. TANQUETA A16",
+          "qty": 1.0,
+          "unit": "BRL",
+          "ubic": "ENVASE"
+        },
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 3.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        }
+      ],
+      "zona_transp": "DD13100063",
+      "window_open_min": 0,
+      "window_close_min": 1920
+    },
+    {
+      "id": "827999558",
+      "entrega_ids": [
+        "827999558"
+      ],
+      "name": "EL RECO D'EN PERE",
+      "address": "CALLE PIRINEU 22, 08507 SANTA EUG\u00c8NIA DE BERGA",
+      "city": "SANTA EUG\u00c8NIA DE BERGA",
+      "cp": "08507",
+      "lat": 41.9512,
+      "lon": 2.249,
+      "delivery_caj": 4.0,
+      "delivery_brl": 0,
+      "delivery_un": 0,
+      "ret_caj": 0,
+      "ret_brl": 0,
+      "delivery_up": 0.037037037037037035,
+      "return_up": 0.02222222222222222,
+      "delivery_value_eur": 110.0,
+      "items": [
+        {
+          "mat": "0RF0019",
+          "desc": "/-COCA COLA LATA 33CL 24U",
+          "qty": 2.0,
+          "unit": "CAJ",
+          "ubic": "CA04A2",
+          "unit_price_eur": 27.5,
+          "line_total_eur": 55.0
+        },
+        {
+          "mat": "0RF0079",
+          "desc": "/-COCA COLA ZERO LATA 33CL 24U",
+          "qty": 2.0,
+          "unit": "CAJ",
+          "ubic": "CA03A3",
+          "unit_price_eur": 27.5,
+          "line_total_eur": 55.0
+        }
+      ],
+      "ret_items": [],
+      "zona_transp": "DD13100063",
+      "window_open_min": 0,
+      "window_close_min": 1920
+    },
+    {
+      "id": "827999559",
+      "entrega_ids": [
+        "827999559"
+      ],
+      "name": "RESTAURANT EL ROSER",
+      "address": "Avinguda Pau Casals 22, 08506 CALLDETENES",
+      "city": "CALLDETENES",
+      "cp": "08506",
+      "lat": 41.9611,
+      "lon": 2.281,
+      "delivery_caj": 14.0,
+      "delivery_brl": 1.0,
+      "delivery_un": 0,
+      "ret_caj": 12.0,
+      "ret_brl": 1.0,
+      "delivery_up": 0.40363756613756613,
+      "return_up": 0.24218253968253967,
+      "delivery_value_eur": 473.0,
+      "items": [
+        {
+          "mat": "ED13",
+          "desc": "ESTRELLA DAMM 1/3 RET. PP",
+          "qty": 4.0,
+          "unit": "CAJ",
+          "ubic": "AA09A1",
+          "unit_price_eur": 26.0,
+          "line_total_eur": 104.0
+        },
+        {
+          "mat": "ED15LN",
+          "desc": "ESTRELLA DAMM 1/5 LN",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "AA08A1",
+          "unit_price_eur": 26.0,
+          "line_total_eur": 26.0
+        },
+        {
+          "mat": "FDT13",
+          "desc": "FREE DAMM TOSTADA 1/3 RET. PP",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "AA04A1",
+          "unit_price_eur": 26.0,
+          "line_total_eur": 26.0
+        },
+        {
+          "mat": "VO13",
+          "desc": "VOLL-DAMM 1/3 RET.",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "AA07A1",
+          "unit_price_eur": 26.0,
+          "line_total_eur": 26.0
+        },
+        {
+          "mat": "ED30",
+          "desc": "ESTRELLA DAMM BARRIL 30",
+          "qty": 1.0,
+          "unit": "BRL",
+          "ubic": "AA10A1",
+          "unit_price_eur": 112.0,
+          "line_total_eur": 112.0
+        },
+        {
+          "mat": "0AG0011",
+          "desc": "VICHY CATALAN GAS 1/2 RET 20U",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "AC07A1",
+          "unit_price_eur": 24.0,
+          "line_total_eur": 24.0
+        },
+        {
+          "mat": "0AG0019",
+          "desc": "FONT D.OR MAXIMUM NATURAL 1/2 RET 20U",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "AC08A1",
+          "unit_price_eur": 24.0,
+          "line_total_eur": 24.0
+        },
+        {
+          "mat": "0RF0019",
+          "desc": "/-COCA COLA LATA 33CL 24U",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "CA04A2",
+          "unit_price_eur": 27.5,
+          "line_total_eur": 27.5
+        },
+        {
+          "mat": "0RF0079",
+          "desc": "/-COCA COLA ZERO LATA 33CL 24U",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "CA03A3",
+          "unit_price_eur": 27.5,
+          "line_total_eur": 27.5
+        },
+        {
+          "mat": "0RF0287",
+          "desc": "/-COCA COLA VR237 24U",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "AC06A1",
+          "unit_price_eur": 24.0,
+          "line_total_eur": 24.0
+        },
+        {
+          "mat": "ED13",
+          "desc": "ESTRELLA DAMM 1/3 RET. PP",
+          "qty": 2.0,
+          "unit": "CAJ",
+          "ubic": "AA09A1",
+          "unit_price_eur": 26.0,
+          "line_total_eur": 52.0
+        }
+      ],
+      "ret_items": [
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 4.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        },
+        {
+          "mat": "CJ15",
+          "desc": "CAJA DAMM+BOT.1/5RET VACIO EN P.PLAS.A13",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        },
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        },
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        },
+        {
+          "mat": "BRL30V",
+          "desc": "BARRIL INOX 30L. EURONORMA",
+          "qty": 1.0,
+          "unit": "BRL",
+          "ubic": "ENVASE"
+        },
+        {
+          "mat": "3ENV0041",
+          "desc": "C.C. AGUA 1/2 VICHY-FONT D'OR",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        },
+        {
+          "mat": "3ENV0058",
+          "desc": "C.C. 1/2 FONT D'OR MAXIMUM",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        },
+        {
+          "mat": "3ENV0021",
+          "desc": "CAJA+BOTELLA COLA VR237",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        },
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 2.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        }
+      ],
+      "zona_transp": "DD13100063",
+      "window_open_min": 0,
+      "window_close_min": 1920
+    }
+  ],
+  "final_route_detail": [
+    {
+      "stop_index": 0,
+      "customer_id": "827999545",
+      "customer_name": "Restaurant L'Arum\u00ed",
+      "arrival_time": "06:44",
+      "departure_time": "06:52",
+      "travel_time_min": 44.18,
+      "distance_km": 54.806,
+      "fuel_cost": 6.5767,
+      "operational_cost": 18.2642,
+      "priority_score": 1.0,
+      "walking_group_id": null,
+      "window_open": "06:00",
+      "window_close": "14:00",
+      "window_status": "on_time",
+      "lat": 41.9512,
+      "lon": 2.249,
+      "delivery_caj": 3.0,
+      "delivery_brl": 2.0,
+      "return_caj": 1.0,
+      "return_brl": 2.0,
+      "priority_breakdown_estimated": {
+        "revenue": 0.2069,
+        "distance": 0.1379,
+        "fuel_cost": 0.1034,
+        "travel_time": 0.069,
+        "operational_cost": 0.069,
+        "route_efficiency": 0.069,
+        "time_window_urgency": 0.0345
+      }
+    }
+  ],
+  "metrics_comparison": {
+    "baseline": {
+      "distance_km": 110.301,
+      "duration_min": 94.62,
+      "fuel_liters_est": 9.8,
+      "co2_kg_est": 25.87,
+      "cost_eur": 46.352,
+      "fuel_cost_eur": 13.2361,
+      "operational_cost_eur": 33.1158
+    },
+    "optimized": {
+      "distance_km": 110.301,
+      "duration_min": 94.62,
+      "fuel_liters_est": 9.8,
+      "co2_kg_est": 25.87,
+      "cost_eur": 46.3519,
+      "fuel_cost_eur": 13.2361,
+      "operational_cost_eur": 33.1158
+    }
+  },
+  "route_summary": {
+    "total_stops": 1,
+    "total_distance_km": 110.301,
+    "total_duration_min": 94.62,
+    "total_fuel_cost": 13.2361,
+    "total_operational_cost": 33.1158,
+    "total_revenue": 309.0,
+    "walking_groups_count": 0,
+    "estimated_time_saved_min": 0.0,
+    "baseline_rand_maps_distance_km": 110.301,
+    "baseline_rand_maps_fuel_cost": 13.2361,
+    "baseline_rand_maps_operational_cost": 33.1158,
+    "baseline_rand_maps_total_eur": 46.352,
+    "baseline_rand_maps_drive_service_min": 94.62
+  },
+  "unload_time_saved_min_estimate": 0.0
+}

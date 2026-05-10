@@ -1,0 +1,110 @@
+{
+  "route_code": "DR0001",
+  "date": "13/02/2026",
+  "transport_id": "DD13100033",
+  "transporter_name": "Transporter DD13100033",
+  "truck_type": "large",
+  "truck_slots": 8,
+  "loading_after_lifo": [
+    {
+      "parcela": 1,
+      "customer_name": "Devoluciones (consolidado)",
+      "parcela_volume_pct": 50.0,
+      "items": [
+        {
+          "material": "RET",
+          "quantity": 21
+        }
+      ]
+    },
+    {
+      "parcela": 2,
+      "customer_name": "RSTE. LA PAGESA",
+      "parcela_volume_pct": 95.0,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 45
+        }
+      ]
+    },
+    {
+      "parcela": 4,
+      "customer_name": "RESTAURANTE MERITXELL",
+      "parcela_volume_pct": 95.0,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 26
+        }
+      ]
+    },
+    {
+      "parcela": 7,
+      "customer_name": "PADELIN",
+      "parcela_volume_pct": 29.5,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 5
+        }
+      ]
+    }
+  ],
+  "loading_before_randomized": [
+    {
+      "parcela": 1,
+      "customer_name": "Devoluciones (consolidado)",
+      "parcela_volume_pct": 50.0,
+      "items": [
+        {
+          "material": "RET",
+          "quantity": 21
+        }
+      ]
+    },
+    {
+      "parcela": 2,
+      "customer_name": "RSTE. LA PAGESA",
+      "parcela_volume_pct": 95.0,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 45
+        }
+      ]
+    },
+    {
+      "parcela": 4,
+      "customer_name": "RESTAURANTE MERITXELL",
+      "parcela_volume_pct": 95.0,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 26
+        }
+      ]
+    },
+    {
+      "parcela": 7,
+      "customer_name": "PADELIN",
+      "parcela_volume_pct": 29.5,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 5
+        }
+      ]
+    }
+  ],
+  "warehouse_pick_sequence": [],
+  "plan_summary": {
+    "total_weight_kg": 4985.8,
+    "total_volume_l": 61823.9,
+    "most_loaded_parcela_pct": 95.0,
+    "synthetic_from_route": true
+  },
+  "warnings": [
+    "Distribuci\u00f3n sint\u00e9tica (orden de visita \u00b7 demo). Ejecutar Block 3 para plan almac\u00e9n + ZM040."
+  ]
+}

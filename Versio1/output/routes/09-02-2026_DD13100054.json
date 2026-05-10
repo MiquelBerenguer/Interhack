@@ -1,0 +1,1043 @@
+{
+  "route_code": "DA0216",
+  "date": "09/02/2026",
+  "transport_id": "DD13100054",
+  "transporter_name": "Transporter DD13100054",
+  "truck_type": "standard",
+  "truck_slots": 6,
+  "zona_key": "DD13100054",
+  "priority_weights_used": {
+    "revenue": 0.3,
+    "distance": 0.2,
+    "fuel_cost": 0.15,
+    "travel_time": 0.1,
+    "operational_cost": 0.1,
+    "route_efficiency": 0.1,
+    "time_window_urgency": 0.05
+  },
+  "depot": {
+    "name": "Estrella Damm Mollet - Magatzem",
+    "address": "Carrer Moli de Can Bassa, Mollet del Valles, Barcelona",
+    "lat": 41.5363,
+    "lon": 2.2131
+  },
+  "baseline_visit_order_global": [
+    3,
+    2,
+    8,
+    9,
+    4,
+    1,
+    10
+  ],
+  "optimized_visit_order_global": [
+    1,
+    4,
+    2,
+    3,
+    8,
+    9,
+    10
+  ],
+  "all_stops": [
+    {
+      "id": "827977929",
+      "entrega_ids": [
+        "827977929"
+      ],
+      "name": "CASAL CIVIC TERRASSA",
+      "address": "Carrer de Wagner 2, 08222 TERRASSA",
+      "city": "TERRASSA",
+      "cp": "08222",
+      "lat": 41.593,
+      "lon": 2.1940000000000004,
+      "delivery_caj": 4.0,
+      "delivery_brl": 0,
+      "delivery_un": 6.0,
+      "ret_caj": 0,
+      "ret_brl": 0,
+      "delivery_up": 0.07184303350970017,
+      "return_up": 0.0431058201058201,
+      "delivery_value_eur": 121.75,
+      "items": [
+        {
+          "mat": "0CF1136",
+          "desc": "GARRIGA CREME NATURAL BOLSA 1KG 1U",
+          "qty": 2.0,
+          "unit": "UN",
+          "ubic": "FA08A2",
+          "unit_price_eur": 1.15,
+          "line_total_eur": 2.3
+        },
+        {
+          "mat": "0CF1137",
+          "desc": "GARRIGA DESCAFEINADO BOLSA 500G 1U",
+          "qty": 3.0,
+          "unit": "UN",
+          "ubic": "FC01A3",
+          "unit_price_eur": 1.15,
+          "line_total_eur": 3.45
+        },
+        {
+          "mat": "0AM1290",
+          "desc": "XPLICIT AZUCAR 7GR  1000U",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "FC02A2",
+          "unit_price_eur": 24.0,
+          "line_total_eur": 24.0
+        },
+        {
+          "mat": "0CF0410",
+          "desc": "MOMENT\u00a0TEA\u00a0\u00a0MANZANILLA\u00a0E15 15U",
+          "qty": 1.0,
+          "unit": "EST",
+          "ubic": "ZCG",
+          "unit_price_eur": 20.0,
+          "line_total_eur": 20.0
+        },
+        {
+          "mat": "0CF0421",
+          "desc": "MOMENT\u00a0TEA\u00a0FRUTAS\u00a0BOSQUE\u00a015U",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "ZCG",
+          "unit_price_eur": 24.0,
+          "line_total_eur": 24.0
+        },
+        {
+          "mat": "0CF0415",
+          "desc": "MOMENT\u00a0TEA\u00a0TILA 15U",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "ZCG",
+          "unit_price_eur": 24.0,
+          "line_total_eur": 24.0
+        },
+        {
+          "mat": "0AM1634",
+          "desc": "XPLICIT EDULCORANTE 1G 150U",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "FC01C4",
+          "unit_price_eur": 24.0,
+          "line_total_eur": 24.0
+        }
+      ],
+      "ret_items": [],
+      "zona_transp": "DD13100051",
+      "window_open_min": 0,
+      "window_close_min": 1920
+    },
+    {
+      "id": "827977930",
+      "entrega_ids": [
+        "827977930"
+      ],
+      "name": "BAR LA PENYA 1",
+      "address": "CARRETERA MONTCADA 148, 08223 TERRASSA",
+      "city": "TERRASSA",
+      "cp": "08223",
+      "lat": 41.593,
+      "lon": 2.1940000000000004,
+      "delivery_caj": 3.0,
+      "delivery_brl": 0,
+      "delivery_un": 12.0,
+      "ret_caj": 0,
+      "ret_brl": 0,
+      "delivery_up": 1.1109171075837743,
+      "return_up": 0.6665502645502646,
+      "delivery_value_eur": 142.35000000000002,
+      "items": [
+        {
+          "mat": "0CF1136",
+          "desc": "GARRIGA CREME NATURAL BOLSA 1KG 1U",
+          "qty": 6.0,
+          "unit": "UN",
+          "ubic": "FA08A2",
+          "unit_price_eur": 1.15,
+          "line_total_eur": 6.9
+        },
+        {
+          "mat": "0CF1137",
+          "desc": "GARRIGA DESCAFEINADO BOLSA 500G 1U",
+          "qty": 2.0,
+          "unit": "UN",
+          "ubic": "FC01A3",
+          "unit_price_eur": 1.15,
+          "line_total_eur": 2.3
+        },
+        {
+          "mat": "0LM2484",
+          "desc": "COMBO VASO+TAPA NAT 8OZ 250CC 50U",
+          "qty": 3.0,
+          "unit": "PAK",
+          "ubic": "ZCG",
+          "unit_price_eur": 20.0,
+          "line_total_eur": 60.0
+        },
+        {
+          "mat": "0AM0876",
+          "desc": "AZUCAR MORENO CEPAC 6G 500U",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "ZCG",
+          "unit_price_eur": 24.0,
+          "line_total_eur": 24.0
+        },
+        {
+          "mat": "0AM0783",
+          "desc": "LOTUS BISCOFF 300U",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "FA05A2",
+          "unit_price_eur": 24.0,
+          "line_total_eur": 24.0
+        },
+        {
+          "mat": "0CF0029",
+          "desc": "NESCAFE DESCAFEINADO SOBRE 2G 100U",
+          "qty": 1.0,
+          "unit": "UN",
+          "ubic": "ZCG",
+          "unit_price_eur": 1.15,
+          "line_total_eur": 1.15
+        },
+        {
+          "mat": "0AM1290",
+          "desc": "XPLICIT AZUCAR 7GR  1000U",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "FC02A2",
+          "unit_price_eur": 24.0,
+          "line_total_eur": 24.0
+        }
+      ],
+      "ret_items": [],
+      "zona_transp": "DD13100054",
+      "window_open_min": 0,
+      "window_close_min": 1920
+    },
+    {
+      "id": "827977931",
+      "entrega_ids": [
+        "827977931"
+      ],
+      "name": "EL PUNT DE TROBADA",
+      "address": "CARRER COLOM 209, 08223 TERRASSA",
+      "city": "TERRASSA",
+      "cp": "08223",
+      "lat": 41.593,
+      "lon": 2.1940000000000004,
+      "delivery_caj": 0,
+      "delivery_brl": 0,
+      "delivery_un": 12.0,
+      "ret_caj": 0,
+      "ret_brl": 0,
+      "delivery_up": 0.045,
+      "return_up": 0.027,
+      "delivery_value_eur": 13.8,
+      "items": [
+        {
+          "mat": "0CF1134",
+          "desc": "GARRIGA S.SUPERIOR NATURAL BOLSA 1KG 1U",
+          "qty": 10.0,
+          "unit": "UN",
+          "ubic": "FA08B5",
+          "unit_price_eur": 1.15,
+          "line_total_eur": 11.5
+        },
+        {
+          "mat": "0CF1137",
+          "desc": "GARRIGA DESCAFEINADO BOLSA 500G 1U",
+          "qty": 2.0,
+          "unit": "UN",
+          "ubic": "FC01A3",
+          "unit_price_eur": 1.15,
+          "line_total_eur": 2.3
+        }
+      ],
+      "ret_items": [],
+      "zona_transp": "DD13100054",
+      "window_open_min": 0,
+      "window_close_min": 1920
+    },
+    {
+      "id": "827977932",
+      "entrega_ids": [
+        "827977932"
+      ],
+      "name": "BAR LA PENYA - 2",
+      "address": "CARRER DE L'ANOIA 7, 08192 SANT QUIRZE DEL VALL\u00c8S",
+      "city": "SANT QUIRZE DEL VALL\u00c8S",
+      "cp": "08192",
+      "lat": 41.546,
+      "lon": 2.223,
+      "delivery_caj": 3.0,
+      "delivery_brl": 0,
+      "delivery_un": 10.0,
+      "ret_caj": 0,
+      "ret_brl": 0,
+      "delivery_up": 0.11758377425044092,
+      "return_up": 0.07055026455026454,
+      "delivery_value_eur": 140.05,
+      "items": [
+        {
+          "mat": "0CF1136",
+          "desc": "GARRIGA CREME NATURAL BOLSA 1KG 1U",
+          "qty": 6.0,
+          "unit": "UN",
+          "ubic": "FA08A2",
+          "unit_price_eur": 1.15,
+          "line_total_eur": 6.9
+        },
+        {
+          "mat": "0CF1137",
+          "desc": "GARRIGA DESCAFEINADO BOLSA 500G 1U",
+          "qty": 1.0,
+          "unit": "UN",
+          "ubic": "FC01A3",
+          "unit_price_eur": 1.15,
+          "line_total_eur": 1.15
+        },
+        {
+          "mat": "0AM1290",
+          "desc": "XPLICIT AZUCAR 7GR  1000U",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "FC02A2",
+          "unit_price_eur": 24.0,
+          "line_total_eur": 24.0
+        },
+        {
+          "mat": "0CF0410",
+          "desc": "MOMENT\u00a0TEA\u00a0\u00a0MANZANILLA\u00a0E15 15U",
+          "qty": 1.0,
+          "unit": "EST",
+          "ubic": "ZCG",
+          "unit_price_eur": 20.0,
+          "line_total_eur": 20.0
+        },
+        {
+          "mat": "0CF0124",
+          "desc": "MOMENT\u00a0TEA\u00a0MENTA\u00a0POLEO\u00a015U",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "ZCG",
+          "unit_price_eur": 24.0,
+          "line_total_eur": 24.0
+        },
+        {
+          "mat": "0CF0415",
+          "desc": "MOMENT\u00a0TEA\u00a0TILA 15U",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "ZCG",
+          "unit_price_eur": 24.0,
+          "line_total_eur": 24.0
+        },
+        {
+          "mat": "0LM2488",
+          "desc": "COMBO VASO+TAPA NAT 7OZ 200CC 50U",
+          "qty": 2.0,
+          "unit": "PAK",
+          "ubic": "ZCG",
+          "unit_price_eur": 20.0,
+          "line_total_eur": 40.0
+        }
+      ],
+      "ret_items": [],
+      "zona_transp": "DD13100054",
+      "window_open_min": 0,
+      "window_close_min": 1920
+    },
+    {
+      "id": "827977933",
+      "entrega_ids": [
+        "827977933"
+      ],
+      "name": "FORN CAFETERIA AVENIDA",
+      "address": "AVINGUDA D'ANGEL SALLENT 146, 08224 TERRASSA",
+      "city": "TERRASSA",
+      "cp": "08224",
+      "lat": 41.593,
+      "lon": 2.1940000000000004,
+      "delivery_caj": 2.0,
+      "delivery_brl": 0,
+      "delivery_un": 14.0,
+      "ret_caj": 0,
+      "ret_brl": 0,
+      "delivery_up": 0.10354497354497355,
+      "return_up": 0.06212698412698413,
+      "delivery_value_eur": 120.65,
+      "items": [
+        {
+          "mat": "0CF1134",
+          "desc": "GARRIGA S.SUPERIOR NATURAL BOLSA 1KG 1U",
+          "qty": 8.0,
+          "unit": "UN",
+          "ubic": "FA08B5",
+          "unit_price_eur": 1.15,
+          "line_total_eur": 9.2
+        },
+        {
+          "mat": "0CF1137",
+          "desc": "GARRIGA DESCAFEINADO BOLSA 500G 1U",
+          "qty": 3.0,
+          "unit": "UN",
+          "ubic": "FC01A3",
+          "unit_price_eur": 1.15,
+          "line_total_eur": 3.45
+        },
+        {
+          "mat": "0AM0876",
+          "desc": "AZUCAR MORENO CEPAC 6G 500U",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "ZCG",
+          "unit_price_eur": 24.0,
+          "line_total_eur": 24.0
+        },
+        {
+          "mat": "0AM1634",
+          "desc": "XPLICIT EDULCORANTE 1G 150U",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "FC01C4",
+          "unit_price_eur": 24.0,
+          "line_total_eur": 24.0
+        },
+        {
+          "mat": "0LM2484",
+          "desc": "COMBO VASO+TAPA NAT 8OZ 250CC 50U",
+          "qty": 3.0,
+          "unit": "PAK",
+          "ubic": "ZCG",
+          "unit_price_eur": 20.0,
+          "line_total_eur": 60.0
+        }
+      ],
+      "ret_items": [],
+      "zona_transp": "DD13100054",
+      "window_open_min": 0,
+      "window_close_min": 1920
+    },
+    {
+      "id": "827977934",
+      "entrega_ids": [
+        "827977934"
+      ],
+      "name": "Bar Gat Negre",
+      "address": "Avinguda de l'Abat Marcet 251, 08225 TERRASSA",
+      "city": "TERRASSA",
+      "cp": "08225",
+      "lat": 41.593,
+      "lon": 2.1940000000000004,
+      "delivery_caj": 0,
+      "delivery_brl": 0,
+      "delivery_un": 6.0,
+      "ret_caj": 0,
+      "ret_brl": 0,
+      "delivery_up": 0.025,
+      "return_up": 0.015,
+      "delivery_value_eur": 6.8999999999999995,
+      "items": [
+        {
+          "mat": "0CF1136",
+          "desc": "GARRIGA CREME NATURAL BOLSA 1KG 1U",
+          "qty": 6.0,
+          "unit": "UN",
+          "ubic": "FA08A2",
+          "unit_price_eur": 1.15,
+          "line_total_eur": 6.9
+        }
+      ],
+      "ret_items": [],
+      "zona_transp": "DD13100051",
+      "window_open_min": 0,
+      "window_close_min": 1920
+    },
+    {
+      "id": "827977935",
+      "entrega_ids": [
+        "827977935",
+        "827977936",
+        "827977937"
+      ],
+      "name": "IBERICUS CENTRAL",
+      "address": "CALLE PROVEN\u00c7A 200, 08226 TERRASSA",
+      "city": "TERRASSA",
+      "cp": "08226",
+      "lat": 41.5618,
+      "lon": 2.0083,
+      "delivery_caj": 24.0,
+      "delivery_brl": 0,
+      "delivery_un": 0,
+      "ret_caj": 4.0,
+      "ret_brl": 0,
+      "delivery_up": 0.369047619047619,
+      "return_up": 0.2214285714285714,
+      "delivery_value_eur": 576.0,
+      "items": [
+        {
+          "mat": "0LT0032",
+          "desc": "CACAOLAT VIDRIO 20CL RET 30U",
+          "qty": 2.0,
+          "unit": "CAJ",
+          "ubic": "AC04A3",
+          "unit_price_eur": 24.0,
+          "line_total_eur": 48.0
+        },
+        {
+          "mat": "0LT0032",
+          "desc": "CACAOLAT VIDRIO 20CL RET 30U",
+          "qty": 2.0,
+          "unit": "CAJ",
+          "ubic": "AC04A3",
+          "unit_price_eur": 24.0,
+          "line_total_eur": 48.0
+        },
+        {
+          "mat": "0CF1140",
+          "desc": "MOMENT TEA MANZANILLA 100U",
+          "qty": 20.0,
+          "unit": "CAJ",
+          "ubic": "ZCG",
+          "unit_price_eur": 24.0,
+          "line_total_eur": 480.0
+        }
+      ],
+      "ret_items": [
+        {
+          "mat": "3ENV0029",
+          "desc": "C.C. CACAOLAT 30 U.",
+          "qty": 2.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        },
+        {
+          "mat": "3ENV0029",
+          "desc": "C.C. CACAOLAT 30 U.",
+          "qty": 2.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        }
+      ],
+      "zona_transp": "DD13100045",
+      "window_open_min": 0,
+      "window_close_min": 720
+    },
+    {
+      "id": "827977938",
+      "entrega_ids": [
+        "827977938"
+      ],
+      "name": "PISCINAS LES CREMADES",
+      "address": "CALLE LAS CREMADES S/N, 08140 CALDES DE MONTBUI",
+      "city": "CALDES DE MONTBUI",
+      "cp": "08140",
+      "lat": 41.561,
+      "lon": 2.2159999999999997,
+      "delivery_caj": 5.0,
+      "delivery_brl": 0,
+      "delivery_un": 0,
+      "ret_caj": 0,
+      "ret_brl": 0,
+      "delivery_up": 0.04755731922398589,
+      "return_up": 0.028534391534391534,
+      "delivery_value_eur": 120.0,
+      "items": [
+        {
+          "mat": "0CF1122",
+          "desc": "MOMENT\u00a0TEA\u00a0\u00a0CHAI TEA LATTE 10U",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "ZCG",
+          "unit_price_eur": 24.0,
+          "line_total_eur": 24.0
+        },
+        {
+          "mat": "0CF1123",
+          "desc": "MOMENT\u00a0TEA\u00a0\u00a0T\u00c9 MATCHA LATTE 10U",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "ZCG",
+          "unit_price_eur": 24.0,
+          "line_total_eur": 24.0
+        },
+        {
+          "mat": "0AM1634",
+          "desc": "XPLICIT EDULCORANTE 1G 150U",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "FC01C4",
+          "unit_price_eur": 24.0,
+          "line_total_eur": 24.0
+        },
+        {
+          "mat": "0AM5463",
+          "desc": "AZUCAR BLANCO 6G 1000U \"BARES\"",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "FC02C1",
+          "unit_price_eur": 24.0,
+          "line_total_eur": 24.0
+        },
+        {
+          "mat": "0AM3588",
+          "desc": "DDI AZUCAR MORENO 6G 1000U",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "FC02A3",
+          "unit_price_eur": 24.0,
+          "line_total_eur": 24.0
+        }
+      ],
+      "ret_items": [],
+      "zona_transp": "DD13100045",
+      "window_open_min": 90,
+      "window_close_min": 240
+    },
+    {
+      "id": "827977939",
+      "entrega_ids": [
+        "827977939"
+      ],
+      "name": "EL DEHESA",
+      "address": "Pla\u00e7a Augusta 3, 08173 SANT CUGAT DEL VALL\u00c8S",
+      "city": "SANT CUGAT DEL VALL\u00c8S",
+      "cp": "08173",
+      "lat": 41.521,
+      "lon": 2.218,
+      "delivery_caj": 3.0,
+      "delivery_brl": 0,
+      "delivery_un": 11.0,
+      "ret_caj": 0,
+      "ret_brl": 0,
+      "delivery_up": 0.0819047619047619,
+      "return_up": 0.049142857142857134,
+      "delivery_value_eur": 84.65,
+      "items": [
+        {
+          "mat": "0CF1133",
+          "desc": "GARRIGA S.PURO ARABICA BOLSA 1KG 1U",
+          "qty": 10.0,
+          "unit": "UN",
+          "ubic": "FC01A3",
+          "unit_price_eur": 1.15,
+          "line_total_eur": 11.5
+        },
+        {
+          "mat": "0CF1137",
+          "desc": "GARRIGA DESCAFEINADO BOLSA 500G 1U",
+          "qty": 1.0,
+          "unit": "UN",
+          "ubic": "FC01A3",
+          "unit_price_eur": 1.15,
+          "line_total_eur": 1.15
+        },
+        {
+          "mat": "0CF1144",
+          "desc": "MOMENT TEA TE NEGRO 100U",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "ZCG",
+          "unit_price_eur": 24.0,
+          "line_total_eur": 24.0
+        },
+        {
+          "mat": "0CF1122",
+          "desc": "MOMENT\u00a0TEA\u00a0\u00a0CHAI TEA LATTE 10U",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "ZCG",
+          "unit_price_eur": 24.0,
+          "line_total_eur": 24.0
+        },
+        {
+          "mat": "0AM1291",
+          "desc": "AZUCAR BLANCO BOLSITA 7GR ''BARES''1000U",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "FC01A1",
+          "unit_price_eur": 24.0,
+          "line_total_eur": 24.0
+        }
+      ],
+      "ret_items": [],
+      "zona_transp": "DD13100054",
+      "window_open_min": 0,
+      "window_close_min": 1920
+    },
+    {
+      "id": "827979291",
+      "entrega_ids": [
+        "827979291"
+      ],
+      "name": "CLUB DE GOLF SANT CUGAT",
+      "address": "Carrer de Vill\u00e0 79, 08173 SANT CUGAT DEL VALL\u00c8S",
+      "city": "SANT CUGAT DEL VALL\u00c8S",
+      "cp": "08173",
+      "lat": 41.521,
+      "lon": 2.218,
+      "delivery_caj": 2.0,
+      "delivery_brl": 0,
+      "delivery_un": 30.0,
+      "ret_caj": 0,
+      "ret_brl": 0,
+      "delivery_up": 0.12663139329805997,
+      "return_up": 0.07597883597883598,
+      "delivery_value_eur": 82.5,
+      "items": [
+        {
+          "mat": "0CF1134",
+          "desc": "GARRIGA S.SUPERIOR NATURAL BOLSA 1KG 1U",
+          "qty": 20.0,
+          "unit": "UN",
+          "ubic": "FA08B5",
+          "unit_price_eur": 1.15,
+          "line_total_eur": 23.0
+        },
+        {
+          "mat": "0AM1291",
+          "desc": "AZUCAR BLANCO BOLSITA 7GR ''BARES''1000U",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "FC01A1",
+          "unit_price_eur": 24.0,
+          "line_total_eur": 24.0
+        },
+        {
+          "mat": "0AM3588",
+          "desc": "DDI AZUCAR MORENO 6G 1000U",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "FC02A3",
+          "unit_price_eur": 24.0,
+          "line_total_eur": 24.0
+        },
+        {
+          "mat": "0CF1137",
+          "desc": "GARRIGA DESCAFEINADO BOLSA 500G 1U",
+          "qty": 10.0,
+          "unit": "UN",
+          "ubic": "FC01A3",
+          "unit_price_eur": 1.15,
+          "line_total_eur": 11.5
+        }
+      ],
+      "ret_items": [],
+      "zona_transp": "DD13100054",
+      "window_open_min": 0,
+      "window_close_min": 1920
+    },
+    {
+      "id": "827979292",
+      "entrega_ids": [
+        "827979292"
+      ],
+      "name": "Club Tennis Barcino",
+      "address": "Pla\u00e7a de Narcisa Freixas 2, 08022 BARCELONA",
+      "city": "BARCELONA",
+      "cp": "08022",
+      "lat": 41.621,
+      "lon": 2.2070000000000003,
+      "delivery_caj": 2.0,
+      "delivery_brl": 0,
+      "delivery_un": 4.0,
+      "ret_caj": 0,
+      "ret_brl": 0,
+      "delivery_up": 0.03187830687830688,
+      "return_up": 0.019126984126984128,
+      "delivery_value_eur": 52.6,
+      "items": [
+        {
+          "mat": "0AM0876",
+          "desc": "AZUCAR MORENO CEPAC 6G 500U",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "ZCG",
+          "unit_price_eur": 24.0,
+          "line_total_eur": 24.0
+        },
+        {
+          "mat": "0AM1634",
+          "desc": "XPLICIT EDULCORANTE 1G 150U",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "FC01C4",
+          "unit_price_eur": 24.0,
+          "line_total_eur": 24.0
+        },
+        {
+          "mat": "0CF1031",
+          "desc": "BONKA ESSENTIA AM\u00c9RICAS 100% AR\u00c1BICA 1KG",
+          "qty": 4.0,
+          "unit": "UN",
+          "ubic": "FB05A2",
+          "unit_price_eur": 1.15,
+          "line_total_eur": 4.6
+        }
+      ],
+      "ret_items": [],
+      "zona_transp": "DD13100054",
+      "window_open_min": 0,
+      "window_close_min": 1920
+    }
+  ],
+  "final_route_detail": [
+    {
+      "stop_index": 1,
+      "customer_id": "827977930",
+      "customer_name": "BAR LA PENYA 1",
+      "arrival_time": "06:15",
+      "departure_time": "06:23",
+      "travel_time_min": 15.43,
+      "distance_km": 11.177,
+      "fuel_cost": 1.3412,
+      "operational_cost": 8.2017,
+      "priority_score": 1.0,
+      "walking_group_id": 1,
+      "window_open": "06:00",
+      "window_close": "14:00",
+      "window_status": "on_time",
+      "lat": 41.593,
+      "lon": 2.1940000000000004,
+      "delivery_caj": 3.0,
+      "delivery_brl": 0.0,
+      "return_caj": 0.0,
+      "return_brl": 0.0,
+      "priority_breakdown_estimated": {
+        "revenue": 0.2069,
+        "distance": 0.1379,
+        "fuel_cost": 0.1034,
+        "travel_time": 0.069,
+        "operational_cost": 0.069,
+        "route_efficiency": 0.069,
+        "time_window_urgency": 0.0345
+      }
+    },
+    {
+      "stop_index": 4,
+      "customer_id": "827977933",
+      "customer_name": "FORN CAFETERIA AVENIDA",
+      "arrival_time": "06:23",
+      "departure_time": "06:31",
+      "travel_time_min": 0.0,
+      "distance_km": 0.0,
+      "fuel_cost": 0.0,
+      "operational_cost": 2.8,
+      "priority_score": 0.3539,
+      "walking_group_id": 1,
+      "window_open": "06:00",
+      "window_close": "14:00",
+      "window_status": "on_time",
+      "lat": 41.593,
+      "lon": 2.1940000000000004,
+      "delivery_caj": 2.0,
+      "delivery_brl": 0.0,
+      "return_caj": 0.0,
+      "return_brl": 0.0,
+      "priority_breakdown_estimated": {
+        "revenue": 0.1321,
+        "distance": 0.088,
+        "fuel_cost": 0.066,
+        "travel_time": 0.044,
+        "operational_cost": 0.044,
+        "route_efficiency": 0.044,
+        "time_window_urgency": 0.022
+      }
+    },
+    {
+      "stop_index": 2,
+      "customer_id": "827977931",
+      "customer_name": "EL PUNT DE TROBADA",
+      "arrival_time": "06:31",
+      "departure_time": "06:39",
+      "travel_time_min": 0.0,
+      "distance_km": 0.0,
+      "fuel_cost": 0.0,
+      "operational_cost": 2.8,
+      "priority_score": 0.1,
+      "walking_group_id": 1,
+      "window_open": "06:00",
+      "window_close": "14:00",
+      "window_status": "on_time",
+      "lat": 41.593,
+      "lon": 2.1940000000000004,
+      "delivery_caj": 0.0,
+      "delivery_brl": 0.0,
+      "return_caj": 0.0,
+      "return_brl": 0.0,
+      "priority_breakdown_estimated": {
+        "revenue": 0.0545,
+        "distance": 0.0364,
+        "fuel_cost": 0.0273,
+        "travel_time": 0.0182,
+        "operational_cost": 0.0182,
+        "route_efficiency": 0.0182,
+        "time_window_urgency": 0.0091
+      }
+    },
+    {
+      "stop_index": 3,
+      "customer_id": "827977932",
+      "customer_name": "BAR LA PENYA - 2",
+      "arrival_time": "06:52",
+      "departure_time": "07:00",
+      "travel_time_min": 12.2,
+      "distance_km": 12.361,
+      "fuel_cost": 1.4833,
+      "operational_cost": 7.07,
+      "priority_score": 0.1444,
+      "walking_group_id": null,
+      "window_open": "06:00",
+      "window_close": "14:00",
+      "window_status": "on_time",
+      "lat": 41.546,
+      "lon": 2.223,
+      "delivery_caj": 3.0,
+      "delivery_brl": 0.0,
+      "return_caj": 0.0,
+      "return_brl": 0.0,
+      "priority_breakdown_estimated": {
+        "revenue": 0.0729,
+        "distance": 0.0486,
+        "fuel_cost": 0.0364,
+        "travel_time": 0.0243,
+        "operational_cost": 0.0243,
+        "route_efficiency": 0.0243,
+        "time_window_urgency": 0.0121
+      }
+    },
+    {
+      "stop_index": 8,
+      "customer_id": "827977939",
+      "customer_name": "EL DEHESA",
+      "arrival_time": "07:07",
+      "departure_time": "07:15",
+      "travel_time_min": 7.12,
+      "distance_km": 4.94,
+      "fuel_cost": 0.5928,
+      "operational_cost": 5.2908,
+      "priority_score": 0.3893,
+      "walking_group_id": 2,
+      "window_open": "06:00",
+      "window_close": "14:00",
+      "window_status": "on_time",
+      "lat": 41.521,
+      "lon": 2.218,
+      "delivery_caj": 3.0,
+      "delivery_brl": 0.0,
+      "return_caj": 0.0,
+      "return_brl": 0.0,
+      "priority_breakdown_estimated": {
+        "revenue": 0.1392,
+        "distance": 0.0928,
+        "fuel_cost": 0.0696,
+        "travel_time": 0.0464,
+        "operational_cost": 0.0464,
+        "route_efficiency": 0.0464,
+        "time_window_urgency": 0.0232
+      }
+    },
+    {
+      "stop_index": 9,
+      "customer_id": "827979291",
+      "customer_name": "CLUB DE GOLF SANT CUGAT",
+      "arrival_time": "07:15",
+      "departure_time": "07:23",
+      "travel_time_min": 0.0,
+      "distance_km": 0.0,
+      "fuel_cost": 0.0,
+      "operational_cost": 2.8,
+      "priority_score": 0.4,
+      "walking_group_id": 2,
+      "window_open": "06:00",
+      "window_close": "14:00",
+      "window_status": "on_time",
+      "lat": 41.521,
+      "lon": 2.218,
+      "delivery_caj": 2.0,
+      "delivery_brl": 0.0,
+      "return_caj": 0.0,
+      "return_brl": 0.0,
+      "priority_breakdown_estimated": {
+        "revenue": 0.1412,
+        "distance": 0.0941,
+        "fuel_cost": 0.0706,
+        "travel_time": 0.0471,
+        "operational_cost": 0.0471,
+        "route_efficiency": 0.0471,
+        "time_window_urgency": 0.0235
+      }
+    },
+    {
+      "stop_index": 10,
+      "customer_id": "827979292",
+      "customer_name": "Club Tennis Barcino",
+      "arrival_time": "07:47",
+      "departure_time": "07:55",
+      "travel_time_min": 24.18,
+      "distance_km": 21.691,
+      "fuel_cost": 2.6029,
+      "operational_cost": 11.2642,
+      "priority_score": -0.15,
+      "walking_group_id": null,
+      "window_open": "06:00",
+      "window_close": "14:00",
+      "window_status": "on_time",
+      "lat": 41.621,
+      "lon": 2.2070000000000003,
+      "delivery_caj": 2.0,
+      "delivery_brl": 0.0,
+      "return_caj": 0.0,
+      "return_brl": 0.0,
+      "priority_breakdown_estimated": {
+        "revenue": -0.06,
+        "distance": -0.04,
+        "fuel_cost": -0.03,
+        "travel_time": -0.02,
+        "operational_cost": -0.02,
+        "route_efficiency": -0.02,
+        "time_window_urgency": -0.01
+      }
+    }
+  ],
+  "metrics_comparison": {
+    "baseline": {
+      "distance_km": 71.686,
+      "duration_min": 150.72,
+      "fuel_liters_est": 6.37,
+      "co2_kg_est": 16.82,
+      "cost_eur": 61.3532,
+      "fuel_cost_eur": 8.6023,
+      "operational_cost_eur": 52.7508
+    },
+    "optimized": {
+      "distance_km": 65.829,
+      "duration_min": 137.75,
+      "fuel_liters_est": 5.85,
+      "co2_kg_est": 15.44,
+      "cost_eur": 56.112,
+      "fuel_cost_eur": 7.8995,
+      "operational_cost_eur": 48.2125
+    }
+  },
+  "route_summary": {
+    "total_stops": 7,
+    "total_distance_km": 65.829,
+    "total_duration_min": 137.75,
+    "total_fuel_cost": 7.8995,
+    "total_operational_cost": 48.2125,
+    "total_revenue": 636.6,
+    "walking_groups_count": 2,
+    "estimated_time_saved_min": 0.0,
+    "baseline_rand_maps_distance_km": 71.686,
+    "baseline_rand_maps_fuel_cost": 8.6023,
+    "baseline_rand_maps_operational_cost": 52.7508,
+    "baseline_rand_maps_total_eur": 61.3532,
+    "baseline_rand_maps_drive_service_min": 150.72
+  },
+  "unload_time_saved_min_estimate": 0.0
+}

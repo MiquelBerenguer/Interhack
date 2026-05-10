@@ -1,0 +1,88 @@
+{
+  "route_code": "DR0032",
+  "date": "09/02/2026",
+  "transport_id": "DD13100034",
+  "transporter_name": "Transporter DD13100034",
+  "truck_type": "large",
+  "truck_slots": 8,
+  "loading_after_lifo": [
+    {
+      "parcela": 1,
+      "customer_name": "Devoluciones (consolidado)",
+      "parcela_volume_pct": 46.0,
+      "items": [
+        {
+          "material": "RET",
+          "quantity": 19
+        }
+      ]
+    },
+    {
+      "parcela": 2,
+      "customer_name": "CULTURAL LA FABRICA",
+      "parcela_volume_pct": 95.0,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 59
+        }
+      ]
+    },
+    {
+      "parcela": 7,
+      "customer_name": "BAR CA LA MARI",
+      "parcela_volume_pct": 85.5,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 21
+        }
+      ]
+    }
+  ],
+  "loading_before_randomized": [
+    {
+      "parcela": 1,
+      "customer_name": "Devoluciones (consolidado)",
+      "parcela_volume_pct": 46.0,
+      "items": [
+        {
+          "material": "RET",
+          "quantity": 19
+        }
+      ]
+    },
+    {
+      "parcela": 2,
+      "customer_name": "CULTURAL LA FABRICA",
+      "parcela_volume_pct": 95.0,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 59
+        }
+      ]
+    },
+    {
+      "parcela": 7,
+      "customer_name": "BAR CA LA MARI",
+      "parcela_volume_pct": 85.5,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 21
+        }
+      ]
+    }
+  ],
+  "warehouse_pick_sequence": [],
+  "plan_summary": {
+    "total_weight_kg": 4190.2,
+    "total_volume_l": 51958.5,
+    "most_loaded_parcela_pct": 95.0,
+    "synthetic_from_route": true
+  },
+  "warnings": [
+    "Distribuci\u00f3n sint\u00e9tica (orden de visita \u00b7 demo). Ejecutar Block 3 para plan almac\u00e9n + ZM040."
+  ]
+}

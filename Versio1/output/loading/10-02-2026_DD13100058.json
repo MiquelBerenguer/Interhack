@@ -1,0 +1,212 @@
+{
+  "route_code": "DR0054",
+  "date": "10/02/2026",
+  "transport_id": "DD13100058",
+  "transporter_name": "Transporter DD13100058",
+  "truck_type": "standard",
+  "truck_slots": 6,
+  "loading_after_lifo": [
+    {
+      "parcela": 1,
+      "customer_name": "Devoluciones (consolidado)",
+      "parcela_volume_pct": 100.0,
+      "items": [
+        {
+          "material": "RET",
+          "quantity": 161
+        }
+      ]
+    },
+    {
+      "parcela": 2,
+      "customer_name": "BAR ARAMAN \u00b7 BAR VILAMIROSA \u00b7 CROISSANTERIA NACCAR",
+      "parcela_volume_pct": 100.0,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 51
+        },
+        {
+          "material": "ENT",
+          "quantity": 42
+        },
+        {
+          "material": "ENT",
+          "quantity": 33
+        }
+      ]
+    },
+    {
+      "parcela": 3,
+      "customer_name": "CAFE ANTIC \u00b7 MANLLEUET Cerveseria Restaurant \u00b7 E.S MANLLEU \u00b7 GRANJA CAFETERIA ROMA",
+      "parcela_volume_pct": 100.0,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 25
+        },
+        {
+          "material": "ENT",
+          "quantity": 6
+        },
+        {
+          "material": "ENT",
+          "quantity": 15
+        },
+        {
+          "material": "ENT",
+          "quantity": 9
+        }
+      ]
+    },
+    {
+      "parcela": 4,
+      "customer_name": "BAR UNIO \u00b7 REST.CAL BATLLE \u00b7 BAR BUS STOP \u00b7 FRANFURT 86",
+      "parcela_volume_pct": 66.6,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 5
+        },
+        {
+          "material": "ENT",
+          "quantity": 8
+        },
+        {
+          "material": "ENT",
+          "quantity": 7
+        },
+        {
+          "material": "ENT",
+          "quantity": 5
+        }
+      ]
+    },
+    {
+      "parcela": 5,
+      "customer_name": "BON PROFIT \u00b7 EL MOLINET \u00b7 BAR REST. MANLLEU",
+      "parcela_volume_pct": 44.0,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 5
+        },
+        {
+          "material": "ENT",
+          "quantity": 4
+        },
+        {
+          "material": "ENT",
+          "quantity": 1
+        }
+      ]
+    }
+  ],
+  "loading_before_randomized": [
+    {
+      "parcela": 1,
+      "customer_name": "Devoluciones (consolidado)",
+      "parcela_volume_pct": 100.0,
+      "items": [
+        {
+          "material": "RET",
+          "quantity": 161
+        }
+      ]
+    },
+    {
+      "parcela": 2,
+      "customer_name": "BAR ARAMAN \u00b7 BAR VILAMIROSA \u00b7 CROISSANTERIA NACCAR",
+      "parcela_volume_pct": 100.0,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 51
+        },
+        {
+          "material": "ENT",
+          "quantity": 42
+        },
+        {
+          "material": "ENT",
+          "quantity": 33
+        }
+      ]
+    },
+    {
+      "parcela": 3,
+      "customer_name": "CAFE ANTIC \u00b7 MANLLEUET Cerveseria Restaurant \u00b7 E.S MANLLEU \u00b7 GRANJA CAFETERIA ROMA",
+      "parcela_volume_pct": 100.0,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 25
+        },
+        {
+          "material": "ENT",
+          "quantity": 6
+        },
+        {
+          "material": "ENT",
+          "quantity": 15
+        },
+        {
+          "material": "ENT",
+          "quantity": 9
+        }
+      ]
+    },
+    {
+      "parcela": 4,
+      "customer_name": "BAR UNIO \u00b7 REST.CAL BATLLE \u00b7 BAR BUS STOP \u00b7 FRANFURT 86",
+      "parcela_volume_pct": 66.6,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 5
+        },
+        {
+          "material": "ENT",
+          "quantity": 8
+        },
+        {
+          "material": "ENT",
+          "quantity": 7
+        },
+        {
+          "material": "ENT",
+          "quantity": 5
+        }
+      ]
+    },
+    {
+      "parcela": 5,
+      "customer_name": "BON PROFIT \u00b7 EL MOLINET \u00b7 BAR REST. MANLLEU",
+      "parcela_volume_pct": 44.0,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 5
+        },
+        {
+          "material": "ENT",
+          "quantity": 4
+        },
+        {
+          "material": "ENT",
+          "quantity": 1
+        }
+      ]
+    }
+  ],
+  "warehouse_pick_sequence": [],
+  "plan_summary": {
+    "total_weight_kg": 7596.1,
+    "total_volume_l": 94191.6,
+    "most_loaded_parcela_pct": 100.0,
+    "synthetic_from_route": true
+  },
+  "warnings": [
+    "Distribuci\u00f3n sint\u00e9tica (orden de visita \u00b7 demo). Ejecutar Block 3 para plan almac\u00e9n + ZM040."
+  ]
+}

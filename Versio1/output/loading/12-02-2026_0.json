@@ -1,0 +1,44 @@
+{
+  "route_code": "DR0045",
+  "date": "12/02/2026",
+  "transport_id": "0",
+  "transporter_name": "Transporter 0",
+  "truck_type": "large",
+  "truck_slots": 8,
+  "loading_after_lifo": [
+    {
+      "parcela": 2,
+      "customer_name": "AAVV SANTA ROSA",
+      "parcela_volume_pct": 89.0,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 22
+        }
+      ]
+    }
+  ],
+  "loading_before_randomized": [
+    {
+      "parcela": 2,
+      "customer_name": "AAVV SANTA ROSA",
+      "parcela_volume_pct": 89.0,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 22
+        }
+      ]
+    }
+  ],
+  "warehouse_pick_sequence": [],
+  "plan_summary": {
+    "total_weight_kg": 1646.5,
+    "total_volume_l": 20416.6,
+    "most_loaded_parcela_pct": 89.0,
+    "synthetic_from_route": true
+  },
+  "warnings": [
+    "Distribuci\u00f3n sint\u00e9tica (orden de visita \u00b7 demo). Ejecutar Block 3 para plan almac\u00e9n + ZM040."
+  ]
+}

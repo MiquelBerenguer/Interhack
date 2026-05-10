@@ -1,0 +1,224 @@
+{
+  "route_code": "DR0016",
+  "date": "10/02/2026",
+  "transport_id": "DD13100017",
+  "transporter_name": "Transporter DD13100017",
+  "truck_type": "large",
+  "truck_slots": 8,
+  "loading_after_lifo": [
+    {
+      "parcela": 1,
+      "customer_name": "Devoluciones (consolidado)",
+      "parcela_volume_pct": 100.0,
+      "items": [
+        {
+          "material": "RET",
+          "quantity": 106
+        }
+      ]
+    },
+    {
+      "parcela": 2,
+      "customer_name": "XAVISAN \u00b7 GARDEN PIZZA (GRANOLLERS)",
+      "parcela_volume_pct": 100.0,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 31
+        },
+        {
+          "material": "ENT",
+          "quantity": 27
+        }
+      ]
+    },
+    {
+      "parcela": 3,
+      "customer_name": "BON QUALITAT \u00b7 LAPONIA CAFE",
+      "parcela_volume_pct": 100.0,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 26
+        },
+        {
+          "material": "ENT",
+          "quantity": 15
+        }
+      ]
+    },
+    {
+      "parcela": 4,
+      "customer_name": "CASA TOI \u00b7 BAR CAN MONIC",
+      "parcela_volume_pct": 53.1,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 6
+        },
+        {
+          "material": "ENT",
+          "quantity": 13
+        }
+      ]
+    },
+    {
+      "parcela": 5,
+      "customer_name": "BAR RESTAURANTE LE VIS#N \u00b7 BAR \"LA OCA\"",
+      "parcela_volume_pct": 81.1,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 14
+        },
+        {
+          "material": "ENT",
+          "quantity": 13
+        }
+      ]
+    },
+    {
+      "parcela": 6,
+      "customer_name": "FRANKFURT JAVIS II \u00b7 ALORA",
+      "parcela_volume_pct": 55.0,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 9
+        },
+        {
+          "material": "ENT",
+          "quantity": 6
+        }
+      ]
+    },
+    {
+      "parcela": 7,
+      "customer_name": "FLECA P.BRETCHA (C/ GIRONA) \u00b7 RESTAURANT 'LES ARCADES'",
+      "parcela_volume_pct": 60.3,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 7
+        },
+        {
+          "material": "ENT",
+          "quantity": 16
+        }
+      ]
+    }
+  ],
+  "loading_before_randomized": [
+    {
+      "parcela": 1,
+      "customer_name": "Devoluciones (consolidado)",
+      "parcela_volume_pct": 100.0,
+      "items": [
+        {
+          "material": "RET",
+          "quantity": 106
+        }
+      ]
+    },
+    {
+      "parcela": 2,
+      "customer_name": "XAVISAN \u00b7 GARDEN PIZZA (GRANOLLERS)",
+      "parcela_volume_pct": 100.0,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 31
+        },
+        {
+          "material": "ENT",
+          "quantity": 27
+        }
+      ]
+    },
+    {
+      "parcela": 3,
+      "customer_name": "BON QUALITAT \u00b7 LAPONIA CAFE",
+      "parcela_volume_pct": 100.0,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 26
+        },
+        {
+          "material": "ENT",
+          "quantity": 15
+        }
+      ]
+    },
+    {
+      "parcela": 4,
+      "customer_name": "CASA TOI \u00b7 BAR CAN MONIC",
+      "parcela_volume_pct": 53.1,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 6
+        },
+        {
+          "material": "ENT",
+          "quantity": 13
+        }
+      ]
+    },
+    {
+      "parcela": 5,
+      "customer_name": "BAR RESTAURANTE LE VIS#N \u00b7 BAR \"LA OCA\"",
+      "parcela_volume_pct": 81.1,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 14
+        },
+        {
+          "material": "ENT",
+          "quantity": 13
+        }
+      ]
+    },
+    {
+      "parcela": 6,
+      "customer_name": "FRANKFURT JAVIS II \u00b7 ALORA",
+      "parcela_volume_pct": 55.0,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 9
+        },
+        {
+          "material": "ENT",
+          "quantity": 6
+        }
+      ]
+    },
+    {
+      "parcela": 7,
+      "customer_name": "FLECA P.BRETCHA (C/ GIRONA) \u00b7 RESTAURANT 'LES ARCADES'",
+      "parcela_volume_pct": 60.3,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 7
+        },
+        {
+          "material": "ENT",
+          "quantity": 16
+        }
+      ]
+    }
+  ],
+  "warehouse_pick_sequence": [],
+  "plan_summary": {
+    "total_weight_kg": 10165.8,
+    "total_volume_l": 126055.9,
+    "most_loaded_parcela_pct": 100.0,
+    "synthetic_from_route": true
+  },
+  "warnings": [
+    "Distribuci\u00f3n sint\u00e9tica (orden de visita \u00b7 demo). Ejecutar Block 3 para plan almac\u00e9n + ZM040."
+  ]
+}

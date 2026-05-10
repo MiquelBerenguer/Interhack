@@ -1,0 +1,193 @@
+{
+  "route_code": "DR0045",
+  "date": "09/02/2026",
+  "transport_id": "DD13100007",
+  "transporter_name": "Transporter DD13100007",
+  "truck_type": "standard",
+  "truck_slots": 6,
+  "zona_key": "DD13100007",
+  "priority_weights_used": {
+    "revenue": 0.3,
+    "distance": 0.2,
+    "fuel_cost": 0.15,
+    "travel_time": 0.1,
+    "operational_cost": 0.1,
+    "route_efficiency": 0.1,
+    "time_window_urgency": 0.05
+  },
+  "depot": {
+    "name": "Estrella Damm Mollet - Magatzem",
+    "address": "Carrer Moli de Can Bassa, Mollet del Valles, Barcelona",
+    "lat": 41.5363,
+    "lon": 2.2131
+  },
+  "baseline_visit_order_global": [
+    0
+  ],
+  "optimized_visit_order_global": [
+    0
+  ],
+  "all_stops": [
+    {
+      "id": "827977314",
+      "entrega_ids": [
+        "827977314",
+        "841035521"
+      ],
+      "name": "VENECIA BAR",
+      "address": "RONDA ORIENT 14, 08100 MOLLET DEL VALLES",
+      "city": "MOLLET DEL VALLES",
+      "cp": "08100",
+      "lat": 41.543,
+      "lon": 2.214,
+      "delivery_caj": 6.0,
+      "delivery_brl": 0,
+      "delivery_un": 0,
+      "ret_caj": 6.0,
+      "ret_brl": 0,
+      "delivery_up": 0.1,
+      "return_up": 0.06,
+      "delivery_value_eur": 156.0,
+      "items": [
+        {
+          "mat": "FDT13",
+          "desc": "FREE DAMM TOSTADA 1/3 RET. PP",
+          "qty": 2.0,
+          "unit": "CAJ",
+          "ubic": "AA04A1",
+          "unit_price_eur": 26.0,
+          "line_total_eur": 52.0
+        },
+        {
+          "mat": "FD13",
+          "desc": "FREE DAMM 1/3 RET.",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "AA06A1",
+          "unit_price_eur": 26.0,
+          "line_total_eur": 26.0
+        },
+        {
+          "mat": "FDL13",
+          "desc": "FREE DAMM LIMON 1/3 RET. PP",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "AA05A1",
+          "unit_price_eur": 26.0,
+          "line_total_eur": 26.0
+        },
+        {
+          "mat": "FDT13",
+          "desc": "FREE DAMM TOSTADA 1/3 RET. PP",
+          "qty": 2.0,
+          "unit": "CAJ",
+          "ubic": "AA04A1",
+          "unit_price_eur": 26.0,
+          "line_total_eur": 52.0
+        }
+      ],
+      "ret_items": [
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 2.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        },
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        },
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        },
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 2.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        }
+      ],
+      "zona_transp": "DD13100007",
+      "window_open_min": 0,
+      "window_close_min": 1920
+    }
+  ],
+  "final_route_detail": [
+    {
+      "stop_index": 0,
+      "customer_id": "827977314",
+      "customer_name": "VENECIA BAR",
+      "arrival_time": "06:06",
+      "departure_time": "06:14",
+      "travel_time_min": 5.57,
+      "distance_km": 1.036,
+      "fuel_cost": 0.1243,
+      "operational_cost": 4.7483,
+      "priority_score": 1.0,
+      "walking_group_id": null,
+      "window_open": "06:00",
+      "window_close": "14:00",
+      "window_status": "on_time",
+      "lat": 41.543,
+      "lon": 2.214,
+      "delivery_caj": 6.0,
+      "delivery_brl": 0.0,
+      "return_caj": 6.0,
+      "return_brl": 0.0,
+      "priority_breakdown_estimated": {
+        "revenue": 0.2069,
+        "distance": 0.1379,
+        "fuel_cost": 0.1034,
+        "travel_time": 0.069,
+        "operational_cost": 0.069,
+        "route_efficiency": 0.069,
+        "time_window_urgency": 0.0345
+      }
+    }
+  ],
+  "metrics_comparison": {
+    "baseline": {
+      "distance_km": 3.054,
+      "duration_min": 22.78,
+      "fuel_liters_est": 0.27,
+      "co2_kg_est": 0.71,
+      "cost_eur": 8.3406,
+      "fuel_cost_eur": 0.3665,
+      "operational_cost_eur": 7.9742
+    },
+    "optimized": {
+      "distance_km": 3.054,
+      "duration_min": 22.78,
+      "fuel_liters_est": 0.27,
+      "co2_kg_est": 0.71,
+      "cost_eur": 8.3407,
+      "fuel_cost_eur": 0.3665,
+      "operational_cost_eur": 7.9742
+    }
+  },
+  "route_summary": {
+    "total_stops": 1,
+    "total_distance_km": 3.054,
+    "total_duration_min": 22.78,
+    "total_fuel_cost": 0.3665,
+    "total_operational_cost": 7.9742,
+    "total_revenue": 156.0,
+    "walking_groups_count": 0,
+    "estimated_time_saved_min": 0.0,
+    "baseline_rand_maps_distance_km": 3.054,
+    "baseline_rand_maps_fuel_cost": 0.3665,
+    "baseline_rand_maps_operational_cost": 7.9742,
+    "baseline_rand_maps_total_eur": 8.3406,
+    "baseline_rand_maps_drive_service_min": 22.78
+  },
+  "unload_time_saved_min_estimate": 0.0
+}

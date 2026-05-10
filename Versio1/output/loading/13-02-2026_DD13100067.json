@@ -1,0 +1,204 @@
+{
+  "route_code": "DR0050",
+  "date": "13/02/2026",
+  "transport_id": "DD13100067",
+  "transporter_name": "Transporter DD13100067",
+  "truck_type": "standard",
+  "truck_slots": 6,
+  "loading_after_lifo": [
+    {
+      "parcela": 1,
+      "customer_name": "Devoluciones (consolidado)",
+      "parcela_volume_pct": 100.0,
+      "items": [
+        {
+          "material": "RET",
+          "quantity": 128
+        }
+      ]
+    },
+    {
+      "parcela": 2,
+      "customer_name": "BAR RACO JUVENIL \u00b7 BAR EL CASAL \u00b7 PENSIO EL TREVOL",
+      "parcela_volume_pct": 100.0,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 35
+        },
+        {
+          "material": "ENT",
+          "quantity": 13
+        },
+        {
+          "material": "ENT",
+          "quantity": 14
+        }
+      ]
+    },
+    {
+      "parcela": 3,
+      "customer_name": "CA L'ANGEL BAR \u00b7 BAR MONTSERRAT \u00b7 PRIMER EXPRESS",
+      "parcela_volume_pct": 90.4,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 13
+        },
+        {
+          "material": "ENT",
+          "quantity": 11
+        },
+        {
+          "material": "ENT",
+          "quantity": 9
+        }
+      ]
+    },
+    {
+      "parcela": 4,
+      "customer_name": "CASAL GENT GRAN ST.VICEN\u00c7 TORELLO \u00b7 BAR XANIA \u00b7 Latitud 42 \u00b7 FORN PUJADES \u00b7 COLLA GRILLATS",
+      "parcela_volume_pct": 76.0,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 10
+        },
+        {
+          "material": "ENT",
+          "quantity": 7
+        },
+        {
+          "material": "ENT",
+          "quantity": 1
+        },
+        {
+          "material": "ENT",
+          "quantity": 1
+        },
+        {
+          "material": "ENT",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "parcela": 5,
+      "customer_name": "BAR DOBLE Z \u00b7 FONDA VILASECA",
+      "parcela_volume_pct": 34.9,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 5
+        },
+        {
+          "material": "ENT",
+          "quantity": 1
+        }
+      ]
+    }
+  ],
+  "loading_before_randomized": [
+    {
+      "parcela": 1,
+      "customer_name": "Devoluciones (consolidado)",
+      "parcela_volume_pct": 100.0,
+      "items": [
+        {
+          "material": "RET",
+          "quantity": 128
+        }
+      ]
+    },
+    {
+      "parcela": 2,
+      "customer_name": "BAR RACO JUVENIL \u00b7 BAR EL CASAL \u00b7 PENSIO EL TREVOL",
+      "parcela_volume_pct": 100.0,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 35
+        },
+        {
+          "material": "ENT",
+          "quantity": 13
+        },
+        {
+          "material": "ENT",
+          "quantity": 14
+        }
+      ]
+    },
+    {
+      "parcela": 3,
+      "customer_name": "CA L'ANGEL BAR \u00b7 BAR MONTSERRAT \u00b7 PRIMER EXPRESS",
+      "parcela_volume_pct": 90.4,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 13
+        },
+        {
+          "material": "ENT",
+          "quantity": 11
+        },
+        {
+          "material": "ENT",
+          "quantity": 9
+        }
+      ]
+    },
+    {
+      "parcela": 4,
+      "customer_name": "CASAL GENT GRAN ST.VICEN\u00c7 TORELLO \u00b7 BAR XANIA \u00b7 Latitud 42 \u00b7 FORN PUJADES \u00b7 COLLA GRILLATS",
+      "parcela_volume_pct": 76.0,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 10
+        },
+        {
+          "material": "ENT",
+          "quantity": 7
+        },
+        {
+          "material": "ENT",
+          "quantity": 1
+        },
+        {
+          "material": "ENT",
+          "quantity": 1
+        },
+        {
+          "material": "ENT",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "parcela": 5,
+      "customer_name": "BAR DOBLE Z \u00b7 FONDA VILASECA",
+      "parcela_volume_pct": 34.9,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 5
+        },
+        {
+          "material": "ENT",
+          "quantity": 1
+        }
+      ]
+    }
+  ],
+  "warehouse_pick_sequence": [],
+  "plan_summary": {
+    "total_weight_kg": 7424.1,
+    "total_volume_l": 92058.8,
+    "most_loaded_parcela_pct": 100.0,
+    "synthetic_from_route": true
+  },
+  "warnings": [
+    "Distribuci\u00f3n sint\u00e9tica (orden de visita \u00b7 demo). Ejecutar Block 3 para plan almac\u00e9n + ZM040."
+  ]
+}

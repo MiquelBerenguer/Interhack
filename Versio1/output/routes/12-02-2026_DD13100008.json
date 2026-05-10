@@ -1,0 +1,1723 @@
+{
+  "route_code": "DR0006",
+  "date": "12/02/2026",
+  "transport_id": "DD13100008",
+  "transporter_name": "Transporter DD13100008",
+  "truck_type": "standard",
+  "truck_slots": 6,
+  "zona_key": "DD13100008",
+  "priority_weights_used": {
+    "revenue": 0.3,
+    "distance": 0.2,
+    "fuel_cost": 0.15,
+    "travel_time": 0.1,
+    "operational_cost": 0.1,
+    "route_efficiency": 0.1,
+    "time_window_urgency": 0.05
+  },
+  "depot": {
+    "name": "Estrella Damm Mollet - Magatzem",
+    "address": "Carrer Moli de Can Bassa, Mollet del Valles, Barcelona",
+    "lat": 41.5363,
+    "lon": 2.2131
+  },
+  "baseline_visit_order_global": [
+    8,
+    13,
+    14,
+    5,
+    2,
+    9
+  ],
+  "optimized_visit_order_global": [
+    2,
+    14,
+    9,
+    8,
+    5,
+    13
+  ],
+  "all_stops": [
+    {
+      "id": "827999913",
+      "entrega_ids": [
+        "827999913"
+      ],
+      "name": "BAR CA LA XIANG",
+      "address": "Carrer de Francesc Layret 71, 08100 MOLLET DEL VALLES",
+      "city": "MOLLET DEL VALLES",
+      "cp": "08100",
+      "lat": 41.543,
+      "lon": 2.214,
+      "delivery_caj": 28.0,
+      "delivery_brl": 0,
+      "delivery_un": 12.0,
+      "ret_caj": 21.0,
+      "ret_brl": 0,
+      "delivery_up": 0.4363095238095238,
+      "return_up": 0.2617857142857143,
+      "delivery_value_eur": 727.8,
+      "items": [
+        {
+          "mat": "ED13",
+          "desc": "ESTRELLA DAMM 1/3 RET. PP",
+          "qty": 7.0,
+          "unit": "CAJ",
+          "ubic": "AA09A1",
+          "unit_price_eur": 26.0,
+          "line_total_eur": 182.0
+        },
+        {
+          "mat": "ED15LN",
+          "desc": "ESTRELLA DAMM 1/5 LN",
+          "qty": 3.0,
+          "unit": "CAJ",
+          "ubic": "AA08A1",
+          "unit_price_eur": 26.0,
+          "line_total_eur": 78.0
+        },
+        {
+          "mat": "FD13",
+          "desc": "FREE DAMM 1/3 RET.",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "AA06A1",
+          "unit_price_eur": 26.0,
+          "line_total_eur": 26.0
+        },
+        {
+          "mat": "TU13",
+          "desc": "TURIA 1/3 RET.",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "AA03A1",
+          "unit_price_eur": 26.0,
+          "line_total_eur": 26.0
+        },
+        {
+          "mat": "VO13",
+          "desc": "VOLL-DAMM 1/3 RET.",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "AA07A1",
+          "unit_price_eur": 26.0,
+          "line_total_eur": 26.0
+        },
+        {
+          "mat": "0AM0292",
+          "desc": "BISCUITS GALICIA MINI MAGD CHOCO 1,5KG",
+          "qty": 6.0,
+          "unit": "CAJ",
+          "ubic": "FB05A2",
+          "unit_price_eur": 24.0,
+          "line_total_eur": 144.0
+        },
+        {
+          "mat": "UE902",
+          "desc": "COPA GRANDE ED",
+          "qty": 12.0,
+          "unit": "UN",
+          "ubic": "PLV",
+          "unit_price_eur": 1.15,
+          "line_total_eur": 13.8
+        },
+        {
+          "mat": "0LM0376",
+          "desc": "TECNOPACKING BOLSA KRAFT 14+7X24 1000U",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "ZCG",
+          "unit_price_eur": 24.0,
+          "line_total_eur": 24.0
+        },
+        {
+          "mat": "FDL13",
+          "desc": "FREE DAMM LIMON 1/3 RET. PP",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "AA05A1",
+          "unit_price_eur": 26.0,
+          "line_total_eur": 26.0
+        },
+        {
+          "mat": "ED15LN",
+          "desc": "ESTRELLA DAMM 1/5 LN",
+          "qty": 2.0,
+          "unit": "CAJ",
+          "ubic": "AA08A1",
+          "unit_price_eur": 26.0,
+          "line_total_eur": 52.0
+        },
+        {
+          "mat": "TU13",
+          "desc": "TURIA 1/3 RET.",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "AA03A1",
+          "unit_price_eur": 26.0,
+          "line_total_eur": 26.0
+        },
+        {
+          "mat": "ED13",
+          "desc": "ESTRELLA DAMM 1/3 RET. PP",
+          "qty": 4.0,
+          "unit": "CAJ",
+          "ubic": "AA09A1",
+          "unit_price_eur": 26.0,
+          "line_total_eur": 104.0
+        }
+      ],
+      "ret_items": [
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 7.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        },
+        {
+          "mat": "CJ15",
+          "desc": "CAJA DAMM+BOT.1/5RET VACIO EN P.PLAS.A13",
+          "qty": 3.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        },
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        },
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        },
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        },
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        },
+        {
+          "mat": "CJ15",
+          "desc": "CAJA DAMM+BOT.1/5RET VACIO EN P.PLAS.A13",
+          "qty": 2.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        },
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        },
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 4.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        }
+      ],
+      "zona_transp": "DD13100001",
+      "window_open_min": 0,
+      "window_close_min": 1920
+    },
+    {
+      "id": "827999914",
+      "entrega_ids": [
+        "827999914",
+        "841038165"
+      ],
+      "name": "Pool",
+      "address": "Passatge Sant Miquel 10, 08100 MOLLET DEL VALLES",
+      "city": "MOLLET DEL VALLES",
+      "cp": "08100",
+      "lat": 41.543,
+      "lon": 2.214,
+      "delivery_caj": 10.0,
+      "delivery_brl": 3.0,
+      "delivery_un": 30.0,
+      "ret_caj": 40.0,
+      "ret_brl": 7.0,
+      "delivery_up": 0.6958333333333333,
+      "return_up": 0.4175,
+      "delivery_value_eur": 630.5,
+      "items": [
+        {
+          "mat": "ED13",
+          "desc": "ESTRELLA DAMM 1/3 RET. PP",
+          "qty": 10.0,
+          "unit": "CAJ",
+          "ubic": "AA09A1",
+          "unit_price_eur": 26.0,
+          "line_total_eur": 260.0
+        },
+        {
+          "mat": "ED30",
+          "desc": "ESTRELLA DAMM BARRIL 30",
+          "qty": 2.0,
+          "unit": "BRL",
+          "ubic": "AA10A1",
+          "unit_price_eur": 112.0,
+          "line_total_eur": 224.0
+        },
+        {
+          "mat": "TU30",
+          "desc": "TURIA BARRIL 30L.",
+          "qty": 1.0,
+          "unit": "BRL",
+          "ubic": "AC04A2",
+          "unit_price_eur": 112.0,
+          "line_total_eur": 112.0
+        },
+        {
+          "mat": "UE902",
+          "desc": "COPA GRANDE ED",
+          "qty": 18.0,
+          "unit": "UN",
+          "ubic": "PLV",
+          "unit_price_eur": 1.15,
+          "line_total_eur": 20.7
+        },
+        {
+          "mat": "UE903",
+          "desc": "COPA PEQUE\u00d1A ED",
+          "qty": 12.0,
+          "unit": "UN",
+          "ubic": "PLV",
+          "unit_price_eur": 1.15,
+          "line_total_eur": 13.8
+        }
+      ],
+      "ret_items": [
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 10.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        },
+        {
+          "mat": "BRL30V",
+          "desc": "BARRIL INOX 30L. EURONORMA",
+          "qty": 2.0,
+          "unit": "BRL",
+          "ubic": "ENVASE"
+        },
+        {
+          "mat": "BRL30V",
+          "desc": "BARRIL INOX 30L. EURONORMA",
+          "qty": 1.0,
+          "unit": "BRL",
+          "ubic": "ENVASE"
+        },
+        {
+          "mat": "BRL30V",
+          "desc": "BARRIL INOX 30L. EURONORMA",
+          "qty": 4.0,
+          "unit": "BRL",
+          "ubic": "ENVASE"
+        },
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 30.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        }
+      ],
+      "zona_transp": "DD13100007",
+      "window_open_min": 180,
+      "window_close_min": 210
+    },
+    {
+      "id": "827999915",
+      "entrega_ids": [
+        "827999915"
+      ],
+      "name": "PUNT DE TROBADA",
+      "address": "Carrer de Can Pantiquet 18, 08100 MOLLET DEL VALLES",
+      "city": "MOLLET DEL VALLES",
+      "cp": "08100",
+      "lat": 41.543,
+      "lon": 2.214,
+      "delivery_caj": 14.0,
+      "delivery_brl": 0,
+      "delivery_un": 1.0,
+      "ret_caj": 2.0,
+      "ret_brl": 0,
+      "delivery_up": 0.201468253968254,
+      "return_up": 0.1208809523809524,
+      "delivery_value_eur": 337.15,
+      "items": [
+        {
+          "mat": "0LT0009",
+          "desc": "LETONA GRAN CREME 1L VR 12U",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "AC05A2",
+          "unit_price_eur": 24.0,
+          "line_total_eur": 24.0
+        },
+        {
+          "mat": "0ZU0020",
+          "desc": "GRANINI MELOCOTON  20CL 24U",
+          "qty": 2.0,
+          "unit": "CAJ",
+          "ubic": "DA09A1",
+          "unit_price_eur": 24.0,
+          "line_total_eur": 48.0
+        },
+        {
+          "mat": "0ZU0024",
+          "desc": "GRANINI PI\u00d1A 20CL 24U",
+          "qty": 4.0,
+          "unit": "CAJ",
+          "ubic": "DA09A3",
+          "unit_price_eur": 24.0,
+          "line_total_eur": 96.0
+        },
+        {
+          "mat": "0LM1718",
+          "desc": "GC MINI SERVICIOS 1C 17X17 400U 10PQ",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "ZCG",
+          "unit_price_eur": 24.0,
+          "line_total_eur": 24.0
+        },
+        {
+          "mat": "1PLV230",
+          "desc": "JARRA LECHE LETONA 1U",
+          "qty": 1.0,
+          "unit": "UN",
+          "ubic": "PLV",
+          "unit_price_eur": 1.15,
+          "line_total_eur": 1.15
+        },
+        {
+          "mat": "0LT0009",
+          "desc": "LETONA GRAN CREME 1L VR 12U",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "AC05A2",
+          "unit_price_eur": 24.0,
+          "line_total_eur": 24.0
+        },
+        {
+          "mat": "0ZU0020",
+          "desc": "GRANINI MELOCOTON  20CL 24U",
+          "qty": 2.0,
+          "unit": "CAJ",
+          "ubic": "DA09A1",
+          "unit_price_eur": 24.0,
+          "line_total_eur": 48.0
+        },
+        {
+          "mat": "0ZU0021",
+          "desc": "GRANINI NARANJA 20CL 24U",
+          "qty": 3.0,
+          "unit": "CAJ",
+          "ubic": "DA09A2",
+          "unit_price_eur": 24.0,
+          "line_total_eur": 72.0
+        }
+      ],
+      "ret_items": [
+        {
+          "mat": "3ENV1281",
+          "desc": "C.C. LECHE LETONA (NUEVO)",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        },
+        {
+          "mat": "3ENV1281",
+          "desc": "C.C. LECHE LETONA (NUEVO)",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        }
+      ],
+      "zona_transp": "DD13100008",
+      "window_open_min": 330,
+      "window_close_min": 420
+    },
+    {
+      "id": "827999916",
+      "entrega_ids": [
+        "827999916"
+      ],
+      "name": "BAR DE TAPES",
+      "address": "Avinguda de Caldes de Montbui 17, 08100 MOLLET DEL VALLES",
+      "city": "MOLLET DEL VALLES",
+      "cp": "08100",
+      "lat": 41.543,
+      "lon": 2.214,
+      "delivery_caj": 5.0,
+      "delivery_brl": 1.0,
+      "delivery_un": 0,
+      "ret_caj": 0,
+      "ret_brl": 1.0,
+      "delivery_up": 0.22466666666666668,
+      "return_up": 0.1348,
+      "delivery_value_eur": 232.0,
+      "items": [
+        {
+          "mat": "ED30",
+          "desc": "ESTRELLA DAMM BARRIL 30",
+          "qty": 1.0,
+          "unit": "BRL",
+          "ubic": "AA10A1",
+          "unit_price_eur": 112.0,
+          "line_total_eur": 112.0
+        },
+        {
+          "mat": "0LT0033",
+          "desc": "LETONA GRAN CREME PET 1,5L PET 6U",
+          "qty": 4.0,
+          "unit": "CAJ",
+          "ubic": "FA06A3",
+          "unit_price_eur": 24.0,
+          "line_total_eur": 96.0
+        },
+        {
+          "mat": "0VE0524",
+          "desc": "SE\u00d1ORIO DE LIZIA VERDEJO RUEDA 75CL 6U",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "EC07A3",
+          "unit_price_eur": 24.0,
+          "line_total_eur": 24.0
+        }
+      ],
+      "ret_items": [
+        {
+          "mat": "BRL30V",
+          "desc": "BARRIL INOX 30L. EURONORMA",
+          "qty": 1.0,
+          "unit": "BRL",
+          "ubic": "ENVASE"
+        }
+      ],
+      "zona_transp": "DD13100001",
+      "window_open_min": 0,
+      "window_close_min": 1920
+    },
+    {
+      "id": "827999917",
+      "entrega_ids": [
+        "827999917"
+      ],
+      "name": "BAR ALEBRIJES",
+      "address": "CALLE BERENGUER III 118, 08100 MOLLET DEL VALLES",
+      "city": "MOLLET DEL VALLES",
+      "cp": "08100",
+      "lat": 41.543,
+      "lon": 2.214,
+      "delivery_caj": 0,
+      "delivery_brl": 0,
+      "delivery_un": 9.0,
+      "ret_caj": 0,
+      "ret_brl": 0,
+      "delivery_up": 0.04501541179337232,
+      "return_up": 0.02700924707602339,
+      "delivery_value_eur": 48.05,
+      "items": [
+        {
+          "mat": "0LI0096",
+          "desc": "TRIPLE SEC PERNOD RICARD 70CL",
+          "qty": 2.0,
+          "unit": "BOT",
+          "ubic": "ZCG",
+          "unit_price_eur": 20.0,
+          "line_total_eur": 40.0
+        },
+        {
+          "mat": "0LM1008",
+          "desc": "SANYTOL LIMPIADOR DESINF.MULTI PULV 750M",
+          "qty": 1.0,
+          "unit": "UN",
+          "ubic": "ZCG",
+          "unit_price_eur": 1.15,
+          "line_total_eur": 1.15
+        },
+        {
+          "mat": "0LM1042",
+          "desc": "DPALILLO CA\u00d1AS NEGRA COCTEL 8x150 250U",
+          "qty": 1.0,
+          "unit": "UN",
+          "ubic": "ZCG",
+          "unit_price_eur": 1.15,
+          "line_total_eur": 1.15
+        },
+        {
+          "mat": "0LM0011",
+          "desc": "GC SERVILLETAS 2C 30x30 100U",
+          "qty": 3.0,
+          "unit": "UN",
+          "ubic": "ZCG",
+          "unit_price_eur": 1.15,
+          "line_total_eur": 3.45
+        },
+        {
+          "mat": "0AM3864",
+          "desc": "FRIMASOL ACEITE GIRASOL 25L",
+          "qty": 1.0,
+          "unit": "UN",
+          "ubic": "EA02A3",
+          "unit_price_eur": 1.15,
+          "line_total_eur": 1.15
+        },
+        {
+          "mat": "0LI1361",
+          "desc": "JOSE CUERVO TEQUILA ESP REPOSADO 70CL",
+          "qty": 1.0,
+          "unit": "UN",
+          "ubic": "ZCG",
+          "unit_price_eur": 1.15,
+          "line_total_eur": 1.15
+        }
+      ],
+      "ret_items": [],
+      "zona_transp": "DD13100007",
+      "window_open_min": 435,
+      "window_close_min": 600
+    },
+    {
+      "id": "827999918",
+      "entrega_ids": [
+        "827999918",
+        "841038166"
+      ],
+      "name": "RACO DEL SEMI CACHOPO",
+      "address": "CALLE JOAQUIM MIR 88, 08100 MOLLET DEL VALLES",
+      "city": "MOLLET DEL VALLES",
+      "cp": "08100",
+      "lat": 41.543,
+      "lon": 2.214,
+      "delivery_caj": 11.0,
+      "delivery_brl": 0,
+      "delivery_un": 1.0,
+      "ret_caj": 15.0,
+      "ret_brl": 0,
+      "delivery_up": 0.1755952380952381,
+      "return_up": 0.10535714285714286,
+      "delivery_value_eur": 306.0,
+      "items": [
+        {
+          "mat": "ED13",
+          "desc": "ESTRELLA DAMM 1/3 RET. PP",
+          "qty": 4.0,
+          "unit": "CAJ",
+          "ubic": "AA09A1",
+          "unit_price_eur": 26.0,
+          "line_total_eur": 104.0
+        },
+        {
+          "mat": "ED15LN",
+          "desc": "ESTRELLA DAMM 1/5 LN",
+          "qty": 3.0,
+          "unit": "CAJ",
+          "ubic": "AA08A1",
+          "unit_price_eur": 26.0,
+          "line_total_eur": 78.0
+        },
+        {
+          "mat": "0LI0720",
+          "desc": "LAGAR DO FRADE CREMA D'ORUJO PET 3L",
+          "qty": 1.0,
+          "unit": "BOT",
+          "ubic": "ZCG",
+          "unit_price_eur": 20.0,
+          "line_total_eur": 20.0
+        },
+        {
+          "mat": "ED13",
+          "desc": "ESTRELLA DAMM 1/3 RET. PP",
+          "qty": 2.0,
+          "unit": "CAJ",
+          "ubic": "AA09A1",
+          "unit_price_eur": 26.0,
+          "line_total_eur": 52.0
+        },
+        {
+          "mat": "ED15LN",
+          "desc": "ESTRELLA DAMM 1/5 LN",
+          "qty": 2.0,
+          "unit": "CAJ",
+          "ubic": "AA08A1",
+          "unit_price_eur": 26.0,
+          "line_total_eur": 52.0
+        }
+      ],
+      "ret_items": [
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 4.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        },
+        {
+          "mat": "CJ15",
+          "desc": "CAJA DAMM+BOT.1/5RET VACIO EN P.PLAS.A13",
+          "qty": 3.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        },
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 2.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        },
+        {
+          "mat": "CJ15",
+          "desc": "CAJA DAMM+BOT.1/5RET VACIO EN P.PLAS.A13",
+          "qty": 2.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        },
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 4.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        }
+      ],
+      "zona_transp": "DD13100008",
+      "window_open_min": 0,
+      "window_close_min": 1920
+    },
+    {
+      "id": "827999919",
+      "entrega_ids": [
+        "827999919"
+      ],
+      "name": "BAR CHAMPANILLO",
+      "address": "PLAZA MAJOR 24, 08100 MOLLET DEL VALLES",
+      "city": "MOLLET DEL VALLES",
+      "cp": "08100",
+      "lat": 41.543,
+      "lon": 2.214,
+      "delivery_caj": 15.0,
+      "delivery_brl": 0,
+      "delivery_un": 0,
+      "ret_caj": 0,
+      "ret_brl": 0,
+      "delivery_up": 0.23809523809523808,
+      "return_up": 0.14285714285714285,
+      "delivery_value_eur": 240.0,
+      "items": [
+        {
+          "mat": "VE12SP",
+          "desc": "AGUA VERI 1/2 PET CAJA 24U. T.TH",
+          "qty": 15.0,
+          "unit": "CAJ",
+          "ubic": "EB03A1",
+          "unit_price_eur": 16.0,
+          "line_total_eur": 240.0
+        }
+      ],
+      "ret_items": [],
+      "zona_transp": "DD13100007",
+      "window_open_min": 0,
+      "window_close_min": 1920
+    },
+    {
+      "id": "827999920",
+      "entrega_ids": [
+        "827999920"
+      ],
+      "name": "BAR DE L?ILLA",
+      "address": "AVENIDA LLIBERTAT 24, 08100 MOLLET DEL VALL\u00c8S",
+      "city": "MOLLET DEL VALL\u00c8S",
+      "cp": "08100",
+      "lat": 41.543,
+      "lon": 2.214,
+      "delivery_caj": 6.0,
+      "delivery_brl": 0,
+      "delivery_un": 1.0,
+      "ret_caj": 2.0,
+      "ret_brl": 0,
+      "delivery_up": 0.12053571428571427,
+      "return_up": 0.07232142857142856,
+      "delivery_value_eur": 123.15,
+      "items": [
+        {
+          "mat": "VO13",
+          "desc": "VOLL-DAMM 1/3 RET.",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "AA07A1",
+          "unit_price_eur": 26.0,
+          "line_total_eur": 26.0
+        },
+        {
+          "mat": "VE12SP",
+          "desc": "AGUA VERI 1/2 PET CAJA 24U. T.TH",
+          "qty": 3.0,
+          "unit": "CAJ",
+          "ubic": "EB03A1",
+          "unit_price_eur": 16.0,
+          "line_total_eur": 48.0
+        },
+        {
+          "mat": "0LT0235",
+          "desc": "LA LEVANTINA AVENA ESP.HOST 1L 6U",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "FA02A2",
+          "unit_price_eur": 24.0,
+          "line_total_eur": 24.0
+        },
+        {
+          "mat": "0LT0009",
+          "desc": "LETONA GRAN CREME 1L VR 12U",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "AC05A2",
+          "unit_price_eur": 24.0,
+          "line_total_eur": 24.0
+        },
+        {
+          "mat": "0AM0310",
+          "desc": "CHOVI MAYO25 MAYONESA SUAVE ESP.HOST3,6L",
+          "qty": 1.0,
+          "unit": "UN",
+          "ubic": "ZCG",
+          "unit_price_eur": 1.15,
+          "line_total_eur": 1.15
+        }
+      ],
+      "ret_items": [
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        },
+        {
+          "mat": "3ENV1281",
+          "desc": "C.C. LECHE LETONA (NUEVO)",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        }
+      ],
+      "zona_transp": "DD13100007",
+      "window_open_min": 0,
+      "window_close_min": 1920
+    },
+    {
+      "id": "827999921",
+      "entrega_ids": [
+        "827999921"
+      ],
+      "name": "BAR FRAYMAN",
+      "address": "CALLE ENRIC MORERA 27, 08100 MOLLET DEL VALL\u00c8S",
+      "city": "MOLLET DEL VALL\u00c8S",
+      "cp": "08100",
+      "lat": 41.543,
+      "lon": 2.214,
+      "delivery_caj": 23.0,
+      "delivery_brl": 0,
+      "delivery_un": 0,
+      "ret_caj": 21.0,
+      "ret_brl": 0,
+      "delivery_up": 0.35317460317460314,
+      "return_up": 0.21190476190476187,
+      "delivery_value_eur": 594.0,
+      "items": [
+        {
+          "mat": "ED13",
+          "desc": "ESTRELLA DAMM 1/3 RET. PP",
+          "qty": 6.0,
+          "unit": "CAJ",
+          "ubic": "AA09A1",
+          "unit_price_eur": 26.0,
+          "line_total_eur": 156.0
+        },
+        {
+          "mat": "ED15LN",
+          "desc": "ESTRELLA DAMM 1/5 LN",
+          "qty": 6.0,
+          "unit": "CAJ",
+          "ubic": "AA08A1",
+          "unit_price_eur": 26.0,
+          "line_total_eur": 156.0
+        },
+        {
+          "mat": "FD13",
+          "desc": "FREE DAMM 1/3 RET.",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "AA06A1",
+          "unit_price_eur": 26.0,
+          "line_total_eur": 26.0
+        },
+        {
+          "mat": "0ZU0021",
+          "desc": "GRANINI NARANJA 20CL 24U",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "DA09A2",
+          "unit_price_eur": 24.0,
+          "line_total_eur": 24.0
+        },
+        {
+          "mat": "NTL13B24",
+          "desc": "NESTEA LIMON 1/3 SR BANDEJA 24U. P.HT",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "DB07A1",
+          "unit_price_eur": 24.0,
+          "line_total_eur": 24.0
+        },
+        {
+          "mat": "ED15LN",
+          "desc": "ESTRELLA DAMM 1/5 LN",
+          "qty": 4.0,
+          "unit": "CAJ",
+          "ubic": "AA08A1",
+          "unit_price_eur": 26.0,
+          "line_total_eur": 104.0
+        },
+        {
+          "mat": "VO13",
+          "desc": "VOLL-DAMM 1/3 RET.",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "AA07A1",
+          "unit_price_eur": 26.0,
+          "line_total_eur": 26.0
+        },
+        {
+          "mat": "ED13",
+          "desc": "ESTRELLA DAMM 1/3 RET. PP",
+          "qty": 3.0,
+          "unit": "CAJ",
+          "ubic": "AA09A1",
+          "unit_price_eur": 26.0,
+          "line_total_eur": 78.0
+        }
+      ],
+      "ret_items": [
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 6.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        },
+        {
+          "mat": "CJ15",
+          "desc": "CAJA DAMM+BOT.1/5RET VACIO EN P.PLAS.A13",
+          "qty": 6.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        },
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        },
+        {
+          "mat": "CJ15",
+          "desc": "CAJA DAMM+BOT.1/5RET VACIO EN P.PLAS.A13",
+          "qty": 4.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        },
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        },
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 3.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        }
+      ],
+      "zona_transp": "DD13100008",
+      "window_open_min": 0,
+      "window_close_min": 1920
+    },
+    {
+      "id": "827999922",
+      "entrega_ids": [
+        "827999922",
+        "841038167"
+      ],
+      "name": "NUEVO VITORINO",
+      "address": "CAN MOLLET 1, 08100 MOLLET DEL VALLES",
+      "city": "MOLLET DEL VALLES",
+      "cp": "08100",
+      "lat": 41.543,
+      "lon": 2.214,
+      "delivery_caj": 25.0,
+      "delivery_brl": 0,
+      "delivery_un": 0,
+      "ret_caj": 55.0,
+      "ret_brl": 0,
+      "delivery_up": 0.41666666666666663,
+      "return_up": 0.24999999999999997,
+      "delivery_value_eur": 650.0,
+      "items": [
+        {
+          "mat": "ED13",
+          "desc": "ESTRELLA DAMM 1/3 RET. PP",
+          "qty": 14.0,
+          "unit": "CAJ",
+          "ubic": "AA09A1",
+          "unit_price_eur": 26.0,
+          "line_total_eur": 364.0
+        },
+        {
+          "mat": "VO13",
+          "desc": "VOLL-DAMM 1/3 RET.",
+          "qty": 3.0,
+          "unit": "CAJ",
+          "ubic": "AA07A1",
+          "unit_price_eur": 26.0,
+          "line_total_eur": 78.0
+        },
+        {
+          "mat": "ED13",
+          "desc": "ESTRELLA DAMM 1/3 RET. PP",
+          "qty": 8.0,
+          "unit": "CAJ",
+          "ubic": "AA09A1",
+          "unit_price_eur": 26.0,
+          "line_total_eur": 208.0
+        }
+      ],
+      "ret_items": [
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 14.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        },
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 3.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        },
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 8.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        },
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 30.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        }
+      ],
+      "zona_transp": "DD13100008",
+      "window_open_min": 0,
+      "window_close_min": 1920
+    },
+    {
+      "id": "827999923",
+      "entrega_ids": [
+        "827999923"
+      ],
+      "name": "PALENTINO BAR",
+      "address": "Avinguda de la Llibertat 39, 08100 MOLLET DEL VALLES",
+      "city": "MOLLET DEL VALLES",
+      "cp": "08100",
+      "lat": 41.543,
+      "lon": 2.214,
+      "delivery_caj": 22.0,
+      "delivery_brl": 1.0,
+      "delivery_un": 0,
+      "ret_caj": 13.0,
+      "ret_brl": 1.0,
+      "delivery_up": 0.5123015873015873,
+      "return_up": 0.30738095238095237,
+      "delivery_value_eur": 640.0,
+      "items": [
+        {
+          "mat": "ED13",
+          "desc": "ESTRELLA DAMM 1/3 RET. PP",
+          "qty": 7.0,
+          "unit": "CAJ",
+          "ubic": "AA09A1",
+          "unit_price_eur": 26.0,
+          "line_total_eur": 182.0
+        },
+        {
+          "mat": "FDT13",
+          "desc": "FREE DAMM TOSTADA 1/3 RET. PP",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "AA04A1",
+          "unit_price_eur": 26.0,
+          "line_total_eur": 26.0
+        },
+        {
+          "mat": "ED30",
+          "desc": "ESTRELLA DAMM BARRIL 30",
+          "qty": 1.0,
+          "unit": "BRL",
+          "ubic": "AA10A1",
+          "unit_price_eur": 112.0,
+          "line_total_eur": 112.0
+        },
+        {
+          "mat": "VE12SP",
+          "desc": "AGUA VERI 1/2 PET CAJA 24U. T.TH",
+          "qty": 2.0,
+          "unit": "CAJ",
+          "ubic": "EB03A1",
+          "unit_price_eur": 16.0,
+          "line_total_eur": 32.0
+        },
+        {
+          "mat": "VE32SP",
+          "desc": "AGUA VERI 1,5L PET CAJA 12U.",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "EB02A1",
+          "unit_price_eur": 16.0,
+          "line_total_eur": 16.0
+        },
+        {
+          "mat": "0LT0032",
+          "desc": "CACAOLAT VIDRIO 20CL RET 30U",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "AC04A3",
+          "unit_price_eur": 24.0,
+          "line_total_eur": 24.0
+        },
+        {
+          "mat": "0LT0235",
+          "desc": "LA LEVANTINA AVENA ESP.HOST 1L 6U",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "FA02A2",
+          "unit_price_eur": 24.0,
+          "line_total_eur": 24.0
+        },
+        {
+          "mat": "0LT0033",
+          "desc": "LETONA GRAN CREME PET 1,5L PET 6U",
+          "qty": 5.0,
+          "unit": "CAJ",
+          "ubic": "FA06A3",
+          "unit_price_eur": 24.0,
+          "line_total_eur": 120.0
+        },
+        {
+          "mat": "ED13",
+          "desc": "ESTRELLA DAMM 1/3 RET. PP",
+          "qty": 4.0,
+          "unit": "CAJ",
+          "ubic": "AA09A1",
+          "unit_price_eur": 26.0,
+          "line_total_eur": 104.0
+        }
+      ],
+      "ret_items": [
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 7.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        },
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        },
+        {
+          "mat": "BRL30V",
+          "desc": "BARRIL INOX 30L. EURONORMA",
+          "qty": 1.0,
+          "unit": "BRL",
+          "ubic": "ENVASE"
+        },
+        {
+          "mat": "3ENV0029",
+          "desc": "C.C. CACAOLAT 30 U.",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        },
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 4.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        }
+      ],
+      "zona_transp": "DD13100007",
+      "window_open_min": 0,
+      "window_close_min": 1920
+    },
+    {
+      "id": "827999924",
+      "entrega_ids": [
+        "827999924"
+      ],
+      "name": "PEKIN RESTAURANT",
+      "address": "PASAJE SANT MIQUEL 16, 08100 MOLLET DEL VALLES",
+      "city": "MOLLET DEL VALLES",
+      "cp": "08100",
+      "lat": 41.543,
+      "lon": 2.214,
+      "delivery_caj": 5.0,
+      "delivery_brl": 0,
+      "delivery_un": 2.0,
+      "ret_caj": 5.0,
+      "ret_brl": 0,
+      "delivery_up": 0.13782051282051283,
+      "return_up": 0.08269230769230769,
+      "delivery_value_eur": 122.3,
+      "items": [
+        {
+          "mat": "0AG0005",
+          "desc": "FONT D.OR NATURAL 1/2 RET 20U",
+          "qty": 4.0,
+          "unit": "CAJ",
+          "ubic": "AC08A2",
+          "unit_price_eur": 24.0,
+          "line_total_eur": 96.0
+        },
+        {
+          "mat": "0AG0011",
+          "desc": "VICHY CATALAN GAS 1/2 RET 20U",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "AC07A1",
+          "unit_price_eur": 24.0,
+          "line_total_eur": 24.0
+        },
+        {
+          "mat": "0AM0157",
+          "desc": "FAISAN TALLARIN 5KG",
+          "qty": 2.0,
+          "unit": "UN",
+          "ubic": "ZCG",
+          "unit_price_eur": 1.15,
+          "line_total_eur": 2.3
+        }
+      ],
+      "ret_items": [
+        {
+          "mat": "3ENV0041",
+          "desc": "C.C. AGUA 1/2 VICHY-FONT D'OR",
+          "qty": 4.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        },
+        {
+          "mat": "3ENV0041",
+          "desc": "C.C. AGUA 1/2 VICHY-FONT D'OR",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        }
+      ],
+      "zona_transp": "DD13100007",
+      "window_open_min": 420,
+      "window_close_min": 600
+    },
+    {
+      "id": "827999925",
+      "entrega_ids": [
+        "827999925"
+      ],
+      "name": "CAFETERIA ESCLAT",
+      "address": "NICARAGUA S/N -, 08100 MOLLET DEL VALLES",
+      "city": "MOLLET DEL VALLES",
+      "cp": "08100",
+      "lat": 41.543,
+      "lon": 2.214,
+      "delivery_caj": 8.0,
+      "delivery_brl": 1.0,
+      "delivery_un": 1.0,
+      "ret_caj": 0,
+      "ret_brl": 1.0,
+      "delivery_up": 0.29166666666666663,
+      "return_up": 0.17499999999999996,
+      "delivery_value_eur": 315.15,
+      "items": [
+        {
+          "mat": "ED30",
+          "desc": "ESTRELLA DAMM BARRIL 30",
+          "qty": 1.0,
+          "unit": "BRL",
+          "ubic": "AA10A1",
+          "unit_price_eur": 112.0,
+          "line_total_eur": 112.0
+        },
+        {
+          "mat": "0LT0234",
+          "desc": "LA LEVANTINA SOJA ESPECIAL HOST 1L 6U",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "FA02A1",
+          "unit_price_eur": 34.0,
+          "line_total_eur": 34.0
+        },
+        {
+          "mat": "0LT0235",
+          "desc": "LA LEVANTINA AVENA ESP.HOST 1L 6U",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "FA02A2",
+          "unit_price_eur": 24.0,
+          "line_total_eur": 24.0
+        },
+        {
+          "mat": "0LT0033",
+          "desc": "LETONA GRAN CREME PET 1,5L PET 6U",
+          "qty": 6.0,
+          "unit": "CAJ",
+          "ubic": "FA06A3",
+          "unit_price_eur": 24.0,
+          "line_total_eur": 144.0
+        },
+        {
+          "mat": "0AM3864",
+          "desc": "FRIMASOL ACEITE GIRASOL 25L",
+          "qty": 1.0,
+          "unit": "UN",
+          "ubic": "EA02A3",
+          "unit_price_eur": 1.15,
+          "line_total_eur": 1.15
+        }
+      ],
+      "ret_items": [
+        {
+          "mat": "BRL30V",
+          "desc": "BARRIL INOX 30L. EURONORMA",
+          "qty": 1.0,
+          "unit": "BRL",
+          "ubic": "ENVASE"
+        }
+      ],
+      "zona_transp": "DD13100001",
+      "window_open_min": 0,
+      "window_close_min": 1920
+    },
+    {
+      "id": "827999926",
+      "entrega_ids": [
+        "827999926"
+      ],
+      "name": "RSTE. YOLANDA",
+      "address": "Antoni Gaudi 10, 08100 MOLLET DEL VALLES",
+      "city": "MOLLET DEL VALLES",
+      "cp": "08100",
+      "lat": 41.543,
+      "lon": 2.214,
+      "delivery_caj": 6.0,
+      "delivery_brl": 1.0,
+      "delivery_un": 0,
+      "ret_caj": 6.0,
+      "ret_brl": 1.0,
+      "delivery_up": 0.26666666666666666,
+      "return_up": 0.16,
+      "delivery_value_eur": 268.0,
+      "items": [
+        {
+          "mat": "ED13",
+          "desc": "ESTRELLA DAMM 1/3 RET. PP",
+          "qty": 4.0,
+          "unit": "CAJ",
+          "ubic": "AA09A1",
+          "unit_price_eur": 26.0,
+          "line_total_eur": 104.0
+        },
+        {
+          "mat": "ED30",
+          "desc": "ESTRELLA DAMM BARRIL 30",
+          "qty": 1.0,
+          "unit": "BRL",
+          "ubic": "AA10A1",
+          "unit_price_eur": 112.0,
+          "line_total_eur": 112.0
+        },
+        {
+          "mat": "ED13",
+          "desc": "ESTRELLA DAMM 1/3 RET. PP",
+          "qty": 2.0,
+          "unit": "CAJ",
+          "ubic": "AA09A1",
+          "unit_price_eur": 26.0,
+          "line_total_eur": 52.0
+        }
+      ],
+      "ret_items": [
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 4.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        },
+        {
+          "mat": "BRL30V",
+          "desc": "BARRIL INOX 30L. EURONORMA",
+          "qty": 1.0,
+          "unit": "BRL",
+          "ubic": "ENVASE"
+        },
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 2.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        }
+      ],
+      "zona_transp": "DD13100008",
+      "window_open_min": 0,
+      "window_close_min": 1920
+    },
+    {
+      "id": "827999927",
+      "entrega_ids": [
+        "827999927"
+      ],
+      "name": "BK MOLLET",
+      "address": "AVENIDA RABASSAIRES 40, 08100 MOLLET DEL VALL\u00c8S",
+      "city": "MOLLET DEL VALL\u00c8S",
+      "cp": "08100",
+      "lat": 41.543,
+      "lon": 2.214,
+      "delivery_caj": 36.0,
+      "delivery_brl": 1.0,
+      "delivery_un": 0,
+      "ret_caj": 0,
+      "ret_brl": 1.0,
+      "delivery_up": 0.7120310245310245,
+      "return_up": 0.4272186147186147,
+      "delivery_value_eur": 734.0,
+      "items": [
+        {
+          "mat": "ED13LT",
+          "desc": "ESTRELLA DAMM 1/3 LATA",
+          "qty": 3.0,
+          "unit": "CAJ",
+          "ubic": "CA01A1",
+          "unit_price_eur": 27.5,
+          "line_total_eur": 82.5
+        },
+        {
+          "mat": "ED30",
+          "desc": "ESTRELLA DAMM BARRIL 30",
+          "qty": 1.0,
+          "unit": "BRL",
+          "ubic": "AA10A1",
+          "unit_price_eur": 112.0,
+          "line_total_eur": 112.0
+        },
+        {
+          "mat": "FD13LT",
+          "desc": "FREE DAMM 1/3 LATA LC",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "CA01A3",
+          "unit_price_eur": 27.5,
+          "line_total_eur": 27.5
+        },
+        {
+          "mat": "VE12SP",
+          "desc": "AGUA VERI 1/2 PET CAJA 24U. T.TH",
+          "qty": 20.0,
+          "unit": "CAJ",
+          "ubic": "EB03A1",
+          "unit_price_eur": 16.0,
+          "line_total_eur": 320.0
+        },
+        {
+          "mat": "VE13SP",
+          "desc": "AGUA VERI 1/3 PET CAJA 35U. T.TH",
+          "qty": 12.0,
+          "unit": "CAJ",
+          "ubic": "EB04A1",
+          "unit_price_eur": 16.0,
+          "line_total_eur": 192.0
+        }
+      ],
+      "ret_items": [
+        {
+          "mat": "BRL30V",
+          "desc": "BARRIL INOX 30L. EURONORMA",
+          "qty": 1.0,
+          "unit": "BRL",
+          "ubic": "ENVASE"
+        }
+      ],
+      "zona_transp": "DD13100008",
+      "window_open_min": 0,
+      "window_close_min": 1920
+    }
+  ],
+  "final_route_detail": [
+    {
+      "stop_index": 2,
+      "customer_id": "827999915",
+      "customer_name": "PUNT DE TROBADA",
+      "arrival_time": "11:30",
+      "departure_time": "11:38",
+      "travel_time_min": 5.57,
+      "distance_km": 1.036,
+      "fuel_cost": 0.1243,
+      "operational_cost": 4.7483,
+      "priority_score": 0.4593,
+      "walking_group_id": 1,
+      "window_open": "11:30",
+      "window_close": "13:00",
+      "window_status": "on_time",
+      "lat": 41.543,
+      "lon": 2.214,
+      "delivery_caj": 14.0,
+      "delivery_brl": 0.0,
+      "return_caj": 2.0,
+      "return_brl": 0.0,
+      "priority_breakdown_estimated": {
+        "revenue": 0.1515,
+        "distance": 0.101,
+        "fuel_cost": 0.0758,
+        "travel_time": 0.0505,
+        "operational_cost": 0.0505,
+        "route_efficiency": 0.0505,
+        "time_window_urgency": 0.0253
+      }
+    },
+    {
+      "stop_index": 14,
+      "customer_id": "827999927",
+      "customer_name": "BK MOLLET",
+      "arrival_time": "11:38",
+      "departure_time": "11:46",
+      "travel_time_min": 0.0,
+      "distance_km": 0.0,
+      "fuel_cost": 0.0,
+      "operational_cost": 2.8,
+      "priority_score": -0.15,
+      "walking_group_id": 1,
+      "window_open": "06:00",
+      "window_close": "14:00",
+      "window_status": "on_time",
+      "lat": 41.543,
+      "lon": 2.214,
+      "delivery_caj": 36.0,
+      "delivery_brl": 1.0,
+      "return_caj": 0.0,
+      "return_brl": 1.0,
+      "priority_breakdown_estimated": {
+        "revenue": -0.06,
+        "distance": -0.04,
+        "fuel_cost": -0.03,
+        "travel_time": -0.02,
+        "operational_cost": -0.02,
+        "route_efficiency": -0.02,
+        "time_window_urgency": -0.01
+      }
+    },
+    {
+      "stop_index": 9,
+      "customer_id": "827999922",
+      "customer_name": "NUEVO VITORINO",
+      "arrival_time": "11:46",
+      "departure_time": "11:54",
+      "travel_time_min": 0.0,
+      "distance_km": 0.0,
+      "fuel_cost": 0.0,
+      "operational_cost": 2.8,
+      "priority_score": -0.15,
+      "walking_group_id": 1,
+      "window_open": "06:00",
+      "window_close": "14:00",
+      "window_status": "on_time",
+      "lat": 41.543,
+      "lon": 2.214,
+      "delivery_caj": 25.0,
+      "delivery_brl": 0.0,
+      "return_caj": 55.0,
+      "return_brl": 0.0,
+      "priority_breakdown_estimated": {
+        "revenue": -0.06,
+        "distance": -0.04,
+        "fuel_cost": -0.03,
+        "travel_time": -0.02,
+        "operational_cost": -0.02,
+        "route_efficiency": -0.02,
+        "time_window_urgency": -0.01
+      }
+    },
+    {
+      "stop_index": 8,
+      "customer_id": "827999921",
+      "customer_name": "BAR FRAYMAN",
+      "arrival_time": "11:54",
+      "departure_time": "12:02",
+      "travel_time_min": 0.0,
+      "distance_km": 0.0,
+      "fuel_cost": 0.0,
+      "operational_cost": 2.8,
+      "priority_score": -0.15,
+      "walking_group_id": 1,
+      "window_open": "06:00",
+      "window_close": "14:00",
+      "window_status": "on_time",
+      "lat": 41.543,
+      "lon": 2.214,
+      "delivery_caj": 23.0,
+      "delivery_brl": 0.0,
+      "return_caj": 21.0,
+      "return_brl": 0.0,
+      "priority_breakdown_estimated": {
+        "revenue": -0.06,
+        "distance": -0.04,
+        "fuel_cost": -0.03,
+        "travel_time": -0.02,
+        "operational_cost": -0.02,
+        "route_efficiency": -0.02,
+        "time_window_urgency": -0.01
+      }
+    },
+    {
+      "stop_index": 5,
+      "customer_id": "827999918",
+      "customer_name": "RACO DEL SEMI CACHOPO",
+      "arrival_time": "12:02",
+      "departure_time": "12:10",
+      "travel_time_min": 0.0,
+      "distance_km": 0.0,
+      "fuel_cost": 0.0,
+      "operational_cost": 2.8,
+      "priority_score": -0.15,
+      "walking_group_id": 1,
+      "window_open": "06:00",
+      "window_close": "14:00",
+      "window_status": "on_time",
+      "lat": 41.543,
+      "lon": 2.214,
+      "delivery_caj": 11.0,
+      "delivery_brl": 0.0,
+      "return_caj": 15.0,
+      "return_brl": 0.0,
+      "priority_breakdown_estimated": {
+        "revenue": -0.06,
+        "distance": -0.04,
+        "fuel_cost": -0.03,
+        "travel_time": -0.02,
+        "operational_cost": -0.02,
+        "route_efficiency": -0.02,
+        "time_window_urgency": -0.01
+      }
+    },
+    {
+      "stop_index": 13,
+      "customer_id": "827999926",
+      "customer_name": "RSTE. YOLANDA",
+      "arrival_time": "12:10",
+      "departure_time": "12:18",
+      "travel_time_min": 0.0,
+      "distance_km": 0.0,
+      "fuel_cost": 0.0,
+      "operational_cost": 2.8,
+      "priority_score": -0.15,
+      "walking_group_id": 1,
+      "window_open": "06:00",
+      "window_close": "14:00",
+      "window_status": "on_time",
+      "lat": 41.543,
+      "lon": 2.214,
+      "delivery_caj": 6.0,
+      "delivery_brl": 1.0,
+      "return_caj": 6.0,
+      "return_brl": 1.0,
+      "priority_breakdown_estimated": {
+        "revenue": -0.06,
+        "distance": -0.04,
+        "fuel_cost": -0.03,
+        "travel_time": -0.02,
+        "operational_cost": -0.02,
+        "route_efficiency": -0.02,
+        "time_window_urgency": -0.01
+      }
+    }
+  ],
+  "metrics_comparison": {
+    "baseline": {
+      "distance_km": 3.054,
+      "duration_min": 62.78,
+      "fuel_liters_est": 0.27,
+      "co2_kg_est": 0.71,
+      "cost_eur": 22.3406,
+      "fuel_cost_eur": 0.3665,
+      "operational_cost_eur": 21.9742
+    },
+    "optimized": {
+      "distance_km": 3.054,
+      "duration_min": 63.22,
+      "fuel_liters_est": 0.27,
+      "co2_kg_est": 0.71,
+      "cost_eur": 22.3407,
+      "fuel_cost_eur": 0.3665,
+      "operational_cost_eur": 21.9742
+    }
+  },
+  "route_summary": {
+    "total_stops": 6,
+    "total_distance_km": 3.054,
+    "total_duration_min": 63.22,
+    "total_fuel_cost": 0.3665,
+    "total_operational_cost": 21.9742,
+    "total_revenue": 2889.15,
+    "walking_groups_count": 1,
+    "estimated_time_saved_min": 0.0,
+    "baseline_rand_maps_distance_km": 3.054,
+    "baseline_rand_maps_fuel_cost": 0.3665,
+    "baseline_rand_maps_operational_cost": 21.9742,
+    "baseline_rand_maps_total_eur": 22.3406,
+    "baseline_rand_maps_drive_service_min": 62.78
+  },
+  "unload_time_saved_min_estimate": 0.0
+}

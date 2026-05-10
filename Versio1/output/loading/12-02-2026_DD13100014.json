@@ -1,0 +1,200 @@
+{
+  "route_code": "DR0016",
+  "date": "12/02/2026",
+  "transport_id": "DD13100014",
+  "transporter_name": "Transporter DD13100014",
+  "truck_type": "large",
+  "truck_slots": 8,
+  "loading_after_lifo": [
+    {
+      "parcela": 1,
+      "customer_name": "Devoluciones (consolidado)",
+      "parcela_volume_pct": 100.0,
+      "items": [
+        {
+          "material": "RET",
+          "quantity": 79
+        }
+      ]
+    },
+    {
+      "parcela": 2,
+      "customer_name": "CASA CHUECOS",
+      "parcela_volume_pct": 22.5,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 3
+        }
+      ]
+    },
+    {
+      "parcela": 3,
+      "customer_name": "CAL JOAN \u00b7 BAR ZHOU",
+      "parcela_volume_pct": 100.0,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 36
+        },
+        {
+          "material": "ENT",
+          "quantity": 22
+        }
+      ]
+    },
+    {
+      "parcela": 4,
+      "customer_name": "LA BAGUETINA \u00b7 BAR RESTAURANT TROYA",
+      "parcela_volume_pct": 91.8,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 16
+        },
+        {
+          "material": "ENT",
+          "quantity": 16
+        }
+      ]
+    },
+    {
+      "parcela": 5,
+      "customer_name": "KARMA\u00b4S",
+      "parcela_volume_pct": 68.0,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 16
+        }
+      ]
+    },
+    {
+      "parcela": 6,
+      "customer_name": "DONNER POMPEU FABRA \u00b7 RESTAURANTE MINT",
+      "parcela_volume_pct": 34.9,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 5
+        },
+        {
+          "material": "ENT",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "parcela": 7,
+      "customer_name": "BAR EL RECONET",
+      "parcela_volume_pct": 15.5,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 1
+        }
+      ]
+    }
+  ],
+  "loading_before_randomized": [
+    {
+      "parcela": 1,
+      "customer_name": "Devoluciones (consolidado)",
+      "parcela_volume_pct": 100.0,
+      "items": [
+        {
+          "material": "RET",
+          "quantity": 79
+        }
+      ]
+    },
+    {
+      "parcela": 2,
+      "customer_name": "CASA CHUECOS",
+      "parcela_volume_pct": 22.5,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 3
+        }
+      ]
+    },
+    {
+      "parcela": 3,
+      "customer_name": "CAL JOAN \u00b7 BAR ZHOU",
+      "parcela_volume_pct": 100.0,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 36
+        },
+        {
+          "material": "ENT",
+          "quantity": 22
+        }
+      ]
+    },
+    {
+      "parcela": 4,
+      "customer_name": "LA BAGUETINA \u00b7 BAR RESTAURANT TROYA",
+      "parcela_volume_pct": 91.8,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 16
+        },
+        {
+          "material": "ENT",
+          "quantity": 16
+        }
+      ]
+    },
+    {
+      "parcela": 5,
+      "customer_name": "KARMA\u00b4S",
+      "parcela_volume_pct": 68.0,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 16
+        }
+      ]
+    },
+    {
+      "parcela": 6,
+      "customer_name": "DONNER POMPEU FABRA \u00b7 RESTAURANTE MINT",
+      "parcela_volume_pct": 34.9,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 5
+        },
+        {
+          "material": "ENT",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "parcela": 7,
+      "customer_name": "BAR EL RECONET",
+      "parcela_volume_pct": 15.5,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 1
+        }
+      ]
+    }
+  ],
+  "warehouse_pick_sequence": [],
+  "plan_summary": {
+    "total_weight_kg": 8004.9,
+    "total_volume_l": 99260.8,
+    "most_loaded_parcela_pct": 100.0,
+    "synthetic_from_route": true
+  },
+  "warnings": [
+    "Distribuci\u00f3n sint\u00e9tica (orden de visita \u00b7 demo). Ejecutar Block 3 para plan almac\u00e9n + ZM040."
+  ]
+}

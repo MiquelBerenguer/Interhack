@@ -1,0 +1,425 @@
+{
+  "route_code": "DR0052",
+  "date": "13/02/2026",
+  "transport_id": "DD13100068",
+  "transporter_name": "Transporter DD13100068",
+  "truck_type": "standard",
+  "truck_slots": 6,
+  "zona_key": "DD13100068",
+  "priority_weights_used": {
+    "revenue": 0.3,
+    "distance": 0.2,
+    "fuel_cost": 0.15,
+    "travel_time": 0.1,
+    "operational_cost": 0.1,
+    "route_efficiency": 0.1,
+    "time_window_urgency": 0.05
+  },
+  "depot": {
+    "name": "Estrella Damm Mollet - Magatzem",
+    "address": "Carrer Moli de Can Bassa, Mollet del Valles, Barcelona",
+    "lat": 41.5363,
+    "lon": 2.2131
+  },
+  "baseline_visit_order_global": [
+    0
+  ],
+  "optimized_visit_order_global": [
+    0
+  ],
+  "all_stops": [
+    {
+      "id": "828006846",
+      "entrega_ids": [
+        "828006846"
+      ],
+      "name": "LLAVORS I CEREALS FONT",
+      "address": "CARRETERA PRATS DE LLU\u00c7ANES 2, 08500 VIC",
+      "city": "VIC",
+      "cp": "08500",
+      "lat": 41.9302,
+      "lon": 2.254,
+      "delivery_caj": 385.0,
+      "delivery_brl": 0,
+      "delivery_un": 0,
+      "ret_caj": 301.0,
+      "ret_brl": 0,
+      "delivery_up": 6.488043478260869,
+      "return_up": 3.8928260869565214,
+      "delivery_value_eur": 9240.0,
+      "items": [
+        {
+          "mat": "0AG0003",
+          "desc": "FONT D.OR NATURAL 1L RET 12U",
+          "qty": 32.0,
+          "unit": "CAJ",
+          "ubic": "AC08A3",
+          "unit_price_eur": 24.0,
+          "line_total_eur": 768.0
+        },
+        {
+          "mat": "0AG0039",
+          "desc": "FONT D.OR NATURAL 1,5L PET 6U",
+          "qty": 84.0,
+          "unit": "CAJ",
+          "ubic": "EB08A1",
+          "unit_price_eur": 24.0,
+          "line_total_eur": 2016.0
+        },
+        {
+          "mat": "0AG0047",
+          "desc": "FONT D.OR NATURAL 8L GARRAFA 1U",
+          "qty": 224.0,
+          "unit": "CAJ",
+          "ubic": "BC01A1",
+          "unit_price_eur": 24.0,
+          "line_total_eur": 5376.0
+        },
+        {
+          "mat": "0LT0009",
+          "desc": "LETONA GRAN CREME 1L VR 12U",
+          "qty": 32.0,
+          "unit": "CAJ",
+          "ubic": "AC05A2",
+          "unit_price_eur": 24.0,
+          "line_total_eur": 768.0
+        },
+        {
+          "mat": "0LT0030",
+          "desc": "LETONA DESNATADA 0% 1L VR 12U",
+          "qty": 10.0,
+          "unit": "CAJ",
+          "ubic": "BA001A2",
+          "unit_price_eur": 24.0,
+          "line_total_eur": 240.0
+        },
+        {
+          "mat": "0RF0287",
+          "desc": "/-COCA COLA VR237 24U",
+          "qty": 3.0,
+          "unit": "CAJ",
+          "ubic": "AC06A1",
+          "unit_price_eur": 24.0,
+          "line_total_eur": 72.0
+        }
+      ],
+      "ret_items": [
+        {
+          "mat": "3ENV0042",
+          "desc": "C.C. AGUA 1/1 VICHY-FONT D'OR",
+          "qty": 32.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        },
+        {
+          "mat": "3ENV0054",
+          "desc": "ENVASE\u00a0GARRAFA\u00a0FONT D'OR\u00a08L",
+          "qty": 224.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        },
+        {
+          "mat": "3ENV1281",
+          "desc": "C.C. LECHE LETONA (NUEVO)",
+          "qty": 32.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        },
+        {
+          "mat": "3ENV1281",
+          "desc": "C.C. LECHE LETONA (NUEVO)",
+          "qty": 10.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        },
+        {
+          "mat": "3ENV0021",
+          "desc": "CAJA+BOTELLA COLA VR237",
+          "qty": 3.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        }
+      ],
+      "zona_transp": "DD13100068",
+      "window_open_min": 0,
+      "window_close_min": 1920
+    },
+    {
+      "id": "828006847",
+      "entrega_ids": [
+        "828006847"
+      ],
+      "name": "HOSPITAL DE VIC CUINA",
+      "address": "Carrer de Francesc Pla el Vigat\u00e0 1, 08500 VIC",
+      "city": "VIC",
+      "cp": "08500",
+      "lat": 41.9302,
+      "lon": 2.254,
+      "delivery_caj": 43.0,
+      "delivery_brl": 0,
+      "delivery_un": 0,
+      "ret_caj": 0,
+      "ret_brl": 0,
+      "delivery_up": 1.003,
+      "return_up": 0.6017999999999999,
+      "delivery_value_eur": 1032.0,
+      "items": [
+        {
+          "mat": "0AG0007",
+          "desc": "FONT D.OR NATURAL 1,5L PET 12U",
+          "qty": 40.0,
+          "unit": "CAJ",
+          "ubic": "EB09A1",
+          "unit_price_eur": 24.0,
+          "line_total_eur": 960.0
+        },
+        {
+          "mat": "0ZU0027",
+          "desc": "LAMBDA MELOCOTON SIN 20CL 24U",
+          "qty": 2.0,
+          "unit": "CAJ",
+          "ubic": "ZCG",
+          "unit_price_eur": 24.0,
+          "line_total_eur": 48.0
+        },
+        {
+          "mat": "0ZU0029",
+          "desc": "LAMBDA PI\u00d1A  SIN 20CL 24U",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "ZCG",
+          "unit_price_eur": 24.0,
+          "line_total_eur": 24.0
+        }
+      ],
+      "ret_items": [],
+      "zona_transp": "DD13100050",
+      "window_open_min": 0,
+      "window_close_min": 1920
+    },
+    {
+      "id": "828006848",
+      "entrega_ids": [
+        "828006848"
+      ],
+      "name": "HOSPITAL DE VIC CAFETERIA",
+      "address": "Carrer de Francesc Pla el Vigat\u00e0 1, 08500 VIC",
+      "city": "VIC",
+      "cp": "08500",
+      "lat": 41.9302,
+      "lon": 2.254,
+      "delivery_caj": 87.0,
+      "delivery_brl": 0,
+      "delivery_un": 0,
+      "ret_caj": 0,
+      "ret_brl": 0,
+      "delivery_up": 1.6369603174603173,
+      "return_up": 0.9821761904761903,
+      "delivery_value_eur": 2088.0,
+      "items": [
+        {
+          "mat": "0AG0007",
+          "desc": "FONT D.OR NATURAL 1,5L PET 12U",
+          "qty": 40.0,
+          "unit": "CAJ",
+          "ubic": "EB09A1",
+          "unit_price_eur": 24.0,
+          "line_total_eur": 960.0
+        },
+        {
+          "mat": "0AG0006",
+          "desc": "FONT D.OR NATURAL 1/3 PET 35U",
+          "qty": 20.0,
+          "unit": "CAJ",
+          "ubic": "EA01A2",
+          "unit_price_eur": 24.0,
+          "line_total_eur": 480.0
+        },
+        {
+          "mat": "0AG0004",
+          "desc": "FONT D.OR NATURAL 1/2 PET 24U",
+          "qty": 20.0,
+          "unit": "CAJ",
+          "ubic": "EB10A1",
+          "unit_price_eur": 24.0,
+          "line_total_eur": 480.0
+        },
+        {
+          "mat": "0ZU0027",
+          "desc": "LAMBDA MELOCOTON SIN 20CL 24U",
+          "qty": 3.0,
+          "unit": "CAJ",
+          "ubic": "ZCG",
+          "unit_price_eur": 24.0,
+          "line_total_eur": 72.0
+        },
+        {
+          "mat": "0ZU0028",
+          "desc": "LAMBDA NARANJA SIN 20CL 24U",
+          "qty": 2.0,
+          "unit": "CAJ",
+          "ubic": "ZCG",
+          "unit_price_eur": 24.0,
+          "line_total_eur": 48.0
+        },
+        {
+          "mat": "0ZU0029",
+          "desc": "LAMBDA PI\u00d1A  SIN 20CL 24U",
+          "qty": 2.0,
+          "unit": "CAJ",
+          "ubic": "ZCG",
+          "unit_price_eur": 24.0,
+          "line_total_eur": 48.0
+        }
+      ],
+      "ret_items": [],
+      "zona_transp": "DD13100050",
+      "window_open_min": 0,
+      "window_close_min": 1920
+    },
+    {
+      "id": "828006849",
+      "entrega_ids": [
+        "828006849"
+      ],
+      "name": "DROGUERIA JUNYENT",
+      "address": "CALLE BELLMUNT 12, 08503 GURB",
+      "city": "GURB",
+      "cp": "08503",
+      "lat": 41.9501,
+      "lon": 2.2673,
+      "delivery_caj": 118.0,
+      "delivery_brl": 0,
+      "delivery_un": 0,
+      "ret_caj": 118.0,
+      "ret_brl": 0,
+      "delivery_up": 1.7874999999999999,
+      "return_up": 1.0724999999999998,
+      "delivery_value_eur": 2832.0,
+      "items": [
+        {
+          "mat": "0AG0003",
+          "desc": "FONT D.OR NATURAL 1L RET 12U",
+          "qty": 3.0,
+          "unit": "CAJ",
+          "ubic": "AC08A3",
+          "unit_price_eur": 24.0,
+          "line_total_eur": 72.0
+        },
+        {
+          "mat": "0AG0010",
+          "desc": "VICHY CATALAN GAS 1L RET 12U",
+          "qty": 3.0,
+          "unit": "CAJ",
+          "ubic": "AC07A2",
+          "unit_price_eur": 24.0,
+          "line_total_eur": 72.0
+        },
+        {
+          "mat": "0AG0047",
+          "desc": "FONT D.OR NATURAL 8L GARRAFA 1U",
+          "qty": 112.0,
+          "unit": "CAJ",
+          "ubic": "BC01A1",
+          "unit_price_eur": 24.0,
+          "line_total_eur": 2688.0
+        }
+      ],
+      "ret_items": [
+        {
+          "mat": "3ENV0042",
+          "desc": "C.C. AGUA 1/1 VICHY-FONT D'OR",
+          "qty": 3.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        },
+        {
+          "mat": "3ENV0042",
+          "desc": "C.C. AGUA 1/1 VICHY-FONT D'OR",
+          "qty": 3.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        },
+        {
+          "mat": "3ENV0054",
+          "desc": "ENVASE\u00a0GARRAFA\u00a0FONT D'OR\u00a08L",
+          "qty": 112.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        }
+      ],
+      "zona_transp": "DD13100050",
+      "window_open_min": 0,
+      "window_close_min": 1920
+    }
+  ],
+  "final_route_detail": [
+    {
+      "stop_index": 0,
+      "customer_id": "828006846",
+      "customer_name": "LLAVORS I CEREALS FONT",
+      "arrival_time": "06:44",
+      "departure_time": "06:52",
+      "travel_time_min": 43.52,
+      "distance_km": 50.004,
+      "fuel_cost": 6.0005,
+      "operational_cost": 18.0308,
+      "priority_score": 1.0,
+      "walking_group_id": null,
+      "window_open": "06:00",
+      "window_close": "14:00",
+      "window_status": "on_time",
+      "lat": 41.9302,
+      "lon": 2.254,
+      "delivery_caj": 385.0,
+      "delivery_brl": 0.0,
+      "return_caj": 301.0,
+      "return_brl": 0.0,
+      "priority_breakdown_estimated": {
+        "revenue": 0.2069,
+        "distance": 0.1379,
+        "fuel_cost": 0.1034,
+        "travel_time": 0.069,
+        "operational_cost": 0.069,
+        "route_efficiency": 0.069,
+        "time_window_urgency": 0.0345
+      }
+    }
+  ],
+  "metrics_comparison": {
+    "baseline": {
+      "distance_km": 100.516,
+      "duration_min": 93.5,
+      "fuel_liters_est": 8.93,
+      "co2_kg_est": 23.58,
+      "cost_eur": 44.7869,
+      "fuel_cost_eur": 12.0619,
+      "operational_cost_eur": 32.725
+    },
+    "optimized": {
+      "distance_km": 100.516,
+      "duration_min": 93.5,
+      "fuel_liters_est": 8.93,
+      "co2_kg_est": 23.58,
+      "cost_eur": 44.7869,
+      "fuel_cost_eur": 12.0619,
+      "operational_cost_eur": 32.725
+    }
+  },
+  "route_summary": {
+    "total_stops": 1,
+    "total_distance_km": 100.516,
+    "total_duration_min": 93.5,
+    "total_fuel_cost": 12.0619,
+    "total_operational_cost": 32.725,
+    "total_revenue": 9240.0,
+    "walking_groups_count": 0,
+    "estimated_time_saved_min": 0.0,
+    "baseline_rand_maps_distance_km": 100.516,
+    "baseline_rand_maps_fuel_cost": 12.0619,
+    "baseline_rand_maps_operational_cost": 32.725,
+    "baseline_rand_maps_total_eur": 44.7869,
+    "baseline_rand_maps_drive_service_min": 93.5
+  },
+  "unload_time_saved_min_estimate": 0.0
+}

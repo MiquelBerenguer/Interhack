@@ -1,0 +1,148 @@
+{
+  "route_code": "DR0006",
+  "date": "12/02/2026",
+  "transport_id": "DD13100008",
+  "transporter_name": "Transporter DD13100008",
+  "truck_type": "standard",
+  "truck_slots": 6,
+  "loading_after_lifo": [
+    {
+      "parcela": 1,
+      "customer_name": "Devoluciones (consolidado)",
+      "parcela_volume_pct": 100.0,
+      "items": [
+        {
+          "material": "RET",
+          "quantity": 101
+        }
+      ]
+    },
+    {
+      "parcela": 2,
+      "customer_name": "PUNT DE TROBADA",
+      "parcela_volume_pct": 61.0,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 14
+        }
+      ]
+    },
+    {
+      "parcela": 3,
+      "customer_name": "BK MOLLET \u00b7 NUEVO VITORINO",
+      "parcela_volume_pct": 100.0,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 37
+        },
+        {
+          "material": "ENT",
+          "quantity": 25
+        }
+      ]
+    },
+    {
+      "parcela": 4,
+      "customer_name": "BAR FRAYMAN \u00b7 RACO DEL SEMI CACHOPO",
+      "parcela_volume_pct": 100.0,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 23
+        },
+        {
+          "material": "ENT",
+          "quantity": 11
+        }
+      ]
+    },
+    {
+      "parcela": 5,
+      "customer_name": "RSTE. YOLANDA",
+      "parcela_volume_pct": 36.5,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 7
+        }
+      ]
+    }
+  ],
+  "loading_before_randomized": [
+    {
+      "parcela": 1,
+      "customer_name": "Devoluciones (consolidado)",
+      "parcela_volume_pct": 100.0,
+      "items": [
+        {
+          "material": "RET",
+          "quantity": 101
+        }
+      ]
+    },
+    {
+      "parcela": 2,
+      "customer_name": "PUNT DE TROBADA",
+      "parcela_volume_pct": 61.0,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 14
+        }
+      ]
+    },
+    {
+      "parcela": 3,
+      "customer_name": "BK MOLLET \u00b7 NUEVO VITORINO",
+      "parcela_volume_pct": 100.0,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 37
+        },
+        {
+          "material": "ENT",
+          "quantity": 25
+        }
+      ]
+    },
+    {
+      "parcela": 4,
+      "customer_name": "BAR FRAYMAN \u00b7 RACO DEL SEMI CACHOPO",
+      "parcela_volume_pct": 100.0,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 23
+        },
+        {
+          "material": "ENT",
+          "quantity": 11
+        }
+      ]
+    },
+    {
+      "parcela": 5,
+      "customer_name": "RSTE. YOLANDA",
+      "parcela_volume_pct": 36.5,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 7
+        }
+      ]
+    }
+  ],
+  "warehouse_pick_sequence": [],
+  "plan_summary": {
+    "total_weight_kg": 7353.8,
+    "total_volume_l": 91187.1,
+    "most_loaded_parcela_pct": 100.0,
+    "synthetic_from_route": true
+  },
+  "warnings": [
+    "Distribuci\u00f3n sint\u00e9tica (orden de visita \u00b7 demo). Ejecutar Block 3 para plan almac\u00e9n + ZM040."
+  ]
+}

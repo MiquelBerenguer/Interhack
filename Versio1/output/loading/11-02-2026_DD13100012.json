@@ -1,0 +1,156 @@
+{
+  "route_code": "DR0016",
+  "date": "11/02/2026",
+  "transport_id": "DD13100012",
+  "transporter_name": "Transporter DD13100012",
+  "truck_type": "standard",
+  "truck_slots": 6,
+  "loading_after_lifo": [
+    {
+      "parcela": 1,
+      "customer_name": "Devoluciones (consolidado)",
+      "parcela_volume_pct": 100.0,
+      "items": [
+        {
+          "material": "RET",
+          "quantity": 59
+        }
+      ]
+    },
+    {
+      "parcela": 2,
+      "customer_name": "BAR XEICA \u00b7 BAR RESTAURANTE CAL DAVID",
+      "parcela_volume_pct": 100.0,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 22
+        },
+        {
+          "material": "ENT",
+          "quantity": 15
+        }
+      ]
+    },
+    {
+      "parcela": 3,
+      "customer_name": "GRANA BAR BY DUMAS",
+      "parcela_volume_pct": 61.0,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 14
+        }
+      ]
+    },
+    {
+      "parcela": 4,
+      "customer_name": "BAR LA PRADERA \u00b7 IMPERIAL \u00b7 BAR LAS TAPAS",
+      "parcela_volume_pct": 90.4,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 13
+        },
+        {
+          "material": "ENT",
+          "quantity": 12
+        },
+        {
+          "material": "ENT",
+          "quantity": 8
+        }
+      ]
+    },
+    {
+      "parcela": 5,
+      "customer_name": "RESTAURANTE EL FOGON",
+      "parcela_volume_pct": 22.5,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 3
+        }
+      ]
+    }
+  ],
+  "loading_before_randomized": [
+    {
+      "parcela": 1,
+      "customer_name": "Devoluciones (consolidado)",
+      "parcela_volume_pct": 100.0,
+      "items": [
+        {
+          "material": "RET",
+          "quantity": 59
+        }
+      ]
+    },
+    {
+      "parcela": 2,
+      "customer_name": "BAR XEICA \u00b7 BAR RESTAURANTE CAL DAVID",
+      "parcela_volume_pct": 100.0,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 22
+        },
+        {
+          "material": "ENT",
+          "quantity": 15
+        }
+      ]
+    },
+    {
+      "parcela": 3,
+      "customer_name": "GRANA BAR BY DUMAS",
+      "parcela_volume_pct": 61.0,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 14
+        }
+      ]
+    },
+    {
+      "parcela": 4,
+      "customer_name": "BAR LA PRADERA \u00b7 IMPERIAL \u00b7 BAR LAS TAPAS",
+      "parcela_volume_pct": 90.4,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 13
+        },
+        {
+          "material": "ENT",
+          "quantity": 12
+        },
+        {
+          "material": "ENT",
+          "quantity": 8
+        }
+      ]
+    },
+    {
+      "parcela": 5,
+      "customer_name": "RESTAURANTE EL FOGON",
+      "parcela_volume_pct": 22.5,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 3
+        }
+      ]
+    }
+  ],
+  "warehouse_pick_sequence": [],
+  "plan_summary": {
+    "total_weight_kg": 6917.1,
+    "total_volume_l": 85772.0,
+    "most_loaded_parcela_pct": 100.0,
+    "synthetic_from_route": true
+  },
+  "warnings": [
+    "Distribuci\u00f3n sint\u00e9tica (orden de visita \u00b7 demo). Ejecutar Block 3 para plan almac\u00e9n + ZM040."
+  ]
+}

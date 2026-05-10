@@ -1,0 +1,1335 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Damm Smart Truck — Dashboard</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js" crossorigin=""></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=DM+Mono:wght@400;500&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --red: #c8102e;
+      --red-dark: #a00020;
+      --red-light: #fef0f2;
+      --red-mid: #f5c6ce;
+      --black: #0d0d0d;
+      --gray-900: #1a1a1a;
+      --gray-700: #444;
+      --gray-500: #777;
+      --gray-300: #c8c8c8;
+      --gray-100: #f0f0f0;
+      --gray-50: #f7f7f7;
+      --white: #ffffff;
+      --border: #e5e5e5;
+      --green: #1a8060;
+      --green-light: #e8f5f1;
+      --amber: #d97706;
+      --amber-light: #fef3c7;
+      --font-body: 'DM Sans', system-ui, sans-serif;
+      --font-display: 'Syne', system-ui, sans-serif;
+      --font-mono: 'DM Mono', monospace;
+      --radius: 10px;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.04);
+      --shadow: 0 4px 12px rgba(0,0,0,.08), 0 2px 4px rgba(0,0,0,.04);
+      --shadow-lg: 0 12px 32px rgba(0,0,0,.10), 0 4px 8px rgba(0,0,0,.06);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: var(--font-body); background: var(--gray-50); color: var(--black); min-height: 100vh; display: flex; flex-direction: column; -webkit-font-smoothing: antialiased; }
+
+    /* ── UPLOAD ── */
+    #upload-screen { min-height: 100vh; background: var(--white); display: flex; flex-direction: column; }
+    .upload-nav { height: 60px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; padding: 0 2.5rem; }
+    .logo-mark { font-family: var(--font-display); font-size: 1.1rem; font-weight: 800; color: var(--black); letter-spacing: -.02em; }
+    .logo-mark span { color: var(--red); }
+    .logo-sub { font-size: .7rem; color: var(--gray-500); font-weight: 400; margin-top: 1px; font-family: var(--font-body); }
+    .upload-body { flex: 1; display: flex; align-items: center; justify-content: center; flex-direction: column; padding: 4rem 2rem; }
+    .eyebrow { font-family: var(--font-mono); font-size: .65rem; letter-spacing: .15em; text-transform: uppercase; color: var(--red); font-weight: 500; margin-bottom: 1.25rem; }
+    .upload-headline { font-family: var(--font-display); font-size: 2.8rem; font-weight: 800; color: var(--black); letter-spacing: -.04em; text-align: center; line-height: 1.05; margin-bottom: .75rem; max-width: 520px; }
+    .upload-desc { font-size: .88rem; color: var(--gray-500); text-align: center; max-width: 400px; line-height: 1.65; margin-bottom: 3rem; }
+
+    .drop-zone { width: 520px; border: 1.5px dashed var(--border); border-radius: 14px; padding: 2.5rem 2rem; text-align: center; cursor: pointer; transition: border-color .2s, background .2s; background: var(--gray-50); position: relative; }
+    .drop-zone:hover, .drop-zone.drag { border-color: var(--red); background: var(--red-light); }
+    .drop-zone input { display: none; }
+    .drop-icon { width: 52px; height: 52px; border-radius: 50%; background: var(--white); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; box-shadow: var(--shadow-sm); }
+    .drop-icon svg { width: 22px; height: 22px; stroke: var(--red); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+    .drop-title { font-size: .9rem; font-weight: 600; color: var(--black); margin-bottom: .35rem; }
+    .drop-hint { font-size: .78rem; color: var(--gray-500); }
+    .drop-hint strong { color: var(--red); }
+    .file-ready { display: none; margin-top: .75rem; font-size: .78rem; color: var(--green); font-weight: 600; }
+
+    .scopes-wrap { width: 520px; margin-top: 1.75rem; }
+    .scopes-label { font-size: .7rem; font-weight: 600; color: var(--gray-500); text-transform: uppercase; letter-spacing: .08em; margin-bottom: .6rem; font-family: var(--font-mono); }
+    .scopes { display: grid; grid-template-columns: repeat(3, 1fr); gap: .6rem; }
+    .scope-card { border: 1.5px solid var(--border); border-radius: var(--radius); padding: 1rem .85rem; background: var(--white); cursor: pointer; transition: border-color .15s, background .15s, box-shadow .15s; text-align: left; }
+    .scope-card:hover { border-color: var(--red-mid); box-shadow: var(--shadow-sm); }
+    .scope-card.pick { border-color: var(--red); background: var(--red-light); box-shadow: 0 0 0 3px rgba(200,16,46,.08); }
+    .scope-card .sc-title { font-family: var(--font-display); font-size: .95rem; font-weight: 700; color: var(--black); }
+    .scope-card.pick .sc-title { color: var(--red); }
+    .scope-card .sc-time { font-size: 1.4rem; font-weight: 800; color: var(--red); font-family: var(--font-display); margin: .25rem 0; line-height: 1; }
+    .scope-card .sc-desc { font-size: .72rem; color: var(--gray-500); }
+
+    .date-row { width: 520px; margin-top: 1rem; }
+    .date-row label { font-size: .72rem; font-weight: 600; color: var(--gray-500); text-transform: uppercase; letter-spacing: .06em; display: block; margin-bottom: .4rem; font-family: var(--font-mono); }
+    .date-row input { width: 100%; padding: .65rem .85rem; border: 1.5px solid var(--border); border-radius: var(--radius); font-family: var(--font-body); font-size: .9rem; background: var(--white); color: var(--black); transition: border-color .15s; outline: none; }
+    .date-row input:focus { border-color: var(--red); }
+
+    .btn-primary { width: 520px; margin-top: 1.25rem; padding: .95rem; border: none; background: var(--red); color: var(--white); font-family: var(--font-display); font-weight: 700; font-size: 1rem; border-radius: var(--radius); cursor: pointer; letter-spacing: -.01em; transition: background .15s, box-shadow .15s; }
+    .btn-primary:hover { background: var(--red-dark); box-shadow: 0 4px 16px rgba(200,16,46,.3); }
+    .btn-primary:disabled { opacity: .4; cursor: not-allowed; }
+    .btn-ghost { width: 520px; margin-top: .6rem; padding: .75rem; border: 1.5px solid var(--border); background: var(--white); color: var(--black); font-family: var(--font-body); font-weight: 600; font-size: .88rem; border-radius: var(--radius); cursor: pointer; transition: border-color .15s; }
+    .btn-ghost:hover { border-color: var(--red); color: var(--red); }
+    .missing-msg { display: none; width: 520px; margin-top: 1rem; padding: .75rem 1rem; background: var(--amber-light); border: 1px solid #fde68a; border-radius: var(--radius); font-size: .8rem; color: var(--amber); }
+
+    /* ── PROGRESS ── */
+    #progress-screen { display: none; min-height: 100vh; flex-direction: column; align-items: center; justify-content: center; padding: 4rem 2rem; background: var(--white); }
+    .prog-wrap { width: 480px; }
+    .prog-eyebrow { font-family: var(--font-mono); font-size: .65rem; letter-spacing: .15em; text-transform: uppercase; color: var(--red); }
+    .prog-title { font-family: var(--font-display); font-size: 2rem; font-weight: 800; letter-spacing: -.03em; margin: .5rem 0 .35rem; }
+    .prog-subtitle { font-size: .85rem; color: var(--gray-500); margin-bottom: 1.5rem; }
+    .prog-bar-wrap { background: var(--gray-100); border-radius: 999px; height: 8px; overflow: hidden; margin-bottom: .5rem; }
+    .prog-bar-fill { height: 100%; background: var(--red); border-radius: 999px; width: 0%; transition: width .35s ease; }
+    .prog-bar-meta { display: flex; justify-content: space-between; font-size: .78rem; color: var(--gray-500); margin-bottom: 2rem; }
+    .prog-steps { display: flex; flex-direction: column; gap: .65rem; }
+    .prog-step { display: flex; align-items: center; gap: .65rem; font-size: .85rem; color: var(--gray-300); transition: color .2s; }
+    .prog-step.active { color: var(--red); font-weight: 600; }
+    .prog-step.done { color: var(--gray-700); }
+    .step-icon { font-size: .9rem; width: 20px; text-align: center; flex-shrink: 0; }
+    .prog-eta { margin-top: 1.5rem; font-size: .78rem; color: var(--gray-500); text-align: center; font-family: var(--font-mono); }
+
+    /* ── APP NAV ── */
+    #app { display: none; flex: 1; flex-direction: column; }
+    nav.top { height: 56px; background: var(--white); border-bottom: 1px solid var(--border); display: flex; align-items: center; padding: 0 1.5rem; gap: 0; position: sticky; top: 0; z-index: 2000; box-shadow: var(--shadow-sm); }
+    .nav-logo { font-family: var(--font-display); font-size: .95rem; font-weight: 800; color: var(--black); letter-spacing: -.02em; margin-right: 2rem; white-space: nowrap; flex-shrink: 0; }
+    .nav-logo span { color: var(--red); }
+    .nav-links { display: flex; gap: 2px; flex: 1; }
+    .nav-btn { border: none; background: transparent; color: var(--gray-500); cursor: pointer; padding: .35rem .85rem; height: 56px; font-family: var(--font-body); font-size: .8rem; font-weight: 500; letter-spacing: .04em; text-transform: uppercase; border-bottom: 2.5px solid transparent; transition: color .15s, border-color .15s; }
+    .nav-btn:hover { color: var(--black); }
+    .nav-btn.active { color: var(--red); border-bottom-color: var(--red); }
+    .nav-tools { display: flex; align-items: center; gap: .75rem; margin-left: auto; }
+    .sel-route { border: 1px solid var(--border); padding: .3rem .6rem; border-radius: 6px; font-size: .78rem; max-width: 240px; font-family: var(--font-body); background: var(--white); color: var(--black); cursor: pointer; }
+    .pill { padding: .2rem .65rem; border-radius: 999px; font-size: .65rem; font-weight: 700; font-family: var(--font-mono); letter-spacing: .04em; background: var(--red-light); color: var(--red); }
+    .pill.green { background: var(--green-light); color: var(--green); }
+    .btn-nav-ghost { border: 1px solid var(--border); background: none; color: var(--gray-500); font-size: .75rem; padding: .3rem .75rem; border-radius: 6px; cursor: pointer; font-family: var(--font-body); transition: border-color .15s, color .15s; }
+    .btn-nav-ghost:hover { border-color: var(--red); color: var(--red); }
+
+    /* ── PAGES ── */
+    .page { display: none; max-width: 1320px; margin: 0 auto; padding: 1.75rem 1.5rem 4rem; width: 100%; }
+    .page.active { display: block; }
+    .page-title { font-family: var(--font-display); font-size: 1.65rem; font-weight: 800; letter-spacing: -.03em; margin-bottom: .25rem; }
+    .page-sub { font-size: .83rem; color: var(--gray-500); margin-bottom: 1.75rem; line-height: 1.5; }
+
+    /* ── SECTION DIVIDER ── */
+    .sec-divider { display: flex; align-items: center; gap: .75rem; margin: 1.75rem 0 1rem; }
+    .sec-divider span { font-family: var(--font-mono); font-size: .65rem; font-weight: 500; color: var(--gray-500); text-transform: uppercase; letter-spacing: .1em; white-space: nowrap; }
+    .sec-divider::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+    /* ── HERO CARDS ── */
+    .hero-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 1.5rem; box-shadow: var(--shadow-sm); }
+    .hero-card { background: var(--white); padding: 1.25rem 1.35rem; }
+    .hero-card .hc-label { font-family: var(--font-mono); font-size: .65rem; text-transform: uppercase; letter-spacing: .1em; color: var(--gray-500); font-weight: 500; margin-bottom: .6rem; }
+    .hero-card .hc-val { font-family: var(--font-display); font-size: 2.1rem; font-weight: 800; color: var(--black); line-height: 1; letter-spacing: -.04em; }
+    .hero-card .hc-val.red { color: var(--red); }
+    .hero-card .hc-val.green { color: var(--green); }
+    .hero-card .hc-sub { font-size: .75rem; color: var(--gray-500); margin-top: .4rem; line-height: 1.4; }
+    .hero-card .hc-delta { display: inline-flex; align-items: center; gap: .2rem; font-family: var(--font-mono); font-size: .7rem; font-weight: 500; color: var(--green); margin-top: .5rem; background: var(--green-light); padding: .15rem .5rem; border-radius: 4px; }
+
+    /* ── PANEL ── */
+    .panel { background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 1.35rem 1.5rem; margin-bottom: 1.25rem; box-shadow: var(--shadow-sm); }
+    .panel-title { font-family: var(--font-display); font-size: 1rem; font-weight: 700; color: var(--black); margin-bottom: .25rem; letter-spacing: -.01em; }
+    .panel-sub { font-size: .78rem; color: var(--gray-500); margin-bottom: 1rem; line-height: 1.4; }
+
+    /* ── SCOPE TOGGLE (in dashboard) ── */
+    .view-tog-wrap { display: flex; align-items: center; gap: .75rem; margin-bottom: 1.5rem; }
+    .view-tog-label { font-family: var(--font-mono); font-size: .68rem; color: var(--gray-500); text-transform: uppercase; letter-spacing: .08em; }
+    .tog { display: flex; background: var(--gray-50); border: 1px solid var(--border); border-radius: 8px; padding: 3px; gap: 2px; }
+    .tog button { border: none; background: transparent; padding: .3rem .75rem; border-radius: 6px; cursor: pointer; font-size: .75rem; font-family: var(--font-body); color: var(--gray-500); transition: all .15s; }
+    .tog button.on { background: var(--white); color: var(--red); font-weight: 600; box-shadow: var(--shadow-sm); }
+    .filter-sel { border: 1px solid var(--border); padding: .3rem .6rem; border-radius: 6px; font-size: .78rem; font-family: var(--font-body); background: var(--white); display: none; }
+
+    /* ── PRIORITY PANEL ── */
+    .prio-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .prio-factor { padding: .85rem 0; border-bottom: 1px solid var(--gray-100); }
+    .prio-factor:last-child { border-bottom: none; }
+    .prio-factor-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: .4rem; }
+    .prio-factor-name { font-size: .83rem; font-weight: 600; color: var(--black); text-transform: capitalize; }
+    .prio-factor-right { display: flex; align-items: center; gap: .6rem; }
+    .prio-weight-badge { font-family: var(--font-mono); font-size: .68rem; font-weight: 500; color: var(--gray-500); background: var(--gray-100); padding: .1rem .4rem; border-radius: 4px; }
+    .prio-eur { font-family: var(--font-mono); font-size: .75rem; font-weight: 600; color: var(--red); }
+    .prio-track { height: 10px; background: var(--gray-100); border-radius: 5px; overflow: hidden; cursor: help; }
+    .prio-fill { height: 100%; background: linear-gradient(90deg, var(--red-mid), var(--red)); border-radius: 5px; transition: width .5s ease; min-width: 3px; }
+    .prio-desc { font-size: .72rem; color: var(--gray-500); margin-top: .35rem; line-height: 1.45; }
+
+    /* ── CHART ── */
+    .chart-holder { position: relative; width: 100%; }
+    .callout { padding: .85rem 1rem; background: var(--red-light); border-radius: 8px; font-size: .8rem; color: var(--black); border: 1px solid var(--red-mid); margin-top: 1rem; line-height: 1.55; }
+    .callout.green { background: var(--green-light); border-color: #a7f3d0; color: var(--gray-900); }
+    .callout.amber { background: var(--amber-light); border-color: #fde68a; color: var(--gray-900); }
+
+    /* ── TABLE ── */
+    .data-table { width: 100%; border-collapse: collapse; font-size: .8rem; }
+    .data-table th { padding: .5rem .65rem; text-align: left; font-family: var(--font-mono); font-size: .62rem; text-transform: uppercase; letter-spacing: .08em; color: var(--gray-500); font-weight: 500; border-bottom: 1.5px solid var(--black); }
+    .data-table td { padding: .6rem .65rem; border-bottom: 1px solid var(--border); vertical-align: middle; }
+    .data-table tr:hover td { background: var(--gray-50); }
+    .data-table tr.walk td { background: rgba(29,158,117,.05); }
+
+    .badge { padding: .15rem .5rem; border-radius: 4px; font-size: .65rem; font-weight: 700; font-family: var(--font-mono); display: inline-block; }
+    .b-on { background: var(--green-light); color: var(--green); }
+    .b-tight { background: var(--amber-light); color: var(--amber); }
+    .b-risk { background: var(--red-light); color: var(--red); }
+    .b-miss { background: var(--gray-100); color: var(--gray-500); }
+
+    /* ── MAP ── */
+    .map-duo { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.25rem; }
+    .map-box { border: 1px solid var(--border); border-radius: 10px; overflow: hidden; background: var(--white); }
+    .map-box-head { padding: .5rem .85rem; font-family: var(--font-mono); font-size: .65rem; text-transform: uppercase; letter-spacing: .06em; color: var(--gray-500); border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: .4rem; }
+    .map-box-head .dot { width: 8px; height: 8px; border-radius: 50%; }
+    .leaflet-el { height: 360px; }
+
+    /* ── METRICS COMPARE ── */
+    .metrics-compare { width: 100%; border-collapse: collapse; font-size: .82rem; }
+    .metrics-compare th { padding: .6rem .85rem; font-family: var(--font-mono); font-size: .65rem; text-transform: uppercase; letter-spacing: .06em; color: var(--gray-500); border-bottom: 1px solid var(--border); }
+    .metrics-compare td { padding: .7rem .85rem; border-bottom: 1px solid var(--border); }
+    .metrics-compare .delta-pos { color: var(--green); font-weight: 600; font-family: var(--font-mono); }
+    .metrics-compare .delta-neg { color: var(--red); font-weight: 600; font-family: var(--font-mono); }
+
+    /* ── TRUCK ── */
+    .truck-duo { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .truck-label { font-family: var(--font-mono); font-size: .7rem; font-weight: 500; text-transform: uppercase; letter-spacing: .06em; color: var(--gray-500); margin-bottom: .6rem; }
+    .tv { display: flex; gap: 3px; min-height: 110px; align-items: stretch; }
+    .tcab { width: 44px; flex-shrink: 0; border-radius: 8px 0 0 8px; border: 1px solid var(--border); display: flex; flex-direction: column; justify-content: center; align-items: center; font-size: .6rem; color: var(--gray-500); background: var(--gray-50); gap: 3px; }
+    .tdoor { width: 30px; flex-shrink: 0; border-radius: 0 8px 8px 0; border: 1px solid var(--border); border-left: 3px solid var(--red); font-size: .7rem; color: var(--red); display: flex; justify-content: center; align-items: center; background: var(--white); }
+    .tpar { flex: 1; border-radius: 4px; border: 1px solid var(--border); display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 4px 2px; text-align: center; cursor: help; min-width: 48px; transition: opacity .15s; }
+    .tpar:hover { opacity: .8; }
+    .tpar.p1ret { background: rgba(29,158,117,.12); border-color: #b2dfdb; color: #1b5e20; }
+    .tpar.p6 { background: rgba(200,16,46,.22); border-color: #c8102e; }
+    .tpar.p5 { background: rgba(200,16,46,.17); border-color: #cc5f6f; }
+    .tpar.p4 { background: rgba(200,16,46,.12); border-color: #dda0a9; }
+    .tpar.p3 { background: rgba(200,16,46,.08); border-color: var(--border); }
+    .tpar.p2 { background: rgba(200,16,46,.04); border-color: var(--border); color: var(--gray-500); }
+    .pnum { font-family: var(--font-display); font-size: 1.1rem; font-weight: 700; opacity: .4; line-height: 1; }
+    .pcl { font-size: .6rem; line-height: 1.3; margin-top: 2px; color: var(--gray-500); max-height: 2.4em; overflow: hidden; }
+    .fill-bar { margin-top: 4px; width: 100%; height: 4px; background: var(--border); border-radius: 2px; overflow: hidden; }
+    .fill-in { height: 100%; background: var(--red); }
+
+    /* ── IMPACT ── */
+    .impact-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-bottom: 1.25rem; }
+    .impact-card { border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; background: var(--white); box-shadow: var(--shadow-sm); }
+    .impact-card.accent { border-color: var(--red); background: var(--red-light); }
+    .impact-label { font-family: var(--font-mono); font-size: .65rem; text-transform: uppercase; letter-spacing: .1em; color: var(--gray-500); font-weight: 500; }
+    .impact-val { font-family: var(--font-display); font-size: 2.6rem; font-weight: 800; color: var(--red); line-height: 1; margin: .5rem 0 .35rem; letter-spacing: -.04em; }
+    .impact-desc { font-size: .78rem; color: var(--gray-500); line-height: 1.45; }
+
+    /* ── UTILS ── */
+    .empty-state { padding: 2.5rem; text-align: center; background: var(--white); border: 1px dashed var(--border); border-radius: 12px; color: var(--gray-500); font-size: .85rem; }
+    .muted { font-size: .75rem; color: var(--gray-500); }
+    .mono { font-family: var(--font-mono); }
+    details.stop-exp { margin: 3px 0 3px 1.5rem; }
+    details.stop-exp summary { cursor: pointer; font-size: .7rem; color: var(--red); font-weight: 600; }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════ UPLOAD SCREEN ══════════════════ -->
+<section id="upload-screen">
+  <div class="upload-nav">
+    <div>
+      <div class="logo-mark">Damm <span>Smart Truck</span></div>
+      <div class="logo-sub">Logistics Optimization Platform</div>
+    </div>
+    <div style="font-family:var(--font-mono);font-size:.72rem;color:var(--gray-500)">v3 · DDI Mollet del Vallès</div>
+  </div>
+  <div class="upload-body">
+    <div class="eyebrow">Optimización de rutas</div>
+    <div class="upload-headline">Inteligencia de<br/>última milla</div>
+    <div class="upload-desc">Carga el Excel de DAMM y el sistema calculará la ruta óptima, el plan de carga y el análisis de impacto económico real.</div>
+
+    <div class="drop-zone" id="dropZone" onclick="document.getElementById('fileHack').click()">
+      <input type="file" id="fileHack" accept=".xlsx,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" />
+      <div class="drop-icon">
+        <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+      </div>
+      <div class="drop-title">Arrastra Hackaton.xlsx o haz clic</div>
+      <div class="drop-hint">Formato: <strong>Hackaton.xlsx</strong> · 5 hojas · datos DDI</div>
+      <div class="file-ready" id="fileReady">✓ Archivo listo</div>
+    </div>
+
+    <div class="scopes-wrap">
+      <div class="scopes-label">Alcance del procesamiento</div>
+      <div class="scopes" id="scopeRow">
+        <div class="scope-card pick" data-scope="day">
+          <div class="sc-title">1 Día</div>
+          <div class="sc-time">~30s</div>
+          <div class="sc-desc">Ideal para demo en vivo</div>
+        </div>
+        <div class="scope-card" data-scope="week">
+          <div class="sc-title">1 Semana</div>
+          <div class="sc-time">~2min</div>
+          <div class="sc-desc">Representativo · 5 días</div>
+        </div>
+        <div class="scope-card" data-scope="full">
+          <div class="sc-title">Dataset completo</div>
+          <div class="sc-time">~15min</div>
+          <div class="sc-desc">Análisis total · 43 días</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="date-row" id="dateRow">
+      <label>Fecha de inicio</label>
+      <input type="date" id="dateInput" value="2026-02-02" min="2026-02-02" max="2026-03-31" />
+    </div>
+
+    <button class="btn-primary" id="btnRun">Optimizar →</button>
+    <button class="btn-ghost" id="btnLoadExisting">Cargar resultados anteriores</button>
+    <div class="missing-msg" id="missingMsg">No se encontró <code>output/summary.json</code>. Ejecuta el pipeline o sube el archivo y lanza el proceso.</div>
+  </div>
+</section>
+
+<!-- ══════════════════ PROGRESS SCREEN ══════════════════ -->
+<div id="progress-screen" style="display:none;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;background:var(--white)">
+  <div class="prog-wrap">
+    <div class="prog-eyebrow">Procesando</div>
+    <div class="prog-title">Optimizando rutas…</div>
+    <div class="prog-subtitle" id="progSubtitle">Iniciando pipeline</div>
+    <div class="prog-bar-wrap">
+      <div class="prog-bar-fill" id="progBar"></div>
+    </div>
+    <div class="prog-bar-meta">
+      <span id="progMsg">Cargando…</span>
+      <span id="progPct" style="font-family:var(--font-mono);font-weight:600">0%</span>
+    </div>
+    <div class="prog-steps">
+      <div class="prog-step" id="step-load"><span class="step-icon">○</span><span>Cargando datos del Excel</span></div>
+      <div class="prog-step" id="step-filter"><span class="step-icon">○</span><span>Filtrando periodo seleccionado</span></div>
+      <div class="prog-step" id="step-routes"><span class="step-icon">○</span><span id="stepRoutesLabel">Optimizando rutas con Google Maps</span></div>
+      <div class="prog-step" id="step-loading"><span class="step-icon">○</span><span>Generando planes de carga</span></div>
+      <div class="prog-step" id="step-export"><span class="step-icon">○</span><span>Escribiendo resultados del dashboard</span></div>
+    </div>
+    <div class="prog-eta" id="progEta"></div>
+  </div>
+</div>
+
+<!-- ══════════════════ APP ══════════════════ -->
+<div id="app" style="display:none;flex:1;flex-direction:column">
+  <nav class="top">
+    <div class="nav-logo">Damm <span>Smart Truck</span></div>
+    <div class="nav-links">
+      <button type="button" class="nav-btn active" data-nav="dash">Dashboard</button>
+      <button type="button" class="nav-btn" data-nav="routes">Rutas</button>
+      <button type="button" class="nav-btn" data-nav="cargo">Carga</button>
+      <button type="button" class="nav-btn" data-nav="impact">Impacto</button>
+    </div>
+    <div class="nav-tools">
+      <select class="sel-route" id="comboRoute"><option value="">Cargando…</option></select>
+      <span class="pill" id="pillStatus">Sin datos</span>
+      <button type="button" class="btn-nav-ghost" id="btnNewUpload">← Nueva carga</button>
+    </div>
+  </nav>
+  <section id="pg-dash" class="page active"></section>
+  <section id="pg-routes" class="page"></section>
+  <section id="pg-cargo" class="page"></section>
+  <section id="pg-impact" class="page"></section>
+</div>
+
+<!-- ══════════════════ TEMPLATES ══════════════════ -->
+<template id="tpl-dash">
+  <div class="page-title">Resultado de optimización</div>
+  <div class="page-sub" id="dashSub">Cargando…</div>
+
+  <div class="view-tog-wrap">
+    <span class="view-tog-label">Ámbito</span>
+    <div class="tog" id="viewTog">
+      <button type="button" data-v="day" class="on">1 día</button>
+      <button type="button" data-v="week">1 semana</button>
+      <button type="button" data-v="all">Todo</button>
+    </div>
+    <select id="filterDaySel" class="filter-sel"></select>
+    <input id="filterWeekSel" type="date" class="filter-sel" />
+  </div>
+
+  <div class="hero-grid" id="heroRow"></div>
+
+  <!-- Priority panel — CORE of the dashboard -->
+  <div class="panel" id="prioPanel">
+    <div class="panel-title">¿Qué guía nuestra optimización?</div>
+    <div class="panel-sub">Los 7 factores del motor de prioridad y su contribución al ahorro total generado</div>
+    <div id="prioContent"></div>
+  </div>
+
+  <!-- Revenue comparison chart -->
+  <div class="panel">
+    <div class="panel-title">Coste por ruta optimizada · baseline vs Smart Truck</div>
+    <div class="panel-sub">Orden descendente por ahorro. Rutas con barra roja clara: coste real de carretera mayor que estimación lineal baseline — el ahorro viene del orden, no de la geometría.</div>
+    <div class="chart-holder" style="min-height:360px;margin-top:.75rem"><canvas id="chartRoutes"></canvas></div>
+    <div id="chartNote" style="margin-top:.5rem"></div>
+  </div>
+</template>
+
+<script>
+(function(){
+"use strict";
+
+/* ─── CONSTANTS ─── */
+const STEP_THRESHOLDS = {
+  "step-load":   [0,  15],
+  "step-filter": [10, 18],
+  "step-routes": [18, 82],
+  "step-loading":[82, 94],
+  "step-export": [94, 100],
+};
+
+const FACTOR_DESC = {
+  revenue:            "Valor del pedido cubierto — prioriza el mayor impacto comercial dentro de huecos viables.",
+  distance:           "Reduce desplazamientos — penaliza candidatos lejanos dentro del cluster de Maps.",
+  fuel_cost:          "Coste de combustible parametrizado — €/km efectivo sobre distancias reales de carretera.",
+  travel_time:        "Favorece secuencias con menos tiempo de circulación y servicio acumulado.",
+  operational_cost:   "Incluye el coste de minutos operativos de reparto desde la llegada.",
+  route_efficiency:   "Evita grandes rodeos frente al resto de paradas pendientes en el mismo bloque.",
+  time_window_urgency:"Cuando la ventana horaria de un cliente se estrecha, sube su peso automáticamente.",
+};
+
+const API = {
+  summary:    "output/summary.json",
+  routeIndex: "output/route_index.json",
+  routes:     (d, t) => `output/routes/${fd(d)}_${st(t)}.json`,
+  loading:    (d, t) => `output/loading/${fd(d)}_${st(t)}.json`,
+};
+
+function fd(s)  { return String(s||"").trim().replace(/\//g,"-"); }
+function st(t)  { return String(t||"").replace(/[^\w\-]/g,"_").replace(/_+/g,"_"); }
+const esc = s   => String(s??"").replace(/[&<>"]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const euros = n => Number(n||0).toLocaleString("es-ES",{style:"currency",currency:"EUR",minimumFractionDigits:2,maximumFractionDigits:2});
+const $ = (s,e=document) => e.querySelector(s);
+
+function parseDMY(str) {
+  const p = String(str||"").split("/");
+  if(p.length!==3) return null;
+  return new Date(+p[2], +p[1]-1, +p[0]);
+}
+function parseISO(s) {
+  const p = (s||"").split("-").map(Number);
+  return new Date(p[0], p[1]-1, p[2]);
+}
+function monday(dt) {
+  const x = new Date(dt);
+  const w = (x.getDay()+6)%7;
+  x.setDate(x.getDate()-w);
+  x.setHours(0,0,0,0);
+  return x;
+}
+function friday(m) {
+  const x = new Date(m);
+  x.setDate(x.getDate()+4);
+  x.setHours(23,59,59,999);
+  return x;
+}
+function uniqDates(rs) {
+  return [...new Set((rs||[]).map(r=>r.date))].sort((a,b)=>+parseDMY(a)-+parseDMY(b));
+}
+
+/* ─── STATE ─── */
+let summaryMaster = null;
+let routeIdx = [];
+let lastRoute = null;
+let lastCargo = null;
+let chartRoutes = null;
+let mapB, mapA;
+let pipelineStartTime = null;
+let currentScope = "day";
+
+/* ─── VIEW MODE ─── */
+function mode() {
+  const b = $("#viewTog .on");
+  return b ? b.dataset.v : "all";
+}
+
+function filtRoutes() {
+  if(!summaryMaster) return [];
+  const src = summaryMaster.routes.slice();
+  const md = mode();
+  if(md==="all") return src;
+  if(md==="day") {
+    const dd = $("#filterDaySel");
+    const d = (dd&&dd.value) || uniqDates(src)[0] || "";
+    return src.filter(r=>r.date===d);
+  }
+  if(md==="week") {
+    const iw = $("#filterWeekSel");
+    if(!iw||!iw.value) return src;
+    const M = monday(parseISO(iw.value)), Fv = friday(M);
+    return src.filter(r=>{ const z=parseDMY(r.date); return z>=M&&z<=Fv; });
+  }
+  return src;
+}
+
+function posSum(lst) {
+  return lst.filter(r=>+r.saving_eur>1e-6).reduce((a,r)=>a+ +r.saving_eur, 0);
+}
+
+function kpis(fr) {
+  const ps = posSum(fr);
+  const annual = Math.round(ps * 52 * 100) / 100;
+  const rev = fr.reduce((a,r)=>a+(+(r.revenue_eur||0)),0);
+  const W = (summaryMaster&&summaryMaster.priority_weights) || {};
+  const posEur = {};
+  for(const [k,v] of Object.entries(W)) posEur[k] = Math.round(ps*v*100)/100;
+  let best = null;
+  for(const r of fr) {
+    if(+r.saving_eur<=1e-6) continue;
+    const ip = +r.improvement_pct;
+    if(!best||ip>best._ip) best = {...r, _ip:ip};
+  }
+  return { annual, pos:ps, posEur, rev, count:fr.length, best: best||{} };
+}
+
+/* ─── MOUNT DASH ─── */
+function mountDash() {
+  const p = $("#pg-dash");
+  if(!p || p.dataset.mounted==="1") return;
+  const t = $("#tpl-dash");
+  if(!t) return;
+  p.innerHTML = "";
+  p.appendChild(t.content.cloneNode(true));
+  p.dataset.mounted = "1";
+  bindTG();
+}
+
+function bindTG() {
+  const tg = $("#viewTog");
+  if(!tg||tg.dataset.bound) return;
+  tg.dataset.bound = "1";
+  tg.addEventListener("click", ev=>{
+    const b = ev.target.closest("button[data-v]");
+    if(!b) return;
+    tg.querySelectorAll("button").forEach(x=>x.classList.remove("on"));
+    b.classList.add("on");
+    filtUI();
+    dash();
+  });
+}
+
+function filtUI() {
+  const m = mode();
+  const sd = $("#filterDaySel"), sw = $("#filterWeekSel");
+  if(sd) sd.style.display = m==="day" ? "inline-block" : "none";
+  if(sw) sw.style.display = m==="week" ? "inline-block" : "none";
+}
+
+function syncFilt() {
+  if(!summaryMaster) return;
+  const Ds = uniqDates(summaryMaster.routes);
+  const fd = $("#filterDaySel");
+  if(fd) {
+    fd.innerHTML = Ds.map(d=>`<option value="${esc(d)}">${esc(d)}</option>`).join("");
+    if(Ds[0]) fd.value = Ds[0];
+    fd.onchange = dash;
+  }
+  const iw = $("#filterWeekSel");
+  if(iw&&Ds[0]) {
+    const m = monday(parseDMY(Ds[0])||new Date());
+    iw.value = m.toISOString().slice(0,10);
+    iw.onchange = dash;
+  }
+}
+
+/* ─── HERO CARDS ─── */
+function renderHero(fr) {
+  mountDash();
+  const el = $("#heroRow");
+  if(!el) return;
+  const K = kpis(fr);
+  const br = K.best || {};
+  const scope = summaryMaster && summaryMaster.scope;
+  const scopeLabel = scope ? `${scope.date_start||""} – ${scope.date_end||""}` : "";
+
+  el.innerHTML = `
+    <div class="hero-card">
+      <div class="hc-label">Ahorro estimado · año <small>(×52 sem.)</small></div>
+      <div class="hc-val red">${euros(K.annual)}</div>
+      <div class="hc-sub">Extrapolación lineal · rutas con saving &gt; 0</div>
+      <div class="hc-delta">↑ proyección anual</div>
+    </div>
+    <div class="hero-card">
+      <div class="hc-label">Mejor ruta optimizada</div>
+      <div class="hc-val" style="font-size:1.25rem">${esc(br.route_code||"—")}</div>
+      <div class="hc-sub">${esc(br.date||"")} · ${(+(br.improvement_pct||0)).toFixed(1)}% ahorro · ${euros(br.saving_eur||0)}</div>
+    </div>
+    <div class="hero-card">
+      <div class="hc-label">Rutas analizadas</div>
+      <div class="hc-val">${K.count}</div>
+      <div class="hc-sub">${scopeLabel}</div>
+    </div>
+    <div class="hero-card">
+      <div class="hc-label">Valor pedidos cubiertos</div>
+      <div class="hc-val green">${euros(K.rev)}</div>
+      <div class="hc-sub">Ingresos en rutas optimizadas</div>
+    </div>`;
+
+  const ds = $("#dashSub");
+  if(ds) ds.textContent = summaryMaster ? `${K.count} rutas · ${scopeLabel} · ${(summaryMaster.totals||{}).stops_served||0} paradas servidas` : "";
+}
+
+/* ─── PRIORITY PANEL ─── */
+function renderPrio(fr) {
+  mountDash();
+  const P = $("#prioContent");
+  if(!P) return;
+  const K = kpis(fr);
+  const W = (summaryMaster&&summaryMaster.priority_weights) || {};
+  const maxW = Math.max(...Object.values(W));
+
+  let html = `<div style="display:grid;grid-template-columns:1fr 1fr;gap:0 2rem">`;
+
+  const entries = Object.entries(W);
+  entries.forEach(([k, w]) => {
+    const pct = Math.round(+w * 100);
+    const barW = Math.round((+w / maxW) * 100);
+    const eu = K.posEur[k] || 0;
+    const desc = FACTOR_DESC[k] || k;
+    const name = k.replace(/_/g," ");
+    html += `
+      <div class="prio-factor">
+        <div class="prio-factor-head">
+          <div class="prio-factor-name">${esc(name)}</div>
+          <div class="prio-factor-right">
+            <span class="prio-weight-badge">${pct}%</span>
+            <span class="prio-eur">${euros(eu)}</span>
+          </div>
+        </div>
+        <div class="prio-track" title="${esc(desc)}">
+          <div class="prio-fill" style="width:${barW}%"></div>
+        </div>
+        <div class="prio-desc">${esc(desc)}</div>
+      </div>`;
+  });
+
+  html += `</div>`;
+
+  html += `<div class="callout" style="margin-top:1.25rem">
+    <strong>Ahorro total rutas positivas:</strong> ${euros(K.pos)} · Proyección anual: <strong>${euros(K.annual)}</strong><br/>
+    <span class="muted">Hipótesis: el peso de cada factor guía cuánto de ese ahorro se atribuye a esa dimensión de optimización. No es efecto causal aislado.</span>
+  </div>`;
+
+  P.innerHTML = html;
+}
+
+/* ─── ROUTES CHART ─── */
+function renderChart(fr) {
+  mountDash();
+  const cv = $("#chartRoutes");
+  if(!cv || typeof Chart==="undefined") return;
+  fr = [...fr].sort((a,b)=>+b.saving_eur - +a.saving_eur);
+  document.documentElement.style.setProperty("--n", String(fr.length||8));
+
+  const labels = fr.map(r=>`${r.route_code} · ${st(r.transport_id)} · ${r.date}`);
+  const bs = fr.map(r=>+(r.baseline_eur)||0);
+  const sm = fr.map(r=>+(r.optimized_eur)||0);
+  const faded = sm.map((v,i)=>v>bs[i]);
+
+  const positiveCount = fr.filter(r=>+r.saving_eur>1e-6).length;
+  const noteEl = $("#chartNote");
+  if(noteEl) {
+    noteEl.innerHTML = positiveCount > 0
+      ? `<span class="muted">${positiveCount} de ${fr.length} rutas con ahorro positivo real. Las barras rojas claras reflejan coste real de carretera mayor que el baseline haversine — no es ineficiencia del algoritmo.</span>`
+      : `<span class="muted">Todas las rutas muestran coste optimizado mayor que baseline. Ver callout para explicación.</span>`;
+  }
+
+  if(chartRoutes) chartRoutes.destroy();
+
+  const h = Math.max(300, fr.length * 28);
+  cv.parentElement.style.height = h + "px";
+
+  chartRoutes = new Chart(cv, {
+    type: "bar",
+    data: {
+      labels,
+      datasets: [
+        { label: "Baseline aleatorio DM (€)", data: bs, backgroundColor: "#d0d0d0", borderRadius: 2 },
+        { label: "Smart Truck optimizado (€)", data: sm, backgroundColor: sm.map((v,i)=>faded[i]?"rgba(200,16,46,0.25)":"#c8102e"), borderRadius: 2 }
+      ]
+    },
+    options: {
+      indexAxis: "y",
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { position: "bottom", labels: { font: { family: "DM Sans", size: 11 } } },
+        tooltip: {
+          callbacks: {
+            label: ctx => `${ctx.dataset.label}: ${Number(ctx.raw).toLocaleString("es-ES",{style:"currency",currency:"EUR",minimumFractionDigits:2})}`
+          }
+        }
+      },
+      scales: {
+        x: { beginAtZero: true, ticks: { callback: v=>Number(v).toLocaleString("es-ES")+" €", font:{family:"DM Mono",size:10} }, grid:{color:"#f0f0f0"} },
+        y: { ticks: { font:{family:"DM Sans",size:10} }, grid:{display:false} }
+      }
+    }
+  });
+}
+
+function dash() {
+  mountDash();
+  filtUI();
+  syncFilt();
+  const fr = filtRoutes();
+  renderHero(fr);
+  renderPrio(fr);
+  renderChart(fr);
+}
+
+/* ─── ROUTE DETAIL ─── */
+async function loadRouteBlob() {
+  const v = $("#comboRoute").value;
+  const P = v.split("|||");
+  if(P.length < 2) { lastRoute = null; return; }
+  try {
+    const r = await fetch(API.routes(P[0], P[1]), {cache:"no-store"});
+    lastRoute = r.ok ? await r.json() : null;
+  } catch(e) { lastRoute = null; }
+}
+
+function stopBI(blob, gix) {
+  const st2 = blob.all_stops || [];
+  for(let si=0; si<st2.length; si++) {
+    const r = st2[si];
+    const ix = r.stop_index!=null ? r.stop_index : si;
+    if(Number(ix)===Number(gix)) return r;
+  }
+  return null;
+}
+
+function latLine(order, blob) {
+  const dp = blob.depot||{};
+  const la = +dp.lat||41.5363, lo = +dp.lon||2.2131;
+  const pts = [[la,lo]];
+  (order||[]).forEach(ix=>{
+    const s = stopBI(blob, ix);
+    if(s && s.lat!=null) pts.push([+s.lat, +s.lon]);
+  });
+  pts.push([la, lo]);
+  return pts;
+}
+
+function zapMaps() {
+  [mapB, mapA].forEach(m=>{ try{ m&&m.remove(); }catch(e){} });
+  mapB = mapA = undefined;
+}
+
+function baselineVsOptimizedKmGap() {
+  if(!lastRoute||!lastRoute.metrics_comparison) return 0;
+  const b = lastRoute.metrics_comparison.baseline||{};
+  const o = lastRoute.metrics_comparison.optimized||{};
+  return Math.abs(+(b.distance_km||0) - +(o.distance_km||0));
+}
+
+function openMaps(showBaselineToo) {
+  if(!window.L || !lastRoute) return;
+  zapMaps();
+  const bLat = latLine(lastRoute.baseline_visit_order_global, lastRoute);
+  const aft  = latLine((lastRoute.final_route_detail||[]).map(s=>s.stop_index), lastRoute);
+
+  const mk = (id, pts, col) => {
+    const el = document.getElementById(id);
+    if(!el) return null;
+    const m = L.map(id, {preferCanvas:true}).setView((pts[1]||pts[0]), 11);
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {maxZoom:19, attribution:"© OSM"}).addTo(m);
+    if(pts.length>1) L.polyline(pts, {color:col, weight:col==="#777"?3:4, opacity:.8}).addTo(m);
+    for(let i=1; i<pts.length-1; i++) {
+      L.circleMarker(pts[i], {radius:8, color:col, fillOpacity:.3, fillColor:col, weight:2})
+       .bindPopup(`<strong>#${i}</strong>`)
+       .addTo(m);
+    }
+    const dp = lastRoute.depot||{};
+    L.circleMarker([+dp.lat||41.5363, +dp.lon||2.2131], {radius:10, color:"#c8102e", fillColor:"#c8102e", fillOpacity:1, weight:2})
+     .bindPopup("<strong>Depósito DDI</strong>")
+     .addTo(m);
+    if(pts.length>1) m.fitBounds(pts, {padding:[20,20]});
+    return m;
+  };
+
+  requestAnimationFrame(()=>{
+    mapA = mk("mapA", aft, "#c8102e");
+    if(showBaselineToo)
+      mapB = mk("mapB", bLat, "#777");
+  });
+}
+
+function syntheticCargoFromRoute(route) {
+  const stops = route.final_route_detail || [];
+  const slots = Math.max(6, Math.min(10, +(route.truck_slots) || 8));
+  const maxP = Math.max(2, slots - 1);
+  const byP = {};
+  let retSum = stops.reduce((a,s)=>a+(+(s.return_caj||0)+ +(s.return_brl||0)),0);
+  if(retSum > 1e-6)
+    byP[1]={parcela:1,customer_name:"Devoluciones (consolidado)",parcela_volume_pct:Math.min(100,8+retSum*2),items:[{material:"RET",quantity:Math.max(1,Math.round(retSum))}]};
+  const n = stops.length;
+  stops.forEach((s,i)=>{
+    const p = n<=1 ? 2 : Math.max(2, Math.min(maxP, 2 + Math.round((maxP-2)*i/Math.max(n-1,1))));
+    const nm = String(s.customer_name||"").trim() || ("Parada "+(i+1));
+    const qty = Math.max(1, Math.round(+(s.delivery_caj||0)+ +(s.delivery_brl||0))) || 1;
+    const vol = Math.min(95, Math.round(12 + qty * 3.5));
+    if(!byP[p]) byP[p] = {parcela:p,customer_name:nm,parcela_volume_pct:vol,items:[{material:"ENT",quantity:qty}]};
+    else{
+      byP[p].customer_name += " · " + nm;
+      byP[p].parcela_volume_pct = Math.min(100, +byP[p].parcela_volume_pct + vol*0.35);
+      byP[p].items.push({material:"ENT",quantity:qty});
+    }
+  });
+  const plan = Object.values(byP).sort((a,b)=>+a.parcela-+b.parcela);
+  plan.forEach(e=> e.parcela_volume_pct = Math.round(+e.parcela_volume_pct*10)/10);
+  const mx = Math.max(...plan.map(e=>+e.parcela_volume_pct),0);
+  const tw = Math.round(plan.reduce((a,e)=>a+ +e.parcela_volume_pct*18.5,0)*10)/10;
+  return{
+    route_code: route.route_code,
+    date: route.date,
+    transport_id: route.transport_id,
+    transporter_name: route.transporter_name||"",
+    truck_type: route.truck_type||"",
+    truck_slots: slots,
+    loading_after_lifo: plan,
+    loading_before_randomized: plan,
+    warehouse_pick_sequence: [],
+    plan_summary: {total_weight_kg:tw,total_volume_l:Math.round(tw*12.4),most_loaded_parcela_pct:mx,synthetic_ui:true},
+    warnings: ["Vista rápida desde el orden optimizado en cliente. Ejecuta el pipeline con Block 3 para datos ZM040 y picking de almacén."],
+  };
+}
+
+function pageRoute() {
+  const box = $("#pg-routes");
+  if(!summaryMaster) { box.innerHTML='<div class="empty-state">Sin summary disponible</div>'; return; }
+
+  if(!lastRoute) {
+    box.innerHTML = `<div class="page-title">Ruta del día seleccionado</div>
+      <div class="page-sub">Selecciona una ruta en el selector superior</div>
+      <div class="empty-state">Datos JSON no encontrados para esta clave (<code>${esc(($("#comboRoute")&&$("#comboRoute").value)||"")}</code>).</div>`;
+    return;
+  }
+
+  const dual = baselineVsOptimizedKmGap() >= 0.08;
+
+  box.innerHTML = `
+    <div class="page-title">Ruta del día seleccionado</div>
+    <div class="page-sub" id="routeHead">Selecciona fecha y vehículo en el selector superior</div>
+
+    <div class="panel" style="margin-bottom:1rem">
+      <div class="panel-title">Ruta optimizada · orden de visita Smart Truck</div>
+      <div class="panel-sub">Polilínea y paradas siguiendo la secuencia entregada por el motor (ventanas + priorización).</div>
+      <div class="map-box" style="max-width:100%">
+        <div class="map-box-head"><span class="dot" style="background:var(--red)"></span>Secuencia servida · Google Maps Distance Matrix</div>
+        <div id="mapA" class="leaflet-el" style="height:380px"></div>
+      </div>
+    </div>
+
+    <div id="baselineStrip" style="display:${dual?"block":"none"}">
+      <div class="panel-sub" style="margin-bottom:.75rem">Referencia baseline: orden inicial Block&nbsp;1 restringido a paradas efectivas sobre la misma matriz DM.</div>
+      <div class="map-duo">
+        <div class="map-box">
+          <div class="map-box-head"><span class="dot" style="background:#999"></span>Baseline · orden aleatorio global</div>
+          <div id="mapB" class="leaflet-el"></div>
+        </div>
+      </div>
+    </div>
+    <div id="baselineNoteWrap"></div>
+
+    <div class="panel"${dual?"":" style=\"display:none\""}>
+      <div class="panel-title">Detalle económico y tiempos (DM)</div>
+      <div id="metricsTable"></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-title">Secuencia de paradas · esta ruta</div>
+      <div style="overflow-x:auto">
+        <table class="data-table">
+          <thead id="routeThead"></thead>
+          <tbody id="routeTbody"></tbody>
+        </table>
+      </div>
+    </div>`;
+
+  const rh = $("#routeHead");
+  if(rh) rh.innerHTML = `<strong>${esc(lastRoute.route_code)}</strong> · ${esc(lastRoute.date)} · ${st(lastRoute.transport_id)} · ${esc(lastRoute.transporter_name||"")}`;
+
+  openMaps(dual);
+
+  const noteW = $("#baselineNoteWrap");
+  if(noteW){
+    noteW.innerHTML = dual ? "" : `<div class="callout" style="margin-bottom:1.25rem">En geometría de carretera, la distancia del baseline ordenado coincide con la ruta Smart Truck (~${(lastRoute.metrics_comparison?.optimized?.distance_km??0)} km): el trabajo del optimizador en este reparto está en las <strong>ventanas horarias</strong>, la <strong>priorización comercial</strong> y una secuencia distinta cuando el problema es más grande.</div>`;
+  }
+
+  const mc = lastRoute.metrics_comparison;
+  if(!mc) {
+    $("#metricsTable").innerHTML = '<div class="empty-state">—</div>';
+  } else {
+    const bs = mc.baseline||{}, op = mc.optimized||{};
+    const row = (lbl,a,b,u,fmt) => {
+      const av = fmt?fmt(a):Number(a||0).toLocaleString("es-ES",{maximumFractionDigits:2})+u;
+      const bv = fmt?fmt(b):Number(b||0).toLocaleString("es-ES",{maximumFractionDigits:2})+u;
+      const delta = Number(a)-Number(b);
+      const cls = delta>0.01?"delta-pos":delta<-0.01?"delta-neg":"";
+      const sign = delta>0.01?"↓ ":"↑ ";
+      return `<tr><td>${lbl}</td><td class="mono">${av}</td><td class="mono">${bv}</td><td class="mono ${cls}">${delta>0.01?sign:""}${Math.abs(delta).toLocaleString("es-ES",{maximumFractionDigits:2})}${u}</td></tr>`;
+    };
+    $("#metricsTable").innerHTML = `
+      <table class="metrics-compare">
+        <thead><tr><th></th><th>Sin optimizar</th><th>Smart Truck</th><th>Diferencia</th></tr></thead>
+        <tbody>
+          ${row("Distancia", bs.distance_km, op.distance_km, " km")}
+          ${row("Tiempo estimado", bs.duration_min, op.duration_min, " min")}
+          ${row("Combustible est.", bs.fuel_liters_est, op.fuel_liters_est, " L")}
+          ${row("CO₂ est.", bs.co2_kg_est, op.co2_kg_est, " kg")}
+          <tr><td>Coste total</td><td class="mono">${euros(bs.cost_eur)}</td><td class="mono">${euros(op.cost_eur)}</td><td class="mono delta-pos">↓ ${euros((bs.cost_eur||0)-(op.cost_eur||0))}</td></tr>
+        </tbody>
+      </table>`;
+  }
+
+  const frs = lastRoute.final_route_detail || [];
+  $("#routeThead").innerHTML = `<tr><th>#</th><th>Cliente</th><th>Llegada</th><th>Ventana</th><th>Estado</th><th>Prioridad</th><th>Bultos</th><th>Devoluciones</th></tr>`;
+
+  let body = "";
+  frs.forEach((s, i) => {
+    const wk = !!s.walking_group_id;
+    const ws = s.window_status||"";
+    const badgeCls = ws==="on_time"?"b-on":ws==="tight"?"b-tight":ws==="at_risk"?"b-risk":"b-miss";
+    const ps = Math.min(100, Math.abs(+(s.priority_score||0))*110);
+    body += `<tr class="${wk?"walk":""}">
+      <td class="mono">${i+1}${wk?' 🚶':''}</td>
+      <td style="font-weight:600">${esc(s.customer_name||"")}</td>
+      <td class="mono">${esc(s.arrival_time||"")}</td>
+      <td class="mono" style="font-size:.72rem">${esc(s.window_open||"")}–${esc(s.window_close||"")}</td>
+      <td><span class="badge ${badgeCls}">${esc(ws)}</span></td>
+      <td><div class="prio-track" style="width:80px"><div class="prio-fill" style="width:${ps}%"></div></div></td>
+      <td class="mono">${+s.delivery_caj||0} CAJ · ${+s.delivery_brl||0} BRL</td>
+      <td class="mono">${+s.return_caj||0}/${+s.return_brl||0}</td>
+    </tr>`;
+    const bd = s.priority_breakdown_estimated || {};
+    if(Object.keys(bd).length) {
+      body += `<tr><td colspan="8"><details class="stop-exp"><summary>Drivers prioridad sintética</summary><small class="mono">${Object.entries(bd).map(([k,v])=>k+":"+(+v).toFixed(4)).join(" · ")}</small></details></td></tr>`;
+    }
+  });
+  $("#routeTbody").innerHTML = body || '<tr><td colspan="8" class="empty-state">—</td></tr>';
+}
+
+/* ─── CARGO PAGE ─── */
+async function pageCargo() {
+  const pg = $("#pg-cargo");
+  if(!summaryMaster) return;
+
+  pg.innerHTML = `
+    <div class="page-title">Distribución de carga en el camión</div>
+    <div class="page-sub" id="cargoMeta">Cargando…</div>
+    <div id="cargoNote"></div>
+    <div id="cargoCostCallout"></div>
+
+    <div class="panel">
+      <div class="panel-title">Parcelas · vista esquemática por orden de descarga</div>
+      <div class="panel-sub">Puerta <strong>derecha</strong>: lado del reparto · <strong>P1</strong> suele llevar huecos/devoluciones; el resto se llena desde el fondo siguiendo el último cliente servido antes (LIFO físico).</div>
+      <div class="tv" id="tkLifo" style="max-width:920px;margin:0 auto"></div>
+      <div id="cargoEfficiency" style="margin-top:.85rem"></div>
+    </div>
+
+    <div class="panel" id="pickPanel">
+      <div class="panel-title">Secuencia de picking · almacén</div>
+      <div class="panel-sub">Datos sólo cuando el pipeline ejecuta Block&nbsp;3 con ZM040.</div>
+      <div style="overflow-x:auto">
+        <table class="data-table">
+          <thead><tr><th>#</th><th>Material</th><th>Descripción</th><th>Qty</th><th>UMA</th><th>Ubicación</th><th>Parcela</th><th>Capa</th></tr></thead>
+          <tbody id="pickTable"></tbody>
+        </table>
+      </div>
+    </div>`;
+
+  const v = $("#comboRoute").value.split("|||");
+  let fromServer = null;
+  try {
+    const r = await fetch(API.loading(v[0], v[1]), {cache:"no-store"});
+    fromServer = r.ok ? await r.json() : null;
+  } catch(e) { fromServer = null; }
+
+  if(fromServer && (fromServer.loading_after_lifo||[]).length) {
+    lastCargo = fromServer;
+  } else if(lastRoute && (lastRoute.final_route_detail||[]).length) {
+    lastCargo = syntheticCargoFromRoute(lastRoute);
+  } else {
+    lastCargo = null;
+  }
+
+  if(!lastCargo) {
+    $("#cargoMeta").textContent = "No hay datos para esta combinación día + vehículo";
+    $("#pickPanel").style.display="none";
+    return;
+  }
+
+  const slots = +(lastCargo.truck_slots)||8;
+  $("#cargoMeta").innerHTML = `<strong>${esc(lastCargo.route_code)}</strong> · ${esc(lastCargo.date)} · ${st(lastCargo.transport_id)} · <span class="mono">${slots}</span> parcelas`;
+
+  const syn = !!(lastCargo.plan_summary &&
+    (lastCargo.plan_summary.synthetic_ui || lastCargo.plan_summary.synthetic_from_route));
+  const nw = $("#cargoNote");
+  if(nw){
+    nw.innerHTML = syn
+      ? `<div class="callout amber">Vista <strong>sintética</strong> (orden de visita optimizado sin plan de almacén). Vuelve a exportar después de un pipeline completo para ver picking ZM040.</div>`
+      : (lastCargo.warnings && lastCargo.warnings.length ? `<div class="callout">${esc(lastCargo.warnings.join(" "))}</div>`:"");
+  }
+
+  const saved = (lastRoute&&lastRoute.unload_time_saved_min_estimate!=null) ? +lastRoute.unload_time_saved_min_estimate : 0;
+  if(saved>1e-3){
+    const hrs = (saved*470*220)/60, eur = hrs*35;
+    $("#cargoCostCallout").innerHTML = `<div class="callout green" style="margin-bottom:1.25rem">
+      <strong>Descarga: ~${saved.toFixed(1)} min ahorro modelo LIFO en esta ruta.</strong><br/>
+      Hipótesis ilustrativa 470×220 días → <strong>${hrs.toLocaleString("es-ES",{maximumFractionDigits:0})} h/año</strong> (~${euros(eur)} a 35 €/h).</div>`;
+  } else $("#cargoCostCallout").innerHTML = "";
+
+  drawTruck($("#tkLifo"), lastCargo.loading_after_lifo, slots);
+
+  const ps = lastCargo.plan_summary||{};
+  $("#cargoEfficiency").innerHTML = `<div class="muted">Peso total (modelo): <strong>${(+ps.total_weight_kg||0).toLocaleString("es-ES")} kg</strong> · Volumen total: <strong>${(+ps.total_volume_l||0).toLocaleString("es-ES")} L</strong> · Ocupación pico parcela ~<strong>${ps.most_loaded_parcela_pct||0}%</strong></div>`;
+
+  const picks = lastCargo.warehouse_pick_sequence||[];
+  if(!picks.length){
+    $("#pickPanel").style.display="none";
+    return;
+  }
+  $("#pickPanel").style.display="block";
+  $("#pickTable").innerHTML = picks.map(p=>`
+    <tr>
+      <td class="mono">${p.pick_order}</td>
+      <td class="mono">${esc(p.material)}</td>
+      <td>${esc(p.description)}</td>
+      <td class="mono">${p.quantity}</td>
+      <td class="mono">${esc(p.uma)}</td>
+      <td class="mono" style="font-weight:600;color:var(--red)">${esc(p.warehouse_location)}</td>
+      <td class="mono">P${p.load_to_parcela}</td>
+      <td class="mono">${p.stack_layer}</td>
+    </tr>`).join("") || '<tr><td colspan="8" class="empty-state">—</td></tr>';
+}
+
+function drawTruck(host, parc, slots) {
+  if(!host) return;
+  host.innerHTML = "";
+  const cab = document.createElement("div");
+  cab.className = "tcab";
+  cab.innerHTML = "🚛<span style='font-size:.55rem;margin-top:2px'>CAB</span>";
+  host.appendChild(cab);
+
+  (parc||[]).sort((a,b)=>+a.parcela-+b.parcela).forEach(ent=>{
+    const d = document.createElement("div");
+    const pn = +ent.parcela;
+    d.className = "tpar " + pCls(pn, slots);
+    const pct = +ent.parcela_volume_pct||0;
+    d.innerHTML = `<span class="pnum">P${pn}</span><div class="pcl">${esc((ent.customer_name||"").slice(0,32))}</div><div class="fill-bar"><span class="fill-in" style="width:${pct}%"></span></div>`;
+    d.title = (ent.items||[]).slice(0,20).map(i=>`${i.material}×${i.quantity}`).join("\n");
+    host.appendChild(d);
+  });
+
+  const door = document.createElement("div");
+  door.className = "tdoor";
+  door.textContent = "🚪";
+  host.appendChild(door);
+}
+
+function pCls(p, maxS) {
+  if(+p===1) return "p1ret";
+  const diff = maxS - p;
+  return ["p6","p5","p4","p3","p2"][diff] || "p2";
+}
+
+/* ─── IMPACT PAGE ─── */
+function pageImpact() {
+  const pg = $("#pg-impact");
+  if(!summaryMaster) { pg.innerHTML='<div class="empty-state">Sin datos</div>'; return; }
+  const fr = filtRoutes();
+  const K = kpis(fr);
+  const t = summaryMaster.totals||{};
+  const distSaved = (+t.total_distance_baseline_km||0) - (+t.total_distance_optimized_km||0);
+  const fuelSaved = distSaved * 0.32;
+  const co2Saved  = distSaved * 0.84;
+  const annualDist  = Math.round(distSaved*470*220/1000)*1000;
+  const annualFuel  = Math.round(fuelSaved*470*220/1000)*1000;
+  const annualCO2   = Math.round(co2Saved*470*220/1000);
+  const annualHours = Math.round(470*220*(+t.total_duration_min||0)/fr.length/60||0);
+
+  pg.innerHTML = `
+    <div class="page-title">Análisis de impacto</div>
+    <div class="page-sub">Proyección anual · flota de 470 camiones · 220 días de operación</div>
+
+    <div class="impact-grid">
+      <div class="impact-card accent">
+        <div class="impact-label">Ahorro económico anual estimado</div>
+        <div class="impact-val">${euros(K.annual)}</div>
+        <div class="impact-desc">Extrapolación lineal de ahorros positivos observados × 52 semanas</div>
+      </div>
+      <div class="impact-card">
+        <div class="impact-label">Reducción CO₂ anual · flota</div>
+        <div class="impact-val">${annualCO2.toLocaleString("es-ES")} t</div>
+        <div class="impact-desc">Toneladas CO₂ evitadas por la reducción de kilómetros</div>
+      </div>
+      <div class="impact-card">
+        <div class="impact-label">Kilómetros ahorrados · flota</div>
+        <div class="impact-val">${annualDist.toLocaleString("es-ES")}</div>
+        <div class="impact-desc">km anuales · flota completa 470 camiones</div>
+      </div>
+      <div class="impact-card">
+        <div class="impact-label">Combustible ahorrado</div>
+        <div class="impact-val">${(annualFuel/1000).toLocaleString("es-ES",{maximumFractionDigits:0})}k L</div>
+        <div class="impact-desc">Miles de litros de gasoil / año</div>
+      </div>
+    </div>
+
+    <div class="callout amber">
+      <strong>Nota metodológica:</strong> Las proyecciones anuales son extrapolaciones lineales del intervalo analizado. El ahorro real depende de la variabilidad estacional de las rutas, condiciones de tráfico y tasas de ventana horaria cumplida.
+    </div>`;
+}
+
+/* ─── POPULATE COMBO ─── */
+async function populateCombo() {
+  const sel = $("#comboRoute");
+  sel.innerHTML = "";
+  const lst = routeIdx&&routeIdx.length ? routeIdx :
+    ((summaryMaster.routes||[]).map(r=>({date:r.date, transport_id:r.transport_id, route_code:r.route_code, transporter_name:r.transporter_name})));
+
+  const B = {};
+  lst.forEach(x=>{ if(!x.date) x.date=""; B[x.date]=B[x.date]||[]; B[x.date].push(x); });
+
+  Object.keys(B).sort((a,b)=>+parseDMY(a)-+parseDMY(b)).forEach(day=>{
+    const og = document.createElement("optgroup");
+    og.label = day||"?";
+    B[day].forEach(it=>{
+      const o = document.createElement("option");
+      o.value = `${it.date}|||${it.transport_id}|||${it.route_code}`;
+      o.textContent = `${it.route_code||""} · ${st(it.transport_id)}`;
+      og.appendChild(o);
+    });
+    sel.appendChild(og);
+  });
+
+  if(sel.options.length) sel.selectedIndex = 0;
+  sel.onchange = async () => { await loadRouteBlob(); };
+}
+
+/* ─── BOOT ─── */
+async function boot() {
+  summaryMaster = null;
+  try {
+    const r = await fetch(API.summary, {cache:"no-store"});
+    if(r.ok) { summaryMaster = await r.json(); summaryMaster.routes = summaryMaster.routes||[]; }
+  } catch(e) {}
+
+  try {
+    const r = await fetch(API.routeIndex, {cache:"no-store"});
+    routeIdx = r.ok ? await r.json() : [];
+  } catch(e) { routeIdx = []; }
+
+  if(!summaryMaster) {
+    $("#missingMsg").style.display = "block";
+    $("#pillStatus").textContent = "Sin datos";
+    show("upload");
+    return;
+  }
+
+  $("#missingMsg").style.display = "none";
+
+  if(!summaryMaster.priority_weights)
+    summaryMaster.priority_weights = {revenue:.3,distance:.2,fuel_cost:.15,travel_time:.1,operational_cost:.1,route_efficiency:.1,time_window_urgency:.05};
+
+  const up = $("#upload-screen"), app = $("#app");
+  if(up) { up.style.display="none"; up.classList.remove("active"); }
+  if(app) { app.style.display="flex"; }
+
+  await populateCombo();
+  $("#pg-dash").dataset.mounted = "";
+  show("dash");
+  await loadRouteBlob();
+
+  const pill = $("#pillStatus");
+  pill.textContent = "Optimizado";
+  pill.classList.add("green");
+}
+
+/* ─── SHOW PAGE ─── */
+function show(which) {
+  const up = $("#upload-screen"), app = $("#app"), ps = $("#progress-screen");
+
+  if(which==="upload") {
+    if(ps) ps.style.display="none";
+    if(app) app.style.display="none";
+    if(up) { up.style.display="flex"; up.classList.add("active"); }
+    return;
+  }
+
+  document.querySelectorAll("#app .page").forEach(p=>p.classList.remove("active"));
+  if(up) { up.style.display="none"; up.classList.remove("active"); }
+  if(app) app.style.display="flex";
+
+  if(which==="dash")   { $("#pg-dash").classList.add("active"); dash(); }
+  else if(which==="routes") { $("#pg-routes").classList.add("active"); loadRouteBlob().then(()=>pageRoute()); }
+  else if(which==="cargo")  { $("#pg-cargo").classList.add("active"); loadRouteBlob().then(()=>pageCargo()); }
+  else if(which==="impact") { $("#pg-impact").classList.add("active"); pageImpact(); }
+
+  window.scrollTo(0,0);
+}
+
+/* ─── PIPELINE EXECUTION ─── */
+function isLive() {
+  return String(location.port)==="8765" || /\blive=1\b/.test(location.search);
+}
+
+function setScope(scope) {
+  currentScope = scope;
+  document.querySelectorAll("#scopeRow .scope-card").forEach(c=>c.classList.remove("pick"));
+  const card = document.querySelector(`#scopeRow .scope-card[data-scope="${scope}"]`);
+  if(card) card.classList.add("pick");
+  const dr = $("#dateRow");
+  if(dr) dr.style.display = scope==="full" ? "none" : "block";
+}
+
+async function startPipeline() {
+  const lines = [
+    "Flujo recomendado para la demo:",
+    "",
+    "1. Copia tu Hackaton.xlsx en Versio1/ (opcionalmente elige día/semana antes de lanzar)",
+    "",
+    "2. En terminal:",
+    "   cd Versio1",
+    "   python run_full_pipeline.py",
+    "   ó con más alcance:",
+    "   python run_full_pipeline.py --week … (según tus flags)",
+    "",
+    "3. Recarga el dashboard · «Cargar resultados anteriores».",
+    "",
+    "Modo en vivo sólo si ejecutas:",
+    "   python dashboard_server.py  → http://127.0.0.1:8765",
+  ];
+  alert(lines.join("\n"));
+}
+
+function streamProgress(jobId) {
+  const es = new EventSource("/progress/"+encodeURIComponent(jobId));
+  es.onmessage = e => {
+    let event = {};
+    try { event = JSON.parse(e.data); } catch(_) { return; }
+    if(event.keepalive) return;
+    if(event.error) {
+      showPipelineError(event.msg||"Error durante la ejecución");
+      if(event.trace) console.error(event.trace);
+      es.close(); return;
+    }
+    updateProgress(event.pct||0, event.msg||"…");
+    if(event.done) { es.close(); setTimeout(()=>{ hideProgressScreen(); boot(); }, 800); }
+  };
+  es.onerror = () => { showPipelineError("Conexión perdida con el servidor"); es.close(); };
+}
+
+function updateProgress(pct, msg) {
+  pct = Math.max(0, Math.min(100, +pct||0));
+  const bar = $("#progBar");
+  if(bar) bar.style.width = pct+"%";
+  $("#progPct").textContent = pct+"%";
+  $("#progMsg").textContent = msg;
+  $("#progSubtitle").textContent = msg;
+
+  for(const [stepId, rng] of Object.entries(STEP_THRESHOLDS)) {
+    const el = document.getElementById(stepId); if(!el) continue;
+    const icon = el.querySelector(".step-icon");
+    const [start, end] = rng;
+    if(pct>=end) { el.className="prog-step done"; if(icon) icon.textContent="✓"; }
+    else if(pct>=start) { el.className="prog-step active"; if(icon) icon.textContent="⟳"; }
+  }
+
+  if(pct>18&&pct<82) { const lab = $("#stepRoutesLabel"); if(lab) lab.textContent=msg; }
+
+  if(pipelineStartTime&&pct>5&&pct<100) {
+    const elapsed = (Date.now()-pipelineStartTime)/1000;
+    const total = elapsed/(pct/100);
+    const remaining = Math.round(total-elapsed);
+    const eta = remaining>120 ? `~${Math.round(remaining/60)} min restantes` : `~${remaining} seg restantes`;
+    $("#progEta").textContent = eta;
+  }
+}
+
+function showProgressScreen() {
+  $("#progress-screen").style.display = "flex";
+  const up = $("#upload-screen"), app = $("#app");
+  if(up) { up.style.display="none"; up.classList.remove("active"); }
+  if(app) app.style.display="none";
+  document.querySelectorAll(".prog-step").forEach(s=>{
+    s.className="prog-step";
+    const ic=s.querySelector(".step-icon"); if(ic) ic.textContent="○";
+  });
+  const bar = $("#progBar"); if(bar) { bar.style.width="0%"; bar.style.background="var(--red)"; }
+  $("#progEta").textContent="";
+  $("#progPct").textContent="0%";
+  $("#progMsg").textContent="Cargando…";
+}
+
+function hideProgressScreen() {
+  $("#progress-screen").style.display = "none";
+  const bar = $("#progBar"); if(bar) { bar.style.width="0%"; bar.style.background="var(--red)"; }
+  $("#progEta").textContent="";
+}
+
+function showPipelineError(msg) {
+  $("#progSubtitle").textContent = "Error durante la optimización";
+  $("#progMsg").textContent = msg;
+  const bar = $("#progBar"); if(bar) { bar.style.background="#e88898"; bar.style.width="100%"; }
+  $("#progEta").innerHTML = `<span style="color:var(--red)">${esc(msg)}</span><br>
+    <button type="button" onclick="window.__resetUpload&&window.__resetUpload()" style="margin-top:12px;padding:.5rem 1rem;background:var(--red);color:#fff;border:none;border-radius:8px;cursor:pointer;font-family:var(--font-body);font-weight:600">← Volver</button>`;
+}
+
+/* ─── INIT ─── */
+document.addEventListener("DOMContentLoaded", () => {
+  window.__resetUpload = () => { hideProgressScreen(); show("upload"); };
+  window.__dashResetUpload = window.__resetUpload;
+
+  boot();
+
+  /* Nav buttons */
+  document.querySelectorAll(".nav-links .nav-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll(".nav-links .nav-btn").forEach(x=>x.classList.remove("active"));
+      btn.classList.add("active");
+      const nv = btn.dataset.nav;
+      show({dash:"dash",routes:"routes",cargo:"cargo",impact:"impact"}[nv]||"dash");
+    });
+  });
+
+  $("#btnNewUpload").onclick = () => show("upload");
+
+  /* Drop zone */
+  const dz = $("#dropZone"), fi = $("#fileHack");
+  dz.addEventListener("click", () => fi.click());
+  fi.addEventListener("change", () => {
+    const fn = fi.files[0]?.name || "";
+    const r = $("#fileReady");
+    if(r && fn) { r.style.display="block"; r.textContent="✓ "+fn; }
+  });
+  dz.addEventListener("dragover", e=>{ e.preventDefault(); dz.classList.add("drag"); });
+  dz.addEventListener("dragleave", () => dz.classList.remove("drag"));
+  dz.addEventListener("drop", e=>{
+    e.preventDefault(); dz.classList.remove("drag");
+    if(e.dataTransfer.files[0]) {
+      const dt = new DataTransfer();
+      dt.items.add(e.dataTransfer.files[0]);
+      fi.files = dt.files;
+      fi.dispatchEvent(new Event("change"));
+    }
+  });
+
+  /* Scope cards */
+  document.querySelectorAll("#scopeRow .scope-card").forEach(c=>{
+    c.addEventListener("click", () => setScope(c.dataset.scope));
+  });
+
+  /* Run button */
+  $("#btnRun").onclick = () => startPipeline();
+  $("#btnLoadExisting").onclick = () => { hideProgressScreen(); boot(); };
+});
+
+})();
+</script>
+</body>
+</html>

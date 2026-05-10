@@ -1,0 +1,272 @@
+{
+  "route_code": "DR0016",
+  "date": "09/02/2026",
+  "transport_id": "DD13100017",
+  "transporter_name": "Transporter DD13100017",
+  "truck_type": "large",
+  "truck_slots": 8,
+  "loading_after_lifo": [
+    {
+      "parcela": 1,
+      "customer_name": "Devoluciones (consolidado)",
+      "parcela_volume_pct": 100.0,
+      "items": [
+        {
+          "material": "RET",
+          "quantity": 166
+        }
+      ]
+    },
+    {
+      "parcela": 2,
+      "customer_name": "bar cafeteria yaki \u00b7 RESTAURANTE EL SOL",
+      "parcela_volume_pct": 100.0,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 24
+        },
+        {
+          "material": "ENT",
+          "quantity": 15
+        }
+      ]
+    },
+    {
+      "parcela": 3,
+      "customer_name": "BAR LA TABERNA \u00b7 AQUI MATEIX \u00b7 Bar Plata \u00b7 PAREDES 4",
+      "parcela_volume_pct": 100.0,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 23
+        },
+        {
+          "material": "ENT",
+          "quantity": 22
+        },
+        {
+          "material": "ENT",
+          "quantity": 21
+        },
+        {
+          "material": "ENT",
+          "quantity": 19
+        }
+      ]
+    },
+    {
+      "parcela": 4,
+      "customer_name": "FRANKFURT ARIES \u00b7 BAR LA GAVINA \u00b7 RSTE. CHINO GRAN MUNDO",
+      "parcela_volume_pct": 86.5,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 14
+        },
+        {
+          "material": "ENT",
+          "quantity": 3
+        },
+        {
+          "material": "ENT",
+          "quantity": 11
+        }
+      ]
+    },
+    {
+      "parcela": 5,
+      "customer_name": "BAR LOS AMIGOS \u00b7 SALA GRANOLLERS (TORRES) \u2013 CIRSA \u00b7 TAPES GRANOLLERS PICA VINS",
+      "parcela_volume_pct": 50.2,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 5
+        },
+        {
+          "material": "ENT",
+          "quantity": 5
+        },
+        {
+          "material": "ENT",
+          "quantity": 5
+        }
+      ]
+    },
+    {
+      "parcela": 6,
+      "customer_name": "CAL FORNER \u00b7 MUSIC CLUB RADIKAL \u00b7 BAR AMISTAD \u00b7 BAR OLIMPIC",
+      "parcela_volume_pct": 76.2,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 6
+        },
+        {
+          "material": "ENT",
+          "quantity": 1
+        },
+        {
+          "material": "ENT",
+          "quantity": 17
+        },
+        {
+          "material": "ENT",
+          "quantity": 7
+        }
+      ]
+    },
+    {
+      "parcela": 7,
+      "customer_name": "BAR CAN CERVANTES \u00b7 BAR TALGO",
+      "parcela_volume_pct": 50.1,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 9
+        },
+        {
+          "material": "ENT",
+          "quantity": 2
+        }
+      ]
+    }
+  ],
+  "loading_before_randomized": [
+    {
+      "parcela": 1,
+      "customer_name": "Devoluciones (consolidado)",
+      "parcela_volume_pct": 100.0,
+      "items": [
+        {
+          "material": "RET",
+          "quantity": 166
+        }
+      ]
+    },
+    {
+      "parcela": 2,
+      "customer_name": "bar cafeteria yaki \u00b7 RESTAURANTE EL SOL",
+      "parcela_volume_pct": 100.0,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 24
+        },
+        {
+          "material": "ENT",
+          "quantity": 15
+        }
+      ]
+    },
+    {
+      "parcela": 3,
+      "customer_name": "BAR LA TABERNA \u00b7 AQUI MATEIX \u00b7 Bar Plata \u00b7 PAREDES 4",
+      "parcela_volume_pct": 100.0,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 23
+        },
+        {
+          "material": "ENT",
+          "quantity": 22
+        },
+        {
+          "material": "ENT",
+          "quantity": 21
+        },
+        {
+          "material": "ENT",
+          "quantity": 19
+        }
+      ]
+    },
+    {
+      "parcela": 4,
+      "customer_name": "FRANKFURT ARIES \u00b7 BAR LA GAVINA \u00b7 RSTE. CHINO GRAN MUNDO",
+      "parcela_volume_pct": 86.5,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 14
+        },
+        {
+          "material": "ENT",
+          "quantity": 3
+        },
+        {
+          "material": "ENT",
+          "quantity": 11
+        }
+      ]
+    },
+    {
+      "parcela": 5,
+      "customer_name": "BAR LOS AMIGOS \u00b7 SALA GRANOLLERS (TORRES) \u2013 CIRSA \u00b7 TAPES GRANOLLERS PICA VINS",
+      "parcela_volume_pct": 50.2,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 5
+        },
+        {
+          "material": "ENT",
+          "quantity": 5
+        },
+        {
+          "material": "ENT",
+          "quantity": 5
+        }
+      ]
+    },
+    {
+      "parcela": 6,
+      "customer_name": "CAL FORNER \u00b7 MUSIC CLUB RADIKAL \u00b7 BAR AMISTAD \u00b7 BAR OLIMPIC",
+      "parcela_volume_pct": 76.2,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 6
+        },
+        {
+          "material": "ENT",
+          "quantity": 1
+        },
+        {
+          "material": "ENT",
+          "quantity": 17
+        },
+        {
+          "material": "ENT",
+          "quantity": 7
+        }
+      ]
+    },
+    {
+      "parcela": 7,
+      "customer_name": "BAR CAN CERVANTES \u00b7 BAR TALGO",
+      "parcela_volume_pct": 50.1,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 9
+        },
+        {
+          "material": "ENT",
+          "quantity": 2
+        }
+      ]
+    }
+  ],
+  "warehouse_pick_sequence": [],
+  "plan_summary": {
+    "total_weight_kg": 10415.5,
+    "total_volume_l": 129152.2,
+    "most_loaded_parcela_pct": 100.0,
+    "synthetic_from_route": true
+  },
+  "warnings": [
+    "Distribuci\u00f3n sint\u00e9tica (orden de visita \u00b7 demo). Ejecutar Block 3 para plan almac\u00e9n + ZM040."
+  ]
+}

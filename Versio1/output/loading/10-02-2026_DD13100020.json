@@ -1,0 +1,132 @@
+{
+  "route_code": "DR0010",
+  "date": "10/02/2026",
+  "transport_id": "DD13100020",
+  "transporter_name": "Transporter DD13100020",
+  "truck_type": "large",
+  "truck_slots": 8,
+  "loading_after_lifo": [
+    {
+      "parcela": 1,
+      "customer_name": "Devoluciones (consolidado)",
+      "parcela_volume_pct": 44.0,
+      "items": [
+        {
+          "material": "RET",
+          "quantity": 18
+        }
+      ]
+    },
+    {
+      "parcela": 2,
+      "customer_name": "JAVIS 3",
+      "parcela_volume_pct": 54.0,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 12
+        }
+      ]
+    },
+    {
+      "parcela": 4,
+      "customer_name": "D\u00c9J\u00c0 VU",
+      "parcela_volume_pct": 26.0,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 4
+        }
+      ]
+    },
+    {
+      "parcela": 5,
+      "customer_name": "BK GRANOLLERS",
+      "parcela_volume_pct": 50.5,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 11
+        }
+      ]
+    },
+    {
+      "parcela": 7,
+      "customer_name": "GIOVANNI",
+      "parcela_volume_pct": 26.0,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 4
+        }
+      ]
+    }
+  ],
+  "loading_before_randomized": [
+    {
+      "parcela": 1,
+      "customer_name": "Devoluciones (consolidado)",
+      "parcela_volume_pct": 44.0,
+      "items": [
+        {
+          "material": "RET",
+          "quantity": 18
+        }
+      ]
+    },
+    {
+      "parcela": 2,
+      "customer_name": "JAVIS 3",
+      "parcela_volume_pct": 54.0,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 12
+        }
+      ]
+    },
+    {
+      "parcela": 4,
+      "customer_name": "D\u00c9J\u00c0 VU",
+      "parcela_volume_pct": 26.0,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 4
+        }
+      ]
+    },
+    {
+      "parcela": 5,
+      "customer_name": "BK GRANOLLERS",
+      "parcela_volume_pct": 50.5,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 11
+        }
+      ]
+    },
+    {
+      "parcela": 7,
+      "customer_name": "GIOVANNI",
+      "parcela_volume_pct": 26.0,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 4
+        }
+      ]
+    }
+  ],
+  "warehouse_pick_sequence": [],
+  "plan_summary": {
+    "total_weight_kg": 3709.2,
+    "total_volume_l": 45994.1,
+    "most_loaded_parcela_pct": 54.0,
+    "synthetic_from_route": true
+  },
+  "warnings": [
+    "Distribuci\u00f3n sint\u00e9tica (orden de visita \u00b7 demo). Ejecutar Block 3 para plan almac\u00e9n + ZM040."
+  ]
+}

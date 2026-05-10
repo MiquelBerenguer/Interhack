@@ -1,0 +1,44 @@
+{
+  "route_code": "DR0054",
+  "date": "12/02/2026",
+  "transport_id": "DD13100051",
+  "transporter_name": "Transporter DD13100051",
+  "truck_type": "standard",
+  "truck_slots": 6,
+  "loading_after_lifo": [
+    {
+      "parcela": 2,
+      "customer_name": "ESCOLA D'HOSTALERIA D'OSONA",
+      "parcela_volume_pct": 15.5,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 1
+        }
+      ]
+    }
+  ],
+  "loading_before_randomized": [
+    {
+      "parcela": 2,
+      "customer_name": "ESCOLA D'HOSTALERIA D'OSONA",
+      "parcela_volume_pct": 15.5,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 1
+        }
+      ]
+    }
+  ],
+  "warehouse_pick_sequence": [],
+  "plan_summary": {
+    "total_weight_kg": 286.8,
+    "total_volume_l": 3556.3,
+    "most_loaded_parcela_pct": 15.5,
+    "synthetic_from_route": true
+  },
+  "warnings": [
+    "Distribuci\u00f3n sint\u00e9tica (orden de visita \u00b7 demo). Ejecutar Block 3 para plan almac\u00e9n + ZM040."
+  ]
+}

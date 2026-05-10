@@ -1,0 +1,254 @@
+{
+  "route_code": "DR0017",
+  "date": "10/02/2026",
+  "transport_id": "0",
+  "transporter_name": "Transporter 0",
+  "truck_type": "large",
+  "truck_slots": 8,
+  "loading_after_lifo": [
+    {
+      "load_sequence": 1,
+      "parcela": 1,
+      "customer_name": "WONCA BURGUER",
+      "delivery_sequence": 1,
+      "items": [
+        {
+          "material": "ED30",
+          "description": "ESTRELLA DAMM BARRIL 30",
+          "quantity": 1,
+          "uma": "BRL",
+          "weight_kg": 42.788,
+          "volume_l": 30.0,
+          "product_type": "BARRIL",
+          "stack_layer": 1,
+          "stacking_note": "floor only - barril"
+        },
+        {
+          "material": "BRL30V",
+          "description": "BARRIL INOX 30L. EURONORMA",
+          "quantity": 1,
+          "uma": "BRL",
+          "weight_kg": 0.0,
+          "volume_l": 0.0,
+          "product_type": "BARRIL",
+          "stack_layer": 2,
+          "stacking_note": "floor only - barril"
+        },
+        {
+          "material": "ED13",
+          "description": "ESTRELLA DAMM 1/3 RET. PP",
+          "quantity": 5,
+          "uma": "CAJ",
+          "weight_kg": 85.0,
+          "volume_l": 39.6,
+          "product_type": "CAJA",
+          "stack_layer": 3,
+          "stacking_note": ""
+        },
+        {
+          "material": "FD13",
+          "description": "FREE DAMM 1/3 RET.",
+          "quantity": 1,
+          "uma": "CAJ",
+          "weight_kg": 17.0,
+          "volume_l": 7.92,
+          "product_type": "CAJA",
+          "stack_layer": 4,
+          "stacking_note": "on top of CAJA"
+        },
+        {
+          "material": "CJ13",
+          "description": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "quantity": 5,
+          "uma": "CAJ",
+          "weight_kg": 0.0,
+          "volume_l": 0.0,
+          "product_type": "CAJA",
+          "stack_layer": 5,
+          "stacking_note": "on top of CAJA"
+        },
+        {
+          "material": "CJ13",
+          "description": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "quantity": 1,
+          "uma": "CAJ",
+          "weight_kg": 0.0,
+          "volume_l": 0.0,
+          "product_type": "CAJA",
+          "stack_layer": 6,
+          "stacking_note": "on top of CAJA"
+        }
+      ],
+      "parcela_weight_kg": 144.788,
+      "parcela_volume_l": 77.52,
+      "parcela_volume_pct": 3.82
+    }
+  ],
+  "loading_before_randomized": [
+    {
+      "load_sequence": 1,
+      "parcela": 1,
+      "customer_name": "WONCA BURGUER",
+      "delivery_sequence": 1,
+      "items": [
+        {
+          "material": "CJ13",
+          "description": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "quantity": 5,
+          "uma": "CAJ",
+          "weight_kg": 0.0,
+          "volume_l": 0.0,
+          "product_type": "CAJA",
+          "stack_layer": 5,
+          "stacking_note": "on top of CAJA"
+        },
+        {
+          "material": "CJ13",
+          "description": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "quantity": 1,
+          "uma": "CAJ",
+          "weight_kg": 0.0,
+          "volume_l": 0.0,
+          "product_type": "CAJA",
+          "stack_layer": 6,
+          "stacking_note": "on top of CAJA"
+        },
+        {
+          "material": "ED30",
+          "description": "ESTRELLA DAMM BARRIL 30",
+          "quantity": 1,
+          "uma": "BRL",
+          "weight_kg": 42.788,
+          "volume_l": 30.0,
+          "product_type": "BARRIL",
+          "stack_layer": 1,
+          "stacking_note": "floor only - barril"
+        },
+        {
+          "material": "BRL30V",
+          "description": "BARRIL INOX 30L. EURONORMA",
+          "quantity": 1,
+          "uma": "BRL",
+          "weight_kg": 0.0,
+          "volume_l": 0.0,
+          "product_type": "BARRIL",
+          "stack_layer": 2,
+          "stacking_note": "floor only - barril"
+        },
+        {
+          "material": "ED13",
+          "description": "ESTRELLA DAMM 1/3 RET. PP",
+          "quantity": 5,
+          "uma": "CAJ",
+          "weight_kg": 85.0,
+          "volume_l": 39.6,
+          "product_type": "CAJA",
+          "stack_layer": 3,
+          "stacking_note": ""
+        },
+        {
+          "material": "FD13",
+          "description": "FREE DAMM 1/3 RET.",
+          "quantity": 1,
+          "uma": "CAJ",
+          "weight_kg": 17.0,
+          "volume_l": 7.92,
+          "product_type": "CAJA",
+          "stack_layer": 4,
+          "stacking_note": "on top of CAJA"
+        }
+      ],
+      "parcela_weight_kg": 144.788,
+      "parcela_volume_l": 77.52,
+      "parcela_volume_pct": 3.82
+    }
+  ],
+  "warehouse_pick_sequence": [
+    {
+      "pick_order": 1,
+      "material": "FD13",
+      "description": "FREE DAMM 1/3 RET.",
+      "quantity": 1,
+      "uma": "CAJ",
+      "warehouse_location": "AA06A1",
+      "load_to_parcela": 1,
+      "stack_layer": 4,
+      "customer_name": "WONCA BURGUER",
+      "delivery_sequence": 1
+    },
+    {
+      "pick_order": 2,
+      "material": "ED13",
+      "description": "ESTRELLA DAMM 1/3 RET. PP",
+      "quantity": 5,
+      "uma": "CAJ",
+      "warehouse_location": "AA09A1",
+      "load_to_parcela": 1,
+      "stack_layer": 3,
+      "customer_name": "WONCA BURGUER",
+      "delivery_sequence": 1
+    },
+    {
+      "pick_order": 3,
+      "material": "ED30",
+      "description": "ESTRELLA DAMM BARRIL 30",
+      "quantity": 1,
+      "uma": "BRL",
+      "warehouse_location": "AA10A1",
+      "load_to_parcela": 1,
+      "stack_layer": 1,
+      "customer_name": "WONCA BURGUER",
+      "delivery_sequence": 1
+    },
+    {
+      "pick_order": 4,
+      "material": "BRL30V",
+      "description": "BARRIL INOX 30L. EURONORMA",
+      "quantity": 1,
+      "uma": "BRL",
+      "warehouse_location": "ENVASE",
+      "load_to_parcela": 1,
+      "stack_layer": 2,
+      "customer_name": "WONCA BURGUER",
+      "delivery_sequence": 1
+    },
+    {
+      "pick_order": 5,
+      "material": "CJ13",
+      "description": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+      "quantity": 5,
+      "uma": "CAJ",
+      "warehouse_location": "ENVASE",
+      "load_to_parcela": 1,
+      "stack_layer": 5,
+      "customer_name": "WONCA BURGUER",
+      "delivery_sequence": 1
+    },
+    {
+      "pick_order": 6,
+      "material": "CJ13",
+      "description": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+      "quantity": 1,
+      "uma": "CAJ",
+      "warehouse_location": "ENVASE",
+      "load_to_parcela": 1,
+      "stack_layer": 6,
+      "customer_name": "WONCA BURGUER",
+      "delivery_sequence": 1
+    }
+  ],
+  "plan_summary": {
+    "total_parcelas_used": 1,
+    "total_weight_kg": 144.79,
+    "total_volume_l": 77.52,
+    "heaviest_parcela": 1,
+    "most_loaded_parcela_pct": 3.82,
+    "barril_count": 2,
+    "caja_count": 12,
+    "botella_count": 0,
+    "otro_count": 0
+  },
+  "warnings": [
+    "BARRIL on layer 2 (material BRL30V) - must be floor"
+  ]
+}

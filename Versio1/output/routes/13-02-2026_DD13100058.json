@@ -1,0 +1,453 @@
+{
+  "route_code": "DR0054",
+  "date": "13/02/2026",
+  "transport_id": "DD13100058",
+  "transporter_name": "Transporter DD13100058",
+  "truck_type": "standard",
+  "truck_slots": 6,
+  "zona_key": "DD13100058",
+  "priority_weights_used": {
+    "revenue": 0.3,
+    "distance": 0.2,
+    "fuel_cost": 0.15,
+    "travel_time": 0.1,
+    "operational_cost": 0.1,
+    "route_efficiency": 0.1,
+    "time_window_urgency": 0.05
+  },
+  "depot": {
+    "name": "Estrella Damm Mollet - Magatzem",
+    "address": "Carrer Moli de Can Bassa, Mollet del Valles, Barcelona",
+    "lat": 41.5363,
+    "lon": 2.2131
+  },
+  "baseline_visit_order_global": [
+    2,
+    1,
+    3,
+    0
+  ],
+  "optimized_visit_order_global": [
+    3,
+    1,
+    0,
+    2
+  ],
+  "all_stops": [
+    {
+      "id": "828006842",
+      "entrega_ids": [
+        "828006842"
+      ],
+      "name": "Bar Tissana",
+      "address": "Carrer de Ripoll 20, 08560 MANLLEU",
+      "city": "MANLLEU",
+      "cp": "08560",
+      "lat": 42.003,
+      "lon": 2.288,
+      "delivery_caj": 16.0,
+      "delivery_brl": 0,
+      "delivery_un": 0,
+      "ret_caj": 16.0,
+      "ret_brl": 0,
+      "delivery_up": 0.24285714285714285,
+      "return_up": 0.1457142857142857,
+      "delivery_value_eur": 416.0,
+      "items": [
+        {
+          "mat": "ED15LN",
+          "desc": "ESTRELLA DAMM 1/5 LN",
+          "qty": 6.0,
+          "unit": "CAJ",
+          "ubic": "AA08A1",
+          "unit_price_eur": 26.0,
+          "line_total_eur": 156.0
+        },
+        {
+          "mat": "VO13",
+          "desc": "VOLL-DAMM 1/3 RET.",
+          "qty": 4.0,
+          "unit": "CAJ",
+          "ubic": "AA07A1",
+          "unit_price_eur": 26.0,
+          "line_total_eur": 104.0
+        },
+        {
+          "mat": "ED15LN",
+          "desc": "ESTRELLA DAMM 1/5 LN",
+          "qty": 4.0,
+          "unit": "CAJ",
+          "ubic": "AA08A1",
+          "unit_price_eur": 26.0,
+          "line_total_eur": 104.0
+        },
+        {
+          "mat": "VO13",
+          "desc": "VOLL-DAMM 1/3 RET.",
+          "qty": 2.0,
+          "unit": "CAJ",
+          "ubic": "AA07A1",
+          "unit_price_eur": 26.0,
+          "line_total_eur": 52.0
+        }
+      ],
+      "ret_items": [
+        {
+          "mat": "CJ15",
+          "desc": "CAJA DAMM+BOT.1/5RET VACIO EN P.PLAS.A13",
+          "qty": 6.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        },
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 4.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        },
+        {
+          "mat": "CJ15",
+          "desc": "CAJA DAMM+BOT.1/5RET VACIO EN P.PLAS.A13",
+          "qty": 4.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        },
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 2.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        }
+      ],
+      "zona_transp": "DD13100058",
+      "window_open_min": 0,
+      "window_close_min": 1920
+    },
+    {
+      "id": "828006843",
+      "entrega_ids": [
+        "828006843"
+      ],
+      "name": "HOSPITAL DE MANLLEU CUINA",
+      "address": "CARRETERA D'OLOT 7, 08560 MANLLEU",
+      "city": "MANLLEU",
+      "cp": "08560",
+      "lat": 42.003,
+      "lon": 2.288,
+      "delivery_caj": 32.0,
+      "delivery_brl": 0,
+      "delivery_un": 0,
+      "ret_caj": 0,
+      "ret_brl": 0,
+      "delivery_up": 0.8,
+      "return_up": 0.48,
+      "delivery_value_eur": 768.0,
+      "items": [
+        {
+          "mat": "0AG0007",
+          "desc": "FONT D.OR NATURAL 1,5L PET 12U",
+          "qty": 32.0,
+          "unit": "CAJ",
+          "ubic": "EB09A1",
+          "unit_price_eur": 24.0,
+          "line_total_eur": 768.0
+        }
+      ],
+      "ret_items": [],
+      "zona_transp": "DD13100058",
+      "window_open_min": 0,
+      "window_close_min": 1920
+    },
+    {
+      "id": "828006844",
+      "entrega_ids": [
+        "828006844"
+      ],
+      "name": "BAR OLIVEDA",
+      "address": "CARRETERA RODA 18, 08560 MANLLEU",
+      "city": "MANLLEU",
+      "cp": "08560",
+      "lat": 42.003,
+      "lon": 2.288,
+      "delivery_caj": 9.0,
+      "delivery_brl": 0,
+      "delivery_un": 0,
+      "ret_caj": 8.0,
+      "ret_brl": 0,
+      "delivery_up": 0.13391053391053392,
+      "return_up": 0.08034632034632035,
+      "delivery_value_eur": 235.5,
+      "items": [
+        {
+          "mat": "ED13",
+          "desc": "ESTRELLA DAMM 1/3 RET. PP",
+          "qty": 4.0,
+          "unit": "CAJ",
+          "ubic": "AA09A1",
+          "unit_price_eur": 26.0,
+          "line_total_eur": 104.0
+        },
+        {
+          "mat": "ED15LN",
+          "desc": "ESTRELLA DAMM 1/5 LN",
+          "qty": 4.0,
+          "unit": "CAJ",
+          "ubic": "AA08A1",
+          "unit_price_eur": 26.0,
+          "line_total_eur": 104.0
+        },
+        {
+          "mat": "ED13LT",
+          "desc": "ESTRELLA DAMM 1/3 LATA",
+          "qty": 1.0,
+          "unit": "CAJ",
+          "ubic": "CA01A1",
+          "unit_price_eur": 27.5,
+          "line_total_eur": 27.5
+        }
+      ],
+      "ret_items": [
+        {
+          "mat": "CJ13",
+          "desc": "CAJA DAMM+BOT.1/3RET VACIO EN P.PLAS.A13",
+          "qty": 4.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        },
+        {
+          "mat": "CJ15",
+          "desc": "CAJA DAMM+BOT.1/5RET VACIO EN P.PLAS.A13",
+          "qty": 4.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        }
+      ],
+      "zona_transp": "DD13100058",
+      "window_open_min": 0,
+      "window_close_min": 1920
+    },
+    {
+      "id": "828006845",
+      "entrega_ids": [
+        "828006845"
+      ],
+      "name": "COMERCIAL F.LEIVA",
+      "address": "CALLE SOGORB 79, 08560 MANLLEU",
+      "city": "MANLLEU",
+      "cp": "08560",
+      "lat": 42.003,
+      "lon": 2.288,
+      "delivery_caj": 88.0,
+      "delivery_brl": 0,
+      "delivery_un": 0,
+      "ret_caj": 88.0,
+      "ret_brl": 0,
+      "delivery_up": 1.7999999999999998,
+      "return_up": 1.0799999999999998,
+      "delivery_value_eur": 2112.0,
+      "items": [
+        {
+          "mat": "0AG0010",
+          "desc": "VICHY CATALAN GAS 1L RET 12U",
+          "qty": 32.0,
+          "unit": "CAJ",
+          "ubic": "AC07A2",
+          "unit_price_eur": 24.0,
+          "line_total_eur": 768.0
+        },
+        {
+          "mat": "0AG0047",
+          "desc": "FONT D.OR NATURAL 8L GARRAFA 1U",
+          "qty": 56.0,
+          "unit": "CAJ",
+          "ubic": "BC01A1",
+          "unit_price_eur": 24.0,
+          "line_total_eur": 1344.0
+        }
+      ],
+      "ret_items": [
+        {
+          "mat": "3ENV0042",
+          "desc": "C.C. AGUA 1/1 VICHY-FONT D'OR",
+          "qty": 32.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        },
+        {
+          "mat": "3ENV0054",
+          "desc": "ENVASE\u00a0GARRAFA\u00a0FONT D'OR\u00a08L",
+          "qty": 56.0,
+          "unit": "CAJ",
+          "ubic": "ENVASE"
+        }
+      ],
+      "zona_transp": "DD13100058",
+      "window_open_min": 0,
+      "window_close_min": 1920
+    }
+  ],
+  "final_route_detail": [
+    {
+      "stop_index": 3,
+      "customer_id": "828006845",
+      "customer_name": "COMERCIAL F.LEIVA",
+      "arrival_time": "06:50",
+      "departure_time": "06:58",
+      "travel_time_min": 49.98,
+      "distance_km": 60.629,
+      "fuel_cost": 7.2755,
+      "operational_cost": 20.2942,
+      "priority_score": 1.0,
+      "walking_group_id": 1,
+      "window_open": "06:00",
+      "window_close": "14:00",
+      "window_status": "on_time",
+      "lat": 42.003,
+      "lon": 2.288,
+      "delivery_caj": 88.0,
+      "delivery_brl": 0.0,
+      "return_caj": 88.0,
+      "return_brl": 0.0,
+      "priority_breakdown_estimated": {
+        "revenue": 0.2069,
+        "distance": 0.1379,
+        "fuel_cost": 0.1034,
+        "travel_time": 0.069,
+        "operational_cost": 0.069,
+        "route_efficiency": 0.069,
+        "time_window_urgency": 0.0345
+      }
+    },
+    {
+      "stop_index": 1,
+      "customer_id": "828006843",
+      "customer_name": "HOSPITAL DE MANLLEU CUINA",
+      "arrival_time": "06:58",
+      "departure_time": "07:06",
+      "travel_time_min": 0.0,
+      "distance_km": 0.0,
+      "fuel_cost": 0.0,
+      "operational_cost": 2.8,
+      "priority_score": -0.15,
+      "walking_group_id": 1,
+      "window_open": "06:00",
+      "window_close": "14:00",
+      "window_status": "on_time",
+      "lat": 42.003,
+      "lon": 2.288,
+      "delivery_caj": 32.0,
+      "delivery_brl": 0.0,
+      "return_caj": 0.0,
+      "return_brl": 0.0,
+      "priority_breakdown_estimated": {
+        "revenue": -0.06,
+        "distance": -0.04,
+        "fuel_cost": -0.03,
+        "travel_time": -0.02,
+        "operational_cost": -0.02,
+        "route_efficiency": -0.02,
+        "time_window_urgency": -0.01
+      }
+    },
+    {
+      "stop_index": 0,
+      "customer_id": "828006842",
+      "customer_name": "Bar Tissana",
+      "arrival_time": "07:06",
+      "departure_time": "07:14",
+      "travel_time_min": 0.0,
+      "distance_km": 0.0,
+      "fuel_cost": 0.0,
+      "operational_cost": 2.8,
+      "priority_score": -0.15,
+      "walking_group_id": 1,
+      "window_open": "06:00",
+      "window_close": "14:00",
+      "window_status": "on_time",
+      "lat": 42.003,
+      "lon": 2.288,
+      "delivery_caj": 16.0,
+      "delivery_brl": 0.0,
+      "return_caj": 16.0,
+      "return_brl": 0.0,
+      "priority_breakdown_estimated": {
+        "revenue": -0.06,
+        "distance": -0.04,
+        "fuel_cost": -0.03,
+        "travel_time": -0.02,
+        "operational_cost": -0.02,
+        "route_efficiency": -0.02,
+        "time_window_urgency": -0.01
+      }
+    },
+    {
+      "stop_index": 2,
+      "customer_id": "828006844",
+      "customer_name": "BAR OLIVEDA",
+      "arrival_time": "07:14",
+      "departure_time": "07:22",
+      "travel_time_min": 0.0,
+      "distance_km": 0.0,
+      "fuel_cost": 0.0,
+      "operational_cost": 2.8,
+      "priority_score": -0.15,
+      "walking_group_id": 1,
+      "window_open": "06:00",
+      "window_close": "14:00",
+      "window_status": "on_time",
+      "lat": 42.003,
+      "lon": 2.288,
+      "delivery_caj": 9.0,
+      "delivery_brl": 0.0,
+      "return_caj": 8.0,
+      "return_brl": 0.0,
+      "priority_breakdown_estimated": {
+        "revenue": -0.06,
+        "distance": -0.04,
+        "fuel_cost": -0.03,
+        "travel_time": -0.02,
+        "operational_cost": -0.02,
+        "route_efficiency": -0.02,
+        "time_window_urgency": -0.01
+      }
+    }
+  ],
+  "metrics_comparison": {
+    "baseline": {
+      "distance_km": 121.505,
+      "duration_min": 130.48,
+      "fuel_liters_est": 10.8,
+      "co2_kg_est": 28.51,
+      "cost_eur": 60.2498,
+      "fuel_cost_eur": 14.5806,
+      "operational_cost_eur": 45.6692
+    },
+    "optimized": {
+      "distance_km": 121.505,
+      "duration_min": 130.48,
+      "fuel_liters_est": 10.8,
+      "co2_kg_est": 28.51,
+      "cost_eur": 60.2498,
+      "fuel_cost_eur": 14.5806,
+      "operational_cost_eur": 45.6692
+    }
+  },
+  "route_summary": {
+    "total_stops": 4,
+    "total_distance_km": 121.505,
+    "total_duration_min": 130.48,
+    "total_fuel_cost": 14.5806,
+    "total_operational_cost": 45.6692,
+    "total_revenue": 3531.5,
+    "walking_groups_count": 1,
+    "estimated_time_saved_min": 0.0,
+    "baseline_rand_maps_distance_km": 121.505,
+    "baseline_rand_maps_fuel_cost": 14.5806,
+    "baseline_rand_maps_operational_cost": 45.6692,
+    "baseline_rand_maps_total_eur": 60.2498,
+    "baseline_rand_maps_drive_service_min": 130.48
+  },
+  "unload_time_saved_min_estimate": 0.0
+}

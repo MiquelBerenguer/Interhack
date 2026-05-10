@@ -1,0 +1,180 @@
+{
+  "route_code": "DR0040",
+  "date": "09/02/2026",
+  "transport_id": "DD13100055",
+  "transporter_name": "Transporter DD13100055",
+  "truck_type": "standard",
+  "truck_slots": 6,
+  "loading_after_lifo": [
+    {
+      "parcela": 1,
+      "customer_name": "Devoluciones (consolidado)",
+      "parcela_volume_pct": 100.0,
+      "items": [
+        {
+          "material": "RET",
+          "quantity": 88
+        }
+      ]
+    },
+    {
+      "parcela": 2,
+      "customer_name": "BAR CHAPLIN \u00b7 FRANKFURT VIC**",
+      "parcela_volume_pct": 100.0,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 24
+        },
+        {
+          "material": "ENT",
+          "quantity": 7
+        }
+      ]
+    },
+    {
+      "parcela": 3,
+      "customer_name": "BAR LA TASCA \u00b7 FORN DE PA EL REMEI \u00b7 ENTREPA I PA",
+      "parcela_volume_pct": 48.9,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 5
+        },
+        {
+          "material": "ENT",
+          "quantity": 5
+        },
+        {
+          "material": "ENT",
+          "quantity": 4
+        }
+      ]
+    },
+    {
+      "parcela": 4,
+      "customer_name": "CA LA NATI \u00b7 LLAR JUVENIL \u00b7 BAR SOL NOU",
+      "parcela_volume_pct": 44.2,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 4
+        },
+        {
+          "material": "ENT",
+          "quantity": 4
+        },
+        {
+          "material": "ENT",
+          "quantity": 4
+        }
+      ]
+    },
+    {
+      "parcela": 5,
+      "customer_name": "SEGAFREDO \u00b7 FUSSIMANYA ESTADI",
+      "parcela_volume_pct": 25.6,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 2
+        },
+        {
+          "material": "ENT",
+          "quantity": 2
+        }
+      ]
+    }
+  ],
+  "loading_before_randomized": [
+    {
+      "parcela": 1,
+      "customer_name": "Devoluciones (consolidado)",
+      "parcela_volume_pct": 100.0,
+      "items": [
+        {
+          "material": "RET",
+          "quantity": 88
+        }
+      ]
+    },
+    {
+      "parcela": 2,
+      "customer_name": "BAR CHAPLIN \u00b7 FRANKFURT VIC**",
+      "parcela_volume_pct": 100.0,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 24
+        },
+        {
+          "material": "ENT",
+          "quantity": 7
+        }
+      ]
+    },
+    {
+      "parcela": 3,
+      "customer_name": "BAR LA TASCA \u00b7 FORN DE PA EL REMEI \u00b7 ENTREPA I PA",
+      "parcela_volume_pct": 48.9,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 5
+        },
+        {
+          "material": "ENT",
+          "quantity": 5
+        },
+        {
+          "material": "ENT",
+          "quantity": 4
+        }
+      ]
+    },
+    {
+      "parcela": 4,
+      "customer_name": "CA LA NATI \u00b7 LLAR JUVENIL \u00b7 BAR SOL NOU",
+      "parcela_volume_pct": 44.2,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 4
+        },
+        {
+          "material": "ENT",
+          "quantity": 4
+        },
+        {
+          "material": "ENT",
+          "quantity": 4
+        }
+      ]
+    },
+    {
+      "parcela": 5,
+      "customer_name": "SEGAFREDO \u00b7 FUSSIMANYA ESTADI",
+      "parcela_volume_pct": 25.6,
+      "items": [
+        {
+          "material": "ENT",
+          "quantity": 2
+        },
+        {
+          "material": "ENT",
+          "quantity": 2
+        }
+      ]
+    }
+  ],
+  "warehouse_pick_sequence": [],
+  "plan_summary": {
+    "total_weight_kg": 5895.9,
+    "total_volume_l": 73109.2,
+    "most_loaded_parcela_pct": 100.0,
+    "synthetic_from_route": true
+  },
+  "warnings": [
+    "Distribuci\u00f3n sint\u00e9tica (orden de visita \u00b7 demo). Ejecutar Block 3 para plan almac\u00e9n + ZM040."
+  ]
+}

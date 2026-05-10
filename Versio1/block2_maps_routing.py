@@ -458,10 +458,12 @@ def cluster_maps_baseline_tour_cost_dm(
             "total_fuel_cost": 0.0,
             "total_operational_cost": 0.0,
             "baseline_rand_maps_total_eur": 0.0,
+            "baseline_service_and_drive_min": 0.0,
         }
     total_dist = 0.0
     total_fuel = 0.0
     total_op = 0.0
+    service_drive_min = 0.0
 
     loc0 = route_local[0]
     edge = matrix[(0, loc0 + 1)]
@@ -470,6 +472,7 @@ def cluster_maps_baseline_tour_cost_dm(
     total_dist += dist_km
     total_fuel += dist_km * FUEL_COST_PER_KM
     total_op += (travel + UNLOADING_TIME_MIN) * TRUCK_OPCOST_PER_MIN
+    service_drive_min += travel + UNLOADING_TIME_MIN
 
     for seq in range(1, len(route_local)):
         prev = route_local[seq - 1]
@@ -480,6 +483,7 @@ def cluster_maps_baseline_tour_cost_dm(
         total_dist += dist_km
         total_fuel += dist_km * FUEL_COST_PER_KM
         total_op += (travel + UNLOADING_TIME_MIN) * TRUCK_OPCOST_PER_MIN
+        service_drive_min += travel + UNLOADING_TIME_MIN
 
     last = route_local[-1]
     edge_ret = matrix[(last + 1, 0)]
@@ -488,6 +492,7 @@ def cluster_maps_baseline_tour_cost_dm(
     total_dist += dist_ret
     total_fuel += dist_ret * FUEL_COST_PER_KM
     total_op += travel_ret * TRUCK_OPCOST_PER_MIN
+    service_drive_min += travel_ret
 
     teur = round(total_fuel + total_op, 4)
     return {
@@ -495,6 +500,7 @@ def cluster_maps_baseline_tour_cost_dm(
         "total_fuel_cost": round(total_fuel, 4),
         "total_operational_cost": round(total_op, 4),
         "baseline_rand_maps_total_eur": teur,
+        "baseline_service_and_drive_min": round(service_drive_min, 2),
     }
 
 
@@ -1680,6 +1686,12 @@ def optimize_cluster_route(
 
     }
 
+    br_loc: List[int] = []
+
+    baseline_visit_order_global: List[int] = []
+
+    optimized_visit_order_global: List[int] = []
+
     if route_local and global_stop_indices is not None and block1_rand_route is not None:
 
         try:
@@ -1701,6 +1713,20 @@ def optimize_cluster_route(
         except Exception as exc:
 
             logger.warning("baseline rand Maps tour failed for %s: %s", transporter_name, exc)
+
+
+
+    if route_local and global_stop_indices is not None:
+
+        optimized_visit_order_global = [int(global_stop_indices[i]) for i in route_local]
+
+        if br_loc:
+
+            baseline_visit_order_global = [int(global_stop_indices[i]) for i in br_loc]
+
+        else:
+
+            baseline_visit_order_global = optimized_visit_order_global[:]
 
 
 
@@ -1804,7 +1830,7 @@ def optimize_cluster_route(
 
                 "operational_cost": round((travel + UNLOADING_TIME_MIN) * TRUCK_OPCOST_PER_MIN, 4),
 
-                "priority_score": priority_by_stop.get(loc, round(sc / max(max_rev, 1e-6), 4)),
+                "priority_score":         priority_by_stop.get(loc, round(sc / max(max_rev, 1e-6), 4)),
 
                 "walking_group_id": walk_id_map.get(loc),
 
@@ -1813,6 +1839,18 @@ def optimize_cluster_route(
                 "window_close": _min_to_hhmm(c_abs),
 
                 "window_status": ws,
+
+                "lat": float(cluster_stops[loc].get("lat", 0.0)),
+
+                "lon": float(cluster_stops[loc].get("lon", 0.0)),
+
+                "delivery_caj": float(cluster_stops[loc].get("delivery_caj") or 0.0),
+
+                "delivery_brl": float(cluster_stops[loc].get("delivery_brl") or 0.0),
+
+                "return_caj": float(cluster_stops[loc].get("ret_caj") or 0.0),
+
+                "return_brl": float(cluster_stops[loc].get("ret_brl") or 0.0),
 
             }
 
@@ -1882,6 +1920,8 @@ def optimize_cluster_route(
 
             "baseline_rand_maps_total_eur": baseline_maps_summary.get("baseline_rand_maps_total_eur", 0.0),
 
+            "baseline_rand_maps_drive_service_min": baseline_maps_summary.get("baseline_service_and_drive_min", 0.0),
+
         }
 
     )
@@ -1911,6 +1951,10 @@ def optimize_cluster_route(
         "needs_reassignment_indices": needs_reassignment_indices,
 
         "deadlock_suggestions": deadlock_suggestions,
+
+        "baseline_visit_order_global": baseline_visit_order_global,
+
+        "optimized_visit_order_global": optimized_visit_order_global,
 
     }
 
@@ -2002,6 +2046,8 @@ def _empty_cluster_result(
 
             "baseline_rand_maps_total_eur": 0.0,
 
+            "baseline_rand_maps_drive_service_min": 0.0,
+
         },
 
         "unserviceable_stops": [],
@@ -2009,6 +2055,10 @@ def _empty_cluster_result(
         "needs_reassignment_indices": [],
 
         "deadlock_suggestions": [],
+
+        "baseline_visit_order_global": [],
+
+        "optimized_visit_order_global": [],
 
     }
 
