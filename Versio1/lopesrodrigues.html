@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Damm Smart Truck</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Inter+Tight:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --red:#C8102E;
+  --red-light:#f5e6e9;
+  --red-mid:#e8b0b8;
+  --black:#111;
+  --gray:#777;
+  --gray-light:#e8e8e8;
+  --gray-bg:#f5f5f5;
+  --white:#ffffff;
+  --border:#e0e0e0;
+  --f:'Inter',system-ui,sans-serif;
+  --ft:'Inter Tight',system-ui,sans-serif;
+}
+html,body{font-family:var(--f);background:var(--white);color:var(--black);min-height:100vh}
+
+/* ── UPLOAD SCREEN ── */
+#upload-screen{
+  min-height:100vh;display:flex;flex-direction:column;
+}
+.upload-nav{
+  padding:24px 48px;display:flex;align-items:center;justify-content:space-between;
+  border-bottom:1px solid var(--border);
+}
+.brand{font-family:var(--ft);font-size:15px;font-weight:600;color:var(--black);letter-spacing:-.01em}
+.brand span{color:var(--red)}
+.brand-sub{font-size:11px;color:var(--gray);font-weight:400;margin-top:1px}
+.upload-body{
+  flex:1;display:flex;align-items:center;justify-content:center;
+  flex-direction:column;padding:80px 48px;
+}
+.upload-eyebrow{
+  font-size:11px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--red);font-weight:500;margin-bottom:20px;
+}
+.upload-headline{
+  font-family:var(--ft);font-size:40px;font-weight:600;
+  color:var(--black);letter-spacing:-.03em;text-align:center;
+  line-height:1.1;margin-bottom:12px;max-width:500px;
+}
+.upload-desc{
+  font-size:14px;color:var(--gray);text-align:center;
+  max-width:380px;line-height:1.6;margin-bottom:48px;
+}
+.drop-zone{
+  width:480px;border:1.5px dashed var(--border);border-radius:12px;
+  padding:48px;text-align:center;cursor:pointer;
+  transition:border-color .2s,background .2s;background:var(--gray-bg);
+  position:relative;
+}
+.drop-zone:hover,.drop-zone.drag{
+  border-color:var(--red);background:#fef8f9;
+}
+.drop-zone input{display:none}
+.drop-icon{
+  width:48px;height:48px;border-radius:50%;background:var(--white);
+  border:1px solid var(--border);display:flex;align-items:center;
+  justify-content:center;margin:0 auto 16px;
+}
+.drop-icon svg{width:20px;height:20px;stroke:var(--red);fill:none;stroke-width:1.5;stroke-linecap:round}
+.drop-title{font-size:14px;font-weight:500;color:var(--black);margin-bottom:6px}
+.drop-hint{font-size:12px;color:var(--gray)}
+.drop-hint span{color:var(--red);font-weight:500}
+
+.config-row{
+  display:flex;gap:20px;margin-top:24px;align-items:flex-end;width:480px;
+}
+.config-group{flex:1}
+.config-label{font-size:11px;font-weight:500;color:var(--gray);letter-spacing:.04em;text-transform:uppercase;margin-bottom:6px}
+.config-select{
+  width:100%;background:var(--white);border:1px solid var(--border);
+  color:var(--black);padding:9px 12px;border-radius:8px;
+  font-family:var(--f);font-size:13px;cursor:pointer;
+  transition:border-color .15s;outline:none;
+}
+.config-select:focus{border-color:var(--red)}
+.alpha-row{display:flex;align-items:center;gap:10px}
+input[type=range]{
+  -webkit-appearance:none;flex:1;height:2px;
+  background:var(--border);border-radius:1px;outline:none;cursor:pointer;
+}
+input[type=range]::-webkit-slider-thumb{
+  -webkit-appearance:none;width:14px;height:14px;border-radius:50%;
+  background:var(--red);cursor:pointer;
+}
+.alpha-val{font-size:13px;font-weight:500;color:var(--red);min-width:28px;text-align:right}
+.btn-run{
+  background:var(--red);color:var(--white);border:none;
+  padding:10px 24px;border-radius:8px;cursor:pointer;
+  font-family:var(--f);font-size:13px;font-weight:500;
+  transition:opacity .15s;white-space:nowrap;
+}
+.btn-run:hover{opacity:.85}
+.file-ok{
+  display:none;margin-top:16px;font-size:12px;color:var(--red);
+  font-weight:500;text-align:center;
+}
+
+/* ── APP SHELL ── */
+#app{display:none;flex-direction:column;min-height:100vh}
+nav{
+  position:sticky;top:0;z-index:9000;background:var(--white);
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;padding:0 40px;height:52px;gap:0;
+}
+.nav-brand{font-family:var(--ft);font-size:14px;font-weight:600;color:var(--black);margin-right:32px;white-space:nowrap}
+.nav-brand span{color:var(--red)}
+.nav-tabs{display:flex;gap:0;flex:1}
+.tab{
+  background:none;border:none;border-bottom:2px solid transparent;
+  color:var(--gray);padding:0 16px;height:52px;cursor:pointer;
+  font-family:var(--f);font-size:12px;font-weight:500;
+  letter-spacing:.02em;transition:color .15s,border-color .15s;
+  text-transform:uppercase;letter-spacing:.06em;
+}
+.tab:hover{color:var(--black)}
+.tab.active{color:var(--red);border-bottom-color:var(--red)}
+.nav-right{
+  display:flex;align-items:center;gap:16px;margin-left:auto;flex-shrink:0;
+}
+.nav-meta{font-size:11px;color:var(--gray)}
+.nav-pill{
+  background:var(--red);color:var(--white);
+  font-size:10px;font-weight:600;letter-spacing:.08em;
+  padding:3px 10px;border-radius:20px;text-transform:uppercase;
+}
+.nav-reset{
+  font-size:11px;color:var(--gray);cursor:pointer;
+  border:1px solid var(--border);border-radius:6px;
+  padding:4px 10px;background:none;font-family:var(--f);
+  transition:border-color .15s,color .15s;
+}
+.nav-reset:hover{color:var(--red);border-color:var(--red)}
+
+/* ── PANELS ── */
+.panel{display:none;padding:48px 40px 80px;max-width:1280px;margin:0 auto;width:100%}
+.panel.active{display:block}
+.panel-title{font-family:var(--ft);font-size:28px;font-weight:600;letter-spacing:-.025em;color:var(--black);margin-bottom:4px}
+.panel-sub{font-size:13px;color:var(--gray);margin-bottom:36px}
+
+/* ── METRICS ── */
+.metrics-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:40px}
+.metric{background:var(--white);padding:24px}
+.metric-label{font-size:11px;color:var(--gray);font-weight:500;text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px}
+.metric-val{font-family:var(--ft);font-size:38px;font-weight:600;letter-spacing:-.03em;color:var(--black);line-height:1}
+.metric-val.red{color:var(--red)}
+.metric-sub{font-size:12px;color:var(--gray);margin-top:6px}
+.metric-delta{display:inline-block;font-size:11px;font-weight:500;color:var(--red);margin-top:8px}
+
+/* ── SECTION LABEL ── */
+.sec{margin-bottom:12px;margin-top:36px;font-size:11px;font-weight:600;color:var(--gray);text-transform:uppercase;letter-spacing:.1em;display:flex;align-items:center;gap:12px}
+.sec::after{content:'';flex:1;height:1px;background:var(--border)}
+
+/* ── TABLE ── */
+.rtable{width:100%;border-collapse:collapse;font-size:13px}
+.rtable thead tr{border-bottom:1.5px solid var(--black)}
+.rtable th{text-align:left;padding:8px 12px;font-size:10px;font-weight:600;color:var(--gray);text-transform:uppercase;letter-spacing:.08em}
+.rtable tbody tr{border-bottom:1px solid var(--border);transition:background .1s}
+.rtable tbody tr:hover td{background:var(--gray-bg)}
+.rtable td{padding:10px 12px;vertical-align:middle}
+.stopnum{width:26px;height:26px;border-radius:50%;border:1px solid var(--border);color:var(--gray);font-size:11px;font-weight:500;display:inline-flex;align-items:center;justify-content:center}
+.pbar{background:var(--gray-light);border-radius:1px;height:3px;width:56px;display:inline-block;vertical-align:middle;overflow:hidden}
+.pfill{height:100%;background:var(--red);border-radius:1px}
+.tag{display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:600;letter-spacing:.04em}
+.tH{background:var(--red-light);color:var(--red)}
+.tM{background:#f5f5f5;color:#666}
+.tL{background:#f5f5f5;color:#aaa}
+.ret-val{font-size:12px;color:var(--red);font-weight:500}
+
+/* ── MAP ── */
+.mapbox{border:1px solid var(--border);border-radius:10px;overflow:hidden}
+#map{height:480px}
+#map-r,#map-o{height:320px}
+#hm{height:460px}
+.map-leg{padding:10px 16px;display:flex;gap:20px;font-size:11px;color:var(--gray);border-top:1px solid var(--border)}
+.dot{width:7px;height:7px;border-radius:50%;display:inline-block;margin-right:5px;vertical-align:middle}
+
+/* ── COMPARE ── */
+.compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:32px}
+.ccard{border:1px solid var(--border);border-radius:10px;overflow:hidden}
+.ccard.opt{border-color:var(--red)}
+.chead{padding:14px 18px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+.chead-title{font-size:13px;font-weight:500}
+.cstats{padding:14px 18px;display:flex;gap:28px}
+.cs{font-size:11px;color:var(--gray)}
+.cs b{font-family:var(--ft);font-size:22px;font-weight:600;color:var(--black);display:block;margin-bottom:2px;letter-spacing:-.02em}
+.cs b.red{color:var(--red)}
+
+/* ── DIFF BARS ── */
+.diff-card{border:1px solid var(--border);border-radius:10px;padding:24px;margin-bottom:0}
+.diff-row{margin-bottom:22px}
+.diff-row-head{display:flex;justify-content:space-between;margin-bottom:8px}
+.diff-row-label{font-size:12px;font-weight:500;color:var(--black)}
+.diff-row-saving{font-size:12px;color:var(--red);font-weight:500}
+.bar-track{display:flex;gap:8px;align-items:center;margin-bottom:4px}
+.bar-key{font-size:10px;color:var(--gray);width:28px;text-align:right;flex-shrink:0}
+.bar-bg{flex:1;background:var(--gray-bg);border-radius:1px;height:7px;overflow:hidden}
+.bar-fill-bad{height:100%;background:var(--red-mid);border-radius:1px}
+.bar-fill-good{height:100%;background:var(--red);border-radius:1px}
+.bar-val{font-size:11px;font-weight:500;color:var(--gray);width:56px;text-align:right;flex-shrink:0}
+.bar-val.red{color:var(--red)}
+
+/* ── IMPACT ── */
+.impact-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:0}
+.impact-card{border:1px solid var(--border);border-radius:10px;padding:24px}
+.impact-card.accent{border-color:var(--red);background:var(--red-light)}
+.impact-big{font-family:var(--ft);font-size:44px;font-weight:600;letter-spacing:-.03em;color:var(--red);line-height:1;margin:10px 0 6px}
+.impact-label{font-size:11px;font-weight:600;color:var(--gray);text-transform:uppercase;letter-spacing:.08em}
+.impact-desc{font-size:12px;color:var(--gray);margin-top:4px;line-height:1.5}
+
+/* ── TRUCK ── */
+.truck-card{border:1px solid var(--border);border-radius:10px;padding:28px}
+.tv{display:flex;gap:3px;height:100px;margin:20px 0 8px;align-items:stretch}
+.tcab{width:40px;background:var(--gray-bg);border-radius:8px 0 0 8px;border:1px solid var(--border);display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:10px;color:var(--gray);flex-shrink:0;gap:3px}
+.tpar{flex:1;border-radius:3px;border:1px solid;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:4px;font-size:9px;text-align:center;cursor:pointer;transition:opacity .15s}
+.tpar:hover{opacity:.8}
+.tpar.ret{background:#e8f5f1;border-color:#b8dfcf;color:#1a8060}
+.tpar.p6{background:#fde8ec;border-color:#f0b8c4;color:var(--red)}
+.tpar.p5{background:#fdeef1;border-color:#f5cdd4;color:#b02040}
+.tpar.p4{background:#fef4f6;border-color:#f5dde2;color:#c04060}
+.tpar.p3,.tpar.p2{background:#fff9fa;border-color:#f0e4e8;color:#c06070}
+.tdoor{width:28px;background:var(--gray-bg);border-radius:0 8px 8px 0;border:1px solid var(--border);border-left:2px solid var(--red);display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:9px;color:var(--red);flex-shrink:0;gap:3px}
+.pnum{font-family:var(--ft);font-size:16px;font-weight:600;opacity:.3;line-height:1}
+.pcl{font-size:8px;color:inherit;opacity:.8;line-height:1.3}
+.truck-labels{display:flex;justify-content:space-between;padding:0 72px;font-size:10px;color:var(--gray);margin-bottom:24px}
+.timeline-row{display:grid;grid-template-columns:26px 160px 1fr 1fr;gap:10px;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);font-size:12px}
+.tls{width:22px;height:22px;border-radius:50%;border:1px solid var(--border);color:var(--gray);font-size:10px;font-weight:500;display:flex;align-items:center;justify-content:center}
+.sbar{height:4px;border-radius:2px;background:var(--gray-bg);overflow:hidden;margin-top:4px}
+.sbar-d{height:100%;background:var(--red);border-radius:2px}
+.sbar-r{height:100%;background:#1D9E75;border-radius:2px}
+.sbar-label{font-size:10px;color:var(--gray)}
+.sbar-label.green{color:#1a8060}
+
+/* ── HEATMAP ── */
+.hm-layout{display:grid;grid-template-columns:2fr 1fr;gap:16px}
+.density-list{border:1px solid var(--border);border-radius:10px;overflow:hidden}
+.dl-row{display:flex;align-items:center;gap:10px;padding:9px 14px;border-bottom:1px solid var(--border);font-size:12px}
+.dl-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.dl-bar{flex:1;background:var(--gray-bg);height:3px;border-radius:2px;overflow:hidden}
+.dl-fill{height:100%;border-radius:2px}
+.dl-name{flex:2;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--black)}
+.dl-score{font-size:10px;color:var(--gray);font-weight:500;min-width:30px;text-align:right}
+
+/* ── DL BUTTONS ── */
+.dl-bar-row{display:flex;gap:10px;margin-bottom:32px}
+.dlbtn{border:1px solid var(--border);border-radius:7px;padding:9px 16px;font-size:12px;color:var(--black);cursor:pointer;display:flex;align-items:center;gap:8px;text-decoration:none;background:var(--white);transition:border-color .15s;font-family:var(--f)}
+.dlbtn:hover{border-color:var(--red);color:var(--red)}
+
+/* chart canvas wrapper */
+.chart-wrap{position:relative;width:100%;height:240px}
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════ UPLOAD SCREEN ══════════════════════ -->
+<div id="upload-screen">
+  <div class="upload-nav">
+    <div>
+      <div class="brand">Damm <span>Smart Truck</span></div>
+      <div class="brand-sub">Logistics Optimization Platform</div>
+    </div>
+    <div style="font-size:12px;color:var(--gray)">v2 · DR0027</div>
+  </div>
+
+  <div class="upload-body">
+    <div class="upload-eyebrow">Optimización de rutas</div>
+    <div class="upload-headline">Sube el archivo de ruta para comenzar</div>
+    <div class="upload-desc">Carga el Excel de DAMM con los datos de entrega y el sistema calculará la ruta óptima, plan de carga y análisis de impacto.</div>
+
+    <div class="drop-zone" id="drop-zone" onclick="document.getElementById('csv-input').click()">
+      <input type="file" id="csv-input" accept=".csv,.xlsx">
+      <div class="drop-icon">
+        <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+      </div>
+      <div class="drop-title">Arrastra aquí o haz clic para subir</div>
+      <div class="drop-hint">Formato: <span>Hackaton.xlsx</span> · Detalle_entrega.csv</div>
+    </div>
+
+    <div class="file-ok" id="file-ok">✓ Archivo listo</div>
+
+    <div class="config-row">
+      <div class="config-group">
+        <div class="config-label">Ruta</div>
+        <select id="sel-ruta" class="config-select">
+          <option>DR0027</option><option>DR0001</option><option>DR0006</option>
+          <option>DR0031</option><option>DR0052</option><option>DR0054</option>
+        </select>
+      </div>
+      <div class="config-group" style="flex:2">
+        <div class="config-label">Prioridad (α) — cliente vs distancia</div>
+        <div class="alpha-row">
+          <input type="range" id="alpha-slider" min="0" max="100" value="65" step="1">
+          <span class="alpha-val" id="alpha-val">0.65</span>
+        </div>
+      </div>
+      <button class="btn-run" onclick="launchApp()">Optimizar →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════ APP SHELL ══════════════════════ -->
+<div id="app">
+  <nav>
+    <div class="nav-brand">Damm <span>Smart Truck</span></div>
+    <div class="nav-tabs">
+      <button class="tab active" onclick="showTab('dash',this)">Dashboard</button>
+      <button class="tab" onclick="showTab('compare',this)">Antes / Después</button>
+      <button class="tab" onclick="showTab('truck',this)">Carga</button>
+      <button class="tab" onclick="showTab('route',this)">Mapa</button>
+      <button class="tab" onclick="showTab('heat',this)">Heatmap</button>
+      <button class="tab" onclick="showTab('impact',this)">Impacto</button>
+    </div>
+    <div class="nav-right">
+      <span class="nav-meta" id="nav-meta">DR0027 · 02/03/2026</span>
+      <div class="nav-pill">Optimizado</div>
+      <button class="nav-reset" onclick="resetToUpload()">← Nueva ruta</button>
+    </div>
+  </nav>
+
+  <!-- DASHBOARD -->
+  <div id="tab-dash" class="panel active">
+    <div class="panel-title">Resultado de optimización</div>
+    <div class="panel-sub" id="dash-sub">Ruta DR0027 · 25 paradas · 02/03/2026</div>
+
+    <div class="metrics-row" id="metrics-row"></div>
+
+    <div class="dl-bar-row">
+      <a class="dlbtn" href="Hoja_Ruta.pdf" download>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        Hoja de Ruta
+      </a>
+      <a class="dlbtn" href="Hoja_Carga.pdf" download>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
+        Hoja de Carga
+      </a>
+      <a class="dlbtn" href="Albaranes.pdf" download>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/></svg>
+        Albaranes
+      </a>
+    </div>
+
+    <div class="sec">Orden de visitas optimizado</div>
+    <table class="rtable">
+      <thead><tr>
+        <th>#</th><th>Cliente</th><th>Ciudad</th>
+        <th>Prioridad</th><th>Entrega</th><th>Retornos</th><th>Dirección</th>
+      </tr></thead>
+      <tbody id="route-tbody"></tbody>
+    </table>
+  </div>
+
+  <!-- COMPARE -->
+  <div id="tab-compare" class="panel">
+    <div class="panel-title">Antes / Después</div>
+    <div class="panel-sub">Ruta aleatoria (estado actual) vs Smart Truck optimizado</div>
+    <div class="compare-grid">
+      <div class="ccard">
+        <div class="chead"><span class="chead-title">Sin optimizar</span><span class="tag tM">BASELINE</span></div>
+        <div id="map-r"></div>
+        <div class="cstats">
+          <div class="cs"><b id="cr-dist">—</b>Distancia</div>
+          <div class="cs"><b id="cr-time">—</b>Tiempo</div>
+          <div class="cs"><b style="color:var(--gray)">Referencia</b>Sin algoritmo</div>
+        </div>
+      </div>
+      <div class="ccard opt">
+        <div class="chead"><span class="chead-title">Smart Truck</span><span class="tag tH">OPTIMIZADO</span></div>
+        <div id="map-o"></div>
+        <div class="cstats">
+          <div class="cs"><b id="co-dist">—</b>Distancia</div>
+          <div class="cs"><b id="co-time">—</b>Tiempo</div>
+          <div class="cs"><b id="co-imp" class="red">—</b>Mejora</div>
+        </div>
+      </div>
+    </div>
+    <div class="diff-card" id="diff-card"></div>
+  </div>
+
+  <!-- TRUCK -->
+  <div id="tab-truck" class="panel">
+    <div class="panel-title">Plan de carga</div>
+    <div class="panel-sub">6 parcelas · cargado de atrás hacia delante · la ruta define la carga</div>
+    <div class="truck-card">
+      <div style="font-size:13px;color:var(--gray);line-height:1.6;max-width:540px;margin-bottom:4px">
+        Los últimos clientes en ruta van en la zona profunda del camión. Los primeros quedan junto a la puerta, minimizando el tiempo de descarga.
+      </div>
+      <div class="tv" id="truck-visual"></div>
+      <div class="truck-labels">
+        <span>← Último en cargarse</span>
+        <span>Primero en cargarse →</span>
+      </div>
+      <div class="sec">Evolución de carga por parada</div>
+      <div style="display:grid;grid-template-columns:26px 165px 1fr 1fr;gap:8px;padding:6px 0;font-size:10px;color:var(--gray);font-weight:600;text-transform:uppercase;letter-spacing:.06em;border-bottom:1px solid var(--border)">
+        <span>#</span><span>Cliente</span><span>Entrega restante</span><span>Retornos recogidos</span>
+      </div>
+      <div id="timeline"></div>
+    </div>
+  </div>
+
+  <!-- ROUTE MAP -->
+  <div id="tab-route" class="panel">
+    <div class="panel-title">Mapa de ruta</div>
+    <div class="panel-sub">Recorrido optimizado con paradas secuenciadas</div>
+    <div class="mapbox">
+      <div id="map"></div>
+      <div class="map-leg">
+        <span><span class="dot" style="background:var(--red)"></span>Depósito DDI</span>
+        <span><span class="dot" style="background:#333"></span>Paradas</span>
+        <span><span class="dot" style="background:var(--red)"></span>Trayecto</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- HEATMAP -->
+  <div id="tab-heat" class="panel">
+    <div class="panel-title">Densidad de clientes</div>
+    <div class="panel-sub">Score = 1 − (distancia media a los 4 vecinos más cercanos / máximo)</div>
+    <div class="hm-layout">
+      <div class="mapbox"><div id="hm"></div></div>
+      <div>
+        <div class="sec" style="margin-top:0">Ranking por densidad</div>
+        <div class="density-list" id="density-list"></div>
+        <div style="border:1px solid var(--border);border-radius:10px;padding:16px;margin-top:12px;font-size:12px;color:var(--gray);line-height:1.8">
+          <span style="color:var(--red)">● Rojo</span> — clúster denso, visita eficiente<br>
+          <span style="color:#aaa">● Gris</span> — cliente aislado, coste por visita alto
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- IMPACT -->
+  <div id="tab-impact" class="panel">
+    <div class="panel-title">Análisis de impacto</div>
+    <div class="panel-sub">Proyección anual · flota de 470 camiones · 220 días de operación</div>
+
+    <div class="impact-grid" id="impact-grid"></div>
+
+    <div class="sec" style="margin-top:36px">Comparativa de métricas</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+      <div class="diff-card">
+        <div class="chart-wrap"><canvas id="impactChart" role="img" aria-label="Comparativa distancia y tiempo baseline vs optimizado"></canvas></div>
+      </div>
+      <div style="border:1px solid var(--border);border-radius:10px;padding:24px">
+        <div style="font-size:11px;font-weight:600;color:var(--gray);text-transform:uppercase;letter-spacing:.08em;margin-bottom:20px">Eficiencia operacional</div>
+        <div id="fleet-bars"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── DATA
+const stops=[{"id":"828089024","name":"ENTREPA I PA","address":"Carrer de la Providència 23, 08500 VIC","city":"VIC","lat":41.9302,"lon":2.254,"delivery_caj":12.0,"delivery_brl":2.0,"delivery_un":0,"ret_caj":10.0,"ret_brl":2.0},{"id":"828089025","name":"ENTREPA I PA","address":"Carrer de la Providència 23, 08500 VIC","city":"VIC","lat":41.9302,"lon":2.254,"delivery_caj":1.0,"delivery_brl":0,"delivery_un":0,"ret_caj":0,"ret_brl":0},{"id":"828089026","name":"INDUSTRIA 52","address":"Carrer de la Indústria 52, 08500 VIC","city":"VIC","lat":41.9302,"lon":2.254,"delivery_caj":9.0,"delivery_brl":0,"delivery_un":0,"ret_caj":9.0,"ret_brl":0},{"id":"828089027","name":"AURIAL PADEL","address":"Carrer de Figueres 14, 08500 VIC","city":"VIC","lat":41.9302,"lon":2.254,"delivery_caj":31.0,"delivery_brl":10.0,"delivery_un":0,"ret_caj":9.0,"ret_brl":10.0},{"id":"828089028","name":"ALASKA BAR","address":"Carrer de Manuel Serra i Moret 4, 08500 VIC","city":"VIC","lat":41.9302,"lon":2.254,"delivery_caj":14.0,"delivery_brl":0,"delivery_un":3.0,"ret_caj":14.0,"ret_brl":0},{"id":"828089029","name":"CASAL DE LA GENT GRAN","address":"CALLE SOLEDAT 13, 08500 VIC","city":"VIC","lat":41.9302,"lon":2.254,"delivery_caj":6.0,"delivery_brl":0,"delivery_un":0,"ret_caj":6.0,"ret_brl":0},{"id":"828089030","name":"BAR REST EL TAST","address":"RAMON SALA 15, 08500 VIC","city":"VIC","lat":41.9302,"lon":2.254,"delivery_caj":25.0,"delivery_brl":0,"delivery_un":14.0,"ret_caj":9.0,"ret_brl":0},{"id":"828089031","name":"ZONA DIESEL URBAN","address":"CALLE MATARO S/N, 08500 VIC","city":"VIC","lat":41.9302,"lon":2.254,"delivery_caj":18.0,"delivery_brl":0,"delivery_un":10.0,"ret_caj":0,"ret_brl":0},{"id":"828089032","name":"CAFETERIA PRADALS","address":"CTRA. SANT HIPÒLIT 61, 08500 VIC","city":"VIC","lat":41.9302,"lon":2.254,"delivery_caj":10.0,"delivery_brl":0,"delivery_un":0,"ret_caj":6.0,"ret_brl":0},{"id":"828089033","name":"LLAR JUVENIL","address":"CALLE PIUS XII 20, 08500 VIC","city":"VIC","lat":41.9302,"lon":2.254,"delivery_caj":6.0,"delivery_brl":0,"delivery_un":0,"ret_caj":0,"ret_brl":0},{"id":"828089034","name":"GURBI","address":"CALLE JACINT VERDAGUER 20, 08503 GURB","city":"GURB","lat":41.9501,"lon":2.2673,"delivery_caj":14.0,"delivery_brl":0,"delivery_un":0,"ret_caj":7.0,"ret_brl":0},{"id":"828089035","name":"PADEL OSONA GURB","address":"CALLE SANT ROC 29, 08503 GURB","city":"GURB","lat":41.9501,"lon":2.2673,"delivery_caj":19.0,"delivery_brl":2.0,"delivery_un":0,"ret_caj":3.0,"ret_brl":2.0},{"id":"828089036","name":"ALOE","address":"MENENDEZ I PELAYO 1, 08500 VIC","city":"VIC","lat":41.9302,"lon":2.254,"delivery_caj":3.0,"delivery_brl":0,"delivery_un":0,"ret_caj":3.0,"ret_brl":0},{"id":"828089037","name":"BAR PRIEGO","address":"CALLE ENRIC PRAT DE LA RIBA 49, 08500 VIC","city":"VIC","lat":41.9302,"lon":2.254,"delivery_caj":22.0,"delivery_brl":0,"delivery_un":0,"ret_caj":22.0,"ret_brl":0},{"id":"828089038","name":"E.S VIC","address":"Carretera de Roda 97, 08500 VIC","city":"VIC","lat":41.9302,"lon":2.254,"delivery_caj":19.0,"delivery_brl":0,"delivery_un":0,"ret_caj":0,"ret_brl":0},{"id":"828089039","name":"FORN ESTADI","address":"AVENIDA PIUS XII 18, 08500 VIC","city":"VIC","lat":41.9302,"lon":2.254,"delivery_caj":3.0,"delivery_brl":0,"delivery_un":0,"ret_caj":0,"ret_brl":0},{"id":"828089040","name":"FORN DE PA EL REMEI","address":"CALLE RAIMON D'ABADAL 23, 08500 VIC","city":"VIC","lat":41.9302,"lon":2.254,"delivery_caj":4.0,"delivery_brl":0,"delivery_un":0,"ret_caj":0,"ret_brl":0},{"id":"828089041","name":"RESTAURANT UNTOK","address":"CALLE ELS PIRINEUS 21, 08503 GURB","city":"GURB","lat":41.9501,"lon":2.2673,"delivery_caj":29.0,"delivery_brl":1.0,"delivery_un":0,"ret_caj":20.0,"ret_brl":1.0},{"id":"828089042","name":"FUSSIMANYA ESTADI","address":"CALLE TAGAMANENT 1, 08500 VIC","city":"VIC","lat":41.9302,"lon":2.254,"delivery_caj":4.0,"delivery_brl":0,"delivery_un":0,"ret_caj":4.0,"ret_brl":0},{"id":"828089043","name":"GARBI 1 CAFET.","address":"RONDA FRANCESC CAMPRODON 5, 08500 VIC","city":"VIC","lat":41.9302,"lon":2.254,"delivery_caj":6.0,"delivery_brl":0,"delivery_un":0,"ret_caj":0,"ret_brl":0},{"id":"828089044","name":"GARBI 1 CAFET.","address":"RONDA FRANCESC CAMPRODON 5, 08500 VIC","city":"VIC","lat":41.9302,"lon":2.254,"delivery_caj":2.0,"delivery_brl":0,"delivery_un":0,"ret_caj":0,"ret_brl":0},{"id":"828089045","name":"GUSTUM AREAS 2","address":"CARRETERA C-25 KM 174,6, 08503 GURB","city":"GURB","lat":41.9501,"lon":2.2673,"delivery_caj":6.0,"delivery_brl":2.0,"delivery_un":0,"ret_caj":5.0,"ret_brl":2.0},{"id":"828089046","name":"GUSTUM AREAS 1","address":"CARRETERA C-25 KM 174,6, 08503 GURB","city":"GURB","lat":41.9501,"lon":2.2673,"delivery_caj":5.0,"delivery_brl":1.0,"delivery_un":0,"ret_caj":4.0,"ret_brl":1.0},{"id":"828089047","name":"FONTSECA, BAR","address":"CTRA. SANT HILARI S/N, 08500 VIC","city":"VIC","lat":41.9302,"lon":2.254,"delivery_caj":13.0,"delivery_brl":0,"delivery_un":0,"ret_caj":13.0,"ret_brl":0},{"id":"841049011","name":"PADEL OSONA GURB","address":"CALLE SANT ROC 29, 08503 GURB","city":"GURB","lat":41.9501,"lon":2.2673,"delivery_caj":0,"delivery_brl":0,"delivery_un":0,"ret_caj":5.0,"ret_brl":2.0}];
+const optRoute=[3,13,0,4,23,2,5,6,18,12,8,7,14,9,19,16,15,20,1,17,21,11,22,10,24];
+const randRoute=[16,12,9,19,18,6,5,10,15,21,11,17,1,14,22,13,2,23,4,24,7,8,0,3,20];
+const depot={name:"DDI Mollet del Vallès",lat:41.543,lon:2.214};
+const parcels={"1":["RETURNABLES"],"2":[],"3":[13,3],"4":[6,5,2,23,4,0],"5":[1,20,15,16,19,9,14,7,8,12,18],"6":[24,10,22,11,21,17]};
+const priority=[0.463,0.009,0.378,0.919,0.426,0.352,0.348,0.173,0.266,0.052,0.271,0.385,0.326,0.49,0.164,0.026,0.035,0.514,0.335,0.052,0.017,0.42,0.356,0.412,0.0];
+const density=[1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0];
+const meta={ruta:"DR0027",fecha:"02/03/2026",opt_dist:91.1,rand_dist:106.1,opt_time:356,rand_time:382,improvement_pct:14.1,time_saved:26,alpha:0.65};
+
+let maps={};
+
+// ── UPLOAD FLOW
+document.getElementById('alpha-slider').oninput=function(){
+  document.getElementById('alpha-val').textContent=(this.value/100).toFixed(2);
+};
+const dz=document.getElementById('drop-zone');
+dz.addEventListener('dragover',e=>{e.preventDefault();dz.classList.add('drag')});
+dz.addEventListener('dragleave',()=>dz.classList.remove('drag'));
+dz.addEventListener('drop',e=>{
+  e.preventDefault();dz.classList.remove('drag');
+  const f=e.dataTransfer.files[0];
+  if(f){document.getElementById('file-ok').style.display='block';document.getElementById('file-ok').textContent='✓ '+f.name+' listo'}
+});
+document.getElementById('csv-input').onchange=function(){
+  if(this.files[0]){
+    document.getElementById('file-ok').style.display='block';
+    document.getElementById('file-ok').textContent='✓ '+this.files[0].name+' listo';
+  }
+};
+
+function launchApp(){
+  document.getElementById('upload-screen').style.display='none';
+  document.getElementById('app').style.display='flex';
+  buildDashboard();
+}
+
+function resetToUpload(){
+  document.getElementById('app').style.display='none';
+  document.getElementById('upload-screen').style.display='flex';
+}
+
+// ── DASHBOARD BUILD
+function buildDashboard(){
+  document.getElementById('nav-meta').textContent=meta.ruta+' · '+meta.fecha;
+  document.getElementById('dash-sub').textContent=`Ruta ${meta.ruta} · ${optRoute.length} paradas · ${meta.fecha} · α = ${meta.alpha}`;
+
+  // Metrics
+  const totalCaj=Math.round(stops.reduce((a,s)=>a+s.delivery_caj,0));
+  const metricsData=[
+    {label:'Distancia ahorrada',val:meta.improvement_pct+'%',sub:`${meta.rand_dist} km → ${meta.opt_dist} km`,red:true},
+    {label:'Tiempo recuperado',val:meta.time_saved+' min',sub:'Por salida de ruta',red:false},
+    {label:'Paradas en ruta',val:optRoute.length,sub:`${totalCaj} cajas a entregar`,red:false},
+    {label:'Distancia óptima',val:meta.opt_dist+' km',sub:'Trayecto calculado',red:false},
+  ];
+  document.getElementById('metrics-row').innerHTML=metricsData.map(m=>`
+    <div class="metric">
+      <div class="metric-label">${m.label}</div>
+      <div class="metric-val${m.red?' red':''}">${m.val}</div>
+      <div class="metric-sub">${m.sub}</div>
+      ${m.red?`<div class="metric-delta">↓ vs baseline sin optimizar</div>`:''}
+    </div>`).join('');
+
+  // Table
+  const tbody=document.getElementById('route-tbody');tbody.innerHTML='';
+  optRoute.forEach((idx,rank)=>{
+    const s=stops[idx],p=priority[idx];
+    const pct=Math.round(p*100);
+    const tag=p>0.6?'<span class="tag tH">HIGH</span>':p>0.3?'<span class="tag tM">MID</span>':'<span class="tag tL">LOW</span>';
+    const del=`${Math.round(s.delivery_caj)} caj${s.delivery_brl?` + ${Math.round(s.delivery_brl)} brl`:''}`;
+    const ret=s.ret_caj>0?`<span class="ret-val">${Math.round(s.ret_caj)} caj</span>`:'<span style="color:#ccc">—</span>';
+    tbody.insertAdjacentHTML('beforeend',`<tr>
+      <td><div class="stopnum">${rank+1}</div></td>
+      <td style="font-weight:500">${s.name}</td>
+      <td style="color:var(--gray);font-size:12px">${s.city}</td>
+      <td><div style="display:flex;align-items:center;gap:8px"><div class="pbar"><div class="pfill" style="width:${pct}%"></div></div>${tag}</div></td>
+      <td style="font-size:12px">${del}</td>
+      <td>${ret}</td>
+      <td style="font-size:11px;color:var(--gray);max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${s.address}</td>
+    </tr>`);
+  });
+
+  // Compare stats
+  document.getElementById('cr-dist').textContent=meta.rand_dist+' km';
+  document.getElementById('cr-time').textContent=meta.rand_time+' min';
+  document.getElementById('co-dist').textContent=meta.opt_dist+' km';
+  document.getElementById('co-time').textContent=meta.opt_time+' min';
+  document.getElementById('co-imp').textContent='−'+meta.improvement_pct+'%';
+
+  // Diff bars
+  const diffMetrics=[
+    {label:'Distancia total',rand:meta.rand_dist,opt:meta.opt_dist,unit:'km'},
+    {label:'Tiempo de ruta',rand:meta.rand_time,opt:meta.opt_time,unit:'min'},
+    {label:'Combustible est.',rand:Math.round(meta.rand_dist*0.32),opt:Math.round(meta.opt_dist*0.32),unit:'L'},
+    {label:'Emisiones CO₂',rand:Math.round(meta.rand_dist*0.84),opt:Math.round(meta.opt_dist*0.84),unit:'kg'},
+  ];
+  document.getElementById('diff-card').innerHTML=diffMetrics.map(m=>{
+    const pct=Math.round(m.opt/m.rand*100);
+    const saved=Math.round(m.rand-m.opt);
+    return `<div class="diff-row">
+      <div class="diff-row-head">
+        <span class="diff-row-label">${m.label}</span>
+        <span class="diff-row-saving">−${saved} ${m.unit}</span>
+      </div>
+      <div class="bar-track"><span class="bar-key" style="color:#bbb">BASE</span><div class="bar-bg"><div class="bar-fill-bad" style="width:100%"></div></div><span class="bar-val">${m.rand} ${m.unit}</span></div>
+      <div class="bar-track"><span class="bar-key red">OPT</span><div class="bar-bg"><div class="bar-fill-good" style="width:${pct}%"></div></div><span class="bar-val red">${m.opt} ${m.unit}</span></div>
+    </div>`;
+  }).join('');
+
+  // Impact grid
+  const annualDist=Math.round((meta.rand_dist-meta.opt_dist)*470*220);
+  const annualFuel=Math.round(annualDist*0.32/1000);
+  const annualCO2=Math.round(annualDist*0.84/1000);
+  const annualHours=Math.round(meta.time_saved/60*470*220);
+  document.getElementById('impact-grid').innerHTML=[
+    {label:'Kilómetros ahorrados/año',val:annualDist.toLocaleString(),unit:'km · flota completa (470 camiones)',accent:false},
+    {label:'Reducción CO₂',val:annualCO2.toLocaleString()+' t',unit:'toneladas CO₂/año evitadas',accent:true},
+    {label:'Combustible ahorrado',val:annualFuel.toLocaleString()+' k L',unit:'miles de litros / año',accent:false},
+    {label:'Horas de conductor ahorradas',val:annualHours.toLocaleString()+' h',unit:'horas/año · flota completa',accent:false},
+  ].map(c=>`
+    <div class="impact-card${c.accent?' accent':''}">
+      <div class="impact-label">${c.label}</div>
+      <div class="impact-big">${c.val}</div>
+      <div class="impact-desc">${c.unit}</div>
+    </div>`).join('');
+
+  // Fleet bars
+  document.getElementById('fleet-bars').innerHTML=[
+    {label:'Distancia ahorrada',val:14},
+    {label:'Tiempo de ruta',val:7},
+    {label:'Eficiencia carga',val:91},
+    {label:'Puntualidad est.',val:94},
+  ].map(b=>`
+    <div style="margin-bottom:18px">
+      <div style="display:flex;justify-content:space-between;margin-bottom:6px">
+        <span style="font-size:12px;color:var(--black)">${b.label}</span>
+        <span style="font-size:12px;font-weight:600;color:var(--red)">${b.val}%</span>
+      </div>
+      <div style="background:var(--gray-bg);border-radius:1px;height:4px;overflow:hidden">
+        <div style="height:100%;width:${b.val}%;background:var(--red);border-radius:1px"></div>
+      </div>
+    </div>`).join('');
+}
+
+// ── TAB ROUTER
+function showTab(name,btn){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+name).classList.add('active');
+  btn.classList.add('active');
+  if(name==='route'&&!maps.main) initMain();
+  if(name==='compare'&&!maps.cmp) initCompare();
+  if(name==='heat'&&!maps.heat) initHeat();
+  if(name==='truck') buildTruck();
+  if(name==='impact') initImpactChart();
+}
+
+// ── MAPS
+function tile(m){
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',
+    {attribution:'©OpenStreetMap ©CartoDB',maxZoom:18}).addTo(m);
+}
+function numIcon(n,fill='#C8102E',size=26){
+  return L.divIcon({className:'',
+    html:`<div style="width:${size}px;height:${size}px;border-radius:50%;background:${fill};color:#fff;font-size:10px;font-weight:600;display:flex;align-items:center;justify-content:center;border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.25)">${n}</div>`,
+    iconSize:[size,size],iconAnchor:[size/2,size/2]});
+}
+function initMain(){
+  const m=L.map('map').setView([depot.lat,depot.lon],9);tile(m);maps.main=m;
+  L.circleMarker([depot.lat,depot.lon],{radius:9,color:'#fff',fillColor:'#C8102E',fillOpacity:1,weight:2})
+   .bindPopup('<b>Depósito DDI</b>').addTo(m);
+  const ll=[[depot.lat,depot.lon]];
+  optRoute.forEach((idx,rank)=>{
+    const s=stops[idx];ll.push([s.lat,s.lon]);
+    L.marker([s.lat,s.lon],{icon:numIcon(rank+1)})
+     .bindPopup(`<b>${s.name}</b><br>${s.address}<br>Entrega: ${Math.round(s.delivery_caj)} caj · Ret: ${Math.round(s.ret_caj)} caj`)
+     .addTo(m);
+  });
+  ll.push([depot.lat,depot.lon]);
+  L.polyline(ll,{color:'#C8102E',weight:2,opacity:.6,dashArray:'6 4'}).addTo(m);
+  m.fitBounds(ll,{padding:[30,30]});
+}
+function drawRoute(divId,route,color){
+  const m=L.map(divId,{zoomControl:false,attributionControl:false}).setView([depot.lat,depot.lon],9);
+  tile(m);
+  L.circleMarker([depot.lat,depot.lon],{radius:7,color:'#fff',fillColor:'#C8102E',fillOpacity:1,weight:2}).addTo(m);
+  const ll=[[depot.lat,depot.lon]];
+  route.forEach((idx,rank)=>{
+    const s=stops[idx];ll.push([s.lat,s.lon]);
+    L.marker([s.lat,s.lon],{icon:numIcon(rank+1,color,20)}).addTo(m);
+  });
+  ll.push([depot.lat,depot.lon]);
+  L.polyline(ll,{color,weight:2,opacity:.7}).addTo(m);
+  m.fitBounds(ll,{padding:[20,20]});
+}
+function initCompare(){
+  maps.cmp=true;
+  drawRoute('map-r',randRoute,'#aaa');
+  drawRoute('map-o',optRoute,'#C8102E');
+}
+function initHeat(){
+  const m=L.map('hm').setView([depot.lat,depot.lon],9);tile(m);maps.heat=m;
+  const bounds=[];
+  stops.forEach((s,i)=>{
+    const d=density[i];
+    const color=d>0.7?'#C8102E':d>0.4?'#e88898':'#bbb';
+    L.circleMarker([s.lat,s.lon],{radius:6+d*14,color,fillColor:color,fillOpacity:.4+d*.45,weight:1})
+     .bindPopup(`<b>${s.name}</b><br>Densidad: ${d.toFixed(2)}`).addTo(m);
+    bounds.push([s.lat,s.lon]);
+  });
+  m.fitBounds(bounds,{padding:[30,30]});
+  const sorted=[...density.map((d,i)=>({d,i}))].sort((a,b)=>b.d-a.d);
+  const dl=document.getElementById('density-list');dl.innerHTML='';
+  sorted.forEach(({d,i})=>{
+    const s=stops[i];
+    const color=d>0.7?'#C8102E':d>0.4?'#e88898':'#bbb';
+    dl.insertAdjacentHTML('beforeend',`<div class="dl-row">
+      <div class="dl-dot" style="background:${color}"></div>
+      <div class="dl-name">${s.name}</div>
+      <div class="dl-bar"><div class="dl-fill" style="width:${Math.round(d*100)}%;background:${color}"></div></div>
+      <div class="dl-score">${d.toFixed(2)}</div>
+    </div>`);
+  });
+}
+
+// ── TRUCK
+function buildTruck(){
+  const tv=document.getElementById('truck-visual');tv.innerHTML='';
+  tv.insertAdjacentHTML('beforeend','<div class="tcab"><span style="font-size:16px">🚛</span><span style="font-size:9px">CAB</span></div>');
+  const cls={6:'p6',5:'p5',4:'p4',3:'p3',2:'p2'};
+  for(let p=6;p>=2;p--){
+    const clients=(parcels[p]||[]).filter(c=>typeof c==='number').map(c=>stops[c].name.split(' ')[0]);
+    tv.insertAdjacentHTML('beforeend',`<div class="tpar ${cls[p]}">
+      <div class="pnum">P${p}</div>
+      <div class="pcl">${clients.slice(0,2).join('<br>')}${clients.length>2?`<br>+${clients.length-2}`:''}</div>
+    </div>`);
+  }
+  tv.insertAdjacentHTML('beforeend',`
+    <div class="tpar ret"><div class="pnum">P1</div><div class="pcl">Retornos</div></div>
+    <div class="tdoor"><span style="font-size:14px">🚪</span><span style="font-size:8px">DOOR</span></div>`);
+
+  const tl=document.getElementById('timeline');tl.innerHTML='';
+  const totalDel=stops.reduce((a,s)=>a+s.delivery_caj+s.delivery_brl*5,0)||1;
+  const totalRet=totalDel*0.6||1;
+  let cumDel=0,cumRet=0;
+  optRoute.forEach((idx,rank)=>{
+    const s=stops[idx];
+    const vol=s.delivery_caj+s.delivery_brl*5;
+    const ret=s.ret_caj+s.ret_brl*5;
+    cumDel+=vol;cumRet+=ret;
+    const delLeft=Math.max(0,(totalDel-cumDel)/totalDel*100);
+    const retFill=Math.min(100,cumRet/totalRet*100);
+    tl.insertAdjacentHTML('beforeend',`<div class="timeline-row">
+      <div class="tls">${rank+1}</div>
+      <div style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--black)">${s.name.substring(0,22)}</div>
+      <div>
+        <div class="sbar-label">${Math.round(totalDel-cumDel)} ud restantes</div>
+        <div class="sbar"><div class="sbar-d" style="width:${delLeft.toFixed(0)}%"></div></div>
+      </div>
+      <div>
+        <div class="sbar-label green">${Math.round(cumRet)} ud recogidas</div>
+        <div class="sbar"><div class="sbar-r" style="width:${retFill.toFixed(0)}%"></div></div>
+      </div>
+    </div>`);
+  });
+}
+
+// ── IMPACT CHART
+let impactBuilt=false;
+function initImpactChart(){
+  if(impactBuilt) return;impactBuilt=true;
+  new Chart(document.getElementById('impactChart'),{
+    type:'bar',
+    data:{
+      labels:['Distancia (km)','Tiempo (min)'],
+      datasets:[
+        {label:'Sin optimizar',data:[meta.rand_dist,meta.rand_time],backgroundColor:'#f0e0e2',borderColor:'#e0b0b8',borderWidth:1,borderRadius:3},
+        {label:'Smart Truck',data:[meta.opt_dist,meta.opt_time],backgroundColor:'#C8102E',borderColor:'#a00020',borderWidth:1,borderRadius:3},
+      ]
+    },
+    options:{
+      responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false}},
+      scales:{
+        x:{ticks:{color:'#888',font:{size:11,family:'Inter'}},grid:{color:'#f0f0f0'}},
+        y:{ticks:{color:'#888',font:{size:11,family:'Inter'}},grid:{color:'#f0f0f0'}}
+      }
+    }
+  });
+}
+</script>
+</body>
+</html>
