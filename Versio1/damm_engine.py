@@ -2,15 +2,48 @@
 DAMM SMART TRUCK V1 - Core Engine
 Reads Hackaton.xlsx, runs optimisation, outputs route + load plan data
 """
-import pandas as pd
-import math
 import json
+import math
+import os
+
+import pandas as pd
+
+from dynamic_truck import (
+    full_route_feasibility,
+    reserved_empty_up,
+    slots_for_truck_type,
+)
+from cabecera_transporte import (
+    collect_entrega_ids_for_route,
+    infer_current_transport_numbers,
+    load_cabecera_sheet,
+    normalize_cabecera_df,
+    reassignment_hints_for_stops,
+)
+from horarios_windows import attach_stop_windows, load_horarios_dataframe
+from priority_cluster import (
+    PRIORITY_WEIGHTS,
+    escalate_truck_slots,
+    find_unassigned,
+    route_with_zona_clusters,
+)
+from zm040_up import aggregate_stop_up, build_units_per_pallet_map, load_zm040
 
 # ── CONFIG ──────────────────────────────────────────────────────────────
 XLSX_PATH   = 'Hackaton.xlsx'
-ALPHA       = 0.65   # priority (valor € estimado) vs distancia en nn_route
-R_RATE      = 0.60   # returnable ratio
-PARCELS     = 6
+ZM040_PATH  = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'Hackaton', 'ZM040.XLSX')
+ALPHA       = 0.65   # priority (transport sector / in-stop value) vs distance in nn_route
+# Truck sizes: small (3) | standard (6) | large (8 pallet slots = UP)
+TRUCK_TYPE  = 'standard'
+# ── Sector = delivery area per transporter (territorial heat-map) ──
+# Capacity per sector in UP (ZM040); None -> total route UP / TRANSPORT_AUTO_SECTOR_COUNT.
+TRANSPORT_CAPACITY_UNITS = None
+TRANSPORT_AUTO_SECTOR_COUNT = 4
+# If not None, a sector may not exceed this pair-to-pair diameter (km) while growing;
+# keeps zones more compact when capacity still allows distant stops.
+SECTOR_MAX_DIAMETER_KM = None
+
+R_RATE      = 0.60   # return empties ~60% of delivery UP (dynamic truck model)
 AVG_SPEED   = 35     # km/h urban
 UNLOAD_MIN  = 8      # minutes per stop
 
@@ -66,10 +99,35 @@ def parse_qty(v):
     except:
         return 0.0
 
+def _norm_text(s):
+    return ' '.join(str(s).strip().lower().split())
+
+def row_zona_transp(row) -> str:
+    """ZonaTransp column(s); duplicate headers become ZonaTransp, ZonaTransp.1 in pandas."""
+    for c in row.index:
+        key = str(c).lower().replace(" ", "").replace("_", "")
+        if "zonatransp" in key:
+            v = row.get(c)
+            if v is not None and str(v).strip() and str(v).strip().lower() not in ("nan", "none"):
+                return str(v).strip()
+    return "SIN_ZONA"
+
+
+def business_key(row):
+    """
+    One business / delivery point: same name, postal code and street -> one stop.
+    Several different Entrega ids with the same key merge into a single stop.
+    """
+    return '|'.join((
+        _norm_text(row['Nombre 1']),
+        str(row['CP']).strip().zfill(5),
+        _norm_text(row['Calle']),
+    ))
+
 def estimate_unit_price_eur(mat_code, unit, desc):
     """
-    Precio unitario mayorista orientativo (€ sin IVA, redondeado) solo para rankear prioridad.
-    No sustituye PVP ni tarifa real DAMM — heurística por UM + palabras clave en denominación/material.
+    Rough wholesale unit price (EUR ex VAT, rounded) only to rank delivery priority.
+    Does not replace list price or real DAMM tariffs — heuristic from UM + keywords in description/material.
     """
     m_raw = str(mat_code).strip()
     u = str(unit).strip().upper()
@@ -110,16 +168,35 @@ def estimate_unit_price_eur(mat_code, unit, desc):
 
     return 20.0
 
+def _resolved_zm040_path():
+    base = os.path.dirname(os.path.abspath(__file__))
+    candidates = [
+        ZM040_PATH,
+        os.path.join(base, 'ZM040.XLSX'),
+        os.path.join(os.getcwd(), 'Hackaton', 'ZM040.XLSX'),
+    ]
+    for p in candidates:
+        if os.path.isfile(p):
+            return p
+    return None
+
+
 # ── LOAD DATA ────────────────────────────────────────────────────────────
 def load_data():
     xl = pd.read_excel(XLSX_PATH, sheet_name=None)
     deliveries = xl['Detalle entrega']
     materials  = xl['Materiales zubic']
     mat_loc = dict(zip(materials['Material'].astype(str), materials['Ubic.'].astype(str)))
-    return deliveries, mat_loc
+    zm040 = _resolved_zm040_path()
+    units_per_pallet = {}
+    if zm040:
+        zdf = load_zm040(zm040)
+        units_per_pallet = build_units_per_pallet_map(zdf)
+    cabecera = load_cabecera_sheet(xl)
+    return deliveries, mat_loc, units_per_pallet, cabecera
 
 # ── PROCESS ONE ROUTE/DATE ───────────────────────────────────────────────
-def process_route(deliveries, mat_loc, ruta, fecha=None):
+def process_route(deliveries, mat_loc, ruta, fecha=None, units_per_pallet=None):
     df = deliveries[deliveries['Ruta'] == ruta].copy()
     if fecha:
         df = df[df['FECHA'] == fecha]
@@ -130,21 +207,25 @@ def process_route(deliveries, mat_loc, ruta, fecha=None):
         fecha = latest
 
     df['qty_num'] = df['Cantidad entrega'].apply(parse_qty)
+    if units_per_pallet is None:
+        units_per_pallet = {}
 
-    # Build per-stop aggregates
+    # Build per-stop aggregates (one stop per business: name + postal code + street).
     stops = {}
     for _, row in df.iterrows():
         eid = str(row['Entrega'])
+        bid = business_key(row)
         mat = str(row['Material'])
         qty = row['qty_num']
         un  = str(row['Un.medida venta']).strip()
 
-        if eid not in stops:
+        if bid not in stops:
             cp_raw = str(row['CP']).strip().zfill(5)
             city   = str(row['Población']).strip()
             lat,lon = cp_to_coords(cp_raw, city)
-            stops[eid] = {
+            stops[bid] = {
                 'id': eid,
+                'entrega_ids': [eid],
                 'name': str(row['Nombre 1']).strip(),
                 'address': f"{str(row['Calle']).strip()}, {cp_raw} {city}",
                 'city': city,
@@ -156,10 +237,19 @@ def process_route(deliveries, mat_loc, ruta, fecha=None):
                 'delivery_un':  0,
                 'ret_caj': 0,
                 'ret_brl': 0,
+                'delivery_up': 0.0,
+                'return_up': 0.0,
                 'delivery_value_eur': 0.0,
                 'items': [],
                 'ret_items': [],
+                'zona_vals': [],
             }
+        else:
+            if eid not in stops[bid]['entrega_ids']:
+                stops[bid]['entrega_ids'].append(eid)
+
+        zt = row_zona_transp(row)
+        stops[bid]['zona_vals'].append(zt)
 
         item_entry = {
             'mat': mat,
@@ -170,33 +260,194 @@ def process_route(deliveries, mat_loc, ruta, fecha=None):
         }
 
         if is_returnable(mat):
-            stops[eid]['ret_items'].append(item_entry)
-            if un == 'CAJ': stops[eid]['ret_caj'] += qty
-            elif un == 'BRL': stops[eid]['ret_brl'] += qty
+            stops[bid]['ret_items'].append(item_entry)
+            if un == 'CAJ': stops[bid]['ret_caj'] += qty
+            elif un == 'BRL': stops[bid]['ret_brl'] += qty
         else:
-            stops[eid]['items'].append(item_entry)
             unit_eur = estimate_unit_price_eur(mat, un, item_entry['desc'])
-            stops[eid]['delivery_value_eur'] += qty * unit_eur
-            if un == 'CAJ': stops[eid]['delivery_caj'] += qty
-            elif un == 'BRL': stops[eid]['delivery_brl'] += qty
-            else: stops[eid]['delivery_un'] += qty
+            item_entry['unit_price_eur'] = round(float(unit_eur), 4)
+            item_entry['line_total_eur'] = round(float(qty) * float(unit_eur), 2)
+            stops[bid]['items'].append(item_entry)
+            stops[bid]['delivery_value_eur'] += qty * unit_eur
+            if un == 'CAJ': stops[bid]['delivery_caj'] += qty
+            elif un == 'BRL': stops[bid]['delivery_brl'] += qty
+            else: stops[bid]['delivery_un'] += qty
 
     stop_list = list(stops.values())
+    for s in stop_list:
+        s['entrega_ids'].sort()
+        s['delivery_up'] = aggregate_stop_up(s['items'], units_per_pallet)
+        # Returns in UP (same ZM040 mapping); dynamic model uses 60% x delivery_up as empties on board
+        s['return_up'] = R_RATE * float(s['delivery_up'])
+        vals = s.pop('zona_vals', [])
+        if vals:
+            s['zona_transp'] = max(set(vals), key=vals.count)
+        else:
+            s['zona_transp'] = 'SIN_ZONA'
     return stop_list, fecha
 
 # ── PRIORITY SCORING ─────────────────────────────────────────────────────
 def score_priority(stops):
+    """
+    Only outbound order value (estimated EUR). Returnables are empties and do not weigh here:
+    they are not subtracted from value nor mixed with a ratio against same-day delivery.
+    """
     values = [max(0.0, float(s.get('delivery_value_eur', 0))) for s in stops]
     max_v = max(values) if max(values) > 0 else 1
+    return [v / max_v for v in values]
 
-    ret_ratios = []
-    for s in stops:
-        total_d = s['delivery_caj'] + s['delivery_brl']*5
-        total_r = s['ret_caj'] + s['ret_brl']*5
-        ret_ratios.append(min(total_r/total_d, 1.0) if total_d > 0 else 0.0)
+def stop_delivery_up(s):
+    """Outbound demand in UP (ZM040: 1/PAL per sales unit from PAL row)."""
+    return float(s.get('delivery_up', 0.0))
 
-    scores = [0.7*(v/max_v) + 0.3*r for v,r in zip(values, ret_ratios)]
-    return scores
+
+def pairwise_max_distance_km(coords, idx_list):
+    if len(idx_list) < 2:
+        return 0.0
+    m = 0.0
+    for ia in range(len(idx_list)):
+        for ib in range(ia + 1, len(idx_list)):
+            d = haversine(coords[idx_list[ia]], coords[idx_list[ib]])
+            if d > m:
+                m = d
+    return m
+
+
+def centroid_geo(coords, idx_list):
+    lats = [coords[i][0] for i in idx_list]
+    lons = [coords[i][1] for i in idx_list]
+    return (sum(lats) / len(lats), sum(lons) / len(lons))
+
+
+def resolved_transport_capacity(stops):
+    if TRANSPORT_CAPACITY_UNITS is not None:
+        return max(float(TRANSPORT_CAPACITY_UNITS), 1e-6)
+    total = sum(stop_delivery_up(s) for s in stops)
+    if total <= 0:
+        return max(1.0, len(stops) / max(TRANSPORT_AUTO_SECTOR_COUNT, 1))
+    return max(total / max(TRANSPORT_AUTO_SECTOR_COUNT, 1), 1e-6)
+
+
+def build_transport_sectors(stops, density, capacity_units):
+    """
+    Sectors = territory assignable to a transporter: cumulative demand <= capacity,
+    growth by nearest customer to the current block, optional diameter cap.
+    Cover radius (radius_cover_km) is derived later from the set of stops.
+    """
+    n = len(stops)
+    coords = [(s['lat'], s['lon']) for s in stops]
+    demand = [stop_delivery_up(s) for s in stops]
+    assigned = set()
+    sectors = []
+
+    while len(assigned) < n:
+        rem = [i for i in range(n) if i not in assigned]
+
+        def pick_seed(rem_list):
+            if not rem_list:
+                return None
+            heavy_local = [i for i in rem_list if demand[i] > capacity_units + 1e-9]
+            pool = heavy_local if heavy_local else rem_list
+            return max(pool, key=lambda i: density[i] * 1e9 + demand[i])
+
+        seed = pick_seed(rem)
+        memb = [seed]
+        assigned.add(seed)
+        load = demand[seed]
+
+        while True:
+            best_j, best_near = None, math.inf
+            for j in range(n):
+                if j in assigned:
+                    continue
+                if load + demand[j] > capacity_units + 1e-9:
+                    continue
+                d_near = min(haversine(coords[j], coords[k]) for k in memb)
+                tent = memb + [j]
+                diam = pairwise_max_distance_km(coords, tent)
+                if SECTOR_MAX_DIAMETER_KM is not None and diam > SECTOR_MAX_DIAMETER_KM + 1e-9:
+                    continue
+                if d_near < best_near:
+                    best_near = d_near
+                    best_j = j
+            if best_j is None:
+                break
+            memb.append(best_j)
+            assigned.add(best_j)
+            load += demand[best_j]
+        sectors.append(sorted(memb))
+    return sectors
+
+
+def sort_sectors_for_priority_display(sectors, density):
+    """Sort sectors by average heat-map intensity (density)."""
+    scored = [(sum(density[i] for i in s) / len(s), sorted(s.copy())) for s in sectors]
+    scored.sort(reverse=True, key=lambda t: t[0])
+    return [t[1] for t in scored]
+
+
+def transport_sectors_geo_meta(stops, sectors_ordered_lists, coords, dens, capacity_units):
+    """Radii and capacity usage per sector (for UI / heat maps)."""
+    meta = []
+    for sid, memb in enumerate(sectors_ordered_lists):
+        heat = sum(dens[i] for i in memb) / len(memb)
+        vol = sum(stop_delivery_up(stops[i]) for i in memb)
+        c = centroid_geo(coords, memb)
+        cov = max(haversine(c, coords[i]) for i in memb)
+        dia = pairwise_max_distance_km(coords, memb)
+        meta.append({
+            'sector_id': sid,
+            'heat_avg': round(heat, 4),
+            'demand_vol': round(vol, 4),
+            'demand_up': round(vol, 4),
+            'capacity_vol': round(capacity_units, 4),
+            'capacity_usage_pct': round(100.0 * vol / capacity_units, 1) if capacity_units else None,
+            'radius_cover_km': round(cov, 3),
+            'diameter_span_km': round(dia, 3),
+            'centroid_lat': round(c[0], 5),
+            'centroid_lon': round(c[1], 5),
+            'n_stops': len(memb),
+            'stop_indices': memb[:],
+            'overload_sector': vol > capacity_units + 1e-6,
+        })
+    return meta
+
+
+def priority_within_transport_sectors(stops, sectors_ordered_lists, dens):
+    """
+    Across sectors: display order by density (already reflected in sectors_ordered_lists).
+    Within a sector: relative priority from order value EUR only.
+    """
+    n = len(stops)
+    if n == 0:
+        return [], []
+
+    values = [max(0.0, float(s.get('delivery_value_eur', 0))) for s in stops]
+    BAND = 1000
+    priority_raw = [0.0] * n
+    stop_sector_rank = [0] * n
+
+    clusters_scored = []
+    for idxs in sectors_ordered_lists:
+        heat_avg = sum(dens[i] for i in idxs) / len(idxs)
+        clusters_scored.append({'stop_indices': idxs[:], 'heat_avg': heat_avg})
+
+    for sector_rank, cl in enumerate(clusters_scored):
+        idxs = cl['stop_indices']
+        mx = max((values[i] for i in idxs), default=0.0)
+        if mx <= 0:
+            mx = 1.0
+        vn = {i: values[i] / mx for i in idxs}
+        band_base = (len(clusters_scored) - 1 - sector_rank) * BAND
+        for i in idxs:
+            priority_raw[i] = band_base + vn[i] * (BAND - 1)
+            stop_sector_rank[i] = sector_rank
+
+    mxp = max(priority_raw) if priority_raw else 1.0
+    if mxp <= 0:
+        mxp = 1.0
+    priority_final = [p / mxp for p in priority_raw]
+    return priority_final, stop_sector_rank
 
 # ── DENSITY HEATMAP ──────────────────────────────────────────────────────
 def density_scores(stops, k=4):
@@ -250,83 +501,214 @@ def two_opt(route, stops, depot):
     return best, best_d
 
 # ── LOAD PLAN ────────────────────────────────────────────────────────────
-def build_load_plan(route, stops):
-    # Load order = reverse of route (last client loaded first = deepest in truck)
+def build_load_plan(route, stops, n_parcels=None):
+    """
+    P1 = first visited customer; P2..Pn share remaining slots by UP.
+    P1 products: first customer outbound + all returnables on the route (manifest).
+    """
+    if n_parcels is None:
+        n_parcels = slots_for_truck_type(TRUCK_TYPE)
+    if not route:
+        return {}, {}
+
+    first = route[0]
     load_order = list(reversed(route))
-    vols = [stops[i]['delivery_caj'] + stops[i]['delivery_brl']*5 for i in load_order]
+    vols = [stops[i]['delivery_up'] for i in load_order]
     total = sum(vols) if sum(vols) > 0 else 1
-    per_parcel = total / (PARCELS - 1)  # P1 reserved for returnables
+    shared_slots = max(1, n_parcels - 1)
+    per_parcel = total / shared_slots
 
-    parcels = {i: [] for i in range(1, PARCELS+1)}
-    cur_p = PARCELS  # start filling from P6 (deepest)
-    cur_vol = 0
+    parcels = {i: [] for i in range(1, n_parcels + 1)}
+    parcels[1] = [first]
 
-    for client_i, vol in zip(load_order, vols):
+    cur_p = n_parcels
+    cur_vol = 0.0
+    for client_i in load_order:
+        if client_i == first:
+            continue
         parcels[cur_p].append(client_i)
-        cur_vol += vol
+        cur_vol += stops[client_i]['delivery_up']
         if cur_vol >= per_parcel and cur_p > 2:
             cur_p -= 1
-            cur_vol = 0
+            cur_vol = 0.0
 
-    # P1 always returnables
-    parcels[1] = ['RETURNABLES']
-
-    # Build flat product list per parcel with warehouse locations
     parcel_products = {}
     for p_num, client_idxs in parcels.items():
         products = []
         if p_num == 1:
-            # Collect all returnable items across all stops
+            for item in stops[first]['items']:
+                row = dict(item)
+                row['client'] = stops[first]['name']
+                products.append(row)
             for i in route:
                 for item in stops[i]['ret_items']:
-                    item['client'] = stops[i]['name']
-                    products.append(item)
+                    row = dict(item)
+                    row['client'] = stops[i]['name']
+                    products.append(row)
         else:
             for ci in client_idxs:
                 if isinstance(ci, int):
                     for item in stops[ci]['items']:
-                        item['client'] = stops[ci]['name']
-                        products.append(item)
+                        row = dict(item)
+                        row['client'] = stops[ci]['name']
+                        products.append(row)
         parcel_products[p_num] = products
 
     return parcels, parcel_products
 
 # ── MAIN OPTIMISE FUNCTION ────────────────────────────────────────────────
 def optimise(ruta, fecha=None):
-    deliveries, mat_loc = load_data()
-    stops, fecha_used = process_route(deliveries, mat_loc, ruta, fecha)
+    deliveries, mat_loc, units_per_pallet, cabecera_df = load_data()
+    stops, fecha_used = process_route(deliveries, mat_loc, ruta, fecha, units_per_pallet)
 
     if not stops:
         return None
 
+    horarios_df = load_horarios_dataframe()
+    attach_stop_windows(stops, horarios_df, str(fecha_used))
+
     depot = DEPOTS.get(ruta, DEPOTS['DEFAULT'])
     depot_coords = (depot['lat'], depot['lon'])
 
-    priority = score_priority(stops)
-    density  = density_scores(stops)
+    density = density_scores(stops)
+    priority_value = score_priority(stops)
+    cap_vol = resolved_transport_capacity(stops)
+    sector_partition = build_transport_sectors(stops, density, cap_vol)
+    sectors_ordered = sort_sectors_for_priority_display(sector_partition, density)
+    coords = [(s['lat'], s['lon']) for s in stops]
+    transport_sectors = transport_sectors_geo_meta(stops, sectors_ordered, coords, density, cap_vol)
+    priority, stop_sector_rank = priority_within_transport_sectors(stops, sectors_ordered, density)
 
     import random
-    random.seed(42)
+
+    rng = random.Random(42)
     rand_route = list(range(len(stops)))
-    random.shuffle(rand_route)
+    rng.shuffle(rand_route)
     rand_dist = route_dist(rand_route, stops, depot_coords)
 
     nn = nn_route(stops, depot_coords, priority, ALPHA)
-    opt_route, opt_dist = two_opt(nn, stops, depot_coords)
+
+    truck_chain = ("small", "standard", "large")
+    try_types = escalate_truck_slots(TRUCK_TYPE, truck_chain)
+    opt_route: list = []
+    selected_truck = TRUCK_TYPE
+    n_slots = slots_for_truck_type(TRUCK_TYPE)
+    cluster_warnings: list = []
+    clusters_by_zona: dict = {}
+    unserviceable: list = []
+    needs_reassignment: list = []
+
+    best_partial: list = []
+    best_partial_meta: tuple = (TRUCK_TYPE, slots_for_truck_type(TRUCK_TYPE), -1)
+    best_clusters: dict = {}
+
+    for tt in try_types:
+        ns = float(slots_for_truck_type(tt))
+        res_e = reserved_empty_up(tt, int(ns))
+        cand, clusters_by_zona, cluster_warnings, _ = route_with_zona_clusters(
+            stops,
+            depot_coords,
+            ns,
+            res_e,
+            AVG_SPEED,
+            UNLOAD_MIN,
+            weights=PRIORITY_WEIGHTS,
+        )
+        un = find_unassigned(stops, cand)
+        delivery_up_vec = [float(s["delivery_up"]) for s in stops]
+        cap_feas = full_route_feasibility(cand, delivery_up_vec, int(ns), truck_type=tt)
+        served = len(cand)
+        if served > best_partial_meta[2]:
+            best_partial = cand[:]
+            best_partial_meta = (tt, int(ns), served)
+            best_clusters = {k: v[:] for k, v in clusters_by_zona.items()}
+        if len(un) == 0 and cap_feas.ok:
+            opt_route = cand
+            selected_truck = tt
+            n_slots = int(ns)
+            break
+    else:
+        if best_partial:
+            opt_route = best_partial
+            selected_truck, n_slots, _ = best_partial_meta
+            clusters_by_zona = best_clusters
+
+    if not opt_route:
+        opt_route = nn[:]
+        selected_truck = TRUCK_TYPE
+        n_slots = slots_for_truck_type(TRUCK_TYPE)
+
+    unassigned_final = find_unassigned(stops, opt_route)
+    for ui in unassigned_final:
+        unserviceable.append(
+            {
+                "stop_index": ui,
+                "name": stops[ui].get("name", ""),
+                "reason": "no_fit_window_capacity_or_zone",
+            }
+        )
+        needs_reassignment.append(ui)
+
+    try:
+        route_day = pd.to_datetime(str(fecha_used), dayfirst=True).normalize()
+    except Exception:
+        route_day = pd.Timestamp.now().normalize()
+    cab_norm = normalize_cabecera_df(cabecera_df) if cabecera_df is not None and not cabecera_df.empty else pd.DataFrame()
+    entregas_ruta = collect_entrega_ids_for_route(deliveries, ruta, str(fecha_used))
+    current_nt = (
+        infer_current_transport_numbers(cab_norm, entregas_ruta, route_day)
+        if not cab_norm.empty
+        else []
+    )
+    reassignment_hints = reassignment_hints_for_stops(
+        stops, unassigned_final, cab_norm, route_day, current_nt
+    )
+
+    opt_route, opt_dist = two_opt(opt_route, stops, depot_coords)
 
     improvement = (rand_dist - opt_dist) / rand_dist * 100 if rand_dist > 0 else 0
     opt_time  = opt_dist/AVG_SPEED*60  + len(stops)*UNLOAD_MIN
     rand_time = rand_dist/AVG_SPEED*60 + len(stops)*UNLOAD_MIN
 
-    parcels, parcel_products = build_load_plan(opt_route, stops)
+    parcels, parcel_products = build_load_plan(opt_route, stops, n_parcels=n_slots)
+
+    delivery_up_vec = [float(s['delivery_up']) for s in stops]
+    cap_feas = full_route_feasibility(
+        opt_route,
+        delivery_up_vec,
+        n_slots,
+        truck_type=selected_truck,
+    )
 
     return {
         'ruta': ruta,
         'fecha': fecha_used,
         'depot': depot,
         'stops': stops,
+        'capacity_model': 'UP_ZM040',
+        'truck_type': selected_truck,
+        'truck_type_requested': TRUCK_TYPE,
+        'n_parcels': n_slots,
+        'priority_weights': PRIORITY_WEIGHTS,
+        'clusters_zona_transp': {k: v[:] for k, v in clusters_by_zona.items()},
+        'cluster_tight_window_warnings': cluster_warnings,
+        'unserviceable_stops': unserviceable,
+        'needs_reassignment_indices': needs_reassignment,
+        'cabecera_n_transporte_inferred': current_nt,
+        'cabecera_reassignment_hints': reassignment_hints,
+        'reserved_empty_up': round(reserved_empty_up(selected_truck, n_slots), 4),
+        'total_delivery_up': round(sum(delivery_up_vec), 4),
+        'capacity_feasible': cap_feas.ok,
+        'capacity_warnings': cap_feas.messages,
+        'peak_used_up': round(cap_feas.peak_used_up, 4),
         'priority': [round(p,3) for p in priority],
+        'priority_value': [round(p,3) for p in priority_value],
         'density': [round(d,3) for d in density],
+        'transport_capacity_vol': round(cap_vol, 4),
+        'transport_auto_sector_count': TRANSPORT_AUTO_SECTOR_COUNT,
+        'transport_sectors': transport_sectors,
+        'stop_sector_rank': stop_sector_rank,
+        'stop_heatmap_group_rank': stop_sector_rank,
         'opt_route': opt_route,
         'rand_route': rand_route,
         'opt_dist': round(opt_dist,1),
@@ -340,6 +722,31 @@ def optimise(ruta, fecha=None):
         'alpha': ALPHA,
         'r_rate': R_RATE,
     }
+
+
+def run_block2(
+    block1_output: dict,
+    maps_api_key: str,
+    llm_api_key: str | None = None,
+    gemini_api_key: str | None = None,
+    weights: dict | None = None,
+) -> dict:
+    """
+    Block 2: per-cluster routes via Google Distance Matrix API.
+    Maps: pass `maps_api_key` or set GOOGLE_MAPS_API_KEY.
+    Deadlock LLM: pass `llm_api_key` (Claude / Anthropic) or ANTHROPIC_API_KEY; or pass
+    `gemini_api_key` / set GEMINI_API_KEY if you use Gemini instead.
+    """
+    from block2_maps_routing import optimize_all_routes
+
+    return optimize_all_routes(
+        block1_output,
+        maps_api_key,
+        anthropic_api_key=llm_api_key,
+        gemini_api_key=gemini_api_key,
+        weights=weights,
+    )
+
 
 if __name__ == '__main__':
     result = optimise('DR0027', '02/03/2026')

@@ -7,3 +7,23 @@ Thumbs.db
 
 # Logs
 *.log
+
+# Secrets (copy .env.example to .env locally)
+.env
+.env.local
+
+# Block 2 runtime
+block2_deadlock_log.jsonl
+
+# Python / caches
+__pycache__/
+*.py[cod]
+
+# Pipeline & Block outputs (regenerate with run_full_pipeline / run_e2e_block2 / run_block3)
+pipeline_out/
+pipeline_test_out/
+block2_result.json
+block3_result.json
+block3_sample.json
+result.json
+sample_block2.json

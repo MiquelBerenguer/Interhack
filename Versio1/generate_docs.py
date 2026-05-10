@@ -4,6 +4,8 @@ Generate the 3 DDI documents as PDFs:
 2. Hoja de Carga - truck load manifest by warehouse location  
 3. Albarán       - delivery note per client
 """
+from __future__ import annotations
+
 from reportlab.lib.pagesizes import A4
 from reportlab.lib import colors
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
@@ -11,25 +13,57 @@ from reportlab.lib.units import cm, mm
 from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph, Spacer, HRFlowable
 from reportlab.lib.enums import TA_CENTER, TA_RIGHT, TA_LEFT
 from reportlab.pdfbase import pdfmetrics
-import json, os
 
-with open('result.json') as f:
-    res = json.load(f)
+import json
+import os
+from typing import Tuple
 
-stops     = res['stops']
-opt_route = res['opt_route']
-parcels   = res['parcels']
-parcel_products = res['parcel_products']
-depot     = res['depot']
-ruta      = res['ruta']
-fecha     = res['fecha'] if res['fecha'] else '02/03/2026'
-carga_num = '11764300'
-vehiculo  = '7524KXX'
-repartidor= 'FRAN ROMERO'
-rep_num   = '850004'
+from damm_engine import estimate_unit_price_eur
 
-OUT = '.'
-os.makedirs(OUT, exist_ok=True)
+# Paths configurable for pipeline (env or init_result)
+RESULT_JSON = os.environ.get("RESULT_JSON", "result.json")
+OUT = os.environ.get("PDF_OUT_DIR", ".")
+
+
+def init_result(result_path: str | None = None, out_dir: str | None = None) -> dict:
+    """Load Block 1 `result.json`-shaped dict and set module globals for PDF builders."""
+    global res, RESULT_JSON, OUT, N_PARCELS, stops, opt_route, parcels, parcel_products
+    global depot, ruta, fecha, carga_num, vehiculo, repartidor, rep_num
+    path = result_path or os.environ.get("RESULT_JSON", "result.json")
+    out = out_dir if out_dir is not None else os.environ.get("PDF_OUT_DIR", ".")
+    RESULT_JSON = path
+    OUT = out
+    os.makedirs(OUT, exist_ok=True)
+    with open(path, encoding="utf-8") as f:
+        res = json.load(f)
+    N_PARCELS = int(res.get("n_parcels", 6))
+    stops = res["stops"]
+    opt_route = res["opt_route"]
+    parcels = res["parcels"]
+    parcel_products = res["parcel_products"]
+    depot = res["depot"]
+    ruta = res["ruta"]
+    fecha = res["fecha"] if res.get("fecha") else "02/03/2026"
+    carga_num = os.environ.get("DDI_CARGA_NUM", "11764300")
+    vehiculo = os.environ.get("DDI_VEHICULO", "7524KXX")
+    repartidor = os.environ.get("DDI_REPARTIDOR", "FRAN ROMERO")
+    rep_num = os.environ.get("DDI_REP_NUM", "850004")
+    return res
+
+
+res = {}
+N_PARCELS = 6
+stops = []
+opt_route = []
+parcels = {}
+parcel_products = {}
+depot = {}
+ruta = ""
+fecha = ""
+carga_num = "11764300"
+vehiculo = "7524KXX"
+repartidor = "FRAN ROMERO"
+rep_num = "850004"
 
 W, H = A4
 DAMM_RED  = colors.HexColor('#C8102E')
@@ -93,7 +127,7 @@ def meta_row():
 # DOC 1: HOJA DE RUTA
 # ════════════════════════════════════════════════════════════════
 def make_hoja_ruta():
-    path = f'{OUT}/Hoja_Ruta.pdf'
+    path = os.path.join(OUT, "Hoja_Ruta.pdf")
     doc = SimpleDocTemplate(path, pagesize=A4,
         leftMargin=1.5*cm, rightMargin=1.5*cm,
         topMargin=1.5*cm, bottomMargin=1.5*cm)
@@ -133,14 +167,14 @@ def make_hoja_ruta():
         ParagraphStyle('sec', fontSize=9, fontName='Helvetica-Bold', 
         textColor=DAMM_RED, spaceAfter=3)))
 
-    route_data = [['#', 'Cliente', 'Dirección', 'Ciudad', 'Entrega (caj)', 'Ret. (caj)', 'Prioridad']]
+    route_data = [['#', 'Cliente', 'Dirección', 'Ciudad', 'Entrega (UP)', 'Retorno vacíos (UP)', 'Prioridad']]
     total_del = total_ret = 0
     for rank, idx in enumerate(opt_route):
         s = stops[idx]
         p = res['priority'][idx]
         tag = '●●●' if p > 0.6 else ('●●○' if p > 0.3 else '●○○')
-        del_qty = int(s['delivery_caj'] + s['delivery_brl']*5)
-        ret_qty = int(s['ret_caj'] + s['ret_brl']*5)
+        del_qty = float(s.get('delivery_up', s['delivery_caj'] + s['delivery_brl'] * 5))
+        ret_qty = float(s.get('return_up', res.get('r_rate', 0.6) * del_qty))
         total_del += del_qty
         total_ret += ret_qty
         route_data.append([
@@ -148,13 +182,13 @@ def make_hoja_ruta():
             Paragraph(f'<b>{s["name"]}</b>', body_style),
             Paragraph(s['address'].split(',')[0], small_style),
             Paragraph(s['city'], small_style),
-            str(del_qty),
-            str(ret_qty),
+            f'{del_qty:.3f}',
+            f'{ret_qty:.3f}',
             tag,
         ])
     route_data.append(['', Paragraph('<b>TOTAL</b>', body_style), '', '',
-                       Paragraph(f'<b>{total_del}</b>', body_style),
-                       Paragraph(f'<b>{total_ret}</b>', body_style), ''])
+                       Paragraph(f'<b>{total_del:.3f}</b>', body_style),
+                       Paragraph(f'<b>{total_ret:.3f}</b>', body_style), ''])
 
     rt = Table(route_data, colWidths=[0.8*cm, 4.5*cm, 4.5*cm, 3*cm, 2*cm, 2*cm, 1.7*cm])
     n = len(route_data)
@@ -176,10 +210,11 @@ def make_hoja_ruta():
         ('LEFTPADDING', (0,0), (-1,-1), 4),
     ]))
     story.append(rt)
-
     story.append(Spacer(1, 4*mm))
     story.append(Paragraph(
-        f'Algoritmo: Nearest-Neighbour TSP + 2-opt  |  α={res["alpha"]} (valor € estimado/distancia)  |  '
+        f'Algoritmo: Nearest-Neighbour TSP + 2-opt  |  α={res["alpha"]} (sectores_transporte/distancia)  '
+        f'· cap. UP/sector {float(res.get("transport_capacity_vol", 0)):.2f} (ZM040)  '
+        f'· camión {res.get("truck_type", "?")} {res.get("n_parcels", "?")} parcelas  |  '
         f'Generado automáticamente por Damm Smart Truck V1',
         ParagraphStyle('foot', fontSize=7, textColor=colors.HexColor('#aaaaaa'), alignment=TA_CENTER)))
 
@@ -190,7 +225,7 @@ def make_hoja_ruta():
 # DOC 2: HOJA DE CARGA
 # ════════════════════════════════════════════════════════════════
 def make_hoja_carga():
-    path = f'{OUT}/Hoja_Carga.pdf'
+    path = os.path.join(OUT, "Hoja_Carga.pdf")
     doc = SimpleDocTemplate(path, pagesize=A4,
         leftMargin=1.5*cm, rightMargin=1.5*cm,
         topMargin=1.5*cm, bottomMargin=1.5*cm)
@@ -202,21 +237,19 @@ def make_hoja_carga():
     story.append(Spacer(1, 4*mm))
 
     # Truck diagram as table
-    story.append(Paragraph('Distribución del camión (6 parcelas)',
+    story.append(Paragraph(f'Distribución del camión ({N_PARCELS} parcelas)',
         ParagraphStyle('sec', fontSize=9, fontName='Helvetica-Bold',
         textColor=DAMM_RED, spaceAfter=3)))
 
     truck_row = [Paragraph('<b>CAB</b>', ParagraphStyle('c', fontSize=7, fontName='Helvetica-Bold',
                     textColor=colors.HexColor('#888888'), alignment=TA_CENTER))]
-    for p in range(6, 0, -1):
+    for p in range(N_PARCELS, 0, -1):
         if p == 1:
-            label = 'P1\nRETORNOS'
-            bg = colors.HexColor('#e8f5e9')
+            label = 'P1\nC1+RET'
             tc = colors.HexColor('#1D9E75')
         else:
             clients = [stops[c]['name'].split()[0] for c in parcels.get(str(p),[]) if isinstance(c,int)]
             label = f'P{p}\n' + ' / '.join(clients[:2]) + (f' +{len(clients)-2}' if len(clients)>2 else '')
-            bg = colors.HexColor('#fff8e1') if p > 3 else colors.HexColor('#fff3e0')
             tc = colors.HexColor('#F2A623')
         truck_row.append(Paragraph(f'<b>{label}</b>',
             ParagraphStyle('tp', fontSize=7, fontName='Helvetica-Bold',
@@ -224,10 +257,13 @@ def make_hoja_carga():
     truck_row.append(Paragraph('<b>PUERTA\n🚪</b>', ParagraphStyle('d', fontSize=7,
         fontName='Helvetica-Bold', textColor=DAMM_RED, alignment=TA_CENTER)))
 
-    tt = Table([truck_row], colWidths=[1.2*cm] + [2.4*cm]*6 + [1.4*cm])
-    bg_colors = [colors.HexColor('#eeeeee')] + [colors.HexColor('#fff8e1')]*3 + \
-                [colors.HexColor('#fff3e0')]*2 + [colors.HexColor('#e8f5e9')] + \
-                [colors.HexColor('#ffebee')]
+    parcel_w = min(2.4 * cm, (19 * cm) / max(N_PARCELS, 1))
+    tt = Table([truck_row], colWidths=[1.2*cm] + [parcel_w]*N_PARCELS + [1.4*cm])
+    bg_colors = [colors.HexColor('#eeeeee')]
+    for _ in range(N_PARCELS - 1):
+        bg_colors.append(colors.HexColor('#fff8e1'))
+    bg_colors.append(colors.HexColor('#e8f5e9'))
+    bg_colors.append(colors.HexColor('#ffebee'))
     style_cmds = [
         ('GRID', (0,0), (-1,-1), 0.5, MID),
         ('VALIGN', (0,0), (-1,-1), 'MIDDLE'),
@@ -246,13 +282,13 @@ def make_hoja_carga():
     story.append(Spacer(1, 5*mm))
 
     # Products per parcel
-    for p_num in range(6, 0, -1):
+    for p_num in range(N_PARCELS, 0, -1):
         p_str = str(p_num)
         products = parcel_products.get(p_str, [])
         client_idxs = parcels.get(p_str, [])
 
         if p_num == 1:
-            section_title = f'PARCELA P1 — ZONA RETORNOS (recogida durante la ruta)'
+            section_title = f'PARCELA P1 — Cliente 1 (slot exclusivo) + retornables ruta'
             bg_h = colors.HexColor('#e8f5e9')
             tc_h = colors.HexColor('#1D9E75')
         else:
@@ -269,7 +305,7 @@ def make_hoja_carga():
 
         if products:
             prod_data = [['Ubic.', 'Código', 'Descripción', 'Cant.', 'Unidad', 'Cliente']]
-            for item in products[:30]:
+            for item in products:
                 prod_data.append([
                     str(item.get('ubic','')),
                     str(item.get('mat','')),
@@ -295,21 +331,37 @@ def make_hoja_carga():
             story.append(Paragraph('(sin productos asignados)', small_style))
 
     story.append(Spacer(1, 4*mm))
-    total_items = sum(len(parcel_products.get(str(p),[])) for p in range(1,7))
+    total_items = sum(len(parcel_products.get(str(p),[])) for p in range(1, N_PARCELS + 1))
+    total_up = sum(float(s.get('delivery_up', 0)) for s in stops)
     story.append(Paragraph(
-        f'Total productos en carga: {total_items}  |  '
-        f'Entrega: {sum(s["delivery_caj"] for s in stops):.0f} cajas  |  '
-        f'Retornos esperados: {sum(s["ret_caj"] for s in stops):.0f} cajas (tasa {int(res["r_rate"]*100)}%)',
+        f'Total líneas en carga: {total_items}  |  '
+        f'Entrega total: {total_up:.3f} UP (ZM040)  |  '
+        f'Modelo vacíos: {int(res.get("r_rate", 0.6)*100)}% de la entrega en UP',
         ParagraphStyle('foot', fontSize=7, textColor=colors.HexColor('#aaaaaa'), alignment=TA_CENTER)))
 
     doc.build(story)
     return path
 
+def _albaran_line_prices(item: dict) -> Tuple[float, float]:
+    """Unit and line total EUR for PDF; uses JSON fields or same heuristic as Block 1."""
+    pu = item.get("unit_price_eur")
+    lt = item.get("line_total_eur")
+    if pu is not None and lt is not None:
+        return float(pu), float(lt)
+    u = float(estimate_unit_price_eur(str(item["mat"]), str(item["unit"]), str(item["desc"])))
+    q = float(item.get("qty") or 0)
+    return u, round(q * u, 2)
+
+
+def _fmt_eur_es(x: float) -> str:
+    return f"{x:.2f}".replace(".", ",") + " €"
+
+
 # ════════════════════════════════════════════════════════════════
 # DOC 3: ALBARANES (one per client)
 # ════════════════════════════════════════════════════════════════
 def make_albaranes():
-    path = f'{OUT}/Albaranes.pdf'
+    path = os.path.join(OUT, "Albaranes.pdf")
     doc = SimpleDocTemplate(path, pagesize=A4,
         leftMargin=1.5*cm, rightMargin=1.5*cm,
         topMargin=1.5*cm, bottomMargin=1.5*cm)
@@ -369,35 +421,59 @@ def make_albaranes():
         story.append(ct)
         story.append(Spacer(1, 3*mm))
 
-        # Products table
+        # Products table (unit + line EUR; heuristic same as engine priority value)
         if s['items']:
-            prod_data = [['Producto', 'Descripción', 'UM', 'Cant.', 'Ubic.']]
+            prod_data = [
+                ['Producto', 'Descripción', 'UM', 'Cant.', 'P. unit. (€)', 'Importe (€)', 'Ubic.'],
+            ]
+            sum_lines = 0.0
             for item in s['items']:
+                pu, lt = _albaran_line_prices(item)
+                sum_lines += lt
                 prod_data.append([
                     str(item['mat']),
-                    Paragraph(str(item['desc'])[:55], small_style),
+                    Paragraph(str(item['desc'])[:48], small_style),
                     str(item['unit']),
                     str(int(item['qty'])),
-                    str(item.get('ubic','')),
+                    _fmt_eur_es(pu),
+                    _fmt_eur_es(lt),
+                    str(item.get('ubic', '')),
                 ])
-            pt = Table(prod_data, colWidths=[2.2*cm, 8.5*cm, 1.5*cm, 1.5*cm, 2.3*cm])
+            prod_data.append([
+                '', '', '', '', Paragraph('<b>Total</b>', small_style),
+                Paragraph(f'<b>{_fmt_eur_es(sum_lines)}</b>', small_style),
+                '',
+            ])
+            pt = Table(
+                prod_data,
+                colWidths=[1.9 * cm, 6.0 * cm, 1.2 * cm, 1.1 * cm, 1.55 * cm, 1.55 * cm, 1.9 * cm],
+            )
+            last_row = len(prod_data) - 1
             pt.setStyle(TableStyle([
-                ('BACKGROUND', (0,0), (-1,0), DAMM_RED),
-                ('TEXTCOLOR', (0,0), (-1,0), colors.white),
-                ('FONTNAME', (0,0), (-1,0), 'Helvetica-Bold'),
-                ('FONTSIZE', (0,0), (-1,-1), 7.5),
-                ('ROWBACKGROUNDS', (0,1), (-1,-1), [colors.white, LIGHT]),
-                ('GRID', (0,0), (-1,-1), 0.3, MID),
-                ('VALIGN', (0,0), (-1,-1), 'MIDDLE'),
-                ('TOPPADDING', (0,0), (-1,-1), 3),
-                ('BOTTOMPADDING', (0,0), (-1,-1), 3),
-                ('LEFTPADDING', (0,0), (-1,-1), 4),
-                ('ALIGN', (3,0), (3,-1), 'CENTER'),
+                ('BACKGROUND', (0, 0), (-1, 0), DAMM_RED),
+                ('TEXTCOLOR', (0, 0), (-1, 0), colors.white),
+                ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
+                ('FONTSIZE', (0, 0), (-1, -1), 7.5),
+                ('ROWBACKGROUNDS', (0, 1), (0, last_row - 1), [colors.white, LIGHT]),
+                ('BACKGROUND', (0, last_row), (-1, last_row), colors.HexColor('#fce4ec')),
+                ('GRID', (0, 0), (-1, -1), 0.3, MID),
+                ('VALIGN', (0, 0), (-1, -1), 'MIDDLE'),
+                ('TOPPADDING', (0, 0), (-1, -1), 3),
+                ('BOTTOMPADDING', (0, 0), (-1, -1), 3),
+                ('LEFTPADDING', (0, 0), (-1, -1), 4),
+                ('ALIGN', (3, 0), (3, last_row - 1), 'CENTER'),
+                ('ALIGN', (4, 1), (5, last_row - 1), 'RIGHT'),
+                ('ALIGN', (4, last_row), (5, last_row), 'RIGHT'),
             ]))
             story.append(Paragraph('Productos a entregar',
                 ParagraphStyle('sec2', fontSize=8, fontName='Helvetica-Bold',
                 textColor=DAMM_RED, spaceAfter=2)))
             story.append(pt)
+            story.append(Paragraph(
+                '<i>Precios orientativos mayoristas sin IVA (misma heurística que valor de prioridad en el motor).</i>',
+                ParagraphStyle('albnote', fontSize=6, fontName='Helvetica', textColor=colors.HexColor('#666666'),
+                               spaceBefore=1, spaceAfter=0),
+            ))
             story.append(Spacer(1, 2*mm))
 
         # Returnables
@@ -432,9 +508,10 @@ def make_albaranes():
                       ParagraphStyle('sig', fontSize=8, fontName='Helvetica')),
             Paragraph(f'Nombre y DNI:<br/><br/><br/>____________________________',
                       ParagraphStyle('sig2', fontSize=8, fontName='Helvetica')),
-            Paragraph(f'<b>Total bultos entrega:</b> {int(s["delivery_caj"])} caj<br/>'
-                      f'<b>Total bultos retorno:</b> {int(s["ret_caj"])} caj<br/><br/>'
-                      f'<font size=7 color="grey">Parcela: P{next((p for p,cl in parcels.items() if isinstance(cl,list) and idx in cl), "—")}</font>',
+            Paragraph(
+                      f'<b>Entrega (UP):</b> {float(s.get("delivery_up", 0)):.3f}<br/>'
+                      f'<b>Retorno vacíos (UP, ~60%):</b> {float(s.get("return_up", 0)):.3f}<br/><br/>'
+                      f'<font size=7 color="grey">Parcela: P{next((p for p, cl in parcels.items() if isinstance(cl, list) and idx in cl), "—")}</font>',
                       ParagraphStyle('totals', fontSize=9, fontName='Helvetica',
                       leading=14, alignment=TA_RIGHT)),
         ]]
@@ -457,7 +534,19 @@ def make_albaranes():
     doc.build(story)
     return path
 
+
+def generate_three_pdfs(result_path: str | None = None, out_dir: str | None = None) -> dict:
+    """Load Block 1 JSON and write Hoja_Ruta, Hoja_Carga, Albaranes PDFs into ``out_dir``."""
+    init_result(result_path, out_dir)
+    return {
+        "hoja_ruta": make_hoja_ruta(),
+        "hoja_carga": make_hoja_carga(),
+        "albaranes": make_albaranes(),
+    }
+
+
 if __name__ == '__main__':
+    init_result()
     print("Generating Hoja de Ruta...")
     p1 = make_hoja_ruta()
     print(f"  → {p1}")
